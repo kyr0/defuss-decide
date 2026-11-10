@@ -65,7 +65,9 @@ test("navigation, theme and every section", async ({ page }, info) => {
   await expect(page.locator('.dd-hero-actions .aura.aura-glow > a.btn[href="#examples"]')).toBeVisible();
   await expect(page.locator('.dd-hero-note a[href="https://huggingface.co/kyr0/winzling-decide-1.0"][target="_blank"]')).toBeVisible();
   await expect(page.locator(".dd-stat dd svg.dd-stat-icon")).toHaveCount(4);
-  await page.screenshot({ path: `output/e2e/site-${info.project.name}.png`, fullPage: true });
+  // The viewport, not the full page. VERIFIED: WebKit on Linux refuses a screenshot taller than 32,767 px, which the
+  // page exceeded in CI (2026-11-10).
+  await page.screenshot({ path: `output/e2e/site-${info.project.name}.png` });
   assertClean();
 });
 

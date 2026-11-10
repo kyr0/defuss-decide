@@ -42,8 +42,6 @@ Wrap: EVERY lead becomes a test | .vae/VERIFY.py rule | one MEMORY line with BC,
 2026-11-08T23:42:19Z s=ba2c51e2 FINDING python/repair_decision.py:main test inputs learn=none: observed in the run log; no Python CI harness
 2026-11-08T23:42:19Z s=ba2c51e2 FINDING python/quantize_gptq.py:rewrite learn=none: export scripts need multi-GB checkpoints; no CI harness
 2026-11-09T09:05:31Z s=ba2c51e2 FINDING python/memguard.py:guard exit log learn=none: observability addition; no Python CI harness
-2026-11-09T16:12:39Z s=ba2c51e2 FINDING docs/assets/site.css:h2 > .heading-anchor learn=test: same contrast test
-2026-11-09T16:12:39Z s=ba2c51e2 FINDING scripts/highlight.ts:createCodeHighlighter learn=test: same contrast test
 2026-11-09T16:12:39Z s=ba2c51e2 FINDING docs/assets/site.css:.dd-option-chosen, .dd-mark-label, .dd-option:not([data-chosen]) learn=test: same contrast test
 2026-11-09T16:12:39Z s=ba2c51e2 FINDING docs/assets/site.css:color-mix learn=verifier: .vae/VERIFY.py site.color-mix-oklab
 2026-11-09T16:12:39Z s=ba2c51e2 FINDING docs/assets/page.js:mac learn=none: probe showed platform 'macOS'; e2e runs on the CI platform, so a platform-specific test would pin the environment
@@ -107,3 +105,5 @@ Wrap: EVERY lead becomes a test | .vae/VERIFY.py rule | one MEMORY line with BC,
 2026-11-10T22:38:26Z s=ba2c51e2 FINDING src/winzling.ts:26 WINZLING_REVISION learn=none: A pin to an external commit; nothing local can check that it is the newest.
 2026-11-10T22:44:32Z s=ba2c51e2 DONE fp=e560cc7c9bad cov=97.1% paths=docs/assets/lib/decide.js,docs/assets/lib/engine.js,docs/assets/lib/format.js,docs/assets/lib/image.js(+10)
 2026-11-10T22:44:32Z s=ba2c51e2 FINDING .gitignore:26 lib/ learn=verifier: scripts/check-repo.ts rule 10 site.tracked, run by make lint and the gate's repo.rules.
+2026-11-10T23:01:58Z s=ba2c51e2 DONE fp=8c8251274ed7 cov=97.1% paths=tests/e2e/site.spec.ts
+2026-11-10T23:01:58Z s=ba2c51e2 FINDING tests/e2e/site.spec.ts:68 learn=none: A limit of WebKit's Linux port that the local macOS run does not reach; CI is the check.
