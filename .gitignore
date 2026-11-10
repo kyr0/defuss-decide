@@ -23,4 +23,5 @@ models/*
 test-results/
 playwright-report/
 *.tgz
-lib/
+# The compiled package only: docs/assets/lib/ is the website's copy and is published with the site.
+/lib/

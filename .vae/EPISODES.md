@@ -42,8 +42,6 @@ Wrap: EVERY lead becomes a test | .vae/VERIFY.py rule | one MEMORY line with BC,
 2026-11-08T23:42:19Z s=ba2c51e2 FINDING python/repair_decision.py:main test inputs learn=none: observed in the run log; no Python CI harness
 2026-11-08T23:42:19Z s=ba2c51e2 FINDING python/quantize_gptq.py:rewrite learn=none: export scripts need multi-GB checkpoints; no CI harness
 2026-11-09T09:05:31Z s=ba2c51e2 FINDING python/memguard.py:guard exit log learn=none: observability addition; no Python CI harness
-2026-11-09T16:12:39Z s=ba2c51e2 DONE fp=0465c8a41a84 cov=97.8% paths=.github/workflows/verify.yml,AGENTS.md,ARCH.md,Makefile(+207)
-2026-11-09T16:12:39Z s=ba2c51e2 FINDING docs/assets/site.css:.dd-steps .step[data-status] .step-indicator learn=test: tests/e2e/site.spec.ts text contrast on every tab, both themes
 2026-11-09T16:12:39Z s=ba2c51e2 FINDING docs/assets/site.css:h2 > .heading-anchor learn=test: same contrast test
 2026-11-09T16:12:39Z s=ba2c51e2 FINDING scripts/highlight.ts:createCodeHighlighter learn=test: same contrast test
 2026-11-09T16:12:39Z s=ba2c51e2 FINDING docs/assets/site.css:.dd-option-chosen, .dd-mark-label, .dd-option:not([data-chosen]) learn=test: same contrast test
@@ -107,3 +105,5 @@ Wrap: EVERY lead becomes a test | .vae/VERIFY.py rule | one MEMORY line with BC,
 2026-11-10T22:33:24Z s=ba2c51e2 FINDING models/README.md:4 license_link learn=none: The rule is Hugging Face's metadata validation, checked at upload; a local rule would duplicate one field's format.
 2026-11-10T22:38:26Z s=ba2c51e2 DONE fp=233d8d1d983d cov=97.1% paths=ARCH.md,README.md,docs/assets/charts.js,docs/assets/render.js(+19)
 2026-11-10T22:38:26Z s=ba2c51e2 FINDING src/winzling.ts:26 WINZLING_REVISION learn=none: A pin to an external commit; nothing local can check that it is the newest.
+2026-11-10T22:44:32Z s=ba2c51e2 DONE fp=e560cc7c9bad cov=97.1% paths=docs/assets/lib/decide.js,docs/assets/lib/engine.js,docs/assets/lib/format.js,docs/assets/lib/image.js(+10)
+2026-11-10T22:44:32Z s=ba2c51e2 FINDING .gitignore:26 lib/ learn=verifier: scripts/check-repo.ts rule 10 site.tracked, run by make lint and the gate's repo.rules.

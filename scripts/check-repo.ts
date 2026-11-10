@@ -113,6 +113,18 @@ for (const [path, text] of [
   if (hit) fail("site.plain-prose", `${path} contains U+${hit[0].codePointAt(0)!.toString(16).toUpperCase().padStart(4, "0")} near "${text.slice(Math.max(0, hit.index - 40), hit.index + 10).replace(/\s+/g, " ")}"; use plain punctuation (a colon, a comma, "to", "x")`);
 }
 
+// 10. Nothing under docs/ is ignored: GitHub Pages serves the tracked tree, so an ignored generated file is missing on
+//     the site. VERIFIED: `lib/` in .gitignore also matched docs/assets/lib/, and the published page lacked the
+//     library modules (2026-11-10).
+try {
+  const ignored = execFileSync("git", ["ls-files", "--others", "--ignored", "--exclude-standard", "docs"], { cwd: ROOT, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] })
+    .split("\n")
+    .filter((f) => f && !f.endsWith(".DS_Store")); // Finder's folder files are no website files
+  if (ignored.length) fail("site.tracked", `.gitignore hides website files: ${ignored.slice(0, 5).join(", ")}; narrow the pattern (for example /lib/)`);
+} catch {
+  // not a git checkout (a packed tarball): nothing is published from it
+}
+
 const stamp = new Date().toISOString();
 if (problems.length) {
   for (const p of problems) console.error(`${stamp} ERROR ${p}`);
