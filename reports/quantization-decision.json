@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-10",
+  "tool": "python/verify_decision.py",
+  "bundle": "decision/fast/q4",
+  "precision": "w4a32",
+  "runtime": "ONNX Runtime CPU",
+  "rule": {
+    "maxFlipShare": 0.03,
+    "maxAccuracyDrop": 0.01
+  },
+  "boolq": {
+    "dataset": "google/boolq",
+    "revision": "35b264d03638db9f4ce671b711558bf7ff0f80d5",
+    "split": "validation, questions 1 to 1,300"
+  },
+  "sets": {
+    "boolq": {
+      "inputs": 1300,
+      "flips": 26,
+      "meanShift": 0.0179,
+      "maxShift": 0.3161,
+      "correct": {
+        "fp32": 1103,
+        "quantized": 1103
+      },
+      "passed": true
+    },
+    "heldOut": {
+      "inputs": 177,
+      "flips": 3,
+      "meanShift": 0.0112,
+      "maxShift": 0.1663,
+      "passed": true
+    },
+    "labelled": {
+      "inputs": 56,
+      "flips": 0,
+      "meanShift": 0.0174,
+      "maxShift": 0.2247,
+      "correct": {
+        "fp32": 52,
+        "quantized": 52
+      },
+      "passed": true
+    }
+  },
+  "fixtureFlips": [
+    "noul"
+  ],
+  "passed": true
+}

@@ -34,6 +34,10 @@ test("navigation, theme and every section", async ({ page }, info) => {
   await expect.poll(() => page.evaluate(() => document.documentElement.classList.contains("dark"))).toBe(!dark);
   // The diagram's seven nodes, the three charts with a visible table of their numbers each, and the four steps.
   await expect(page.locator("#pipeline .diagram-node")).toHaveCount(7);
+  // The models section: both family stacks.
+  await expect(page.locator("#models .dd-stack")).toHaveCount(2);
+  await expect(page.locator("#stack-text .dd-stack-box")).toHaveCount(6);
+  await expect(page.locator("#stack-image .dd-stack-box")).toHaveCount(10);
   await expect(page.locator("#measured .dd-chart")).toHaveCount(3);
   await expect(page.locator("#measured .dd-data table")).toHaveCount(3);
   await expect(page.locator("#measured details")).toHaveCount(0);
@@ -77,7 +81,7 @@ test("a heading anchor is a deep link with its own history entry", async ({ page
   await page.goBack();
   await expect(page).toHaveURL(/#use-node$/);
   // Every section and every step has a heading anchor to itself.
-  for (const id of ["why", "examples", "how", "measured", "enterprise", "use", "use-install", "use-browser"]) await expect(page.locator(`a.heading-anchor[href="#${id}"]`)).toHaveCount(1);
+  for (const id of ["why", "examples", "how", "models", "stack-text", "stack-image", "measured", "enterprise", "use", "use-install", "use-browser"]) await expect(page.locator(`a.heading-anchor[href="#${id}"]`)).toHaveCount(1);
   assertClean();
 });
 
@@ -155,7 +159,7 @@ test("each chart answers one question in horizontal bars and redraws for its swi
   await page.goto("/docs/#measured");
   const described = (id: string) => page.locator(`#${id} .chart [aria-label^="This is a chart"], #${id} .chart[aria-label^="This is a chart"]`).first();
   // Downloads: the shared backbones have their own bars beside the tasks that share them.
-  await expect(described("measured-size")).toHaveAttribute("aria-label", /Text backbone, shared.*Evidence/);
+  await expect(described("measured-size")).toHaveAttribute("aria-label", /Text backbone.*Evidence/);
   await expect(page.locator("#measured-size [data-factor]")).toHaveCount(0);
   // Time per question: the browsers were measured on short texts and images, so 1,800 tokens shows Node.js only.
   const speed = page.locator("#measured-speed");
@@ -168,7 +172,7 @@ test("each chart answers one question in horizontal bars and redraws for its swi
   // Quality: one bar per bundle in the precision a default load uses, so both precisions appear as series.
   await expect(described("measured-quality")).toHaveAttribute("aria-label", /q8.*q4/);
   await page.locator('.dd-lang [data-locale="de"]').click();
-  await expect(described("measured-size")).toHaveAttribute("aria-label", /Text-Backbone, geteilt/);
+  await expect(described("measured-size")).toHaveAttribute("aria-label", /Text-Backbone.*Evidenz/);
   assertClean();
 });
 

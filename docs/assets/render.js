@@ -63,6 +63,7 @@ export function boxHTML(src, alt, answer, width = 512, height = 512) {
   return (
     `<figure class="dd-figure"><div class="dd-frame">${img(src, alt, width, height)}` +
     `<button type="button" class="dd-max" data-max aria-label="Show the image with its box larger" data-l-label="show-box-larger"><svg class="dd-icon" aria-hidden="true"><use href="#i-maximize"/></svg></button>` +
+    `<span class="dd-dim" style="--t:${pct(box.top)};--l:${pct(box.left)};--r:${pct(box.right)};--b:${pct(box.bottom)}"></span>` +
     `<span class="dd-box" style="top:${pct(box.top)};left:${pct(box.left)};width:${pct(box.right - box.left)};height:${pct(box.bottom - box.top)}"></span>` +
     `<span class="dd-point" style="top:${pct(point.y)};left:${pct(point.x)}"></span></div>` +
     `<figcaption>${L("box", "Box")} x ${box.left.toFixed(2)}-${box.right.toFixed(2)}, y ${box.top.toFixed(2)}-${box.bottom.toFixed(2)}, ${L("confidence", "confidence")} ${answer.confidence.toFixed(3)}</figcaption></figure>`

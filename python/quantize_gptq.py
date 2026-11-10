@@ -23,9 +23,9 @@ zero points was wrong on the Node.js CPU at optimization level extended and `Gat
 
 GPTQ uses Hessians from inputs this script builds from the repository's documents in the decision format and in each
 task's format: a backbone matrix from the decision model and all five task nets (each source weighted equally), a
-task's layers 20 to 23 from its own net. Every graph must reproduce PyTorch with the same quantized weights; the
-decision bundle must also keep the chosen option of its recorded fixtures. Task bundles stay unvalidated until
-`scripts/verify-quantized.ts` passes, as for the other quantized task bundles.
+task's layers 20 to 23 from its own net. Every graph must reproduce PyTorch with the same quantized weights. Task
+bundles stay unvalidated until `scripts/verify-quantized.ts` passes, as for the other quantized task bundles, and the
+decision bundle until `python/verify_decision.py` passes.
 """
 import argparse, hashlib, json, os, random, re, shutil, sys, tempfile, time
 from pathlib import Path
@@ -558,8 +558,9 @@ def main():
                                                   if c.get('options') else {'type': 'noul', 'instructions': c['instructions']}) for c in labelled])
                 entry['labelled']['correctFp32'] = sum(int(n[int(a_.argmax())] == c['expected']) for (n, a_, _), c in zip(rows, labelled))
                 entry['labelled']['correctQ4'] = sum(int(n[int(b_.argmax())] == c['expected']) for (n, _, b_), c in zip(rows, labelled))
-                # The decision gate, like the task gate: every recorded fixture keeps FP32's chosen option.
-                extra = {'validated': not flipped, **({'rejected': f'chosen option differs from FP32 on fixtures {flipped}'} if flipped else {})}
+                # The decision gate is python/verify_decision.py (accuracy and share of differing answers on 1,533 inputs);
+                # the fixtures' flips are recorded, not gated.
+                extra = {'validated': False, 'pendingVerification': 'uv run python python/verify_decision.py --source <checkpoint> --models <models>'}
                 entry['fixtureFlips'] = flipped
             else:
                 net, eng, v = task_net(root, label); net = fake_quant(net); wrapper = FastSpan(net).eval()

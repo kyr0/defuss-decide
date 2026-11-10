@@ -20,12 +20,14 @@ const label = (data, id) => data.labels[id]?.[locale()] ?? id;
 
 /** A horizontal bar chart: one row per category (top down), one bar series per entry of `series`. */
 function bars({ rows, series, max, format, stacked = false, markLine, showMaxLabel = true, labelFormat = format, labelColor }) {
+  // On a phone the legend wraps to a second line and the row labels take a third of the width: more room on top, smaller labels.
+  const phone = matchMedia("(max-width: 48rem)").matches;
   return {
     aria: { enabled: true },
-    legend: { top: 0, itemGap: 16 },
-    grid: { top: 36, left: 8, right: 64, bottom: 4, containLabel: true },
+    legend: { top: 0, itemGap: phone ? 10 : 16 },
+    grid: { top: phone ? 60 : 36, left: phone ? 0 : 8, right: phone ? 56 : 64, bottom: 4, containLabel: true },
     tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, valueFormatter: (v) => (v == null ? "-" : format(v)) },
-    yAxis: { type: "category", inverse: true, data: rows, axisTick: { show: false }, axisLabel: { interval: 0, fontSize: 13 } },
+    yAxis: { type: "category", inverse: true, data: rows, axisTick: { show: false }, axisLabel: { interval: 0, fontSize: phone ? 11 : 13 } },
     xAxis: { type: "value", min: 0, max, splitNumber: 4, axisLabel: { formatter: (v) => format(v), hideOverlap: true, showMaxLabel }, splitLine: { lineStyle: { opacity: 0.18 } } },
     series: series.map((s, i) => ({
       name: s.name,

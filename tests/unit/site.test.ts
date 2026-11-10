@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 import { axisRange, benchSpeed, browserKey, browserSpeed, downloadRows, downloads, niceCeil, qualityData } from "../../scripts/site-data.ts";
 import { bundleDir, loadFiles } from "../../scripts/model-sizes.ts";
 import { elementAt, syncEnglishTemplates, tr } from "../../scripts/site-i18n.ts";
-import { codeHTML, heroAnswerHTML, heroStats, stepsHTML, uspSizeHTML } from "../../scripts/site-sections.ts";
+import { architectureHTML, codeHTML, heroAnswerHTML, heroStats, stepsHTML, uspSizeHTML } from "../../scripts/site-sections.ts";
 
 describe("site i18n", () => {
   test("elementAt skips nested elements of the same tag", () => {
@@ -57,7 +57,7 @@ describe("site chart data", () => {
         ner: { original: 1000, fp32: 1500, q8: 1000 },
         relation: { original: 1000, fp32: 1500, q4: 30, q4Shared: "text" },
         "vision-box": { original: 900, q8: 400 },
-        "decision/fast": { original: 1400, fp32: 1400 },
+        "decision/fast": { original: 1400, fp32: 1400, q4: 10, q4Shared: "text" },
       },
     });
     expect(rows).toEqual([
@@ -66,7 +66,7 @@ describe("site chart data", () => {
       { id: "ner", kind: "q8", mb: 1049 },
       { id: "relation", kind: "q4", mb: 31 },
       { id: "vision-box", kind: "q8", mb: 419 },
-      { id: "decision/fast", kind: "fp32", mb: 1468 },
+      { id: "decision/fast", kind: "q4", mb: 10 },
     ]);
   });
 
@@ -163,5 +163,15 @@ describe("site sections", () => {
     expect([...html.matchAll(/step-indicator">(\d)</g)].map((m) => m[1])).toEqual(["1", "2"]);
     expect(html).toContain('id="use-b"');
     expect(html).toContain('href="#use-b"');
+  });
+});
+
+describe("the models section", () => {
+  test("both families are stacks whose backbone spans every model line, in both languages", () => {
+    const html = architectureHTML();
+    expect(html.match(/<figure class="dd-stack /g)).toHaveLength(2);
+    expect(html).toContain('style="grid-column:2 / span 2"');
+    expect(html).toContain('style="grid-column:2 / span 3"');
+    expect(html).toContain("UltraBERT-Text-Encoder");
   });
 });

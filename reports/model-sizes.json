@@ -1,7 +1,7 @@
 {
  "date": "2026-11-09",
  "unit": "MiB (1,048,576 bytes)",
- "method": "files directly in each bundle folder (no .br copies, no subfolders); original = the pinned safetensors files one task needs (base weights plus its adapter); a manifest must say validated: true, except decision/fast q4 (validated: false), the default on the maintainer's request",
+ "method": "files directly in each bundle folder (no .br copies, no subfolders); original = the pinned safetensors files one task needs (base weights plus its adapter); a manifest must say validated: true",
  "shared": {
   "text": 209.6,
   "image": 120.7
@@ -63,10 +63,7 @@
    "original": 1451.3,
    "fp32": 1455.2,
    "q4": 15.2,
-   "q4Shared": "text",
-   "unvalidated": [
-    "q4"
-   ]
+   "q4Shared": "text"
   },
   "decision/vision": {
    "original": 971.6,

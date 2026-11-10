@@ -1,5 +1,5 @@
 // The website sections that docs.ts generates from data: the install switch, the hero numbers, the pipeline diagram,
-// the charts with their data tables, and the four "Get started" steps. Every visible string comes in English and
+// the model stacks, the charts with their data tables, and the four "Get started" steps. Every visible string comes in English and
 // German (`tr`, defuss-i18n regions); every number comes from a record (scripts/site-data.ts).
 //
 // WHY generated HTML strings instead of components rendered in the browser: the page must show its English content
@@ -206,8 +206,8 @@ const BUNDLE_LABELS: Record<string, [string, string]> = {
   "vision-span": ["Image claims", "Bildbehauptungen"],
   "decision/fast": ["Text decisions", "Textentscheidungen"],
   "decision/vision": ["Image decisions", "Bildentscheidungen"],
-  "backbone:text": ["Text backbone, shared", "Text-Backbone, geteilt"],
-  "backbone:image": ["Image backbone, shared", "Bild-Backbone, geteilt"],
+  "backbone:text": ["Text backbone", "Text-Backbone"],
+  "backbone:image": ["Image backbone", "Bild-Backbone"],
 };
 
 const toggleGroup = (name: string, label: [string, string], options: [string, string, string][], multiple = false) =>
@@ -252,8 +252,14 @@ function chartFrame(id: string, icon: string, title: [string, string], dek: [str
  * in a visible table (all that shows without script) and the embedded data. WHY bars per task and no factor matrix: a reader wants "how big, how
  * fast, how close", and one view per question answers it; the tables keep every number. */
 export function chartsHTML(data: ChartData): string {
-  const KIND: Record<string, [string, string]> = { backbone: ["shared, q4", "geteilt, q4"], q4: ["q4", "q4"], q8: ["q8", "q8"], fp32: ["FP32 (no smaller bundle)", "FP32 (kein kleineres Bundle)"] };
-  const sizeRows: Cell[][] = data.sizes.map((r) => [BUNDLE_LABELS[r.id] ?? r.id, KIND[r.kind], both(r.mb.toLocaleString("en-US"))]);
+  const KIND: Record<string, [string, string]> = { backbone: ["q4", "q4"], q4: ["q4", "q4"], q8: ["q8", "q8"], fp32: ["FP32 (no smaller bundle)", "FP32 (kein kleineres Bundle)"] };
+  // A shared backbone says so in a badge beside its name, once; its precision column then reads like every other row's.
+  const SHARED_BADGE: Pair = ['<span class="badge" data-variant="secondary">shared</span>', '<span class="badge" data-variant="secondary">geteilt</span>'];
+  const rowName = (r: { id: string; kind: string }): Cell => {
+    const label = BUNDLE_LABELS[r.id] ?? [r.id, r.id];
+    return r.kind === "backbone" ? [`${label[0]} ${SHARED_BADGE[0]}`, `${label[1]} ${SHARED_BADGE[1]}`] : label;
+  };
+  const sizeRows: Cell[][] = data.sizes.map((r) => [rowName(r), KIND[r.kind], both(r.mb.toLocaleString("en-US"))]);
   const size = chartFrame(
     "measured-size",
     "i-download",
@@ -343,4 +349,76 @@ export function stepsHTML(steps: Step[]): string {
   return `
     <ol class="steps dd-steps" data-orientation="vertical">${items.join("")}
     </ol>`;
+}
+
+// ---- architecture -------------------------------------------------------------------------------------------------------
+type Pair = [string, string];
+interface StackBox { name: Pair; meta: Pair; span?: number; tone?: "base" | "none" }
+interface Family { id: string; title: Pair; source: string; columns: number; heads: Pair[]; layers: { role: Pair; boxes: StackBox[] }[] }
+
+// The two model families, top layer first: a box sits on the box below it in the same column.
+// VERIFIED (2026-11-10): layer counts, widths and vocabularies from config.json, the adapters and backbone variants from
+// vela3_config.json and vela3v_config.json of the pinned checkpoints (python/source-lock.json); the readouts from
+// python/vela_onnx/portable.py and tasks.py. The checkpoints are not tracked, so the figures are written here.
+const FAMILIES: Family[] = [
+  {
+    id: "text", title: ["Text models", "Textmodelle"], source: "vllm-sr/vela3-fast", columns: 2,
+    heads: [["Decisions", "Entscheidungen"], ["Five span tasks", "Fünf Stellen-Aufgaben"]],
+    layers: [
+      { role: ["Readout", "Ausgabekopf"], boxes: [
+        { name: ["Decision head", "Entscheidungskopf"], meta: ["one score per answer option", "ein Wert pro Antwortoption"] },
+        { name: ["Span readout", "Stellen-Kopf"], meta: ["one score per word and label", "ein Wert pro Wort und Label"] }] },
+      { role: ["Adapter", "Adapter"], boxes: [
+        { name: ["No adapter", "Kein Adapter"], meta: ["the head reads the backbone as trained", "der Kopf liest das Backbone wie trainiert"], tone: "none" },
+        { name: ["LoRA adapter per task", "LoRA-Adapter je Aufgabe"], meta: ["small matrices beside all 168 backbone matrices, and its own layers 20 to 23", "kleine Matrizen neben allen 168 Backbone-Matrizen und eigene Schichten 20 bis 23"] }] },
+      { role: ["Backbone", "Backbone"], boxes: [
+        { name: ["UltraBERT text encoder", "UltraBERT-Text-Encoder"], meta: ["24 layers, 1,024 numbers per token, 168 weight matrices; the same frozen weights under all six models", "24 Schichten, 1.024 Zahlen pro Token, 168 Gewichtsmatrizen; dieselben eingefrorenen Gewichte unter allen sechs Modellen"], span: 2, tone: "base" }] },
+      { role: ["Input", "Eingabe"], boxes: [
+        { name: ["Tokenizer and token table", "Tokenizer und Token-Tabelle"], meta: ["49,152 tokens and 8 marker tokens, such as the ones for the question and for each option", "49.152 Token und 8 Marker-Token, etwa für die Frage und für jede Option"], span: 2, tone: "base" }] },
+    ],
+  },
+  {
+    id: "image", title: ["Image models", "Bildmodelle"], source: "vllm-sr/vela3-fast-vision", columns: 3,
+    heads: [["Decisions", "Entscheidungen"], ["Claims and OCR", "Behauptungen und OCR"], ["Regions", "Regionen"]],
+    layers: [
+      { role: ["Readout", "Ausgabekopf"], boxes: [
+        { name: ["Decision head", "Entscheidungskopf"], meta: ["one score per answer option", "ein Wert pro Antwortoption"] },
+        { name: ["Span readout", "Stellen-Kopf"], meta: ["one score per word and label", "ein Wert pro Wort und Label"] },
+        { name: ["Region readout", "Regionen-Kopf"], meta: ["one score per image cell", "ein Wert pro Bildzelle"] }] },
+      { role: ["Adapter", "Adapter"], boxes: [
+        { name: ["No adapter", "Kein Adapter"], meta: ["the head reads its backbone as trained", "der Kopf liest sein Backbone wie trainiert"], tone: "none" },
+        { name: ["LoRA adapter per task", "LoRA-Adapter je Aufgabe"], meta: ["rank 64, for image claims and for the OCR check", "Rang 64, für Bildbehauptungen und für die OCR-Prüfung"] },
+        { name: ["LoRA adapter", "LoRA-Adapter"], meta: ["rank 64, for image regions", "Rang 64, für Bildregionen"] }] },
+      { role: ["Backbone", "Backbone"], boxes: [
+        { name: ["UltraBERT text encoder", "UltraBERT-Text-Encoder"], meta: ["24 layers, 768 numbers per token; weights trained for decisions", "24 Schichten, 768 Zahlen pro Token; für Entscheidungen trainierte Gewichte"], tone: "base" },
+        { name: ["UltraBERT text encoder", "UltraBERT-Text-Encoder"], meta: ["the same size; base weights, one copy for both tasks", "gleiche Größe; Basisgewichte, eine Kopie für beide Aufgaben"], tone: "base" },
+        { name: ["UltraBERT text encoder", "UltraBERT-Text-Encoder"], meta: ["the same size; its own decision-trained weights", "gleiche Größe; eigene, für Entscheidungen trainierte Gewichte"], tone: "base" }] },
+      { role: ["Input", "Eingabe"], boxes: [
+        { name: ["SigLIP image encoder and token table", "SigLIP-Bild-Encoder und Token-Tabelle"], meta: ["12 layers over 512 px tiles in 16 px patches; its features take the place of the image tokens in the text", "12 Schichten über 512-px-Kacheln in 16-px-Patches; seine Merkmale ersetzen die Bild-Token im Text"], span: 3, tone: "base" }] },
+    ],
+  },
+];
+
+/** The models section: both families as stacks, where a box sits on the box below it in its column. WHY stacks and
+ * not prose: "x sits on y" is a spatial fact. The maintainer removed a table of every bundle from this section
+ * (2026-11-10); the sizes and precisions per bundle are in the charts' tables. */
+export function architectureHTML(): string {
+  const stacks = FAMILIES.map((f) => {
+    const heads = f.heads.map(([en, d], i) => `<div class="dd-stack-head" style="grid-column:${i + 2}">${tr(`st-${f.id}-h${i}`, en, d)}</div>`).join("");
+    const rows = f.layers.map((l, li) => {
+      const boxes = l.boxes.map((b, bi) => `<div class="dd-stack-box"${b.tone ? ` data-tone="${b.tone}"` : ""}${b.span ? ` style="grid-column:2 / span ${b.span}"` : ""}><strong>${tr(`st-${f.id}-${li}-${bi}-n`, b.name[0], b.name[1])}</strong>${tr(`st-${f.id}-${li}-${bi}-m`, b.meta[0], b.meta[1], "span", 'class="dd-stack-meta"')}</div>`).join("");
+      return `<div class="dd-stack-role">${tr(`st-${f.id}-r${li}`, l.role[0], l.role[1])}</div>${boxes}`;
+    }).join("\n          ");
+    return `
+      <figure class="dd-stack parallax-reveal" id="stack-${f.id}" aria-labelledby="stack-${f.id}-title">
+        <figcaption><h3 id="stack-${f.id}-title"><a class="heading-anchor" data-router-link href="#stack-${f.id}" ${attr("aria-label", `Link to: ${f.title[0]}`, `Link zu: ${f.title[1]}`)}>§</a>${tr(`st-${f.id}-t`, f.title[0], f.title[1])}</h3><p>${tr(`st-${f.id}-s`, "Exported from", "Exportiert aus")} <code>${f.source}</code></p></figcaption>
+        <div class="dd-stack-grid" style="--cols:${f.columns}">
+          <div></div>${heads}
+          ${rows}
+        </div>
+      </figure>`;
+  }).join("");
+  return `
+    <div class="dd-stacks">${stacks}
+    </div>`;
 }

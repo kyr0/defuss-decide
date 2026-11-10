@@ -39,7 +39,7 @@ import type { Sample } from "./verify-samples.ts";
 import { syncEnglishTemplates, tr } from "./site-i18n.ts";
 import { WINZLING_URL } from "../src/winzling.ts";
 import { benchSpeed, browserSpeed, downloadRows, downloads, qualityData, PRECISIONS, type BenchRecord, type BrowserRecord, type Precision } from "./site-data.ts";
-import { chartsHTML, codeHTML, diagramHTML, heroAnswerHTML, heroStats, installHTML, statsHTML, stepsHTML, uspSizeHTML, type ChartData } from "./site-sections.ts";
+import { architectureHTML, chartsHTML, codeHTML, diagramHTML, heroAnswerHTML, heroStats, installHTML, statsHTML, stepsHTML, uspSizeHTML, type ChartData } from "./site-sections.ts";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const BUNDLES = join(ROOT, "tests/fixtures/bundles");
@@ -280,9 +280,8 @@ export async function relateChoices(): Promise<SampleChoice[]> {
   });
 }
 
-/** A choice of a tab with where its recorded answer comes from; fixtures also name their `data-example`. */
+/** A choice of a tab; fixtures also name their `data-example`. */
 interface TabChoice extends SampleChoice {
-  source: string;
   example?: string;
 }
 /** One tab of the examples: its runner (`kind`), its bundle folder (`dir`) and its choices, recorded answers first. */
@@ -298,19 +297,12 @@ export interface Tab {
   choices: TabChoice[];
 }
 
-const SOURCE = {
-  python: "original Python model, reproduced by JavaScript",
-  samples: `real FP32 bundles in Node.js, <code>${SAMPLES_RECORD}</code>`,
-  decide: `real bundles, <code>${DECIDE_RECORD}</code>`,
-  relate: `real FP32 decision bundle in Node.js, <code>${RELATE_RECORD}</code>`,
-};
-
 /** The tabs in page order: decisions, relations, then the eight trained tasks with their sample images and every
  * recorded Python fixture. */
 export function tabsOf(fixtures: Record<string, Fixture[]>, decisions: SampleChoice[], samples: Record<string, SampleChoice[]>, relates: SampleChoice[]): Tab[] {
   const fixtureChoice = (a: Adapter, f: Fixture): TabChoice => {
     const image = a.dir.startsWith("vision-") ? fixtureImage(a) : null;
-    return { id: `fixture-${f.name}`, title: `Fixture: ${f.name}`, image: image?.src ?? null, alt: image?.alt ?? null, width: image ? 512 : null, height: image ? 512 : null, state: f.state, question: f.question, answer: f.answer, source: SOURCE.python, example: `${a.id}/${f.name}` };
+    return { id: `fixture-${f.name}`, title: `Fixture: ${f.name}`, image: image?.src ?? null, alt: image?.alt ?? null, width: image ? 512 : null, height: image ? 512 : null, state: f.state, question: f.question, answer: f.answer, example: `${a.id}/${f.name}` };
   };
   return [
     {
@@ -320,7 +312,7 @@ export function tabsOf(fixtures: Record<string, Fixture[]>, decisions: SampleCho
       title: "Typed decisions",
       de: [DECIDE_TAB.labelDe, "Typisierte Entscheidungen", "Jede Ja/Nein- oder Auswahlfrage über JSON, Text und Bilder, ohne Training dafür: Die Bildadapter ergänzen den Zustand um das, was sie sehen, die Evidenz markiert die relevanten Felder, und der Entscheidungskopf antwortet mit Wahrscheinlichkeiten."],
       blurb: "Any yes/no or multiple-choice question over JSON, text and images, without training for it: the image adapters add what they see to the state, evidence marks the fields that matter, and the decision head answers with probabilities.",
-      choices: [...decisions.map((c) => ({ ...c, source: SOURCE.decide })), ...(samples.decide ?? []).map((c) => ({ ...c, source: SOURCE.samples }))],
+      choices: [...decisions, ...(samples.decide ?? [])],
     },
     {
       ...RELATE_TAB,
@@ -329,7 +321,7 @@ export function tabsOf(fixtures: Record<string, Fixture[]>, decisions: SampleCho
       title: "Graph relations",
       de: [RELATE_TAB.labelDe, "Graph-Relationen", "Ordnet Absätze danach, wie sie zu einer Aussage stehen, als Kanten eines Wissensgraphen: stützt (der Absatz sagt, dass sie stimmt), widerlegt (sagt, dass sie falsch ist) und betrifft (gleiches Thema)."],
       blurb: "Rank paragraphs by how they relate to a statement, as edges of a knowledge graph: supports (the paragraph states that it is true), refutes (states that it is false) and relates (same topic). The decision head answers one four-option question per paragraph, without training for the task; it ranks by what a paragraph states, including stated causes and qualifiers.",
-      choices: relates.map((c) => ({ ...c, source: SOURCE.relate })),
+      choices: relates,
     },
     ...ADAPTERS.map((a): Tab => ({
       id: a.id,
@@ -339,7 +331,7 @@ export function tabsOf(fixtures: Record<string, Fixture[]>, decisions: SampleCho
       title: a.title,
       blurb: a.blurb,
       de: a.de,
-      choices: [...(samples[a.id] ?? []).map((c) => ({ ...c, source: SOURCE.samples })), ...fixtures[a.dir].map((f) => fixtureChoice(a, f))],
+      choices: [...(samples[a.id] ?? []), ...fixtures[a.dir].map((f) => fixtureChoice(a, f))],
     })),
   ];
 }
@@ -381,7 +373,6 @@ async function recordedHTML(c: TabChoice, first: boolean): Promise<string> {
   const image = c.image ? { src: c.image, alt: c.alt!, width: c.width!, height: c.height! } : null;
   return `
             <div class="dd-recorded" data-sample="${escape(c.id)}"${c.example ? ` data-example="${escape(c.example)}"` : ""}${first ? "" : " hidden"}>
-              <p class="dd-source"><span data-l="recorded">Recorded</span>: ${c.source}</p>
               ${answerHTML(image, c.state, c.question, c.answer)}
               ${await rawHTML(c.answer)}
             </div>`;
@@ -413,7 +404,7 @@ async function panelHTML(tab: Tab, first: boolean): Promise<string> {
           <svg class="dd-arrow dd-arrow-down" viewBox="0 0 24 40" aria-hidden="true"><path d="M12 3v32m-8-9 8 9 8-9"/></svg>
           <section class="card dd-result" aria-labelledby="result-title-${tab.id}">
             <div class="dd-result-head">
-              <h4 class="dd-result-title" id="result-title-${tab.id}">${tr(`res-${tab.id}`, "Result", "Ergebnis")}</h4>
+              <h4 class="dd-result-title" id="result-title-${tab.id}">${tr(`res-${tab.id}`, "Result", "Ergebnis")}<span class="badge dd-cached" data-variant="secondary" id="cached-${tab.id}">${tr(`cached-${tab.id}`, "Cached", "Gespeichert")}</span></h4>
               <div class="dd-actions">
                 <button type="submit" class="btn" data-size="sm" id="run-${tab.id}"><svg class="dd-icon" aria-hidden="true"><use href="#i-play"/></svg>${tr(`run-l-${tab.id}`, "Run in this tab", "Hier ausführen")}<kbd class="kbd-group dd-run-kbd" aria-hidden="true"><kbd class="kbd" data-size="sm" data-mod>Ctrl</kbd><kbd class="kbd" data-size="sm">Enter</kbd></kbd></button>
                 <button type="button" class="btn" data-size="sm" data-variant="outline" id="reset-${tab.id}"><svg class="dd-icon" aria-hidden="true"><use href="#i-reset"/></svg>${tr(`reset-l-${tab.id}`, "Reset", "Zurücksetzen")}</button>
@@ -573,6 +564,7 @@ export async function build(): Promise<Record<string, string>> {
   if (!hero) throw new Error(`the decide examples lack "${HERO_DECISION}" for the hero`);
   html = replaceRegion(html, "hero-answer", heroAnswerHTML((hero.question as { instructions: string }).instructions, hero.answer as DecideAnswer));
   html = replaceRegion(html, "diagram", diagramHTML());
+  html = replaceRegion(html, "architecture", architectureHTML());
   html = replaceRegion(html, "charts", chartsHTML(charts));
   html = replaceRegion(html, "steps", stepsHTML([
     { id: "install", title: ["Install the package", "Paket installieren"], text: ["Pick your package manager. The library runs in Node.js 22 or later, Bun and current browsers.", "Wählen Sie Ihren Paketmanager. Die Bibliothek läuft in Node.js ab 22, Bun und aktuellen Browsern."], body: await installHTML("install-steps", highlight) },
@@ -584,7 +576,7 @@ export async function build(): Promise<Record<string, string>> {
   html = html.replace(/(<input class="input" id="live-base" type="text" value=")[^"]*(")/, `$1${WINZLING_URL}$2`);
   html = syncEnglishTemplates(html);
   // The page's data: what site.js needs to fill the editors and run a choice; the recorded answers are already HTML.
-  const examples = tabs.map(({ id, dir, kind, label, choices }) => ({ id, dir, kind, label, choices: choices.map(({ source: _s, example: _e, ...c }) => c) }));
+  const examples = tabs.map(({ id, dir, kind, label, choices }) => ({ id, dir, kind, label, choices: choices.map(({ example: _e, ...c }) => c) }));
   const files: Record<string, string> = {
     "docs/index.html": html,
     "docs/data/examples.json": JSON.stringify(examples, null, 1) + "\n",

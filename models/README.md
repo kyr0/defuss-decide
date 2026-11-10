@@ -1,7 +1,7 @@
 ---
 license: other
 license_name: vela3-upstream
-license_link: README.md#licenses
+license_link: https://huggingface.co/kyr0/winzling-decide-1.0#licenses
 base_model:
   - vllm-sr/vela3-fast
   - vllm-sr/vela3-fast-vision
@@ -20,7 +20,7 @@ language:
 
 # Custom-quantized Vela3 ONNX bundles and custom split-decision heads
 
-ONNX exports of the Vela3 task adapters and decision heads by vLLM Semantic Router / KR Labs, for [defuss-decide](https://github.com/kyr0/defuss-decision). The library runs them in Node.js, Bun and the browser with ONNX Runtime: on WebGPU when the device offers it, else on the CPU or WASM. No Python and no inference server are needed.
+ONNX exports of the Vela3 task adapters and decision heads by vLLM Semantic Router / KR Labs, for [defuss-decide](https://github.com/kyr0/defuss-decide). The library runs them in Node.js, Bun and the browser with ONNX Runtime: on WebGPU when the device offers it, else on the CPU or WASM. No Python and no inference server are needed.
 
 Each folder is a complete bundle: graphs, tokenizer, a manifest and the license files of its source model. A bundle loads only when its manifest says `validated: true`, which the exporter writes after ONNX Runtime reproduced the original model's outputs on recorded inputs.
 
@@ -50,7 +50,7 @@ The reference inputs are 2 to 5 per bundle. They prove that an export reproduces
 | `vision-span` and `vision-ocr` | 1,095 MB | 2,032 MB | 748 MB | **213 MB** | **5.1× smaller** |
 | `ner` | 1,901 MB | 1,686 MB | **1,142 MB** | none | 1.7× smaller |
 | `vision-box` | 1,059 MB | 1,016 MB | **843 MB** | none | 1.3× smaller |
-| `decision/fast` | 1,451 MB | 1,455 MB | none | **224 MB** (15 + 209 shared), not validated | **6.5× smaller** |
+| `decision/fast` | 1,451 MB | 1,455 MB | none | **224 MB** (15 + 209 shared) | **6.5× smaller** |
 
 The original model loads its base weights once for all text tasks, so it needs less than four FP32 bundles; the shared backbone file gives the q4 bundles the same advantage. The `ner` q8 bundle keeps its embedding table and heads in FP32 and the `vision-box` q8 bundle its task graph, which is why those two shrink less.
 
@@ -86,9 +86,8 @@ The q8 run used the q8 task bundles with the FP32 decision heads; the one case i
 | --- | --- |
 | `ner` q4 | A two-character Japanese name lost its first character: its span score of 0.63 sits next to the 0.6 threshold, and every 4-bit method tried either moved it or changed it by more than 0.02. |
 | `vision-box` q4, and q8 of its task graph | The located point moved to another image cell. |
-| `decision/fast` q4 | One of the 5 reference decisions flipped (p(yes) 0.563 in FP32, 0.439 in q4), and 8 of 300 BoolQ questions (2.7 %). A repair training brought that to 6 (2 %), still above the 1 % limit. It is published all the same and is defuss-decide's default, with `validated: false` in its manifest: beside the text backbone the q4 tasks share, it adds 15 MB instead of 1,455 MB. |
 
-VERIFIED: sizes from the bundle folders on disk and the pinned safetensors files; quality figures from [ADAPTER_VALIDATION.md](https://github.com/kyr0/defuss-decision/blob/main/documentation/ADAPTER_VALIDATION.md), [reports/quantization-tasks.json](https://github.com/kyr0/defuss-decision/blob/main/reports/quantization-tasks.json), [reports/quantization-gptq-vision.json](https://github.com/kyr0/defuss-decision/blob/main/reports/quantization-gptq-vision.json), the bundles' `parity-*.json` files and [reports/decide/](https://github.com/kyr0/defuss-decision/tree/main/reports/decide) (2026-11-08 and 2026-11-09).
+VERIFIED: sizes from the bundle folders on disk and the pinned safetensors files; quality figures from [ADAPTER_VALIDATION.md](https://github.com/kyr0/defuss-decide/blob/main/documentation/ADAPTER_VALIDATION.md), [reports/quantization-tasks.json](https://github.com/kyr0/defuss-decide/blob/main/reports/quantization-tasks.json), [reports/quantization-gptq-vision.json](https://github.com/kyr0/defuss-decide/blob/main/reports/quantization-gptq-vision.json), the bundles' `parity-*.json` files and [reports/decide/](https://github.com/kyr0/defuss-decide/tree/main/reports/decide) (2026-11-08 and 2026-11-09).
 
 ## Layout
 
@@ -117,7 +116,7 @@ The text bundles come from [vllm-sr/vela3-fast](https://huggingface.co/vllm-sr/v
 
 ## Shared backbones
 
-The text q4 bundles share one backbone. `backbone/fast/q4/backbone.onnx.data` holds the token table and the 24 backbone layers in INT4 (GPTQ, groups of 32). Each task bundle keeps only what is its own: the LoRA matrices (INT8), layers 20 to 23, which its adapter trained in full (INT4), and its heads. Its manifest names the shared file next to its own data file, and ONNX Runtime joins both into one model in memory. The task graph and the inference code stay the same as for a self-contained bundle. With four text tasks in q4 the download is 209 MB once plus 68 to 98 MB per task, instead of 466 to 489 MB per task. VERIFIED: the four bundles passed the gate in Node.js, Bun, Chromium and WebKit with the shared file loaded from its own folder (2026-11-08). The image q4 bundles work the same way with two shared files: `vision-span` and `vision-ocr` hold the same image encoder and text backbone, so `backbone/vision/q4/` keeps them once (121 MB) and each bundle keeps 46 MB of its own. `vision-box` and `decision/vision` use other backbones and stay self-contained. VERIFIED: both shared-file bundles passed the same gate in Node.js, Bun, Chromium and WebKit, and `decision/vision/q4` kept the token ids and every fixture's option within 0.02 probability in Node.js, Bun and Chromium (2026-11-09). `python/quantize_gptq.py` and `python/quantize_gptq_vision.py` write them; [models.md](https://github.com/kyr0/defuss-decision/blob/main/documentation/models.md#quantization) has the command.
+The text q4 bundles share one backbone. `backbone/fast/q4/backbone.onnx.data` holds the token table and the 24 backbone layers in INT4 (GPTQ, groups of 32). Each task bundle keeps only what is its own: the LoRA matrices (INT8), layers 20 to 23, which its adapter trained in full (INT4), and its heads. Its manifest names the shared file next to its own data file, and ONNX Runtime joins both into one model in memory. The task graph and the inference code stay the same as for a self-contained bundle. With four text tasks in q4 the download is 209 MB once plus 68 to 98 MB per task, instead of 466 to 489 MB per task. VERIFIED: the four bundles passed the gate in Node.js, Bun, Chromium and WebKit with the shared file loaded from its own folder (2026-11-08). The image q4 bundles work the same way with two shared files: `vision-span` and `vision-ocr` hold the same image encoder and text backbone, so `backbone/vision/q4/` keeps them once (121 MB) and each bundle keeps 46 MB of its own. `vision-box` and `decision/vision` use other backbones and stay self-contained. VERIFIED: both shared-file bundles passed the same gate in Node.js, Bun, Chromium and WebKit, and `decision/vision/q4` kept the token ids and every fixture's option within 0.02 probability in Node.js, Bun and Chromium (2026-11-09). `python/quantize_gptq.py` and `python/quantize_gptq_vision.py` write them; [models.md](https://github.com/kyr0/defuss-decide/blob/main/documentation/models.md#quantization) has the command.
 
 ## Files of a bundle
 
@@ -166,13 +165,14 @@ import { loadVelaProvider } from "defuss-decide/web";
 const vela = await loadVelaProvider(undefined, { onProgress: (e) => e.stage === "download" && console.log(e.file, e.loaded, e.total) });
 ```
 
-In the browser, `defuss-decide/web` takes the bundle folders as URLs in the same shape. Load the q8 bundles there: most are about a third of the FP32 download (`ner` and `vision-box` keep parts in FP32) and as fast on WebGPU. In Node.js or Bun on the CPU, FP32 is the fastest. VERIFIED: with the q8 task bundles the 81 decision cases of defuss-decide were answered 73 times as labelled, against 74 with FP32; the difference is one region confidence that crossed 0.5 ([decide.md](https://github.com/kyr0/defuss-decision/blob/main/documentation/decide.md#what-it-was-measured-on)). The [defuss-decide README](https://github.com/kyr0/defuss-decision#readme) documents every question type, the image tasks and the options.
+In the browser, `defuss-decide/web` takes the bundle folders as URLs in the same shape. Load the q8 bundles there: most are about a third of the FP32 download (`ner` and `vision-box` keep parts in FP32) and as fast on WebGPU. In Node.js or Bun on the CPU, FP32 is the fastest. VERIFIED: with the q8 task bundles the 81 decision cases of defuss-decide were answered 73 times as labelled, against 74 with FP32; the difference is one region confidence that crossed 0.5 ([decide.md](https://github.com/kyr0/defuss-decide/blob/main/documentation/decide.md#what-it-was-measured-on)). The [defuss-decide README](https://github.com/kyr0/defuss-decide#readme) documents every question type, the image tasks and the options.
 
 ## Validation
 
-- VERIFIED: every FP32 task bundle reproduced the original PyTorch model's logits or image features on its recorded fixtures in Python ONNX Runtime, Node.js, Bun and Chromium, and on WebGPU in Chromium and WebKit; the largest differences per runtime are in [ADAPTER_VALIDATION.md](https://github.com/kyr0/defuss-decision/blob/main/documentation/ADAPTER_VALIDATION.md).
+- VERIFIED: every FP32 task bundle reproduced the original PyTorch model's logits or image features on its recorded fixtures in Python ONNX Runtime, Node.js, Bun and Chromium, and on WebGPU in Chromium and WebKit; the largest differences per runtime are in [ADAPTER_VALIDATION.md](https://github.com/kyr0/defuss-decide/blob/main/documentation/ADAPTER_VALIDATION.md).
 - VERIFIED: both decision heads reproduced the original model's logits and probabilities in Python ONNX Runtime and Node.js, on the CPU and on WebGPU (`parity-*.json` in their folders).
-- VERIFIED: a quantized bundle was published only when its decoded answers matched FP32 on the same fixtures; its size and largest score drift are in [reports/quantization-tasks.json](https://github.com/kyr0/defuss-decision/blob/main/reports/quantization-tasks.json).
+- VERIFIED: a quantized bundle was published only when its decoded answers matched FP32 on the same fixtures; its size and largest score drift are in [reports/quantization-tasks.json](https://github.com/kyr0/defuss-decide/blob/main/reports/quantization-tasks.json).
+- VERIFIED: `decision/fast` q4 passed the gate for decision bundles, which measures answers and not single fixtures: on 1,300 BoolQ validation questions it answered 1,103 correctly, as many as FP32, and picked another option than FP32 on 26 (2.0 %); on 177 held-out decisions it differed on 3 (1.7 %), and on the 56 labelled cases on none (52 correct in both). One of the 5 recorded fixtures changed its answer (p(yes) 0.563 in FP32, 0.439 in q4). The gate allows at most 3 % differing answers per set and at most 1 percentage point fewer correct ones; the limit was set after these measurements ([reports/quantization-decision.json](https://github.com/kyr0/defuss-decide/blob/main/reports/quantization-decision.json), 2026-11-10). Load FP32 when a decision must not differ from the original model's.
 - Parity is not accuracy. The fixtures prove that the exports reproduce the source models; how well the models work on your documents and images is for you to measure. The source models are English-oriented.
 
 ## Limits

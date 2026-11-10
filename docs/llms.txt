@@ -37,7 +37,7 @@ In the browser, import `defuss-decide/web` and pass bundle URLs, or none for the
 
 ## Install
 
-Package name `defuss-decide` (ESM, TypeScript declarations included): `bun add defuss-decide`, `pnpm add defuss-decide`, `npm install defuss-decide` or `yarn add defuss-decide`. Until the package is published, install it from a checkout: `git clone https://github.com/kyr0/defuss-decision.git`, then `bun add ../defuss-decision` in your app.
+Package name `defuss-decide` (ESM, TypeScript declarations included): `bun add defuss-decide`, `pnpm add defuss-decide`, `npm install defuss-decide` or `yarn add defuss-decide`. Until the package is published, install it from a checkout: `git clone https://github.com/kyr0/defuss-decide.git`, then `bun add ../defuss-decision` in your app.
 
 Model bundles are on Hugging Face as kyr0/winzling-decide-1.0 (`hf download kyr0/winzling-decide-1.0 --exclude "*.br" --local-dir models` for the Node.js default), or exported from the pinned upstream checkpoints with `uv run python/export_tasks.py` (see documentation/models.md). An export writes `manifest.json` with `validated: true` only after ONNX Runtime matched PyTorch on reference fixtures; the loaders refuse bundles without it.
 
@@ -54,7 +54,7 @@ Model bundles are on Hugging Face as kyr0/winzling-decide-1.0 (`hf download kyr0
 
 | Bundle | Answers | Precisions |
 | --- | --- | --- |
-| `decision/fast` | yes/no or option probabilities for text and JSON state | FP32, q4 (not validated: 3 of 177 test decisions change) |
+| `decision/fast` | yes/no or option probabilities for text and JSON state | FP32, q4 (as accurate as FP32 on 1,300 test questions; 2.0 % of the answers differ) |
 | `decision/vision` | decisions that also read images | FP32, q4 |
 | `evidence` | passages that support an answer | FP32, q8, q4 |
 | `span` | labels with free-text descriptions, toxicity | FP32, q8, q4 |
@@ -74,17 +74,17 @@ Model bundles are on Hugging Face as kyr0/winzling-decide-1.0 (`hf download kyr0
 
 ## Docs
 
-- [README](https://github.com/kyr0/defuss-decision/blob/main/README.md): overview, install, Node.js, Bun and browser usage, data contract
-- [API reference](https://github.com/kyr0/defuss-decision/blob/main/documentation/api.md): every export, question shape, answer shape and error
-- [Decisions](https://github.com/kyr0/defuss-decision/blob/main/documentation/decide.md): the decide pipeline, its options and what it was measured on
-- [Graph relations](https://github.com/kyr0/defuss-decision/blob/main/documentation/relate.md): ranking paragraphs against a statement
-- [Models](https://github.com/kyr0/defuss-decision/blob/main/documentation/models.md): export, quantization (q8, GPTQ q4 with shared backbones) and Brotli copies
-- [Performance](https://github.com/kyr0/defuss-decision/blob/main/documentation/performance.md): latency per runtime, backend and precision
-- [Validation](https://github.com/kyr0/defuss-decision/blob/main/documentation/VALIDATION.md): how parity is checked
-- [Model card](https://github.com/kyr0/defuss-decision/blob/main/models/README.md): sizes and quality per bundle and precision
+- [README](https://github.com/kyr0/defuss-decide/blob/main/README.md): overview, install, Node.js, Bun and browser usage, data contract
+- [API reference](https://github.com/kyr0/defuss-decide/blob/main/documentation/api.md): every export, question shape, answer shape and error
+- [Decisions](https://github.com/kyr0/defuss-decide/blob/main/documentation/decide.md): the decide pipeline, its options and what it was measured on
+- [Graph relations](https://github.com/kyr0/defuss-decide/blob/main/documentation/relate.md): ranking paragraphs against a statement
+- [Models](https://github.com/kyr0/defuss-decide/blob/main/documentation/models.md): export, quantization (q8, GPTQ q4 with shared backbones) and Brotli copies
+- [Performance](https://github.com/kyr0/defuss-decide/blob/main/documentation/performance.md): latency per runtime, backend and precision
+- [Validation](https://github.com/kyr0/defuss-decide/blob/main/documentation/VALIDATION.md): how parity is checked
+- [Model card](https://github.com/kyr0/defuss-decide/blob/main/models/README.md): sizes and quality per bundle and precision
 
 ## Optional
 
-- [Architecture](https://github.com/kyr0/defuss-decision/blob/main/ARCH.md): module map, security and privacy notes
-- [Research](https://github.com/kyr0/defuss-decision/blob/main/documentation/RESEARCH.md): why Vela3 and how the decision heads were chosen
+- [Architecture](https://github.com/kyr0/defuss-decide/blob/main/ARCH.md): module map, security and privacy notes
+- [Research](https://github.com/kyr0/defuss-decide/blob/main/documentation/RESEARCH.md): why Vela3 and how the decision heads were chosen
 - [Custom adaptations](https://www.linkedin.com/in/aronhomberg/): new decision types, smaller models, integration and on-premise deployments by the author, Aron Homberg

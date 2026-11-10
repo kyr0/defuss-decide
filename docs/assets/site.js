@@ -230,6 +230,7 @@ async function run(example, state, question, images, progress) {
 function playground(form, example) {
   const id = example.id;
   const field = (name) => $(`${name}-${id}`);
+  const cached = field("cached");
   const [state, question, image, status, alert, error, stale, live, runButton, bar] = ["state", "question", "image", "status", "alert", "error", "stale", "live", "run", "progress"].map(field);
   const picker = form.querySelector(".dd-picker");
   let choiceId = example.choices[0].id,
@@ -252,6 +253,8 @@ function playground(form, example) {
   function showRecorded() {
     for (const pane of form.querySelectorAll(".dd-recorded")) pane.hidden = file() !== null || pane.dataset.sample !== choiceId;
     live.hidden = file() === null;
+    // The badge marks a recorded answer; it goes with an own image and with a live run.
+    cached.hidden = file() !== null;
     if (file()) live.innerHTML = `<p class="dd-empty">Your image is not run yet.</p>`;
     stale.hidden = !edited && file() === null;
     alert.hidden = true;
@@ -387,6 +390,7 @@ function playground(form, example) {
         `<details class="dd-raw" id="json-${id}"><summary data-l="answer-json">Answer JSON</summary><pre class="dd-json"><code class="dd-shiki">${highlightJSON(answerJSON(answer))}</code></pre></details>`;
       for (const pane of form.querySelectorAll(".dd-recorded")) pane.hidden = true;
       live.hidden = false;
+      cached.hidden = true;
       edited = false;
       stale.hidden = true;
       localize(live);

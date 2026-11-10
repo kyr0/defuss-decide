@@ -1,6 +1,6 @@
 # defuss-decide
 
-[![CI](https://github.com/kyr0/defuss-decision/actions/workflows/verify.yml/badge.svg)](https://github.com/kyr0/defuss-decision/actions/workflows/verify.yml)
+[![CI](https://github.com/kyr0/defuss-decide/actions/workflows/verify.yml/badge.svg)](https://github.com/kyr0/defuss-decide/actions/workflows/verify.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 ![Runtimes](https://img.shields.io/badge/runs%20in-Node.js%20%7C%20Bun%20%7C%20Chromium%20%7C%20WebKit-informational)
 
@@ -70,7 +70,7 @@ OCR checking is not text recognition: the image and the already extracted text a
 The package is not on npm. Install it from a checkout:
 
 ```bash
-git clone https://github.com/kyr0/defuss-decision.git
+git clone https://github.com/kyr0/defuss-decide.git
 cd your-app
 bun add ../defuss-decision
 ```
@@ -282,7 +282,7 @@ If you use defuss-decide in research or want to reference it, cite it as:
   title        = {defuss-decide: parity-validated Vela3 span and region adapters for JavaScript runtimes},
   year         = {2026},
   version      = {0.2.0},
-  howpublished = {\url{https://github.com/kyr0/defuss-decision}},
+  howpublished = {\url{https://github.com/kyr0/defuss-decide}},
   note         = {Span and decision module of the defuss runtime, MIT License}
 }
 ```

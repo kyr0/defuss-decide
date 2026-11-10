@@ -7,7 +7,6 @@
 // started with (tests/e2e/site.spec.ts, Chromium and WebKit).
 
 export const STRINGS = {
-  recorded: ["Recorded", "Aufgezeichnet"],
   live: ["Live", "Live"],
   "answer-json": ["Answer JSON", "Antwort als JSON"],
   label: ["Label", "Label"],

@@ -23,7 +23,7 @@ export type BundlePrecision = "fp32" | "q8" | "q4";
 /** The Hugging Face repository of the release. */
 export const WINZLING_REPOSITORY = "kyr0/winzling-decide-1.0";
 /** The pinned commit: its files never change, so a cache of them never goes stale. */
-export const WINZLING_REVISION = "f7b3975c20187d459eac0d50e2ab952451ae89f5";
+export const WINZLING_REVISION = "8fb5a439ced663a11eb689ad21ec6bf7edb0c312";
 /** The release's folder URL at the pinned commit; the browser loaders' default. */
 export const WINZLING_URL = `https://huggingface.co/${WINZLING_REPOSITORY}/resolve/${WINZLING_REVISION}/`;
 /** The Cache API cache the browser loaders keep the release's files in by default. */
@@ -32,7 +32,7 @@ export const WINZLING_CACHE = "winzling-decide-1.0";
 /** A task of the release: the eight adapters and the two decision bundles. */
 export type WinzlingTask = "evidence" | "ner" | "relation" | "span" | "span_set" | "vision-box" | "vision-ocr" | "vision-span" | "decision/fast" | "decision/vision";
 
-/** The published precisions every task loads, smallest last: the validated ones, and q4 for `decision/fast`. */
+/** The published precisions every task loads, smallest last: the validated ones. */
 export const PRECISIONS: Readonly<Record<WinzlingTask, readonly BundlePrecision[]>> = {
   evidence: ["fp32", "q8", "q4"],
   ner: ["fp32", "q8"],

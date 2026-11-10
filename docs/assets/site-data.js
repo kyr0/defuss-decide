@@ -30,8 +30,8 @@ export function downloads(rec) {
 }
 /**
  * The download chart's rows from a record that `downloads` prepared: per task its smallest published bundle (q4, else
- * q8, else FP32), and each shared backbone on its own row before the tasks that share it, because it downloads once
- * for all of them. Text tasks, then image tasks, then the decision bundles.
+ * q8, else FP32), and each shared backbone on one row of its own before the first tasks that share it, because it
+ * downloads once for all of them. Text tasks, then image tasks, then the decision bundles.
  */
 export function downloadRows(rec) {
     const groups = { text: [], image: [], decision: [] };
@@ -39,6 +39,8 @@ export function downloadRows(rec) {
         groups[id.startsWith("decision/") ? "decision" : id.startsWith("vision-") ? "image" : "text"].push(id);
     const mb = (mib) => Math.round(mib * 1.048576);
     const rows = [];
+    // A backbone has one row, before the first group that shares it (the text decisions share the text tasks' backbone).
+    const listed = new Set();
     for (const ids of Object.values(groups)) {
         const bundles = ids.map((id) => {
             const b = rec.bundles[id];
@@ -47,8 +49,10 @@ export function downloadRows(rec) {
                 throw new Error(`reports/model-sizes.json has no size for ${id}`);
             return { id, kind, mib: b[kind], shared: kind === "q4" ? b.q4Shared : undefined };
         });
-        for (const name of new Set(bundles.map((b) => b.shared).filter((n) => !!n)))
+        for (const name of new Set(bundles.map((b) => b.shared).filter((n) => !!n && !listed.has(n)))) {
+            listed.add(name);
             rows.push({ id: `backbone:${name}`, kind: "backbone", mb: mb(rec.shared[name]) });
+        }
         for (const b of bundles)
             rows.push({ id: b.id, kind: b.kind, mb: mb(b.mib) });
     }

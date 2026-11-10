@@ -5,8 +5,7 @@ import { PRECISIONS, WINZLING_URL, winzlingBundle, winzlingBundles, winzlingPrec
 import type { WinzlingTask } from "../../src/winzling.ts";
 
 describe("the Winzling release", () => {
-  test("the precisions are those of the size record: the validated bundles and the text decision bundle in q4", () => {
-    // reports/model-sizes.json: "a manifest must say validated: true, except decision/fast q4", the maintainer's default.
+  test("the precisions are those of the size record, which lists the validated bundles", () => {
     const record = JSON.parse(readFileSync("reports/model-sizes.json", "utf8")).bundles as Record<string, Record<string, unknown>>;
     expect(Object.keys(PRECISIONS).sort()).toEqual(Object.keys(record).sort());
     for (const [task, sizes] of Object.entries(record))

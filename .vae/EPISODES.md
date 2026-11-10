@@ -33,35 +33,15 @@ Wrap: EVERY lead becomes a test | .vae/VERIFY.py rule | one MEMORY line with BC,
 2026-11-08T19:22:22Z s=ba2c51e2 FINDING tests/e2e/site.spec.ts live samples (chromium) learn=none: timing depends on external machine load, not a code defect; no test pins a timing
 2026-11-08T19:47:51Z s=ba2c51e2 FINDING plans/2026-11-08_19-43_decision-q4.md:13 B (evidence) learn=none: a claim about which method a report used is checked by reading the report; no mechanical rule fits plan prose
 2026-11-08T19:47:51Z s=ba2c51e2 FINDING plans/2026-11-08_19-43_decision-q4.md:12 P (precision) learn=none: prose precision, covered by review
-2026-11-08T21:47:06Z s=ba2c51e2 FINDING scripts/check-repo.ts:94 fixtures.bundle learn=verifier: check-repo.ts itself runs in make lint; a manifest scanner change is exercised by the split fixture bundle it now walks
-2026-11-08T21:47:06Z s=ba2c51e2 FINDING scripts/make-fixture-bundles.py fast-decision-split learn=verifier: check-repo fixtures.bundle rule catches a folder without manifest
-2026-11-08T21:47:06Z s=ba2c51e2 FINDING src/node-session.ts:1 src.module-doc learn=verifier: check-repo src.module-doc
-2026-11-08T21:47:06Z s=ba2c51e2 FINDING tests/unit/engine.test.ts loading learn=test: regression-free coverage of the error path
 2026-11-08T21:47:06Z s=ba2c51e2 FINDING python/quantize_gptq.py:paragraphs learn=none: script-level bug caught before any output; Python scripts have no CI harness
 2026-11-08T21:47:06Z s=ba2c51e2 FINDING python/quantize_gptq.py:main decision gate learn=none: observed in the smoke run (noul fixture)
 2026-11-08T21:47:06Z s=ba2c51e2 FINDING python/quantize_gptq.py:inputs learn=none: reproducibility by design
-2026-11-08T21:59:53Z s=ba2c51e2 DONE fp=f20a1473a28a cov=97.8% paths=.github/workflows/verify.yml,AGENTS.md,ARCH.md,Makefile(+178)
-2026-11-08T21:59:53Z s=ba2c51e2 FINDING python/quantize_gptq.py:main parity check learn=memory: .vae/MEMORY.md ORT 1.31.1 CPU line records the rewrite
-2026-11-08T22:22:29Z s=ba2c51e2 FAIL tests.e2e.1
-2026-11-08T22:25:08Z s=ba2c51e2 DONE fp=03c0a16cf059 cov=97.8% paths=.github/workflows/verify.yml,AGENTS.md,ARCH.md,Makefile(+180)
-2026-11-08T23:42:19Z s=ba2c51e2 DONE fp=e29748baf106 cov=97.8% paths=.github/workflows/verify.yml,AGENTS.md,ARCH.md,Makefile(+186)
 2026-11-08T23:42:19Z s=ba2c51e2 FINDING python/memguard.py:guard (watch thread) learn=none: Python scripts have no CI test harness; verified by probe
-2026-11-08T23:42:19Z s=ba2c51e2 FINDING orchestration of python/ model jobs learn=verifier: .vae/checks/memguard.py via rule python.memguard fails when a torch/onnxruntime job under python/ does not call guard after parse_args (failure path probed on a
 2026-11-08T23:42:19Z s=ba2c51e2 FINDING python/repair_decision.py:published_q4 learn=none: script-level, caught by the smoke run; no Python CI harness
 2026-11-08T23:42:19Z s=ba2c51e2 FINDING python/repair_decision.py:main learning rate learn=none: a training hyperparameter, not a code defect; recorded in the plan
 2026-11-08T23:42:19Z s=ba2c51e2 FINDING python/repair_decision.py:main test inputs learn=none: observed in the run log; no Python CI harness
 2026-11-08T23:42:19Z s=ba2c51e2 FINDING python/quantize_gptq.py:rewrite learn=none: export scripts need multi-GB checkpoints; no CI harness
-2026-11-09T09:05:31Z s=ba2c51e2 DONE fp=e4223c8fef58 cov=97.8% paths=.github/workflows/verify.yml,AGENTS.md,ARCH.md,Makefile(+186)
-2026-11-09T09:05:31Z s=ba2c51e2 FINDING python/repair_decision.py:student_from, Repaired, main export learn=verifier: python/memguard.py stops any job that drives the machine below the floor; rule python.memguard keeps it wired
 2026-11-09T09:05:31Z s=ba2c51e2 FINDING python/memguard.py:guard exit log learn=none: observability addition; no Python CI harness
-2026-11-09T12:12:59Z s=ba2c51e2 FAIL tests.e2e.1
-2026-11-09T12:14:57Z s=ba2c51e2 DONE fp=a284c1d47f3a cov=97.8% paths=.github/workflows/verify.yml,AGENTS.md,ARCH.md,Makefile(+186)
-2026-11-09T12:34:22Z s=ba2c51e2 DONE fp=6e06ed7ae889 cov=97.8% paths=.github/workflows/verify.yml,AGENTS.md,ARCH.md,Makefile(+186)
-2026-11-09T13:31:08Z s=ba2c51e2 DONE fp=75e074e4b7d5 cov=97.8% paths=.github/workflows/verify.yml,AGENTS.md,ARCH.md,Makefile(+190)
-2026-11-09T13:47:31Z s=ba2c51e2 DONE fp=7ae1bb57c70c cov=97.8% paths=.github/workflows/verify.yml,AGENTS.md,ARCH.md,Makefile(+190)
-2026-11-09T13:48:57Z s=ba2c51e2 DONE fp=2677b5d8cc64 cov=97.8% paths=.github/workflows/verify.yml,AGENTS.md,ARCH.md,Makefile(+190)
-2026-11-09T14:04:06Z s=ba2c51e2 DONE fp=a9ec045376cd cov=97.8% paths=.github/workflows/verify.yml,AGENTS.md,ARCH.md,Makefile(+191)
-2026-11-09T15:52:51Z s=ba2c51e2 FAIL tests.unit,tests.e2e.1,coverage
 2026-11-09T16:12:39Z s=ba2c51e2 DONE fp=0465c8a41a84 cov=97.8% paths=.github/workflows/verify.yml,AGENTS.md,ARCH.md,Makefile(+207)
 2026-11-09T16:12:39Z s=ba2c51e2 FINDING docs/assets/site.css:.dd-steps .step[data-status] .step-indicator learn=test: tests/e2e/site.spec.ts text contrast on every tab, both themes
 2026-11-09T16:12:39Z s=ba2c51e2 FINDING docs/assets/site.css:h2 > .heading-anchor learn=test: same contrast test
@@ -107,3 +87,23 @@ Wrap: EVERY lead becomes a test | .vae/VERIFY.py rule | one MEMORY line with BC,
 2026-11-10T02:53:57Z s=ba2c51e2 FINDING tests/e2e/guard.ts:shaderRace learn=learning: third-party race, not reproducible on demand; exemption is narrow and documented, to be removed when the library is fixed
 2026-11-10T02:53:57Z s=ba2c51e2 FINDING scripts/site-sections.ts:chart title learn=learning: wording judgment, not mechanically checkable
 2026-11-10T02:53:57Z s=ba2c51e2 FINDING scripts/site-data.ts:qualityData learn=test: tests/unit/site.test.ts asserts used and change
+2026-11-10T14:16:17Z s=ba2c51e2 DONE fp=75bc25e42d94 cov=97.1% paths=README.md,docs/index.html,models/README.md
+2026-11-10T14:16:17Z s=ba2c51e2 FINDING README.md:3 (CI badge), models/README.md:23, docs/index.html:122, docs/llms.txt:77 learn=none: The repository name is a hosting fact outside the tree (package.json has no repository field), so no rule can check it without pinning a value that worked once.
+2026-11-10T21:10:01Z s=ba2c51e2 FAIL tests.e2e.1
+2026-11-10T21:34:36Z s=ba2c51e2 DONE fp=06e79c7ca1fa cov=97.1% paths=README.md,docs/assets/site.css,docs/index.html,models/README.md(+4)
+2026-11-10T21:34:36Z s=ba2c51e2 FINDING README.md:3, models/README.md:23, docs/index.html:122, docs/llms.txt:77 learn=none: The repository name is a hosting fact outside the tree; a rule would pin a value that worked once.
+2026-11-10T21:34:36Z s=ba2c51e2 FINDING scripts/site-sections.ts:FAMILIES (token table box) learn=none: A prose fact about upstream tokens; the checkpoints are not tracked, so no rule can compare it.
+2026-11-10T21:34:36Z s=ba2c51e2 FINDING scripts/site-sections.ts:defaultWeights, architectureHTML learn=test: tests/unit/site.test.ts 'a bundle or precision without a description fails instead of printing a guess'.
+2026-11-10T21:34:36Z s=ba2c51e2 FINDING tests/e2e/site.spec.ts:453 live samples: vision-span (webkit) learn=memory: Covered by the existing one-heavy-job rule: the gate must not run beside a model job.
+2026-11-10T22:12:53Z s=ba2c51e2 FAIL tests.e2e.1
+2026-11-10T22:23:56Z s=ba2c51e2 DONE fp=21a36cfe95e4 cov=97.1% paths=ARCH.md,README.md,docs/assets/charts.js,docs/assets/render.js(+19)
+2026-11-10T22:23:56Z s=ba2c51e2 FINDING scripts/site-data.ts:downloadRows learn=test: tests/unit/site.test.ts 'the download rows show each task's smallest bundle, and a shared backbone once, before its tasks'.
+2026-11-10T22:23:56Z s=ba2c51e2 FINDING docs/assets/site.css:.dd-dim, docs/assets/render.js:boxHTML learn=none: A paint defect of the browser is not checkable by a DOM assertion; a pixel test would pin one renderer.
+2026-11-10T22:23:56Z s=ba2c51e2 FINDING docs/assets/charts.js:bars learn=none: Canvas layout; no DOM to assert. Checked by screenshot.
+2026-11-10T22:23:56Z s=ba2c51e2 FINDING tests/e2e/site.spec.ts:175 learn=test: The existing test caught it.
+2026-11-10T22:23:56Z s=ba2c51e2 FINDING python/verify_decision.py, python/quantize_gptq.py:562 learn=none: The script needs the 1.4 GB FP32 bundle and the checkpoint, which CI does not have; its proof is the tracked report.
+2026-11-10T22:23:56Z s=ba2c51e2 FINDING src/engine.ts:66 (comment), src/node.ts:116, src/web.ts:359 learn=none: Depends on an upload outside the repository.
+2026-11-10T22:33:24Z s=ba2c51e2 DONE fp=37206afd4f46 cov=97.1% paths=ARCH.md,README.md,docs/assets/charts.js,docs/assets/render.js(+19)
+2026-11-10T22:33:24Z s=ba2c51e2 FINDING models/README.md:4 license_link learn=none: The rule is Hugging Face's metadata validation, checked at upload; a local rule would duplicate one field's format.
+2026-11-10T22:38:26Z s=ba2c51e2 DONE fp=233d8d1d983d cov=97.1% paths=ARCH.md,README.md,docs/assets/charts.js,docs/assets/render.js(+19)
+2026-11-10T22:38:26Z s=ba2c51e2 FINDING src/winzling.ts:26 WINZLING_REVISION learn=none: A pin to an external commit; nothing local can check that it is the newest.
