@@ -1,0 +1,302 @@
+{
+  "format": "defuss-vela-onnx/1",
+  "model": "vllm-sr/vela3-fast",
+  "revision": "fa60e3aa41132c60bf05a84cabfdced39cb6d4f7",
+  "kind": "fast",
+  "task": "span_set",
+  "precision": "fp32",
+  "maxTokens": 2048,
+  "maxImages": 0,
+  "maxAnswerTokens": 768,
+  "tokenizer": "tokenizer.json",
+  "tokenizerConfig": "tokenizer_config.json",
+  "graphs": {
+    "task": {
+      "file": "task.onnx",
+      "externalData": [
+        "task.onnx.data"
+      ],
+      "sizeBytes": 739349,
+      "totalSizeBytes": 1638858773
+    }
+  },
+  "validated": true,
+  "markers": {
+    "[Q]": 49152,
+    "[O]": 49153,
+    "[ABS]": 49154,
+    "[SEP_SCHEMA]": 49155,
+    "[SEG_user]": 49156,
+    "[SEG_answer]": 49157,
+    "[E]": 49158,
+    "[SEG_context]": 49159
+  },
+  "bosId": 0,
+  "eosId": 0,
+  "padId": 0,
+  "spanConfig": {
+    "default_question": "Which spans are named entities of these types?",
+    "threshold": 0.6,
+    "relation_threshold": 0.55,
+    "evidence": {
+      "labels": [
+        "evidence"
+      ],
+      "question": "Which spans of the context support the answer to the question?",
+      "threshold": 0.5,
+      "max_len": 32768,
+      "buckets": [
+        {
+          "name": "short",
+          "max_tokens": 2048,
+          "threshold": 0.5
+        },
+        {
+          "name": "long",
+          "max_tokens": 1000000000000,
+          "threshold": 0.4
+        }
+      ],
+      "source": "short: ub_zs EV dev pick; long (> 2048 target tokens): QASPER validation thr half; one window up to 32768 tokens",
+      "adapter": "evidence_adapter.safetensors"
+    },
+    "router_set_temperature": 0.29842907190322876,
+    "thresholds_by_set": {
+      "halu": 0.45,
+      "toxic": 0.5
+    },
+    "pii_buckets": [
+      {
+        "name": "short",
+        "max_tokens": 1024,
+        "threshold": 0.35
+      },
+      {
+        "name": "4K",
+        "max_tokens": 6144,
+        "threshold": 0.95
+      },
+      {
+        "name": "8K",
+        "max_tokens": 1000000000000,
+        "threshold": 0.4
+      }
+    ],
+    "threshold_sources": {
+      "open_relation_evidence": "ub_zs dev on this package",
+      "evidence_long": "kd_eval QASPER-validation thr half",
+      "halu_pii": "score_schema_r4 dev on the dev1 package, T_span from its eval_v2 calibration",
+      "toxic": "not tuned (0.5)"
+    },
+    "router_label_sets": {
+      "pii": [
+        "AGE",
+        "CREDIT_CARD",
+        "DATE_TIME",
+        "DOMAIN_NAME",
+        "EMAIL_ADDRESS",
+        "GPE",
+        "IBAN_CODE",
+        "IP_ADDRESS",
+        "NRP",
+        "ORGANIZATION",
+        "PERSON",
+        "PHONE_NUMBER",
+        "STREET_ADDRESS",
+        "TITLE",
+        "US_DRIVER_LICENSE",
+        "US_SSN",
+        "ZIP_CODE"
+      ],
+      "halu": [
+        "unsupported"
+      ],
+      "toxic": [
+        "Criminal Planning/Confessions",
+        "Violence",
+        "Hate/Identity Hate",
+        "Harassment",
+        "Profanity",
+        "Sexual",
+        "Sexual (minor)",
+        "Controlled/Regulated Substances",
+        "PII/Privacy",
+        "Guns and Illegal Weapons",
+        "Suicide and Self Harm",
+        "Unauthorized Advice",
+        "Political/Misinformation/Conspiracy",
+        "Fraud/Deception",
+        "Illegal Activity",
+        "Threat",
+        "Copyright/Trademark/Plagiarism",
+        "High Risk Gov Decision Making",
+        "Immoral/Unethical",
+        "Needs Caution",
+        "Other",
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "S7",
+        "S8",
+        "S9",
+        "S10",
+        "S11",
+        "S12",
+        "S14",
+        "others",
+        "social_stereotypes_and_unfair_discrimination",
+        "disseminating_false_or_misleading_information_encouraging_disinformation_campaigns",
+        "violence_and_physical_harm",
+        "private_information_individual",
+        "sensitive_information_organization_government",
+        "defamation_encouraging_unethical_or_unsafe_actions",
+        "toxic_language_hate_speech",
+        "fraud_assisting_illegal_activities",
+        "copyright_violations",
+        "causing_material_harm_by_disseminating_misinformation",
+        "sexual_content",
+        "mental_health_over-reliance_crisis"
+      ]
+    },
+    "schemas": {
+      "pii": {
+        "question": "Which spans are personal information?",
+        "labels": {
+          "AGE": "a person's age",
+          "CREDIT_CARD": "a payment card number",
+          "DATE_TIME": "a date, time or date of birth",
+          "DOMAIN_NAME": "an internet domain name or website address",
+          "EMAIL_ADDRESS": "an e-mail address",
+          "GPE": "a country, city, state or other geopolitical place",
+          "IBAN_CODE": "an international bank account number (IBAN)",
+          "IP_ADDRESS": "an IPv4 or IPv6 address",
+          "NRP": "a nationality, religious or political group",
+          "ORGANIZATION": "the name of a company, institution or other organisation",
+          "PERSON": "a person's name",
+          "PHONE_NUMBER": "a telephone number",
+          "STREET_ADDRESS": "a street address or postal address",
+          "TITLE": "a personal or professional title such as Dr. or Mrs.",
+          "US_DRIVER_LICENSE": "a US driver's licence number",
+          "US_SSN": "a US social security number",
+          "ZIP_CODE": "a postal or ZIP code"
+        },
+        "over": "user"
+      },
+      "halu": {
+        "question": "Which spans of the answer are not supported by the context?",
+        "labels": {
+          "unsupported": "a claim not supported by the context"
+        },
+        "over": "answer"
+      },
+      "toxic": {
+        "question": "Which spans are harmful?",
+        "labels": {
+          "Criminal Planning/Confessions": "planning, assisting or confessing to a crime",
+          "Violence": "inciting, threatening or describing physical violence against people",
+          "Hate/Identity Hate": "hatred or dehumanisation targeting a protected identity",
+          "Harassment": "targeted abuse, bullying or intimidation of a person",
+          "Profanity": "obscene or vulgar language",
+          "Sexual": "sexually explicit content involving adults",
+          "Sexual (minor)": "any sexual content involving a minor",
+          "Controlled/Regulated Substances": "obtaining, producing or misusing drugs or regulated substances",
+          "PII/Privacy": "seeking or exposing personal or private information about someone",
+          "Guns and Illegal Weapons": "acquiring, building or using weapons illegally",
+          "Suicide and Self Harm": "self-harm, suicide or encouragement of either",
+          "Unauthorized Advice": "medical, legal or financial advice given without qualification",
+          "Political/Misinformation/Conspiracy": "political manipulation, misinformation or conspiracy content",
+          "Fraud/Deception": "scams, phishing, forgery or deceiving others for gain",
+          "Illegal Activity": "unlawful activity not covered by a more specific category",
+          "Threat": "an explicit threat of harm directed at someone",
+          "Copyright/Trademark/Plagiarism": "infringing copyright or passing off others' work",
+          "High Risk Gov Decision Making": "high-stakes government, military or public-safety decisions",
+          "Immoral/Unethical": "conduct that is unethical without being clearly illegal",
+          "Needs Caution": "ambiguous content warranting caution without a clear violation",
+          "Other": "a safety concern that no other category describes",
+          "S1": "violent crimes, including terrorism and physical assault",
+          "S2": "non-violent crimes such as theft, trafficking or cybercrime",
+          "S3": "sex-related crimes including trafficking and sexual assault",
+          "S4": "child sexual exploitation of any kind",
+          "S5": "defamation, false damaging statements about a real person",
+          "S6": "specialised medical, legal or financial advice without qualification",
+          "S7": "privacy violations, exposing personal information",
+          "S8": "intellectual property infringement",
+          "S9": "indiscriminate weapons, chemical, biological, nuclear or radiological",
+          "S10": "hate targeting a protected characteristic",
+          "S11": "suicide and self-harm",
+          "S12": "sexual content involving adults",
+          "S14": "abuse of a code interpreter or execution environment",
+          "others": "a safety concern that no other category describes",
+          "social_stereotypes_and_unfair_discrimination": "stereotyping or unfair treatment based on a protected characteristic",
+          "disseminating_false_or_misleading_information_encouraging_disinformation_campaigns": "spreading false or misleading claims, or organising a disinformation campaign",
+          "violence_and_physical_harm": "inciting, threatening or describing physical harm to people",
+          "private_information_individual": "seeking or exposing a private individual's personal information",
+          "sensitive_information_organization_government": "seeking or exposing confidential organisational or government information",
+          "defamation_encouraging_unethical_or_unsafe_actions": "defaming a real person, or encouraging unethical or unsafe conduct",
+          "toxic_language_hate_speech": "abusive, degrading or hateful language directed at people",
+          "fraud_assisting_illegal_activities": "scams, forgery or assistance with unlawful activity",
+          "copyright_violations": "reproducing or infringing copyrighted material",
+          "causing_material_harm_by_disseminating_misinformation": "false claims that cause concrete harm, such as medical or safety misinformation",
+          "sexual_content": "sexually explicit content involving adults",
+          "mental_health_over-reliance_crisis": "mental-health crisis content, or unsafe reliance on the model for care"
+        },
+        "over": "user"
+      }
+    },
+    "window": {
+      "max_len": 8192,
+      "overlap": 512,
+      "aggregation": "mean of word logits over windows",
+      "evidence_max_len": 32768
+    },
+    "precision": "span / router passes in fp32 (as evaluated: dev reads and thresholds); Vela3Encoder.load(adapter_bf16=True) for bf16 autocast",
+    "task_adapters": {
+      "relation": "relation_adapter.safetensors",
+      "ner": "ner_adapter.safetensors"
+    },
+    "relation": {
+      "threshold_pair": 0.55,
+      "threshold_multi": 0.45,
+      "source": "rel_dev.py v3 on the dev1 package (NER step = the NER adapter at 0.6): pair = head-conditioned dev pick, multi = CoNLL04 + CrossRE dev e2e pick"
+    },
+    "ner": {
+      "threshold": 0.6,
+      "source": "ner_dev.py on this package: one threshold on the thr halves of ner_shift / hier / ner_shift_lc (names only)"
+    },
+    "threshold_note": "evfast: evidence thresholds from dev reads on this package (set_ev.py, 2026-10-24T20:11:06Z); other thresholds provisional (copied), not used by evidence questions",
+    "entity_route": "ner",
+    "entity_route_relation_pipeline": "span",
+    "set_adapter": {
+      "file": "span_sets_adapter.safetensors",
+      "label_sets": [
+        "halu",
+        "pii"
+      ],
+      "router_set_temperature": 0.29842907190322876,
+      "thresholds_by_set": {
+        "halu": 0.45
+      },
+      "pii_buckets": [
+        {
+          "name": "short",
+          "max_tokens": 1024,
+          "threshold": 0.35
+        },
+        {
+          "name": "4K",
+          "max_tokens": 6144,
+          "threshold": 0.95
+        },
+        {
+          "name": "8K",
+          "max_tokens": 1000000000000,
+          "threshold": 0.4
+        }
+      ],
+      "source": "span_sets/ckpt-060000 (dev2 package: T_span / halu / PII buckets)"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+# The Python side: download, export with parity gates and quantization (python/), plus the fixture generator
+# (scripts/make-fixture-bundles.py). Scripts, not a package: `uv sync`, then `uv run python/<script>.py`.
+# The recorded exports ran on Linux CPU; other operating systems are not validated for exports.
+[project]
+name = "defuss-decision-export"
+version = "0.2.0"
+description = "Exports the pinned Vela3 checkpoints to validated ONNX bundles for defuss-decide"
+requires-python = "==3.12.*"
+dependencies = [
+  "torch==2.15.0",
+  "torchvision==0.29.2",
+  "transformers==5.21.0",
+  "onnx==1.23.2",
+  "ml_dtypes==0.6.0",
+  "onnxruntime==1.31.1",
+  "huggingface-hub==1.33.0",
+  "safetensors==0.8.0",
+  "numpy==2.5.4",
+  "pillow==13.0.0",
+  "scipy==1.18.1",
+  "socksio==1.0.0",
+  "pyarrow==26.0.1",
+]
+
+[tool.uv]
+package = false
+
+# CPU builds of PyTorch, as the exports use: the default PyPI wheels for Linux pull several GB of CUDA libraries.
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+torchvision = { index = "pytorch-cpu" }

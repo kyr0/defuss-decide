@@ -1,0 +1,47 @@
+{
+ "format": "defuss-vela-onnx/1",
+ "model": "vllm-sr/vela3-fast",
+ "revision": "fa60e3aa41132c60bf05a84cabfdced39cb6d4f7",
+ "kind": "fast",
+ "precision": "fp32",
+ "maxTokens": 2048,
+ "maxImages": 0,
+ "tokenizer": "../tokenizer-fast.json",
+ "tokenizerConfig": "../tokenizer_config-fast.json",
+ "validated": true,
+ "markers": {
+  "[Q]": 49152,
+  "[O]": 49153,
+  "[ABS]": 49154,
+  "[SEP_SCHEMA]": 49155,
+  "[SEG_user]": 49156,
+  "[SEG_answer]": 49157,
+  "[E]": 49158,
+  "[SEG_context]": 49159
+ },
+ "bosId": 0,
+ "eosId": 0,
+ "padId": 0,
+ "fixture": true,
+ "graphs": {
+  "decision": {
+   "file": "decision.onnx",
+   "externalData": [
+    "decision.onnx.data",
+    {
+     "path": "backbone.onnx.data",
+     "file": "../backbone.onnx.data"
+    }
+   ],
+   "sizeBytes": 1226,
+   "totalSizeBytes": 1238
+  }
+ },
+ "note": "Test fixture: real configuration, tokenizer and Python fixtures; tiny synthetic ONNX graphs. Outputs are meaningless; see scripts/make-fixture-bundles.py.",
+ "fixtureName": "fast-decision-split",
+ "capabilities": [
+  "choice",
+  "noul"
+ ],
+ "scope": "ordinary decisions; no task adapters"
+}

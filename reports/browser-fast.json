@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "model": "vllm-sr/vela3-fast",
+  "precision": "fp32",
+  "backend": "wasm",
+  "results": [
+    {
+      "case": "billing",
+      "tokenIdsExact": true,
+      "maxProbabilityError": 9.178480186999849e-7,
+      "ms": 792.4050000002608
+    },
+    {
+      "case": "noul",
+      "tokenIdsExact": true,
+      "maxProbabilityError": 4.2518185205953074e-7,
+      "ms": 658.445000000298
+    },
+    {
+      "case": "json",
+      "tokenIdsExact": true,
+      "maxProbabilityError": 1.0746091327895613e-7,
+      "ms": 1283.4699999997392
+    },
+    {
+      "case": "long",
+      "tokenIdsExact": true,
+      "maxProbabilityError": 1.1036235383898862e-7,
+      "ms": 10040.825000000186
+    },
+    {
+      "case": "empty",
+      "tokenIdsExact": true,
+      "maxProbabilityError": 0,
+      "ms": 290.570000000298
+    }
+  ],
+  "browser": "153.0.8010.0"
+}

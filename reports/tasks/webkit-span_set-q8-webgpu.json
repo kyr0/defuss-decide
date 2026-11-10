@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "model": "vllm-sr/vela3-fast",
+  "task": "span_set",
+  "precision": "w8a32",
+  "maxLogitError": 0.059426307678222656,
+  "maxScoreDrift": 0.000029787726383401214,
+  "checks": [
+    {
+      "name": "pii",
+      "maxLogitError": 0.059426307678222656,
+      "decodedOutputMatched": true,
+      "milliseconds": 94
+    },
+    {
+      "name": "halu",
+      "maxLogitError": 0.01457136869430542,
+      "decodedOutputMatched": true,
+      "milliseconds": 64
+    }
+  ],
+  "backend": "webgpu",
+  "browser": "27.2"
+}

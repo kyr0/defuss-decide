@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "model": "vllm-sr/vela3-fast-vision",
+  "task": "ocr",
+  "checks": [
+    {
+      "name": "ocr",
+      "maxLogitError": 0.00025653839111328125,
+      "decodedOutputMatched": true,
+      "milliseconds": 399
+    }
+  ],
+  "backend": "webgpu",
+  "browser": "27.2"
+}

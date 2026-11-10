@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "model": "vllm-sr/vela3-fast",
+  "task": "relation",
+  "precision": "w4a32",
+  "maxLogitError": 0.2622659206390381,
+  "maxScoreDrift": 0.011329994759214923,
+  "checks": [
+    {
+      "name": "employment",
+      "maxLogitError": 0.24132847785949707,
+      "decodedOutputMatched": true,
+      "milliseconds": 91
+    },
+    {
+      "name": "multi",
+      "maxLogitError": 0.2622659206390381,
+      "decodedOutputMatched": true,
+      "milliseconds": 54
+    }
+  ],
+  "backend": "webgpu",
+  "browser": "27.2"
+}

@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "model": "vllm-sr/vela3-fast",
+  "task": "span_set",
+  "checks": [
+    {
+      "name": "pii",
+      "maxLogitError": 0.00000667572021484375,
+      "decodedOutputMatched": true,
+      "milliseconds": 271
+    },
+    {
+      "name": "halu",
+      "maxLogitError": 0.0000011920928955078125,
+      "decodedOutputMatched": true,
+      "milliseconds": 171
+    }
+  ],
+  "runtime": "Node v24.22.1"
+}

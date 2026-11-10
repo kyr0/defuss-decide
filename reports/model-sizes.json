@@ -1,0 +1,132 @@
+{
+ "date": "2026-11-09",
+ "unit": "MiB (1,048,576 bytes)",
+ "method": "files directly in each bundle folder (no .br copies, no subfolders); original = the pinned safetensors files one task needs (base weights plus its adapter); a manifest must say validated: true, except decision/fast q4 (validated: false), the default on the maintainer's request",
+ "shared": {
+  "text": 209.6,
+  "image": 120.7
+ },
+ "bundles": {
+  "evidence": {
+   "original": 1781.4,
+   "fp32": 1566.3,
+   "q8": 543.1,
+   "q4": 67.6,
+   "q4Shared": "text"
+  },
+  "ner": {
+   "original": 1901.4,
+   "fp32": 1686.3,
+   "q8": 1142
+  },
+  "relation": {
+   "original": 1901.4,
+   "fp32": 1686.3,
+   "q8": 573.2,
+   "q4": 97.6,
+   "q4Shared": "text"
+  },
+  "span": {
+   "original": 1781.4,
+   "fp32": 1566.3,
+   "q8": 543.1,
+   "q4": 67.6,
+   "q4Shared": "text"
+  },
+  "span_set": {
+   "original": 1781.4,
+   "fp32": 1566.3,
+   "q8": 543.1,
+   "q4": 67.6,
+   "q4Shared": "text"
+  },
+  "vision-box": {
+   "original": 1059.4,
+   "fp32": 1016.3,
+   "q8": 842.8
+  },
+  "vision-ocr": {
+   "original": 1005.4,
+   "fp32": 1016.3,
+   "q8": 373.6,
+   "q4": 45.7,
+   "q4Shared": "image"
+  },
+  "vision-span": {
+   "original": 1059.4,
+   "fp32": 1016.3,
+   "q8": 373.6,
+   "q4": 45.7,
+   "q4Shared": "image"
+  },
+  "decision/fast": {
+   "original": 1451.3,
+   "fp32": 1455.2,
+   "q4": 15.2,
+   "q4Shared": "text",
+   "unvalidated": [
+    "q4"
+   ]
+  },
+  "decision/vision": {
+   "original": 971.6,
+   "fp32": 1008.6,
+   "q4": 148.6
+  }
+ },
+ "download": {
+  "method": "the .br copies of the files a load fetches: manifest, tokenizer files, graphs and their weights; shared backbone files once, under shared",
+  "shared": {
+   "text": 192.7,
+   "image": 110.6
+  },
+  "bundles": {
+   "evidence": {
+    "fp32": 1431.1,
+    "q8": 488.6,
+    "q4": 59.6
+   },
+   "ner": {
+    "fp32": 1541.9,
+    "q8": 1033.8
+   },
+   "relation": {
+    "fp32": 1541.2,
+    "q8": 517,
+    "q4": 88
+   },
+   "span": {
+    "fp32": 1431.1,
+    "q8": 488.6,
+    "q4": 59.6
+   },
+   "span_set": {
+    "fp32": 1431.1,
+    "q8": 488.6,
+    "q4": 59.6
+   },
+   "vision-box": {
+    "fp32": 372.6,
+    "q8": 400.8
+   },
+   "vision-ocr": {
+    "fp32": 372.6,
+    "q8": 250.8,
+    "q4": 35.7
+   },
+   "vision-span": {
+    "fp32": 372.7,
+    "q8": 250.9,
+    "q4": 35.7
+   },
+   "decision/fast": {
+    "fp32": 1328.8,
+    "q4": 10.7
+   },
+   "decision/vision": {
+    "fp32": 351.7,
+    "q4": 129.6
+   }
+  }
+ }
+}

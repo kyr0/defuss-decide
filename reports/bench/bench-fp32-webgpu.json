@@ -1,0 +1,135 @@
+{
+  "runtime": "node v26.11.1",
+  "platform": "darwin/arm64",
+  "precision": "fp32",
+  "backend": "webgpu",
+  "threads": "default",
+  "rows": [
+    {
+      "bundle": "evidence/fp32",
+      "fixture": "evidence",
+      "backend": "webgpu",
+      "loadMs": 4207,
+      "medianMs": 52
+    },
+    {
+      "bundle": "evidence/fp32",
+      "fixture": "support",
+      "backend": "webgpu",
+      "loadMs": 4207,
+      "medianMs": 51
+    },
+    {
+      "bundle": "evidence/fp32",
+      "fixture": "evidence, about 1,800 tokens",
+      "backend": "webgpu",
+      "loadMs": 4207,
+      "medianMs": 477
+    },
+    {
+      "bundle": "ner/fp32",
+      "fixture": "entities",
+      "backend": "webgpu",
+      "loadMs": 4565,
+      "medianMs": 51
+    },
+    {
+      "bundle": "ner/fp32",
+      "fixture": "unicode",
+      "backend": "webgpu",
+      "loadMs": 4565,
+      "medianMs": 53
+    },
+    {
+      "bundle": "ner/fp32",
+      "fixture": "entities, about 1,800 tokens",
+      "backend": "webgpu",
+      "loadMs": 4565,
+      "medianMs": 360
+    },
+    {
+      "bundle": "relation/fp32",
+      "fixture": "employment",
+      "backend": "webgpu",
+      "loadMs": 4670,
+      "medianMs": 50
+    },
+    {
+      "bundle": "relation/fp32",
+      "fixture": "multi",
+      "backend": "webgpu",
+      "loadMs": 4670,
+      "medianMs": 51
+    },
+    {
+      "bundle": "relation/fp32",
+      "fixture": "employment, about 1,800 tokens",
+      "backend": "webgpu",
+      "loadMs": 4670,
+      "medianMs": 320
+    },
+    {
+      "bundle": "span/fp32",
+      "fixture": "description",
+      "backend": "webgpu",
+      "loadMs": 4165,
+      "medianMs": 52
+    },
+    {
+      "bundle": "span/fp32",
+      "fixture": "unicode",
+      "backend": "webgpu",
+      "loadMs": 4165,
+      "medianMs": 51
+    },
+    {
+      "bundle": "span/fp32",
+      "fixture": "description, about 1,800 tokens",
+      "backend": "webgpu",
+      "loadMs": 4165,
+      "medianMs": 340
+    },
+    {
+      "bundle": "span_set/fp32",
+      "fixture": "pii",
+      "backend": "webgpu",
+      "loadMs": 3862,
+      "medianMs": 52
+    },
+    {
+      "bundle": "span_set/fp32",
+      "fixture": "halu",
+      "backend": "webgpu",
+      "loadMs": 3862,
+      "medianMs": 52
+    },
+    {
+      "bundle": "span_set/fp32",
+      "fixture": "pii, about 1,800 tokens",
+      "backend": "webgpu",
+      "loadMs": 3862,
+      "medianMs": 450
+    },
+    {
+      "bundle": "vision-box/fp32",
+      "fixture": "box",
+      "backend": "webgpu",
+      "loadMs": 2796,
+      "medianMs": 291
+    },
+    {
+      "bundle": "vision-ocr/fp32",
+      "fixture": "ocr",
+      "backend": "webgpu",
+      "loadMs": 2815,
+      "medianMs": 290
+    },
+    {
+      "bundle": "vision-span/fp32",
+      "fixture": "span",
+      "backend": "webgpu",
+      "loadMs": 2922,
+      "medianMs": 289
+    }
+  ]
+}

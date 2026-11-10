@@ -1,0 +1,183 @@
+{
+ "date": "2026-11-08",
+ "scope": "v0.2 task adapters (8 bundles), weight-only MatMul quantization, FP32 activations",
+ "tool": "python/quantize_tasks.py",
+ "gate": "scripts/verify-quantized.ts + browser-tasks.ts quantized: token ids, offsets, positions and decoded spans/box/point must match the FP32 fixtures exactly; span score / box confidence drift <= 0.02 (v0.1 quantization tolerance); raw logit deviation reported only",
+ "runtimes": {
+  "node": "v26.11.1 (onnxruntime-node 1.31.1, darwin/arm64)",
+  "bun": "1.4.3 (same native runtime)",
+  "browser": "Chromium 156.0.8078.4, WASM backend (onnxruntime-web 1.31.1)"
+ },
+ "accepted": {
+  "q8": {
+   "config": "per-output-channel signed INT8 + DequantizeLinear, opset 17, external data preserved",
+   "bundles": {
+    "span": {
+     "sizeMB": 544,
+     "fp32MB": 1567,
+     "maxLogitError": 0.0667,
+     "maxScoreDrift": 0.0036
+    },
+    "span_set": {
+     "sizeMB": 544,
+     "fp32MB": 1567,
+     "maxLogitError": 0.0703,
+     "maxScoreDrift": 0.0007
+    },
+    "ner": {
+     "sizeMB": 1150,
+     "fp32MB": 1687,
+     "maxLogitError": 0.0284,
+     "maxScoreDrift": 0.0027,
+     "note": "smaller ratio: embedding table and heads stay FP32, only MatMul weights quantized"
+    },
+    "relation": {
+     "sizeMB": 574,
+     "fp32MB": 1687,
+     "maxLogitError": 0.082,
+     "maxScoreDrift": 0.0049
+    },
+    "evidence": {
+     "sizeMB": 544,
+     "fp32MB": 1567,
+     "maxLogitError": 0.0679,
+     "maxScoreDrift": 0.0058
+    },
+    "vision-span": {
+     "sizeMB": 374,
+     "fp32MB": 1017,
+     "maxLogitError": 0.2927,
+     "maxScoreDrift": 0.0002
+    },
+    "vision-ocr": {
+     "sizeMB": 374,
+     "fp32MB": 1017,
+     "maxLogitError": 0.0547,
+     "maxScoreDrift": 1.4e-05
+    },
+    "vision-box": {
+     "sizeMB": 859,
+     "fp32MB": 1017,
+     "maxLogitError": 0.266,
+     "maxScoreDrift": 2.6e-05,
+     "note": "encoder-only: the task graph stays FP32 because any quantization of it flips the point argmax (knife-edge); quantized with --only vision"
+    }
+   },
+   "passed": {
+    "node": true,
+    "bun": true,
+    "browser": true
+   }
+  },
+  "q4": {
+   "config": {
+    "text (evidence, relation, span, span_set)": "python/quantize_gptq.py: GPTQ INT4, asymmetric groups of 32 with fp16 scales, as MatMulNBits; the token table (INT4 groups of 32) and the 24 backbone layers are one shared file (backbone/fast/q4/backbone.onnx.data); each bundle keeps its own LoRA (INT8 per channel), layers 20 to 23 (INT4) and heads; export report reports/quantization-gptq.json",
+    "vision (vision-span, vision-ocr)": "python/quantize_gptq_vision.py: GPTQ INT4, asymmetric groups of 32 with fp16 scales, as MatMulNBits, Hessians from 48 generated inputs per bundle; the image encoder and the text backbone with its token table are two shared files (backbone/vision/q4/image.onnx.data, text.onnx.data); each bundle keeps its own connector, LoRA (INT8 per channel) and heads; export report reports/quantization-gptq-vision.json"
+   },
+   "bundles": {
+    "span": {
+     "sizeMB": 277,
+     "ownMB": 68,
+     "sharedMB": 209,
+     "fp32MB": 1567,
+     "maxLogitError": 0.3582,
+     "maxScoreDrift": 0.0146,
+     "method": "gptq-shared"
+    },
+    "span_set": {
+     "sizeMB": 277,
+     "ownMB": 68,
+     "sharedMB": 209,
+     "fp32MB": 1567,
+     "maxLogitError": 0.9066,
+     "maxScoreDrift": 0.0028,
+     "method": "gptq-shared"
+    },
+    "relation": {
+     "sizeMB": 307,
+     "ownMB": 98,
+     "sharedMB": 209,
+     "fp32MB": 1687,
+     "maxLogitError": 0.2623,
+     "maxScoreDrift": 0.0113,
+     "method": "gptq-shared"
+    },
+    "evidence": {
+     "sizeMB": 277,
+     "ownMB": 68,
+     "sharedMB": 209,
+     "fp32MB": 1567,
+     "maxLogitError": 0.1709,
+     "maxScoreDrift": 0.0095,
+     "method": "gptq-shared"
+    },
+    "vision-span": {
+     "sizeMB": 167,
+     "ownMB": 46,
+     "sharedMB": 121,
+     "fp32MB": 1017,
+     "maxLogitError": 0.061,
+     "maxScoreDrift": 0.0,
+     "method": "gptq-shared"
+    },
+    "vision-ocr": {
+     "sizeMB": 167,
+     "ownMB": 46,
+     "sharedMB": 121,
+     "fp32MB": 1017,
+     "maxLogitError": 0.6288,
+     "maxScoreDrift": 0.0004,
+     "method": "gptq-shared"
+    }
+   },
+   "passed": {
+    "node": true,
+    "bun": true,
+    "browser": true
+   },
+   "runtimes": {
+    "text": "Node.js CPU and WebGPU, Bun CPU, Chromium WASM and WebGPU, WebKit WebGPU (2026-11-08)",
+    "vision": "Node.js CPU and WebGPU, Bun CPU, Chromium WASM and WebGPU, WebKit WebGPU (2026-11-09)"
+   }
+  }
+ },
+ "rejected": [
+  {
+   "bundle": "ner",
+   "mode": "q4",
+   "reason": "unicode fixture: 東京 span score is 0.6266 against a 0.6 threshold; per-channel and group-wise g64/g32/g16 flip the span to 京 (26-28 vs 27-28); g16 max logit error 0.34",
+   "tried": [
+    "per-channel",
+    "g64",
+    "g32",
+    "g16 flips decode",
+    "g8 fixes decode but span score drift 0.0216 > 0.02",
+    "GPTQ g32 with the shared backbone (2026-11-08): the unicode fixture loses the 東京 span"
+   ]
+  },
+  {
+   "bundle": "decision/fast",
+   "mode": "q4",
+   "reason": "GPTQ g32 with the shared backbone: the noul fixture flips (FP32 p(yes) 0.563 to about 0.44); 3 of 177 held-out decisions flip, the 56 labelled cases stay 52 correct as with FP32; restoring any one layer or matrix type to FP32 removes at most 13% of the drift (reports/quantization-decision-sensitivity.json)",
+   "export": "reports/quantization-gptq.json"
+  },
+  {
+   "bundle": "vision-box",
+   "mode": "q4",
+   "reason": "box point is an argmax over image cells sitting on a knife edge: task-graph quantization at any tested setting (Q8 per-channel/g64/g32/g8, Q4 g64/g32/g16) moves the point one cell (x 0.28125 -> 0.34375); Q4-g8 task-only passes the fixture by rounding luck and is not trusted; encoder-only Q4 (g16/g8) fails the gate too",
+   "tried": [
+    "q4 both graphs g16",
+    "q4 vision-only g16/g8",
+    "q4 task-only g64/g32/g16/g8",
+    "q8 task-only per-channel/g64/g32/g8",
+    "GPTQ g32 on both graphs (python/quantize_gptq_vision.py, 2026-11-09): the point moves from x 0.28125, y 0.28125 to x 0.71875, y 0.34375"
+   ]
+  },
+  {
+   "bundle": "vision-box",
+   "mode": "q8 full graph",
+   "reason": "task-graph Q8 alone (any grouping) flips the point argmax; accepted variant quantizes only the vision encoder"
+  }
+ ],
+ "note": "Fixture gates are necessary but not an accuracy benchmark; knife-edge fixture cases (ner unicode, vision-box point) dominate the rejections. FP32 remains the reference; use q8 everywhere it exists, q4 where accepted, when transfer size matters."
+}

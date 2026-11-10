@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%23397de0'/%3E%3C/svg%3E"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vela3 · ONNX decision PoC</title><style>
+:root{color-scheme:dark;font:16px/1.5 system-ui;background:#11151a;color:#e4edf4}body{max-width:1000px;margin:50px auto;padding:0 24px}h1{font-size:32px}p{color:#a9bbc7}label{display:block;margin-top:18px}input,select,textarea,button{font:inherit;padding:10px;border:1px solid #3c4f5e;border-radius:6px;background:#1b252e;color:inherit}textarea{width:100%;box-sizing:border-box}input[type=text]{width:60%}button{background:#236958;cursor:pointer;margin:18px 8px 0 0}button:disabled{opacity:.5;cursor:wait}pre{white-space:pre-wrap;background:#0a1016;padding:20px;border-radius:8px}.row{display:flex;gap:20px}.tag{color:#70dbb7}#status{min-height:25px}
+</style></head><body><div class="tag">defuss-decide / provider experiment</div><h1>Vela3 decisions in your browser</h1><p>Local ONNX inference. Export a bundle first; loading downloads its weights from this host. Choice and yes/no decisions only.</p>
+<label>Bundle URL <input id="bundle" type="text" value="/models/fast/"></label>
+<div class="row"><label>Backend <select id="backend"><option value="auto">Auto · WebGPU, else WASM</option><option value="webgpu">WebGPU · GPU</option><option value="wasm">WASM · CPU</option></select></label><label>WASM threads <select id="threads"><option>1</option><option>2</option><option>4</option></select></label></div>
+<button id="load">Load model</button><button id="unload" disabled>Release model</button><div id="status" role="status">No model loaded.</div>
+<label>State<textarea id="state" rows="3">My invoice includes a duplicate charge.</textarea></label>
+<label>Questions · JSON<textarea id="questions" rows="9">{
+  "route": {
+    "type": "choice",
+    "instructions": "Which team should handle this request?",
+    "criteria": {"billing": null, "technical": null, "sales": null}
+  }
+}</textarea></label>
+<label>Images · vision bundle only, up to three<input id="images" type="file" accept="image/*" multiple></label>
+<button id="run" disabled>Run decision</button><button id="parity" disabled>Run exported parity fixtures</button><pre id="result">Results appear here.</pre>
+<script type="module" src="/examples/browser/main.ts"></script></body></html>

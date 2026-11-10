@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "model": "vllm-sr/vela3-fast-vision",
+  "task": "box",
+  "checks": [
+    {
+      "name": "box",
+      "maxLogitError": 0.000013530254364013672,
+      "decodedOutputMatched": true,
+      "milliseconds": 8450
+    }
+  ],
+  "runtime": "Bun 1.4.4"
+}

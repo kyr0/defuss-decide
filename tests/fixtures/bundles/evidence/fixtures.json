@@ -1,0 +1,285 @@
+[
+  {
+    "name": "evidence",
+    "state": {
+      "user": "Where does Ada live?",
+      "context": "Ada lives in London. Bob lives in Paris.",
+      "answer": "London"
+    },
+    "question": {
+      "type": "span",
+      "target": "context",
+      "criteria": [
+        "evidence"
+      ]
+    },
+    "ids": [
+      0,
+      49158,
+      42477,
+      49155,
+      49156,
+      9576,
+      1072,
+      34099,
+      2330,
+      47,
+      49159,
+      4503,
+      81,
+      2397,
+      281,
+      4528,
+      30,
+      8363,
+      2397,
+      281,
+      7042,
+      30,
+      49157,
+      21253,
+      0
+    ],
+    "wordPositions": [
+      11,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+    ],
+    "labelPositions": [
+      1
+    ],
+    "offsets": [
+      [
+        0,
+        3
+      ],
+      [
+        4,
+        9
+      ],
+      [
+        10,
+        12
+      ],
+      [
+        13,
+        19
+      ],
+      [
+        19,
+        20
+      ],
+      [
+        21,
+        24
+      ],
+      [
+        25,
+        30
+      ],
+      [
+        31,
+        33
+      ],
+      [
+        34,
+        39
+      ],
+      [
+        39,
+        40
+      ]
+    ],
+    "names": [
+      "evidence"
+    ],
+    "logits": [
+      [
+        0.8347012400627136
+      ],
+      [
+        0.8537126183509827
+      ],
+      [
+        0.8272478580474854
+      ],
+      [
+        1.665208101272583
+      ],
+      [
+        -0.16013048589229584
+      ],
+      [
+        -1.7910677194595337
+      ],
+      [
+        -1.945507287979126
+      ],
+      [
+        -1.9724959135055542
+      ],
+      [
+        -1.6007812023162842
+      ],
+      [
+        -1.8239130973815918
+      ]
+    ],
+    "answer": {
+      "type": "span",
+      "target": "context",
+      "spans": [
+        {
+          "start": 0,
+          "end": 19,
+          "label": "evidence",
+          "probability": 0.7338505387306213,
+          "text": "Ada lives in London",
+          "score": 0.7338505030717547
+        }
+      ],
+      "head": "span",
+      "head_reason": "span adapter; evidence question, short bucket (11 target tokens)",
+      "threshold": 0.5
+    }
+  },
+  {
+    "name": "support",
+    "state": "The Moon orbits Earth. Mars orbits the Sun.",
+    "question": {
+      "type": "span",
+      "instructions": "Which spans support the claim that the Moon orbits Earth?",
+      "criteria": {
+        "support": "Supporting text"
+      }
+    },
+    "ids": [
+      0,
+      49158,
+      22610,
+      42,
+      28411,
+      1694,
+      49155,
+      49156,
+      504,
+      8872,
+      21837,
+      2591,
+      30,
+      7621,
+      21837,
+      260,
+      5430,
+      30,
+      0
+    ],
+    "wordPositions": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "labelPositions": [
+      1
+    ],
+    "offsets": [
+      [
+        0,
+        3
+      ],
+      [
+        4,
+        8
+      ],
+      [
+        9,
+        15
+      ],
+      [
+        16,
+        21
+      ],
+      [
+        21,
+        22
+      ],
+      [
+        23,
+        27
+      ],
+      [
+        28,
+        34
+      ],
+      [
+        35,
+        38
+      ],
+      [
+        39,
+        42
+      ],
+      [
+        42,
+        43
+      ]
+    ],
+    "names": [
+      "support"
+    ],
+    "logits": [
+      [
+        -0.9054059386253357
+      ],
+      [
+        -0.5241248607635498
+      ],
+      [
+        -0.6268349289894104
+      ],
+      [
+        -0.4644516110420227
+      ],
+      [
+        -1.1838908195495605
+      ],
+      [
+        -0.21109680831432343
+      ],
+      [
+        -0.43604913353919983
+      ],
+      [
+        -0.42168480157852173
+      ],
+      [
+        -0.2928922474384308
+      ],
+      [
+        -1.6186778545379639
+      ]
+    ],
+    "answer": {
+      "type": "span",
+      "target": "user",
+      "spans": [],
+      "head": "span",
+      "head_reason": "span adapter; evidence question, short bucket (10 target tokens)",
+      "threshold": 0.5
+    }
+  }
+]

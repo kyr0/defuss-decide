@@ -1,0 +1,8 @@
+{
+  "passed": false,
+  "supersededBy": "External-data packages validated in browser-*.json",
+  "task": "fast-ner",
+  "format": "embedded weights",
+  "error": "Session creation: ERROR_CODE 6 std::bad_alloc",
+  "precisionUnchanged": true
+}

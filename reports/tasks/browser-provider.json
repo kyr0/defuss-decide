@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "task": "ner",
+      "passed": true,
+      "milliseconds": 3285
+    },
+    {
+      "task": "span_set",
+      "passed": true,
+      "milliseconds": 3176
+    },
+    {
+      "task": "vision-ocr",
+      "passed": true,
+      "milliseconds": 28685
+    },
+    {
+      "task": "vision-box",
+      "passed": true,
+      "milliseconds": 28572
+    },
+    {
+      "task": "ner",
+      "passed": true,
+      "milliseconds": 3896
+    }
+  ],
+  "browser": "156.0.8078.4"
+}

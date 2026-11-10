@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "model": "vision",
+  "task": "ocr",
+  "torch": "2.15.0+cpu",
+  "checks": [
+    {
+      "case": "ocr/wrapper",
+      "max_abs_error": 0.0
+    },
+    {
+      "case": "vision-features",
+      "max_abs_error": 4.149973392486572e-06
+    },
+    {
+      "case": "ocr/onnx",
+      "max_abs_error": 5.7220458984375e-06
+    }
+  ],
+  "scope": "original checkpoint vs portable wrapper and ONNX CPU; JS verification separately checks decoding"
+}

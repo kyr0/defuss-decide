@@ -1,0 +1,428 @@
+{
+ "runtime": "node v26.11.1",
+ "platform": "darwin/arm64",
+ "backend": "auto",
+ "correct": 18,
+ "of": 18,
+ "runs": [
+  {
+   "sample": "squirrel",
+   "task": "vision-box",
+   "correct": true,
+   "answer": {
+    "type": "box",
+    "box": {
+     "top": 0.625,
+     "bottom": 0.875,
+     "left": 0.625,
+     "right": 0.75
+    },
+    "point": {
+     "y": 0.78125,
+     "x": 0.65625
+    },
+    "confidence": 0.9910073280334473
+   },
+   "backend": "webgpu",
+   "ms": 422
+  },
+  {
+   "sample": "dragon",
+   "task": "vision-box",
+   "correct": true,
+   "answer": {
+    "type": "box",
+    "box": {
+     "top": 0.25,
+     "bottom": 1,
+     "left": 0,
+     "right": 1
+    },
+    "point": {
+     "y": 0.46875,
+     "x": 0.53125
+    },
+    "confidence": 0.9887259006500244
+   },
+   "backend": "webgpu",
+   "ms": 317
+  },
+  {
+   "sample": "space",
+   "task": "vision-box",
+   "correct": true,
+   "answer": {
+    "type": "box",
+    "box": {
+     "top": 0.25,
+     "bottom": 0.875,
+     "left": 0.375,
+     "right": 0.9375
+    },
+    "point": {
+     "y": 0.46875,
+     "x": 0.78125
+    },
+    "confidence": 0.9972109794616699
+   },
+   "backend": "webgpu",
+   "ms": 313
+  },
+  {
+   "sample": "submarine",
+   "task": "vision-box",
+   "correct": true,
+   "answer": {
+    "type": "box",
+    "box": {
+     "top": 0.25,
+     "bottom": 0.625,
+     "left": 0.4375,
+     "right": 0.75
+    },
+    "point": {
+     "y": 0.53125,
+     "x": 0.59375
+    },
+    "confidence": 0.7935823202133179
+   },
+   "backend": "webgpu",
+   "ms": 322
+  },
+  {
+   "sample": "library",
+   "task": "vision-box",
+   "correct": true,
+   "answer": {
+    "type": "box",
+    "box": {
+     "top": 0.5625,
+     "bottom": 0.875,
+     "left": 0.0625,
+     "right": 0.5
+    },
+    "point": {
+     "y": 0.78125,
+     "x": 0.21875
+    },
+    "confidence": 0.9877710938453674
+   },
+   "backend": "webgpu",
+   "ms": 336
+  },
+  {
+   "sample": "kitchen",
+   "task": "vision-box",
+   "correct": true,
+   "answer": {
+    "type": "box",
+    "box": {
+     "top": 0.625,
+     "bottom": 0.875,
+     "left": 0.6875,
+     "right": 1
+    },
+    "point": {
+     "y": 0.78125,
+     "x": 0.78125
+    },
+    "confidence": 0.7339479327201843
+   },
+   "backend": "webgpu",
+   "ms": 321
+  },
+  {
+   "sample": "market",
+   "task": "vision-box",
+   "correct": true,
+   "answer": {
+    "type": "box",
+    "box": {
+     "top": 0.1875,
+     "bottom": 0.8125,
+     "left": 0.25,
+     "right": 0.625
+    },
+    "point": {
+     "y": 0.46875,
+     "x": 0.40625
+    },
+    "confidence": 0.908692479133606
+   },
+   "backend": "webgpu",
+   "ms": 314
+  },
+  {
+   "sample": "reef",
+   "task": "vision-box",
+   "correct": true,
+   "answer": {
+    "type": "box",
+    "box": {
+     "top": 0.3125,
+     "bottom": 0.5625,
+     "left": 0.625,
+     "right": 1
+    },
+    "point": {
+     "y": 0.40625,
+     "x": 0.84375
+    },
+    "confidence": 0.9557948708534241
+   },
+   "backend": "webgpu",
+   "ms": 303
+  },
+  {
+   "sample": "squirrel",
+   "task": "vision-span",
+   "correct": true,
+   "answer": {
+    "type": "span",
+    "target": "answer",
+    "head": "image_halu",
+    "threshold": 0.05,
+    "spans": [
+     {
+      "start": 78,
+      "end": 102,
+      "label": "unsupported",
+      "text": "A cat is the goalkeeper.",
+      "score": 0.9981436630090078
+     }
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 479
+  },
+  {
+   "sample": "space",
+   "task": "vision-span",
+   "correct": true,
+   "answer": {
+    "type": "span",
+    "target": "answer",
+    "head": "image_halu",
+    "threshold": 0.05,
+    "spans": [
+     {
+      "start": 44,
+      "end": 70,
+      "label": "unsupported",
+      "text": "A dog flies the spaceship.",
+      "score": 0.17085046569506326
+     }
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 317
+  },
+  {
+   "sample": "squirrel",
+   "task": "decide",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.00893791998041571,
+     "yes": 0.9910620800195843
+    },
+    "evidence": [
+     {
+      "start": 56,
+      "end": 120,
+      "label": "evidence",
+      "probability": 0.8855408504605293,
+      "score": 0.8858301560084025,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "listing.title: Fantasy Cup poster\nlisting.sport: soccer\nobservations.0: the image shows the soccer ball (confidence 0.99)",
+    "observations": [
+     "the image shows the soccer ball (confidence 0.99)"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 9321
+  },
+  {
+   "sample": "dragon",
+   "task": "decide",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.9270285323675337,
+     "yes": 0.0729714676324663
+    },
+    "evidence": [
+     {
+      "start": 34,
+      "end": 104,
+      "label": "evidence",
+      "probability": 0.8146336183828466,
+      "score": 0.8137070350348949,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "listing.title: Dragon rider print\nobservations.0: the image does not show the submarine (confidence 0.49)",
+    "observations": [
+     "the image does not show the submarine (confidence 0.49)"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 8584
+  },
+  {
+   "sample": "bottle",
+   "task": "decide",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.14377079322687936,
+     "yes": 0.8562292067731206
+    },
+    "evidence": [
+     {
+      "start": 128,
+      "end": 169,
+      "label": "evidence",
+      "probability": 0.7581561538908217,
+      "score": 0.7581561538908217,
+      "observations_ref": [
+       1
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "ocr: ALPENQUELL\nISOLIERFLASCHE\n750 ML\nLIMITED EDITION\nobservations.0: the image shows the engraved brand name (confidence 0.99)\nobservations.1: OCR text matches the scan",
+    "observations": [
+     "the image shows the engraved brand name (confidence 0.99)",
+     "OCR text matches the scan"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 13390
+  },
+  {
+   "sample": "submarine",
+   "task": "vision-ocr",
+   "correct": true,
+   "answer": {
+    "type": "span",
+    "target": "ocr",
+    "head": "ocr_check",
+    "threshold": 0.45,
+    "spans": [
+     {
+      "start": 62,
+      "end": 63,
+      "label": "ocr_error",
+      "text": "9",
+      "score": 0.931624710559845
+     }
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 343
+  },
+  {
+   "sample": "letter",
+   "task": "vision-ocr",
+   "correct": true,
+   "answer": {
+    "type": "span",
+    "target": "ocr",
+    "head": "ocr_check",
+    "threshold": 0.45,
+    "spans": [
+     {
+      "start": 17,
+      "end": 35,
+      "label": "ocr_error",
+      "text": "Keller\nAhornweg 72",
+      "score": 0.9616440733273824
+     }
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 334
+  },
+  {
+   "sample": "broadcast",
+   "task": "vision-ocr",
+   "correct": true,
+   "answer": {
+    "type": "span",
+    "target": "ocr",
+    "head": "ocr_check",
+    "threshold": 0.45,
+    "spans": [
+     {
+      "start": 58,
+      "end": 104,
+      "label": "ocr_error",
+      "text": "Technikmesse 2025 eröffnet neue KI-Initiativen",
+      "score": 0.9994842767715454
+     }
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 309
+  },
+  {
+   "sample": "notes",
+   "task": "vision-ocr",
+   "correct": true,
+   "answer": {
+    "type": "span",
+    "target": "ocr",
+    "head": "ocr_check",
+    "threshold": 0.45,
+    "spans": [
+     {
+      "start": 124,
+      "end": 151,
+      "label": "ocr_error",
+      "text": "Rückruf an +49 170 555 1248",
+      "score": 0.9974885838372367
+     }
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 308
+  },
+  {
+   "sample": "bottle",
+   "task": "vision-ocr",
+   "correct": true,
+   "answer": {
+    "type": "span",
+    "target": "ocr",
+    "head": "ocr_check",
+    "threshold": 0.45,
+    "spans": [
+     {
+      "start": 0,
+      "end": 9,
+      "label": "ocr_error",
+      "text": "BERGQUELL",
+      "score": 0.9994152784347534
+     }
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 284
+  }
+ ]
+}

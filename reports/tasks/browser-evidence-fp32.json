@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "model": "vllm-sr/vela3-fast",
+  "task": "evidence",
+  "checks": [
+    {
+      "name": "evidence",
+      "maxLogitError": 0.0000025033950805664062,
+      "decodedOutputMatched": true,
+      "milliseconds": 653
+    },
+    {
+      "name": "support",
+      "maxLogitError": 0.0000019371509552001953,
+      "decodedOutputMatched": true,
+      "milliseconds": 411
+    }
+  ],
+  "browser": "156.0.8078.4"
+}

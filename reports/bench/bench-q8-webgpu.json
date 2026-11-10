@@ -1,0 +1,135 @@
+{
+  "runtime": "node v26.11.1",
+  "platform": "darwin/arm64",
+  "precision": "q8",
+  "backend": "webgpu",
+  "threads": "default",
+  "rows": [
+    {
+      "bundle": "evidence/q8",
+      "fixture": "evidence",
+      "backend": "webgpu",
+      "loadMs": 2515,
+      "medianMs": 53
+    },
+    {
+      "bundle": "evidence/q8",
+      "fixture": "support",
+      "backend": "webgpu",
+      "loadMs": 2515,
+      "medianMs": 52
+    },
+    {
+      "bundle": "evidence/q8",
+      "fixture": "evidence, about 1,800 tokens",
+      "backend": "webgpu",
+      "loadMs": 2515,
+      "medianMs": 524
+    },
+    {
+      "bundle": "ner/q8",
+      "fixture": "entities",
+      "backend": "webgpu",
+      "loadMs": 2452,
+      "medianMs": 54
+    },
+    {
+      "bundle": "ner/q8",
+      "fixture": "unicode",
+      "backend": "webgpu",
+      "loadMs": 2452,
+      "medianMs": 54
+    },
+    {
+      "bundle": "ner/q8",
+      "fixture": "entities, about 1,800 tokens",
+      "backend": "webgpu",
+      "loadMs": 2452,
+      "medianMs": 395
+    },
+    {
+      "bundle": "relation/q8",
+      "fixture": "employment",
+      "backend": "webgpu",
+      "loadMs": 2337,
+      "medianMs": 54
+    },
+    {
+      "bundle": "relation/q8",
+      "fixture": "multi",
+      "backend": "webgpu",
+      "loadMs": 2337,
+      "medianMs": 53
+    },
+    {
+      "bundle": "relation/q8",
+      "fixture": "employment, about 1,800 tokens",
+      "backend": "webgpu",
+      "loadMs": 2337,
+      "medianMs": 336
+    },
+    {
+      "bundle": "span/q8",
+      "fixture": "description",
+      "backend": "webgpu",
+      "loadMs": 2533,
+      "medianMs": 53
+    },
+    {
+      "bundle": "span/q8",
+      "fixture": "unicode",
+      "backend": "webgpu",
+      "loadMs": 2533,
+      "medianMs": 53
+    },
+    {
+      "bundle": "span/q8",
+      "fixture": "description, about 1,800 tokens",
+      "backend": "webgpu",
+      "loadMs": 2533,
+      "medianMs": 353
+    },
+    {
+      "bundle": "span_set/q8",
+      "fixture": "pii",
+      "backend": "webgpu",
+      "loadMs": 2379,
+      "medianMs": 53
+    },
+    {
+      "bundle": "span_set/q8",
+      "fixture": "halu",
+      "backend": "webgpu",
+      "loadMs": 2379,
+      "medianMs": 52
+    },
+    {
+      "bundle": "span_set/q8",
+      "fixture": "pii, about 1,800 tokens",
+      "backend": "webgpu",
+      "loadMs": 2379,
+      "medianMs": 334
+    },
+    {
+      "bundle": "vision-box/q8",
+      "fixture": "box",
+      "backend": "webgpu",
+      "loadMs": 1877,
+      "medianMs": 295
+    },
+    {
+      "bundle": "vision-ocr/q8",
+      "fixture": "ocr",
+      "backend": "webgpu",
+      "loadMs": 1446,
+      "medianMs": 296
+    },
+    {
+      "bundle": "vision-span/q8",
+      "fixture": "span",
+      "backend": "webgpu",
+      "loadMs": 1470,
+      "medianMs": 298
+    }
+  ]
+}

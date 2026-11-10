@@ -1,0 +1,579 @@
+{
+ "note": "Hand-labelled paragraph relations for scripts/verify-relate.ts: per paragraph, 1 when it states that the statement is true (supports), false (refutes) or is about its topic (relates), 0.5 for partial cases. `first` chose the method (2026-11-08); `second` was written afterwards to check it. `nuance` relates the same paragraphs to an absolute and a qualified statement: a paragraph that only contradicts the absolute one must refute it more. A smoke set, not a benchmark.",
+ "sets": {
+  "first": [
+   {
+    "claim": "The sky is blue.",
+    "paragraphs": [
+     {
+      "text": "Photo of a blue sky over the city.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Photo of a green sky over the city.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1
+     },
+     {
+      "text": "The sky is usually blue on Earth when it is not cloudy.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Rayleigh scattering of sunlight makes the daytime sky look blue.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Clouds form when water vapour condenses into droplets.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Add two cups of flour and stir until smooth.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0
+     }
+    ]
+   },
+   {
+    "claim": "The sky is usually blue on Earth when it is not cloudy.",
+    "paragraphs": [
+     {
+      "text": "Photo of a clear blue sky over the city.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Earth's sky is never blue, not even on clear days.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1
+     },
+     {
+      "text": "On a cloudy day the sky over Berlin was grey.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "On Mars the daytime sky is a pale butterscotch colour.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Rayleigh scattering of sunlight makes the daytime sky look blue.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Add two cups of flour and stir until smooth.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0
+     }
+    ]
+   },
+   {
+    "claim": "Regular exercise lowers blood pressure.",
+    "paragraphs": [
+     {
+      "text": "A meta-analysis found that aerobic training reduced systolic blood pressure by about 5 mmHg.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "In the trial, blood pressure did not change after twelve weeks of daily running.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1
+     },
+     {
+      "text": "Exercise improves sleep quality in older adults.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "High salt intake raises blood pressure.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "The museum opens at nine on weekdays.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0
+     }
+    ]
+   },
+   {
+    "claim": "The bridge was closed because of storm damage.",
+    "paragraphs": [
+     {
+      "text": "Storm Ciara damaged the bridge's cables, so the city closed it on Monday.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "The bridge closed on Monday for scheduled painting; the storm caused no damage there.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1
+     },
+     {
+      "text": "The bridge was closed on Monday.",
+      "supports": 0.5,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "The storm damaged several roofs in the old town.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Tickets for the concert are sold out.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0
+     }
+    ]
+   },
+   {
+    "claim": "The company's revenue grew in 2025.",
+    "paragraphs": [
+     {
+      "text": "Revenue rose 12 percent to 4.1 billion euros in 2025.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Revenue fell from 4.1 to 3.6 billion euros in 2025.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1
+     },
+     {
+      "text": "The company opened two new offices in 2025.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Analysts expect revenue to grow in 2026.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Penguins live mostly in the southern hemisphere.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0
+     }
+    ]
+   },
+   {
+    "claim": "Coffee contains caffeine.",
+    "paragraphs": [
+     {
+      "text": "A cup of brewed coffee has about 95 mg of caffeine.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Coffee contains no caffeine at all.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1
+     },
+     {
+      "text": "Even decaffeinated coffee still contains small amounts of caffeine.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Tea is grown in India, China and Kenya.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0.5
+     },
+     {
+      "text": "The train leaves from platform 4.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0
+     }
+    ]
+   },
+   {
+    "claim": "The patient is allergic to penicillin.",
+    "paragraphs": [
+     {
+      "text": "Allergies: penicillin (rash, 2019).",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "No known drug allergies.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1
+     },
+     {
+      "text": "The patient takes metformin for type 2 diabetes.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0.5
+     },
+     {
+      "text": "The parking garage closes at midnight.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0
+     }
+    ]
+   },
+   {
+    "claim": "Berlin is the capital of Germany.",
+    "paragraphs": [
+     {
+      "text": "Germany's capital and largest city is Berlin.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Bonn is the capital of Germany.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1
+     },
+     {
+      "text": "Bonn was the capital of West Germany until 1990.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Berlin has around 3.7 million inhabitants.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Photosynthesis turns light into chemical energy.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0
+     }
+    ]
+   },
+   {
+    "claim": "The order was delivered on time.",
+    "paragraphs": [
+     {
+      "text": "The parcel left the warehouse on 3 March. It arrived on 5 March, the promised delivery date, and the customer signed for it.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "The parcel arrived on 9 March, four days after the promised date.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1
+     },
+     {
+      "text": "The customer asked to change the delivery address.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Our newsletter covers spring fashion.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0
+     }
+    ]
+   }
+  ],
+  "second": [
+   {
+    "claim": "Smoking causes lung cancer.",
+    "paragraphs": [
+     {
+      "text": "Long-term studies show that smoking is the leading cause of lung cancer.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Lung cancer is more common among smokers, but this study could not establish that smoking causes it.",
+      "supports": 0.5,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Smoking has no effect on the risk of lung cancer.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1
+     },
+     {
+      "text": "Air pollution also increases the risk of lung cancer.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "The bakery sells rye bread on Saturdays.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0
+     }
+    ]
+   },
+   {
+    "claim": "The meeting was moved to Thursday because the CEO was ill.",
+    "paragraphs": [
+     {
+      "text": "Since the CEO was sick, the meeting now takes place on Thursday.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "The meeting was moved to Thursday because the room was double-booked.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1
+     },
+     {
+      "text": "The meeting was moved to Thursday.",
+      "supports": 0.5,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "The meeting still takes place on Tuesday as planned.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1
+     },
+     {
+      "text": "The volcano last erupted in 1980.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0
+     }
+    ]
+   },
+   {
+    "claim": "All swans are white.",
+    "paragraphs": [
+     {
+      "text": "Black swans live in Australia.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1
+     },
+     {
+      "text": "Every swan we observed in the park was white.",
+      "supports": 0.5,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Swans are large water birds related to geese.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "The stock market closed higher today.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0
+     }
+    ]
+   },
+   {
+    "claim": "The drug reduced symptoms in the trial.",
+    "paragraphs": [
+     {
+      "text": "Patients on the drug reported fewer symptoms than those on placebo.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Symptoms did not differ between the drug and the placebo group.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1
+     },
+     {
+      "text": "The trial enrolled 240 patients over two years.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "The concert hall seats 2,000 people.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0
+     }
+    ]
+   },
+   {
+    "claim": "Ada lives in London.",
+    "paragraphs": [
+     {
+      "text": "Ada's flat is in Camden, in north London.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Ada moved from London to Paris last year and lives there now.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1
+     },
+     {
+      "text": "Ada was born in London.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "The recipe uses three eggs.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0
+     }
+    ]
+   },
+   {
+    "claim": "The price of the product increased.",
+    "paragraphs": [
+     {
+      "text": "The product now costs 24 euros instead of 19.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "The product's price fell by 10 percent.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1
+     },
+     {
+      "text": "Sales of the product doubled last quarter.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "The river flooded the village.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0
+     }
+    ]
+   },
+   {
+    "claim": "The server crashed because the disk was full.",
+    "paragraphs": [
+     {
+      "text": "At 03:12 the monitoring raised an alert. The data disk had reached 100 percent usage, which made the database exit and took the server down. The disk was expanded at 04:00.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "At 03:12 the monitoring raised an alert. The disk had plenty of free space; a faulty memory module caused the crash.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1
+     },
+     {
+      "text": "The server rebooted at 04:00 after planned maintenance.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "The marketing team launched a new campaign.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0
+     }
+    ]
+   },
+   {
+    "claim": "The store is open on Sundays.",
+    "paragraphs": [
+     {
+      "text": "Open daily, including Sundays, from 10 to 18.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "The store is not open on Sundays.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1
+     },
+     {
+      "text": "The store is open on Saturdays from 9 to 14.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1
+     },
+     {
+      "text": "Penguins cannot fly.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0
+     }
+    ]
+   }
+  ]
+ },
+ "nuance": {
+  "statements": [
+   "The sky is blue.",
+   "The sky is usually blue on Earth when it is not cloudy."
+  ],
+  "paragraphs": [
+   "Photo of a green sky over the city.",
+   "On a cloudy day the sky over Berlin was grey.",
+   "On Mars the daytime sky is a pale butterscotch colour."
+  ]
+ }
+}

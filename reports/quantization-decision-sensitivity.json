@@ -1,0 +1,651 @@
+{
+ "date": "2026-11-08",
+ "tool": "python/quant_sensitivity.py",
+ "fp32LabelledCorrect": 52,
+ "counts": {
+  "heldOut": 177,
+  "labelled": 56,
+  "fixtures": 5
+ },
+ "runs": [
+  {
+   "run": "all int4",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0099,
+    "maxShift": 0.112
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0116,
+    "maxShift": 0.1618,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0858,
+    "maxShift": 0.36
+   }
+  },
+  {
+   "run": "layer 0 FP32",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0086,
+    "maxShift": 0.0944
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.01,
+    "maxShift": 0.1584,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0677,
+    "maxShift": 0.2915
+   },
+   "heldOutMeanShiftRemoved": 0.131
+  },
+  {
+   "run": "layer 1 FP32",
+   "heldOut": {
+    "flips": 1,
+    "meanShift": 0.0095,
+    "maxShift": 0.1133
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0125,
+    "maxShift": 0.1874,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0836,
+    "maxShift": 0.3575
+   },
+   "heldOutMeanShiftRemoved": 0.04
+  },
+  {
+   "run": "layer 2 FP32",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0097,
+    "maxShift": 0.1089
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0102,
+    "maxShift": 0.0766,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0819,
+    "maxShift": 0.3466
+   },
+   "heldOutMeanShiftRemoved": 0.02
+  },
+  {
+   "run": "layer 3 FP32",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0092,
+    "maxShift": 0.0926
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0123,
+    "maxShift": 0.15,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.089,
+    "maxShift": 0.3706
+   },
+   "heldOutMeanShiftRemoved": 0.071
+  },
+  {
+   "run": "layer 4 FP32",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0096,
+    "maxShift": 0.1287
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0123,
+    "maxShift": 0.1014,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0821,
+    "maxShift": 0.3478
+   },
+   "heldOutMeanShiftRemoved": 0.03
+  },
+  {
+   "run": "layer 5 FP32",
+   "heldOut": {
+    "flips": 1,
+    "meanShift": 0.0093,
+    "maxShift": 0.0826
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0125,
+    "maxShift": 0.1553,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0831,
+    "maxShift": 0.3542
+   },
+   "heldOutMeanShiftRemoved": 0.061
+  },
+  {
+   "run": "layer 6 FP32",
+   "heldOut": {
+    "flips": 1,
+    "meanShift": 0.0097,
+    "maxShift": 0.0926
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0132,
+    "maxShift": 0.1659,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.08,
+    "maxShift": 0.3365
+   },
+   "heldOutMeanShiftRemoved": 0.02
+  },
+  {
+   "run": "layer 7 FP32",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0099,
+    "maxShift": 0.0945
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0118,
+    "maxShift": 0.1838,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.081,
+    "maxShift": 0.346
+   },
+   "heldOutMeanShiftRemoved": 0.0
+  },
+  {
+   "run": "layer 8 FP32",
+   "heldOut": {
+    "flips": 1,
+    "meanShift": 0.0087,
+    "maxShift": 0.0945
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0125,
+    "maxShift": 0.1164,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0813,
+    "maxShift": 0.3538
+   },
+   "heldOutMeanShiftRemoved": 0.121
+  },
+  {
+   "run": "layer 9 FP32",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0096,
+    "maxShift": 0.1045
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0112,
+    "maxShift": 0.1221,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0832,
+    "maxShift": 0.3372
+   },
+   "heldOutMeanShiftRemoved": 0.03
+  },
+  {
+   "run": "layer 10 FP32",
+   "heldOut": {
+    "flips": 1,
+    "meanShift": 0.0098,
+    "maxShift": 0.0982
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0114,
+    "maxShift": 0.1335,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0862,
+    "maxShift": 0.3501
+   },
+   "heldOutMeanShiftRemoved": 0.01
+  },
+  {
+   "run": "layer 11 FP32",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0095,
+    "maxShift": 0.1113
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0112,
+    "maxShift": 0.1635,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0826,
+    "maxShift": 0.3229
+   },
+   "heldOutMeanShiftRemoved": 0.04
+  },
+  {
+   "run": "layer 12 FP32",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0096,
+    "maxShift": 0.1032
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0128,
+    "maxShift": 0.178,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0823,
+    "maxShift": 0.3296
+   },
+   "heldOutMeanShiftRemoved": 0.03
+  },
+  {
+   "run": "layer 13 FP32",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0099,
+    "maxShift": 0.1159
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0113,
+    "maxShift": 0.1611,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.085,
+    "maxShift": 0.3553
+   },
+   "heldOutMeanShiftRemoved": 0.0
+  },
+  {
+   "run": "layer 14 FP32",
+   "heldOut": {
+    "flips": 1,
+    "meanShift": 0.0102,
+    "maxShift": 0.1099
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0118,
+    "maxShift": 0.1729,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0877,
+    "maxShift": 0.3651
+   },
+   "heldOutMeanShiftRemoved": -0.03
+  },
+  {
+   "run": "layer 15 FP32",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0098,
+    "maxShift": 0.1112
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0116,
+    "maxShift": 0.165,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.085,
+    "maxShift": 0.3567
+   },
+   "heldOutMeanShiftRemoved": 0.01
+  },
+  {
+   "run": "layer 16 FP32",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0099,
+    "maxShift": 0.1113
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0116,
+    "maxShift": 0.1607,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0857,
+    "maxShift": 0.3598
+   },
+   "heldOutMeanShiftRemoved": 0.0
+  },
+  {
+   "run": "layer 17 FP32",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0099,
+    "maxShift": 0.1119
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0116,
+    "maxShift": 0.1618,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0857,
+    "maxShift": 0.36
+   },
+   "heldOutMeanShiftRemoved": 0.0
+  },
+  {
+   "run": "layer 18 FP32",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0099,
+    "maxShift": 0.112
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0116,
+    "maxShift": 0.1618,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0859,
+    "maxShift": 0.36
+   },
+   "heldOutMeanShiftRemoved": 0.0
+  },
+  {
+   "run": "layer 19 FP32",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0099,
+    "maxShift": 0.112
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0116,
+    "maxShift": 0.1618,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0858,
+    "maxShift": 0.36
+   },
+   "heldOutMeanShiftRemoved": 0.0
+  },
+  {
+   "run": "layer 20 FP32",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0099,
+    "maxShift": 0.112
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0116,
+    "maxShift": 0.1618,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0858,
+    "maxShift": 0.36
+   },
+   "heldOutMeanShiftRemoved": 0.0
+  },
+  {
+   "run": "layer 21 FP32",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0099,
+    "maxShift": 0.112
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0116,
+    "maxShift": 0.1618,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0858,
+    "maxShift": 0.36
+   },
+   "heldOutMeanShiftRemoved": 0.0
+  },
+  {
+   "run": "layer 22 FP32",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0099,
+    "maxShift": 0.112
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0116,
+    "maxShift": 0.1618,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0858,
+    "maxShift": 0.36
+   },
+   "heldOutMeanShiftRemoved": 0.0
+  },
+  {
+   "run": "layer 23 FP32",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0099,
+    "maxShift": 0.112
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0116,
+    "maxShift": 0.1618,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0858,
+    "maxShift": 0.36
+   },
+   "heldOutMeanShiftRemoved": 0.0
+  },
+  {
+   "run": "q_proj FP32 in every layer",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0089,
+    "maxShift": 0.1061
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0134,
+    "maxShift": 0.1756,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0918,
+    "maxShift": 0.3432
+   },
+   "heldOutMeanShiftRemoved": 0.101
+  },
+  {
+   "run": "k_proj FP32 in every layer",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0096,
+    "maxShift": 0.0934
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0109,
+    "maxShift": 0.1374,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0774,
+    "maxShift": 0.3291
+   },
+   "heldOutMeanShiftRemoved": 0.03
+  },
+  {
+   "run": "v_proj FP32 in every layer",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0087,
+    "maxShift": 0.0973
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.014,
+    "maxShift": 0.187,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0789,
+    "maxShift": 0.3123
+   },
+   "heldOutMeanShiftRemoved": 0.121
+  },
+  {
+   "run": "o_proj FP32 in every layer",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0094,
+    "maxShift": 0.0949
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0115,
+    "maxShift": 0.138,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0761,
+    "maxShift": 0.3071
+   },
+   "heldOutMeanShiftRemoved": 0.051
+  },
+  {
+   "run": "gate_proj FP32 in every layer",
+   "heldOut": {
+    "flips": 1,
+    "meanShift": 0.0093,
+    "maxShift": 0.0873
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0105,
+    "maxShift": 0.11,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0752,
+    "maxShift": 0.3147
+   },
+   "heldOutMeanShiftRemoved": 0.061
+  },
+  {
+   "run": "up_proj FP32 in every layer",
+   "heldOut": {
+    "flips": 0,
+    "meanShift": 0.0093,
+    "maxShift": 0.1065
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0134,
+    "maxShift": 0.1561,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0802,
+    "maxShift": 0.3493
+   },
+   "heldOutMeanShiftRemoved": 0.061
+  },
+  {
+   "run": "down_proj FP32 in every layer",
+   "heldOut": {
+    "flips": 1,
+    "meanShift": 0.0088,
+    "maxShift": 0.1097
+   },
+   "labelled": {
+    "flips": 0,
+    "meanShift": 0.0099,
+    "maxShift": 0.1046,
+    "correct": 52
+   },
+   "fixtures": {
+    "flips": 1,
+    "meanShift": 0.0767,
+    "maxShift": 0.3121
+   },
+   "heldOutMeanShiftRemoved": 0.111
+  }
+ ]
+}

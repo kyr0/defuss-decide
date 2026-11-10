@@ -1,0 +1,75 @@
+{
+  "name": "defuss-decide",
+  "version": "0.2.0",
+  "description": "Vela3-based typed decisions in your browser including vision: Spans, NER, PII, evidence verification, OCR-verification and image-region adapters as validated, custom quantized ONNX bundles that run in Node.js, Bun and the browser without Python.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "author": "Aron Homberg <info@aron-homberg.de>",
+  "packageManager": "bun@1.4.3",
+  "engines": {
+    "node": ">=22"
+  },
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js"
+    },
+    "./node": {
+      "types": "./lib/node.d.ts",
+      "import": "./lib/node.js"
+    },
+    "./web": {
+      "types": "./lib/web.d.ts",
+      "import": "./lib/web.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "README.md",
+    "ARCH.md",
+    "LICENSE",
+    "THIRD_PARTY.md",
+    "documentation/licenses"
+  ],
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc -p tsconfig.build.json && vite build",
+    "build:lib": "tsc -p tsconfig.build.json",
+    "prepack": "bun run build:lib",
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.build.json && tsc -p tests/types/tsconfig.json",
+    "lint": "oxlint --deny-warnings --ignore-pattern 'docs/assets/vendor/**' src tests scripts examples docs/assets && bun run typecheck",
+    "test": "vitest run --project node && bun test ./tests/unit/ && vitest run --project browser",
+    "coverage": "vitest run --coverage --project node --project \"browser (chromium)\"",
+    "e2e": "node scripts/e2e.ts",
+    "docs": "node scripts/docs.ts",
+    "verify:repo": "node scripts/check-repo.ts",
+    "test:onnx": "node scripts/verify-js.ts",
+    "test:browser": "node scripts/browser-test.ts",
+    "test:tasks": "node scripts/verify-tasks.ts",
+    "test:browser:tasks": "node scripts/browser-tasks.ts"
+  },
+  "dependencies": {
+    "@huggingface/tokenizers": "0.1.3",
+    "defuss-brotli": "0.3.0",
+    "onnxruntime-node": "1.31.1",
+    "onnxruntime-web": "1.31.1",
+    "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "@shikijs/langs": "^4.6.0",
+    "@shikijs/themes": "^4.6.0",
+    "@types/node": "26.6.6",
+    "@vitest/browser-playwright": "5.0.5",
+    "@vitest/coverage-v8": "5.0.5",
+    "oxlint": "1.90.0",
+    "playwright": "1.64.1",
+    "shiki": "^4.6.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.3.0",
+    "vitest": "5.0.5"
+  }
+}

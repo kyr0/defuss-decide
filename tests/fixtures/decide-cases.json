@@ -1,0 +1,1009 @@
+{
+ "note": "Hand-written decisions for scripts/verify-decide.ts; a smoke set for the pipeline, not a benchmark. The cases from agent-confirm-yes on (agents, access, flights, medical notes, contracts, languages, code changes, grounding, moderation, routing, sentiment, severity, documents) were written on 2026-11-08 before the pipeline changes were measured on them.",
+ "cases": [
+  {
+   "name": "text-1",
+   "instructions": "Is the order fulfilled?",
+   "expected": "yes",
+   "state": {
+    "order": {
+     "id": 17,
+     "status": "delivered",
+     "items": [
+      {
+       "sku": "A1",
+       "ordered": 2,
+       "shipped": 2
+      }
+     ],
+     "delivered_at": "2026-11-03"
+    }
+   }
+  },
+  {
+   "name": "text-2",
+   "instructions": "Is the order fulfilled?",
+   "expected": "no",
+   "state": {
+    "order": {
+     "id": 18,
+     "status": "pending",
+     "items": [
+      {
+       "sku": "A1",
+       "ordered": 2,
+       "shipped": 0
+      }
+     ],
+     "delivered_at": null
+    }
+   }
+  },
+  {
+   "name": "text-3",
+   "instructions": "Is the order fulfilled?",
+   "expected": "no",
+   "state": {
+    "order": {
+     "id": 19,
+     "status": "partially shipped",
+     "items": [
+      {
+       "sku": "A1",
+       "ordered": 3,
+       "shipped": 1
+      }
+     ],
+     "delivered_at": null
+    }
+   }
+  },
+  {
+   "name": "text-4",
+   "instructions": "Is the order fulfilled?",
+   "expected": "yes",
+   "state": {
+    "order": {
+     "id": 20,
+     "status": "complete",
+     "items": [
+      {
+       "sku": "B2",
+       "ordered": 1,
+       "shipped": 1
+      },
+      {
+       "sku": "C3",
+       "ordered": 4,
+       "shipped": 4
+      }
+     ]
+    }
+   }
+  },
+  {
+   "name": "text-5",
+   "instructions": "Is the order fulfilled?",
+   "expected": "no",
+   "state": {
+    "order": {
+     "id": 21,
+     "status": "cancelled",
+     "items": [
+      {
+       "sku": "B2",
+       "ordered": 1,
+       "shipped": 0
+      }
+     ]
+    }
+   }
+  },
+  {
+   "name": "text-6",
+   "instructions": "Is the invoice paid?",
+   "expected": "yes",
+   "state": {
+    "invoice": {
+     "number": "R-7",
+     "total": 120,
+     "paid": 120,
+     "status": "paid"
+    }
+   }
+  },
+  {
+   "name": "text-7",
+   "instructions": "Is the invoice paid?",
+   "expected": "no",
+   "state": {
+    "invoice": {
+     "number": "R-8",
+     "total": 120,
+     "paid": 0,
+     "status": "open"
+    }
+   }
+  },
+  {
+   "name": "text-8",
+   "instructions": "Is the invoice paid?",
+   "expected": "no",
+   "state": {
+    "invoice": {
+     "number": "R-9",
+     "total": 300,
+     "paid": 150,
+     "status": "partially paid"
+    }
+   }
+  },
+  {
+   "name": "text-9",
+   "instructions": "Is the invoice paid?",
+   "expected": "yes",
+   "state": {
+    "invoice": {
+     "number": "R-10",
+     "total": 80,
+     "paid": 80,
+     "status": "settled",
+     "paid_at": "2026-10-30"
+    }
+   }
+  },
+  {
+   "name": "text-10",
+   "instructions": "Is the invoice paid?",
+   "expected": "no",
+   "state": {
+    "invoice": {
+     "number": "R-11",
+     "total": 80,
+     "paid": 0,
+     "status": "overdue",
+     "due": "2026-10-01"
+    }
+   }
+  },
+  {
+   "name": "text-11",
+   "instructions": "Is the ticket resolved?",
+   "expected": "yes",
+   "state": {
+    "ticket": {
+     "id": 4,
+     "state": "closed",
+     "resolution": "fixed"
+    }
+   }
+  },
+  {
+   "name": "text-12",
+   "instructions": "Is the ticket resolved?",
+   "expected": "no",
+   "state": {
+    "ticket": {
+     "id": 5,
+     "state": "open",
+     "resolution": null
+    }
+   }
+  },
+  {
+   "name": "text-13",
+   "instructions": "Is the ticket resolved?",
+   "expected": "no",
+   "state": {
+    "ticket": {
+     "id": 6,
+     "state": "in progress",
+     "assignee": "Bob"
+    }
+   }
+  },
+  {
+   "name": "text-14",
+   "instructions": "Is the ticket resolved?",
+   "expected": "yes",
+   "state": {
+    "ticket": {
+     "id": 7,
+     "state": "done",
+     "resolution": "answered",
+     "closed_at": "2026-11-01"
+    }
+   }
+  },
+  {
+   "name": "text-15",
+   "instructions": "Is the user an adult?",
+   "expected": "yes",
+   "state": {
+    "user": {
+     "name": "Ada",
+     "age": 36
+    }
+   }
+  },
+  {
+   "name": "text-16",
+   "instructions": "Is the user an adult?",
+   "expected": "no",
+   "state": {
+    "user": {
+     "name": "Tim",
+     "age": 12
+    }
+   }
+  },
+  {
+   "name": "text-17",
+   "instructions": "Is the package overweight for the 20 kg limit?",
+   "expected": "yes",
+   "state": {
+    "package": {
+     "weight_kg": 27.5
+    }
+   }
+  },
+  {
+   "name": "text-18",
+   "instructions": "Is the package overweight for the 20 kg limit?",
+   "expected": "no",
+   "state": {
+    "package": {
+     "weight_kg": 4.2
+    }
+   }
+  },
+  {
+   "name": "text-19",
+   "instructions": "Is the subscription active?",
+   "expected": "yes",
+   "state": {
+    "subscription": {
+     "plan": "pro",
+     "status": "active",
+     "renews": "2027-01-01"
+    }
+   }
+  },
+  {
+   "name": "text-20",
+   "instructions": "Is the subscription active?",
+   "expected": "no",
+   "state": {
+    "subscription": {
+     "plan": "pro",
+     "status": "expired",
+     "ended": "2026-09-01"
+    }
+   }
+  },
+  {
+   "name": "image-1",
+   "instructions": "Is there a red square in the image?",
+   "expected": "yes",
+   "state": {
+    "note": "product photo"
+   },
+   "images": [
+    "models/vela3-fast-onnx/vision-box/fp32/sample.png"
+   ],
+   "region": "the red square"
+  },
+  {
+   "name": "image-2",
+   "instructions": "Is there a green triangle in the image?",
+   "expected": "no",
+   "state": {
+    "note": "product photo"
+   },
+   "images": [
+    "models/vela3-fast-onnx/vision-box/fp32/sample.png"
+   ],
+   "region": "the green triangle"
+  },
+  {
+   "name": "image-3",
+   "instructions": "Is the background of the image white?",
+   "expected": "yes",
+   "state": {
+    "note": "product photo"
+   },
+   "images": [
+    "models/vela3-fast-onnx/vision-box/fp32/sample.png"
+   ]
+  },
+  {
+   "name": "image-4",
+   "instructions": "Does the image show a person?",
+   "expected": "no",
+   "state": {
+    "note": "product photo"
+   },
+   "images": [
+    "models/vela3-fast-onnx/vision-box/fp32/sample.png"
+   ],
+   "region": "the person"
+  },
+  {
+   "name": "ocr-1",
+   "instructions": "Does the extracted invoice text match the scanned document?",
+   "expected": "yes",
+   "state": {
+    "ocr": "Invoice 123\nTotal: EUR 42.00"
+   },
+   "images": [
+    "models/vela3-fast-onnx/vision-ocr/fp32/sample.png"
+   ],
+   "region": "the invoice total"
+  },
+  {
+   "name": "ocr-2",
+   "instructions": "Does the extracted invoice text match the scanned document?",
+   "expected": "no",
+   "state": {
+    "ocr": "Invoice 128\nTotal: EUR 92.00"
+   },
+   "images": [
+    "models/vela3-fast-onnx/vision-ocr/fp32/sample.png"
+   ],
+   "region": "the invoice total"
+  },
+  {
+   "name": "agent-confirm-yes",
+   "instructions": "Has the user confirmed the payment?",
+   "expected": "yes",
+   "state": {
+    "conversation": [
+     {
+      "role": "assistant",
+      "text": "Shall I pay the invoice of 120 EUR now?"
+     },
+     {
+      "role": "user",
+      "text": "Yes, go ahead and pay it."
+     }
+    ]
+   }
+  },
+  {
+   "name": "agent-confirm-no",
+   "instructions": "Has the user confirmed the payment?",
+   "expected": "no",
+   "state": {
+    "conversation": [
+     {
+      "role": "assistant",
+      "text": "Shall I pay the invoice of 120 EUR now?"
+     },
+     {
+      "role": "user",
+      "text": "Wait, not yet. I need to check the amount first."
+     }
+    ]
+   }
+  },
+  {
+   "name": "agent-done-yes",
+   "instructions": "Is the task complete?",
+   "expected": "yes",
+   "state": {
+    "task": "Book a table for 4 people at 7 pm",
+    "log": [
+     "Searched restaurants near the office",
+     "Booked a table for 4 at Luigi's at 19:00, confirmation A12"
+    ]
+   }
+  },
+  {
+   "name": "agent-done-no",
+   "instructions": "Is the task complete?",
+   "expected": "no",
+   "state": {
+    "task": "Book a table for 4 people at 7 pm",
+    "log": [
+     "Searched restaurants near the office",
+     "Luigi's is fully booked at 19:00",
+     "Waiting for a reply from Trattoria Roma"
+    ]
+   }
+  },
+  {
+   "name": "access-yes",
+   "instructions": "Is the user allowed to delete the project?",
+   "expected": "yes",
+   "state": {
+    "policy": "Only admins may delete projects.",
+    "user": {
+     "name": "Ada",
+     "role": "admin"
+    }
+   }
+  },
+  {
+   "name": "access-no",
+   "instructions": "Is the user allowed to delete the project?",
+   "expected": "no",
+   "state": {
+    "policy": "Only admins may delete projects.",
+    "user": {
+     "name": "Tim",
+     "role": "viewer"
+    }
+   }
+  },
+  {
+   "name": "flight-yes",
+   "instructions": "Is the flight delayed?",
+   "expected": "yes",
+   "state": {
+    "flight": {
+     "number": "LH 2041",
+     "status": "delayed",
+     "scheduled": "10:05",
+     "estimated": "11:40"
+    }
+   }
+  },
+  {
+   "name": "flight-no",
+   "instructions": "Is the flight delayed?",
+   "expected": "no",
+   "state": {
+    "flight": {
+     "number": "LH 2041",
+     "status": "on time",
+     "scheduled": "10:05",
+     "estimated": "10:05"
+    }
+   }
+  },
+  {
+   "name": "fever-yes",
+   "instructions": "Does the patient report a fever?",
+   "expected": "yes",
+   "state": {
+    "notes": "Patient reports a fever of 39.2 degrees since yesterday and a dry cough."
+   }
+  },
+  {
+   "name": "fever-no",
+   "instructions": "Does the patient report a fever?",
+   "expected": "no",
+   "state": {
+    "notes": "Patient reports a sprained ankle after jogging. No fever, no other complaints."
+   }
+  },
+  {
+   "name": "contract-yes",
+   "instructions": "Does the contract allow termination without notice?",
+   "expected": "yes",
+   "state": {
+    "clause": "Either party may terminate this agreement at any time without notice."
+   }
+  },
+  {
+   "name": "contract-no",
+   "instructions": "Does the contract allow termination without notice?",
+   "expected": "no",
+   "state": {
+    "clause": "Either party may terminate this agreement with 30 days' written notice."
+   }
+  },
+  {
+   "name": "language-yes",
+   "instructions": "Is the reply written in German?",
+   "expected": "yes",
+   "state": {
+    "reply": "Vielen Dank für Ihre Nachricht, wir melden uns morgen bei Ihnen."
+   }
+  },
+  {
+   "name": "language-no",
+   "instructions": "Is the reply written in German?",
+   "expected": "no",
+   "state": {
+    "reply": "Thank you for your message, we will get back to you tomorrow."
+   }
+  },
+  {
+   "name": "schema-yes",
+   "instructions": "Does the change modify the database schema?",
+   "expected": "yes",
+   "state": {
+    "diff": "ALTER TABLE users ADD COLUMN phone TEXT;"
+   }
+  },
+  {
+   "name": "schema-no",
+   "instructions": "Does the change modify the database schema?",
+   "expected": "no",
+   "state": {
+    "diff": "Fix a typo in the README: 'recieve' -> 'receive'."
+   }
+  },
+  {
+   "name": "grounded-yes",
+   "instructions": "Does the answer follow from the context?",
+   "expected": "yes",
+   "state": {
+    "context": "The museum is open from 9 to 17 on weekdays and closed on Mondays.",
+    "answer": "On a Wednesday the museum opens at 9."
+   }
+  },
+  {
+   "name": "grounded-no",
+   "instructions": "Does the answer follow from the context?",
+   "expected": "no",
+   "state": {
+    "context": "The museum is open from 9 to 17 on weekdays and closed on Mondays.",
+    "answer": "The museum is open on Mondays until 20."
+   }
+  },
+  {
+   "name": "attack-yes",
+   "instructions": "Does the comment insult another person?",
+   "expected": "yes",
+   "state": {
+    "comment": "You are an idiot and nobody wants to read your posts."
+   }
+  },
+  {
+   "name": "attack-no",
+   "instructions": "Does the comment insult another person?",
+   "expected": "no",
+   "state": {
+    "comment": "I disagree with your point about pricing, but thanks for the detailed write-up."
+   }
+  },
+  {
+   "name": "flag-yes",
+   "instructions": "Is the new checkout enabled for this user?",
+   "expected": "yes",
+   "state": {
+    "flag": {
+     "name": "new_checkout",
+     "enabled_for": "beta testers"
+    },
+    "user": {
+     "name": "Ada",
+     "groups": [
+      "beta testers"
+     ]
+    }
+   }
+  },
+  {
+   "name": "flag-no",
+   "instructions": "Is the new checkout enabled for this user?",
+   "expected": "no",
+   "state": {
+    "flag": {
+     "name": "new_checkout",
+     "enabled": false
+    },
+    "user": {
+     "name": "Ada",
+     "groups": [
+      "beta testers"
+     ]
+    }
+   }
+  },
+  {
+   "name": "stock-yes",
+   "instructions": "Is the item in stock?",
+   "expected": "yes",
+   "state": {
+    "item": {
+     "sku": "K-11",
+     "warehouse": "Hamburg",
+     "available": 34
+    }
+   }
+  },
+  {
+   "name": "stock-no",
+   "instructions": "Is the item in stock?",
+   "expected": "no",
+   "state": {
+    "item": {
+     "sku": "K-11",
+     "warehouse": "Hamburg",
+     "available": 0,
+     "note": "sold out, restock in December"
+    }
+   }
+  },
+  {
+   "name": "route-billing",
+   "instructions": "Which team should handle the message?",
+   "expected": "billing",
+   "options": {
+    "billing": "Payments, charges, invoices and refunds",
+    "technical": "Errors, bugs and problems using the product",
+    "sales": "New purchases, pricing questions and upgrades"
+   },
+   "state": {
+    "message": "I was charged twice for my subscription this month."
+   }
+  },
+  {
+   "name": "route-technical",
+   "instructions": "Which team should handle the message?",
+   "expected": "technical",
+   "options": {
+    "billing": "Payments, charges, invoices and refunds",
+    "technical": "Errors, bugs and problems using the product",
+    "sales": "New purchases, pricing questions and upgrades"
+   },
+   "state": {
+    "message": "The app crashes every time I open the settings page."
+   }
+  },
+  {
+   "name": "route-sales",
+   "instructions": "Which team should handle the message?",
+   "expected": "sales",
+   "options": {
+    "billing": "Payments, charges, invoices and refunds",
+    "technical": "Errors, bugs and problems using the product",
+    "sales": "New purchases, pricing questions and upgrades"
+   },
+   "state": {
+    "message": "We are 40 people. What would the enterprise plan cost us?"
+   }
+  },
+  {
+   "name": "review-positive",
+   "instructions": "What is the sentiment of the review?",
+   "expected": "positive",
+   "options": {
+    "positive": null,
+    "neutral": null,
+    "negative": null
+   },
+   "state": {
+    "review": "Arrived early, works perfectly and the battery lasts for days. Love it!"
+   }
+  },
+  {
+   "name": "review-negative",
+   "instructions": "What is the sentiment of the review?",
+   "expected": "negative",
+   "options": {
+    "positive": null,
+    "neutral": null,
+    "negative": null
+   },
+   "state": {
+    "review": "Broke after two days and support never answered. Waste of money."
+   }
+  },
+  {
+   "name": "review-neutral",
+   "instructions": "What is the sentiment of the review?",
+   "expected": "neutral",
+   "options": {
+    "positive": null,
+    "neutral": null,
+    "negative": null
+   },
+   "state": {
+    "review": "The package contained the charger and a manual. Delivery took four days."
+   }
+  },
+  {
+   "name": "severity-high",
+   "instructions": "How severe is the incident?",
+   "expected": "critical",
+   "options": {
+    "critical": "A core service is down for all users",
+    "major": "A feature is degraded for some users",
+    "minor": "Cosmetic or limited impact"
+   },
+   "state": {
+    "incident": {
+     "service": "checkout",
+     "status": "down",
+     "affected": "all users",
+     "since": "10 minutes"
+    }
+   }
+  },
+  {
+   "name": "severity-minor",
+   "instructions": "How severe is the incident?",
+   "expected": "minor",
+   "options": {
+    "critical": "A core service is down for all users",
+    "major": "A feature is degraded for some users",
+    "minor": "Cosmetic or limited impact"
+   },
+   "state": {
+    "incident": {
+     "service": "settings page",
+     "status": "a button label is misaligned",
+     "affected": "users on small screens"
+    }
+   }
+  },
+  {
+   "name": "doc-invoice",
+   "instructions": "What kind of document is this?",
+   "expected": "invoice",
+   "options": {
+    "invoice": "A bill asking for payment",
+    "contract": "An agreement between parties",
+    "letter": "A personal or business letter"
+   },
+   "state": "Invoice no. 2026-117. Amount due: 1,240.00 EUR. Please pay within 14 days to IBAN DE12 3456."
+  },
+  {
+   "name": "doc-contract",
+   "instructions": "What kind of document is this?",
+   "expected": "contract",
+   "options": {
+    "invoice": "A bill asking for payment",
+    "contract": "An agreement between parties",
+    "letter": "A personal or business letter"
+   },
+   "state": "This agreement is made between Nordlicht GmbH and Ada Keller. The parties agree to the following terms."
+  },
+  {
+   "name": "moderate-remove",
+   "instructions": "What should happen with the comment?",
+   "expected": "remove",
+   "options": {
+    "keep": "Respectful and on topic",
+    "review": "Borderline, a moderator should check",
+    "remove": "Spam, threats or insults"
+   },
+   "state": {
+    "comment": "BUY CHEAP PILLS NOW!!! visit cheap-pills.example"
+   }
+  },
+  {
+   "name": "moderate-keep",
+   "instructions": "What should happen with the comment?",
+   "expected": "keep",
+   "options": {
+    "keep": "Respectful and on topic",
+    "review": "Borderline, a moderator should check",
+    "remove": "Spam, threats or insults"
+   },
+   "state": {
+    "comment": "Great article, the section on caching helped me fix our build."
+   }
+  },
+  {
+   "name": "image-5",
+   "instructions": "Does the image show a soccer ball?",
+   "expected": "yes",
+   "state": {
+    "listing": {
+     "title": "Fantasy Cup poster"
+    }
+   },
+   "images": [
+    "docs/assets/samples/synthetic/vision_box_span_1_squirrel.webp"
+   ],
+   "region": "the soccer ball"
+  },
+  {
+   "name": "image-6",
+   "instructions": "Does the image show a cat?",
+   "expected": "no",
+   "state": {
+    "listing": {
+     "title": "Fantasy Cup poster"
+    }
+   },
+   "images": [
+    "docs/assets/samples/synthetic/vision_box_span_1_squirrel.webp"
+   ],
+   "region": "the cat"
+  },
+  {
+   "name": "image-7",
+   "instructions": "Does the image show a submarine?",
+   "expected": "no",
+   "state": {
+    "listing": {
+     "title": "Dragon rider print"
+    }
+   },
+   "images": [
+    "docs/assets/samples/synthetic/vision_box_span_2_dragon.webp"
+   ],
+   "region": "the submarine"
+  },
+  {
+   "name": "image-8",
+   "instructions": "Does the image show a dragon?",
+   "expected": "yes",
+   "state": {
+    "listing": {
+     "title": "Dragon rider print"
+    }
+   },
+   "images": [
+    "docs/assets/samples/synthetic/vision_box_span_2_dragon.webp"
+   ],
+   "region": "the dragon"
+  },
+  {
+   "name": "image-9",
+   "instructions": "Does a rabbit pull the spaceship?",
+   "expected": "yes",
+   "state": {},
+   "images": [
+    "docs/assets/samples/synthetic/vision_box_span_3_space.webp"
+   ],
+   "region": "the rabbit"
+  },
+  {
+   "name": "image-10",
+   "instructions": "Is there an octopus in the picture?",
+   "expected": "yes",
+   "state": {},
+   "images": [
+    "docs/assets/samples/synthetic/vision_pinpoint_4.webp"
+   ],
+   "region": "the octopus"
+  },
+  {
+   "name": "image-11",
+   "instructions": "Is there a horse in the picture?",
+   "expected": "no",
+   "state": {},
+   "images": [
+    "docs/assets/samples/synthetic/vision_pinpoint_4.webp"
+   ],
+   "region": "the horse"
+  },
+  {
+   "name": "image-12",
+   "instructions": "Is someone cooking in the picture?",
+   "expected": "yes",
+   "state": {},
+   "images": [
+    "docs/assets/samples/synthetic/vision_pinpoint_2.webp"
+   ],
+   "region": "the cook"
+  },
+  {
+   "name": "image-13",
+   "instructions": "Is there a car in the picture?",
+   "expected": "no",
+   "state": {},
+   "images": [
+    "docs/assets/samples/synthetic/vision_pinpoint_3.webp"
+   ],
+   "region": "the car"
+  },
+  {
+   "name": "ocr-3",
+   "instructions": "Does the extracted text match the image?",
+   "expected": "yes",
+   "state": {
+    "ocr": "ALPENQUELL\nISOLIERFLASCHE\n750 ML\nLIMITED EDITION"
+   },
+   "images": [
+    "docs/assets/samples/synthetic/ocr_product_engraved.webp"
+   ],
+   "lines": true
+  },
+  {
+   "name": "ocr-4",
+   "instructions": "Does the extracted text match the image?",
+   "expected": "no",
+   "state": {
+    "ocr": "BERGQUELL\nISOLIERFLASCHE\n750 ML\nLIMITED EDITION"
+   },
+   "images": [
+    "docs/assets/samples/synthetic/ocr_product_engraved.webp"
+   ],
+   "lines": true
+  },
+  {
+   "name": "ocr-5",
+   "instructions": "Does the extracted text match the image?",
+   "expected": "yes",
+   "state": {
+    "ocr": "Empfänger:\nMaria Keller\nAhornweg 27\n80469 München"
+   },
+   "images": [
+    "docs/assets/samples/synthetic/ocr_document_digital.webp"
+   ],
+   "lines": true
+  },
+  {
+   "name": "ocr-6",
+   "instructions": "Does the extracted text match the image?",
+   "expected": "no",
+   "state": {
+    "ocr": "Empfänger:\nMaria Keller\nAhornweg 72\n80469 München"
+   },
+   "images": [
+    "docs/assets/samples/synthetic/ocr_document_digital.webp"
+   ],
+   "lines": true
+  },
+  {
+   "name": "ocr-7",
+   "instructions": "Does the extracted text match the image?",
+   "expected": "yes",
+   "state": {
+    "ocr": "4. Rückruf an +49 170 555 1284\n5. Türcode: ZX-418-K"
+   },
+   "images": [
+    "docs/assets/samples/synthetic/ocr_letter_handwriting.webp"
+   ],
+   "lines": true
+  },
+  {
+   "name": "ocr-8",
+   "instructions": "Does the extracted text match the image?",
+   "expected": "no",
+   "state": {
+    "ocr": "4. Rückruf an +49 170 555 1248\n5. Türcode: ZX-418-K"
+   },
+   "images": [
+    "docs/assets/samples/synthetic/ocr_letter_handwriting.webp"
+   ],
+   "lines": true
+  },
+  {
+   "name": "ocr-9",
+   "instructions": "Does the extracted text match the image?",
+   "expected": "yes",
+   "state": {
+    "ocr": "LENA HOFFMANN\nProjektleiterin | Zukunftsforum Berlin\nTechnikmesse 2026 eröffnet neue KI-Initiativen"
+   },
+   "images": [
+    "docs/assets/samples/synthetic/ocr_film_labels.webp"
+   ],
+   "lines": true
+  },
+  {
+   "name": "ocr-10",
+   "instructions": "Does the extracted text match the image?",
+   "expected": "no",
+   "state": {
+    "ocr": "LENA HOFFMANN\nProjektleiterin | Zukunftsforum Berlin\nTechnikmesse 2025 eröffnet neue KI-Initiativen"
+   },
+   "images": [
+    "docs/assets/samples/synthetic/ocr_film_labels.webp"
+   ],
+   "lines": true
+  },
+  {
+   "name": "ocr-11",
+   "instructions": "Does the extracted text match the image?",
+   "expected": "yes",
+   "state": {
+    "ocr": "DANGER\nGIANT FISH AREA\nATLANTIS 5 km"
+   },
+   "images": [
+    "docs/assets/samples/synthetic/vision_box_span_4_submarine_ocr.webp"
+   ],
+   "lines": true
+  },
+  {
+   "name": "ocr-12",
+   "instructions": "Does the extracted text match the image?",
+   "expected": "no",
+   "state": {
+    "ocr": "DANGER\nGIANT FISH AREA\nATLANTIS 9 km"
+   },
+   "images": [
+    "docs/assets/samples/synthetic/vision_box_span_4_submarine_ocr.webp"
+   ],
+   "lines": true
+  }
+ ]
+}

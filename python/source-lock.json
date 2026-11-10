@@ -1,0 +1,24 @@
+{
+  "fast": {
+    "config.json": "a85b358ac11b71d780deb09e8a082efddc67938a2eb4fc16d68d8ae888c69d14",
+    "model.safetensors": "2294745881d9a01b7d049133b57e5fed2aec6ae1d34ef1ab9fa16f047fc35c8e",
+    "tokenizer.json": "38734bb17ef19f84c67b5eb5692bea19801ffd02cb5c5ffc11429e76b0242e08",
+    "tokenizer_config.json": "649781df90d51837dd6ba951a89fae07c985a9eacfd781d84002d480c3cb0b6e",
+    "configuration_ultrabert.py": "823d10bda19f5164da4f79f8f9c01e5ebd7a75569abce78c0a26b7674fc78cd9",
+    "modeling_ultrabert.py": "6d86b56fbcc634dd2f7e2aa29047062289def1ba7e602b991be1af888dc82072",
+    "vela3_encoder.py": "3ca59bead96cf8aeaa2fb07b4c3b8c4f50c67822ad6dbfba9d575d5fc9f853d3",
+    "ub_d3_common.py": "ae36592c0fe964af9bba46b55a6eccff484efeb15c8c2fe209149fe285f971a3"
+  },
+  "vision": {
+    "config.json": "96c0a13f682092cb4b7289ec10d54179dd0085bbc988cba269a7b3d1ace1c079",
+    "backbone_h2.safetensors": "65e0c0284eb8c6e494c058d1988ad1b3d2eab60c368bb3d704e09174d1220bd5",
+    "decision_adapter.safetensors": "8a8ddc13ccc09ebe41f4200b8685a72a7c19d4567c7c1a85f600b25dad53ae55",
+    "tokenizer.json": "bda9af747539d9444eca3fc9df922811ae318d93ced0b83ecf2001c77a925e8a",
+    "tokenizer_config.json": "5c983bf0fa140fd6005da8b8239df4de0c85243e08be553896be2527cad8186f",
+    "processor_config.json": "0657d91d3b77ff66812ae4527aa0fad027dfd532df237e73c5b794cc2fcbac5c",
+    "configuration_ultravbert.py": "97b79ba8cf3d1e96b829441fa06fcc56ed83d3c0d43a89b04661c463cf9bf1cf",
+    "modeling_ultravbert.py": "fdc8e5c3ace4336e0eee7f54366029e3bb7ab347b51cf01372eaa38e3ebae866",
+    "image_processing_ultravbert.py": "6c41054315f105fabda36d9fcc9d84f1fce84bf0cb4489917360a5dc2544dac9",
+    "uvb_core.py": "973a990aee3ec5968ca1f8d321edf6add2bd92e18cd4939eeb0b9c888fed5a58"
+  }
+}

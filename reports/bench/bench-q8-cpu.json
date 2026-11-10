@@ -1,0 +1,135 @@
+{
+  "runtime": "node v26.11.1",
+  "platform": "darwin/arm64",
+  "precision": "q8",
+  "backend": "cpu",
+  "threads": "default",
+  "rows": [
+    {
+      "bundle": "evidence/q8",
+      "fixture": "evidence",
+      "backend": "cpu",
+      "loadMs": 2092,
+      "medianMs": 35
+    },
+    {
+      "bundle": "evidence/q8",
+      "fixture": "support",
+      "backend": "cpu",
+      "loadMs": 2092,
+      "medianMs": 27
+    },
+    {
+      "bundle": "evidence/q8",
+      "fixture": "evidence, about 1,800 tokens",
+      "backend": "cpu",
+      "loadMs": 2092,
+      "medianMs": 2073
+    },
+    {
+      "bundle": "ner/q8",
+      "fixture": "entities",
+      "backend": "cpu",
+      "loadMs": 2311,
+      "medianMs": 26
+    },
+    {
+      "bundle": "ner/q8",
+      "fixture": "unicode",
+      "backend": "cpu",
+      "loadMs": 2311,
+      "medianMs": 34
+    },
+    {
+      "bundle": "ner/q8",
+      "fixture": "entities, about 1,800 tokens",
+      "backend": "cpu",
+      "loadMs": 2311,
+      "medianMs": 2196
+    },
+    {
+      "bundle": "relation/q8",
+      "fixture": "employment",
+      "backend": "cpu",
+      "loadMs": 2024,
+      "medianMs": 24
+    },
+    {
+      "bundle": "relation/q8",
+      "fixture": "multi",
+      "backend": "cpu",
+      "loadMs": 2024,
+      "medianMs": 26
+    },
+    {
+      "bundle": "relation/q8",
+      "fixture": "employment, about 1,800 tokens",
+      "backend": "cpu",
+      "loadMs": 2024,
+      "medianMs": 2202
+    },
+    {
+      "bundle": "span/q8",
+      "fixture": "description",
+      "backend": "cpu",
+      "loadMs": 2064,
+      "medianMs": 30
+    },
+    {
+      "bundle": "span/q8",
+      "fixture": "unicode",
+      "backend": "cpu",
+      "loadMs": 2064,
+      "medianMs": 53
+    },
+    {
+      "bundle": "span/q8",
+      "fixture": "description, about 1,800 tokens",
+      "backend": "cpu",
+      "loadMs": 2064,
+      "medianMs": 2068
+    },
+    {
+      "bundle": "span_set/q8",
+      "fixture": "pii",
+      "backend": "cpu",
+      "loadMs": 2369,
+      "medianMs": 64
+    },
+    {
+      "bundle": "span_set/q8",
+      "fixture": "halu",
+      "backend": "cpu",
+      "loadMs": 2369,
+      "medianMs": 37
+    },
+    {
+      "bundle": "span_set/q8",
+      "fixture": "pii, about 1,800 tokens",
+      "backend": "cpu",
+      "loadMs": 2369,
+      "medianMs": 2142
+    },
+    {
+      "bundle": "vision-box/q8",
+      "fixture": "box",
+      "backend": "cpu",
+      "loadMs": 1308,
+      "medianMs": 1635
+    },
+    {
+      "bundle": "vision-ocr/q8",
+      "fixture": "ocr",
+      "backend": "cpu",
+      "loadMs": 1683,
+      "medianMs": 1700
+    },
+    {
+      "bundle": "vision-span/q8",
+      "fixture": "span",
+      "backend": "cpu",
+      "loadMs": 1548,
+      "medianMs": 1675
+    }
+  ]
+}

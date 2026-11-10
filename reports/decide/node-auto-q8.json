@@ -1,0 +1,3421 @@
+{
+ "runtime": "node v26.11.1",
+ "platform": "darwin/arm64",
+ "backend": "auto",
+ "precision": "q8",
+ "correct": 73,
+ "of": 81,
+ "cases": [
+  {
+   "name": "text-1",
+   "instructions": "Is the order fulfilled?",
+   "expected": "yes",
+   "state": {
+    "order": {
+     "id": 17,
+     "status": "delivered",
+     "items": [
+      {
+       "sku": "A1",
+       "ordered": 2,
+       "shipped": 2
+      }
+     ],
+     "delivered_at": "2026-11-03"
+    }
+   },
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.05684508772849817,
+     "yes": 0.9431549122715018
+    },
+    "evidence": [
+     {
+      "start": 13,
+      "end": 36,
+      "label": "evidence",
+      "probability": 0.7831997752189637,
+      "score": 0.7831997752189637,
+      "observations_ref": [],
+      "state_ref": [
+       "order.status"
+      ]
+     }
+    ],
+    "context": "order.id: 17\norder.status: delivered\norder.items.0.sku: A1\norder.items.0.ordered: 2\norder.items.0.shipped: 2\norder.delivered_at: 2026-11-03",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2627
+  },
+  {
+   "name": "text-2",
+   "instructions": "Is the order fulfilled?",
+   "expected": "no",
+   "state": {
+    "order": {
+     "id": 18,
+     "status": "pending",
+     "items": [
+      {
+       "sku": "A1",
+       "ordered": 2,
+       "shipped": 0
+      }
+     ],
+     "delivered_at": null
+    }
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.9399751983524667,
+     "yes": 0.06002480164753334
+    },
+    "evidence": [
+     {
+      "start": 13,
+      "end": 34,
+      "label": "evidence",
+      "probability": 0.7097088813781738,
+      "score": 0.7097088813781738,
+      "observations_ref": [],
+      "state_ref": [
+       "order.status"
+      ]
+     }
+    ],
+    "context": "order.id: 18\norder.status: pending\norder.items.0.sku: A1\norder.items.0.ordered: 2\norder.items.0.shipped: 0\norder.delivered_at: null",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2560
+  },
+  {
+   "name": "text-3",
+   "instructions": "Is the order fulfilled?",
+   "expected": "no",
+   "state": {
+    "order": {
+     "id": 19,
+     "status": "partially shipped",
+     "items": [
+      {
+       "sku": "A1",
+       "ordered": 3,
+       "shipped": 1
+      }
+     ],
+     "delivered_at": null
+    }
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.6461003233423108,
+     "yes": 0.35389967665768923
+    },
+    "evidence": [
+     {
+      "start": 13,
+      "end": 25,
+      "label": "evidence",
+      "probability": 0.5350140730539957,
+      "score": 0.5350140730539957,
+      "observations_ref": [],
+      "state_ref": [
+       "order.status"
+      ]
+     },
+     {
+      "start": 27,
+      "end": 44,
+      "label": "evidence",
+      "probability": 0.638594388961792,
+      "score": 0.638594388961792,
+      "observations_ref": [],
+      "state_ref": [
+       "order.status"
+      ]
+     }
+    ],
+    "context": "order.id: 19\norder.status: partially shipped\norder.items.0.sku: A1\norder.items.0.ordered: 3\norder.items.0.shipped: 1\norder.delivered_at: null",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2574
+  },
+  {
+   "name": "text-4",
+   "instructions": "Is the order fulfilled?",
+   "expected": "yes",
+   "state": {
+    "order": {
+     "id": 20,
+     "status": "complete",
+     "items": [
+      {
+       "sku": "B2",
+       "ordered": 1,
+       "shipped": 1
+      },
+      {
+       "sku": "C3",
+       "ordered": 4,
+       "shipped": 4
+      }
+     ]
+    }
+   },
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.4013897369027959,
+     "yes": 0.5986102630972041
+    },
+    "evidence": [
+     {
+      "start": 13,
+      "end": 35,
+      "label": "evidence",
+      "probability": 0.8749825119972229,
+      "score": 0.8749825119972229,
+      "observations_ref": [],
+      "state_ref": [
+       "order.status"
+      ]
+     }
+    ],
+    "context": "order.id: 20\norder.status: complete\norder.items.0.sku: B2\norder.items.0.ordered: 1\norder.items.0.shipped: 1\norder.items.1.sku: C3\norder.items.1.ordered: 4\norder.items.1.shipped: 4",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2568
+  },
+  {
+   "name": "text-5",
+   "instructions": "Is the order fulfilled?",
+   "expected": "no",
+   "state": {
+    "order": {
+     "id": 21,
+     "status": "cancelled",
+     "items": [
+      {
+       "sku": "B2",
+       "ordered": 1,
+       "shipped": 0
+      }
+     ]
+    }
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.925837594681016,
+     "yes": 0.07416240531898399
+    },
+    "evidence": [
+     {
+      "start": 13,
+      "end": 36,
+      "label": "evidence",
+      "probability": 0.7232811212539673,
+      "score": 0.7232811212539673,
+      "observations_ref": [],
+      "state_ref": [
+       "order.status"
+      ]
+     }
+    ],
+    "context": "order.id: 21\norder.status: cancelled\norder.items.0.sku: B2\norder.items.0.ordered: 1\norder.items.0.shipped: 0",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2561
+  },
+  {
+   "name": "text-6",
+   "instructions": "Is the invoice paid?",
+   "expected": "yes",
+   "state": {
+    "invoice": {
+     "number": "R-7",
+     "total": 120,
+     "paid": 120,
+     "status": "paid"
+    }
+   },
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.00210670643509403,
+     "yes": 0.997893293564906
+    },
+    "evidence": [
+     {
+      "start": 57,
+      "end": 77,
+      "label": "evidence",
+      "probability": 0.8893153071403503,
+      "score": 0.8893153071403503,
+      "observations_ref": [],
+      "state_ref": [
+       "invoice.status"
+      ]
+     }
+    ],
+    "context": "invoice.number: R-7\ninvoice.total: 120\ninvoice.paid: 120\ninvoice.status: paid",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2516
+  },
+  {
+   "name": "text-7",
+   "instructions": "Is the invoice paid?",
+   "expected": "no",
+   "state": {
+    "invoice": {
+     "number": "R-8",
+     "total": 120,
+     "paid": 0,
+     "status": "open"
+    }
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.9995984040238454,
+     "yes": 0.0004015959761546418
+    },
+    "evidence": [
+     {
+      "start": 39,
+      "end": 54,
+      "label": "evidence",
+      "probability": 0.8958866119384765,
+      "score": 0.8958866119384765,
+      "observations_ref": [],
+      "state_ref": [
+       "invoice.paid"
+      ]
+     }
+    ],
+    "context": "invoice.number: R-8\ninvoice.total: 120\ninvoice.paid: 0\ninvoice.status: open",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2541
+  },
+  {
+   "name": "text-8",
+   "instructions": "Is the invoice paid?",
+   "expected": "no",
+   "state": {
+    "invoice": {
+     "number": "R-9",
+     "total": 300,
+     "paid": 150,
+     "status": "partially paid"
+    }
+   },
+   "decision": "yes",
+   "correct": false,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.2701957650673191,
+     "yes": 0.7298042349326809
+    },
+    "evidence": [
+     {
+      "start": 39,
+      "end": 47,
+      "label": "evidence",
+      "probability": 0.5054073333740234,
+      "score": 0.5054073333740234,
+      "observations_ref": [],
+      "state_ref": [
+       "invoice.paid"
+      ]
+     },
+     {
+      "start": 57,
+      "end": 87,
+      "label": "evidence",
+      "probability": 0.8533788124720255,
+      "score": 0.8533788124720255,
+      "observations_ref": [],
+      "state_ref": [
+       "invoice.status"
+      ]
+     }
+    ],
+    "context": "invoice.number: R-9\ninvoice.total: 300\ninvoice.paid: 150\ninvoice.status: partially paid",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2594
+  },
+  {
+   "name": "text-9",
+   "instructions": "Is the invoice paid?",
+   "expected": "yes",
+   "state": {
+    "invoice": {
+     "number": "R-10",
+     "total": 80,
+     "paid": 80,
+     "status": "settled",
+     "paid_at": "2026-10-30"
+    }
+   },
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.026283721833649687,
+     "yes": 0.9737162781663503
+    },
+    "evidence": [
+     {
+      "start": 36,
+      "end": 79,
+      "label": "evidence",
+      "probability": 0.7440431659871881,
+      "score": 0.7440431659871881,
+      "observations_ref": [],
+      "state_ref": [
+       "invoice.total",
+       "invoice.paid",
+       "invoice.status"
+      ]
+     }
+    ],
+    "context": "invoice.number: R-10\ninvoice.total: 80\ninvoice.paid: 80\ninvoice.status: settled\ninvoice.paid_at: 2026-10-30",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2656
+  },
+  {
+   "name": "text-10",
+   "instructions": "Is the invoice paid?",
+   "expected": "no",
+   "state": {
+    "invoice": {
+     "number": "R-11",
+     "total": 80,
+     "paid": 0,
+     "status": "overdue",
+     "due": "2026-10-01"
+    }
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.9993914071720408,
+     "yes": 0.0006085928279592415
+    },
+    "evidence": [
+     {
+      "start": 39,
+      "end": 54,
+      "label": "evidence",
+      "probability": 0.9144528388977051,
+      "score": 0.9144528388977051,
+      "observations_ref": [],
+      "state_ref": [
+       "invoice.paid"
+      ]
+     }
+    ],
+    "context": "invoice.number: R-11\ninvoice.total: 80\ninvoice.paid: 0\ninvoice.status: overdue\ninvoice.due: 2026-10-01",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 3338
+  },
+  {
+   "name": "text-11",
+   "instructions": "Is the ticket resolved?",
+   "expected": "yes",
+   "state": {
+    "ticket": {
+     "id": 4,
+     "state": "closed",
+     "resolution": "fixed"
+    }
+   },
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.02749903696032896,
+     "yes": 0.972500963039671
+    },
+    "evidence": [
+     {
+      "start": 34,
+      "end": 58,
+      "label": "evidence",
+      "probability": 0.8894181609153747,
+      "score": 0.8894181609153747,
+      "observations_ref": [],
+      "state_ref": [
+       "ticket.resolution"
+      ]
+     }
+    ],
+    "context": "ticket.id: 4\nticket.state: closed\nticket.resolution: fixed",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2800
+  },
+  {
+   "name": "text-12",
+   "instructions": "Is the ticket resolved?",
+   "expected": "no",
+   "state": {
+    "ticket": {
+     "id": 5,
+     "state": "open",
+     "resolution": null
+    }
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.9919650409348016,
+     "yes": 0.008034959065198322
+    },
+    "evidence": [
+     {
+      "start": 32,
+      "end": 55,
+      "label": "evidence",
+      "probability": 0.8812803149223327,
+      "score": 0.8812803149223327,
+      "observations_ref": [],
+      "state_ref": [
+       "ticket.resolution"
+      ]
+     }
+    ],
+    "context": "ticket.id: 5\nticket.state: open\nticket.resolution: null",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 3081
+  },
+  {
+   "name": "text-13",
+   "instructions": "Is the ticket resolved?",
+   "expected": "no",
+   "state": {
+    "ticket": {
+     "id": 6,
+     "state": "in progress",
+     "assignee": "Bob"
+    }
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.9973070266005563,
+     "yes": 0.002692973399443751
+    },
+    "evidence": [
+     {
+      "start": 13,
+      "end": 19,
+      "label": "evidence",
+      "probability": 0.5046666264533997,
+      "score": 0.5046666264533997,
+      "observations_ref": [],
+      "state_ref": [
+       "ticket.state"
+      ]
+     },
+     {
+      "start": 27,
+      "end": 38,
+      "label": "evidence",
+      "probability": 0.561002790927887,
+      "score": 0.561002790927887,
+      "observations_ref": [],
+      "state_ref": [
+       "ticket.state"
+      ]
+     }
+    ],
+    "context": "ticket.id: 6\nticket.state: in progress\nticket.assignee: Bob",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 3466
+  },
+  {
+   "name": "text-14",
+   "instructions": "Is the ticket resolved?",
+   "expected": "yes",
+   "state": {
+    "ticket": {
+     "id": 7,
+     "state": "done",
+     "resolution": "answered",
+     "closed_at": "2026-11-01"
+    }
+   },
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.011553428590239223,
+     "yes": 0.9884465714097608
+    },
+    "evidence": [
+     {
+      "start": 13,
+      "end": 59,
+      "label": "evidence",
+      "probability": 0.6739821195602417,
+      "score": 0.6739821195602417,
+      "observations_ref": [],
+      "state_ref": [
+       "ticket.state",
+       "ticket.resolution"
+      ]
+     }
+    ],
+    "context": "ticket.id: 7\nticket.state: done\nticket.resolution: answered\nticket.closed_at: 2026-11-01",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2771
+  },
+  {
+   "name": "text-15",
+   "instructions": "Is the user an adult?",
+   "expected": "yes",
+   "state": {
+    "user": {
+     "name": "Ada",
+     "age": 36
+    }
+   },
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.012509556826330814,
+     "yes": 0.9874904431736692
+    },
+    "evidence": [
+     {
+      "start": 15,
+      "end": 27,
+      "label": "evidence",
+      "probability": 0.8477479577064514,
+      "score": 0.8477479577064514,
+      "observations_ref": [],
+      "state_ref": [
+       "user.age"
+      ]
+     }
+    ],
+    "context": "user.name: Ada\nuser.age: 36",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2899
+  },
+  {
+   "name": "text-16",
+   "instructions": "Is the user an adult?",
+   "expected": "no",
+   "state": {
+    "user": {
+     "name": "Tim",
+     "age": 12
+    }
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.9865800591916157,
+     "yes": 0.013419940808384226
+    },
+    "evidence": [
+     {
+      "start": 15,
+      "end": 27,
+      "label": "evidence",
+      "probability": 0.6942306995391846,
+      "score": 0.6942306995391846,
+      "observations_ref": [],
+      "state_ref": [
+       "user.age"
+      ]
+     }
+    ],
+    "context": "user.name: Tim\nuser.age: 12",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 3408
+  },
+  {
+   "name": "text-17",
+   "instructions": "Is the package overweight for the 20 kg limit?",
+   "expected": "yes",
+   "state": {
+    "package": {
+     "weight_kg": 27.5
+    }
+   },
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.05918402960145841,
+     "yes": 0.9408159703985416
+    },
+    "evidence": [
+     {
+      "start": 0,
+      "end": 23,
+      "label": "evidence",
+      "probability": 0.6020567842892238,
+      "score": 0.6020567842892238,
+      "observations_ref": [],
+      "state_ref": [
+       "package.weight_kg"
+      ]
+     }
+    ],
+    "context": "package.weight_kg: 27.5",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 3533
+  },
+  {
+   "name": "text-18",
+   "instructions": "Is the package overweight for the 20 kg limit?",
+   "expected": "no",
+   "state": {
+    "package": {
+     "weight_kg": 4.2
+    }
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.6420191142046698,
+     "yes": 0.35798088579533016
+    },
+    "evidence": [],
+    "context": "package.weight_kg: 4.2",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 4755
+  },
+  {
+   "name": "text-19",
+   "instructions": "Is the subscription active?",
+   "expected": "yes",
+   "state": {
+    "subscription": {
+     "plan": "pro",
+     "status": "active",
+     "renews": "2027-01-01"
+    }
+   },
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.006523989661832763,
+     "yes": 0.9934760103381672
+    },
+    "evidence": [
+     {
+      "start": 23,
+      "end": 50,
+      "label": "evidence",
+      "probability": 0.9104118347167969,
+      "score": 0.9104118347167969,
+      "observations_ref": [],
+      "state_ref": [
+       "subscription.status"
+      ]
+     }
+    ],
+    "context": "subscription.plan: pro\nsubscription.status: active\nsubscription.renews: 2027-01-01",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2932
+  },
+  {
+   "name": "text-20",
+   "instructions": "Is the subscription active?",
+   "expected": "no",
+   "state": {
+    "subscription": {
+     "plan": "pro",
+     "status": "expired",
+     "ended": "2026-09-01"
+    }
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.998490412521762,
+     "yes": 0.001509587478238091
+    },
+    "evidence": [
+     {
+      "start": 23,
+      "end": 51,
+      "label": "evidence",
+      "probability": 0.654697597026825,
+      "score": 0.654697597026825,
+      "observations_ref": [],
+      "state_ref": [
+       "subscription.status"
+      ]
+     }
+    ],
+    "context": "subscription.plan: pro\nsubscription.status: expired\nsubscription.ended: 2026-09-01",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2503
+  },
+  {
+   "name": "image-1",
+   "instructions": "Is there a red square in the image?",
+   "expected": "yes",
+   "state": {
+    "note": "product photo"
+   },
+   "images": [
+    "models/vela3-fast-onnx/vision-box/fp32/sample.png"
+   ],
+   "region": "the red square",
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.016860616478488577,
+     "yes": 0.9831393835215114
+    },
+    "evidence": [
+     {
+      "start": 20,
+      "end": 83,
+      "label": "evidence",
+      "probability": 0.8277260325849056,
+      "score": 0.8272562742233276,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "note: product photo\nobservations.0: the image shows the red square (confidence 0.99)",
+    "observations": [
+     "the image shows the red square (confidence 0.99)"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 5590
+  },
+  {
+   "name": "image-2",
+   "instructions": "Is there a green triangle in the image?",
+   "expected": "no",
+   "state": {
+    "note": "product photo"
+   },
+   "images": [
+    "models/vela3-fast-onnx/vision-box/fp32/sample.png"
+   ],
+   "region": "the green triangle",
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.9164477509236171,
+     "yes": 0.08355224907638296
+    },
+    "evidence": [
+     {
+      "start": 20,
+      "end": 95,
+      "label": "evidence",
+      "probability": 0.8124586277537875,
+      "score": 0.8114746773944181,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "note: product photo\nobservations.0: the image does not show the green triangle (confidence 0.01)",
+    "observations": [
+     "the image does not show the green triangle (confidence 0.01)"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 4749
+  },
+  {
+   "name": "image-3",
+   "instructions": "Is the background of the image white?",
+   "expected": "yes",
+   "state": {
+    "note": "product photo"
+   },
+   "images": [
+    "models/vela3-fast-onnx/vision-box/fp32/sample.png"
+   ],
+   "decision": "no",
+   "correct": false,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.6184699217118004,
+     "yes": 0.3815300782881997
+    },
+    "evidence": [],
+    "context": "note: product photo",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2712
+  },
+  {
+   "name": "image-4",
+   "instructions": "Does the image show a person?",
+   "expected": "no",
+   "state": {
+    "note": "product photo"
+   },
+   "images": [
+    "models/vela3-fast-onnx/vision-box/fp32/sample.png"
+   ],
+   "region": "the person",
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.90564499635824,
+     "yes": 0.09435500364175993
+    },
+    "evidence": [
+     {
+      "start": 20,
+      "end": 87,
+      "label": "evidence",
+      "probability": 0.7786123717532438,
+      "score": 0.7776454165577888,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "note: product photo\nobservations.0: the image does not show the person (confidence 0.21)",
+    "observations": [
+     "the image does not show the person (confidence 0.21)"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 4723
+  },
+  {
+   "name": "ocr-1",
+   "instructions": "Does the extracted invoice text match the scanned document?",
+   "expected": "yes",
+   "state": {
+    "ocr": "Invoice 123\nTotal: EUR 42.00"
+   },
+   "images": [
+    "models/vela3-fast-onnx/vision-ocr/fp32/sample.png"
+   ],
+   "region": "the invoice total",
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.0504592326194212,
+     "yes": 0.9495407673805788
+    },
+    "evidence": [
+     {
+      "start": 102,
+      "end": 143,
+      "label": "evidence",
+      "probability": 0.8659359878963895,
+      "score": 0.8659359878963895,
+      "observations_ref": [
+       1
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "ocr: Invoice 123\nTotal: EUR 42.00\nobservations.0: the image shows the invoice total (confidence 0.76)\nobservations.1: OCR text matches the scan",
+    "observations": [
+     "the image shows the invoice total (confidence 0.76)",
+     "OCR text matches the scan"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 7031
+  },
+  {
+   "name": "ocr-2",
+   "instructions": "Does the extracted invoice text match the scanned document?",
+   "expected": "no",
+   "state": {
+    "ocr": "Invoice 128\nTotal: EUR 92.00"
+   },
+   "images": [
+    "models/vela3-fast-onnx/vision-ocr/fp32/sample.png"
+   ],
+   "region": "the invoice total",
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.7227556297876907,
+     "yes": 0.2772443702123093
+    },
+    "evidence": [
+     {
+      "start": 102,
+      "end": 116,
+      "label": "evidence",
+      "probability": 0.5286839803059896,
+      "score": 0.5286839803059896,
+      "observations_ref": [
+       1
+      ],
+      "state_ref": []
+     },
+     {
+      "start": 118,
+      "end": 166,
+      "label": "evidence",
+      "probability": 0.5548133105039597,
+      "score": 0.5565918196331371,
+      "observations_ref": [
+       1
+      ],
+      "state_ref": []
+     },
+     {
+      "start": 184,
+      "end": 187,
+      "label": "evidence",
+      "probability": 0.509976863861084,
+      "score": 0.509976863861084,
+      "observations_ref": [
+       2
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "ocr: Invoice 128\nTotal: EUR 92.00\nobservations.0: the image shows the invoice total (confidence 0.76)\nobservations.1: OCR text not supported by the scan: \"Invoice 128\"\nobservations.2: OCR text not supported by the scan: \"EUR 92.00\"",
+    "observations": [
+     "the image shows the invoice total (confidence 0.76)",
+     "OCR text not supported by the scan: \"Invoice 128\"",
+     "OCR text not supported by the scan: \"EUR 92.00\""
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 7404
+  },
+  {
+   "name": "agent-confirm-yes",
+   "instructions": "Has the user confirmed the payment?",
+   "expected": "yes",
+   "state": {
+    "conversation": [
+     {
+      "role": "assistant",
+      "text": "Shall I pay the invoice of 120 EUR now?"
+     },
+     {
+      "role": "user",
+      "text": "Yes, go ahead and pay it."
+     }
+    ]
+   },
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.02551069350106172,
+     "yes": 0.9744893064989383
+    },
+    "evidence": [
+     {
+      "start": 60,
+      "end": 91,
+      "label": "evidence",
+      "probability": 0.5263214707374573,
+      "score": 0.5263214707374573,
+      "observations_ref": [],
+      "state_ref": [
+       "conversation.0.text"
+      ]
+     },
+     {
+      "start": 118,
+      "end": 164,
+      "label": "evidence",
+      "probability": 0.6590513629572732,
+      "score": 0.6590513629572732,
+      "observations_ref": [],
+      "state_ref": [
+       "conversation.1.text"
+      ]
+     }
+    ],
+    "context": "conversation.0.role: assistant\nconversation.0.text: Shall I pay the invoice of 120 EUR now?\nconversation.1.role: user\nconversation.1.text: Yes, go ahead and pay it.",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2657
+  },
+  {
+   "name": "agent-confirm-no",
+   "instructions": "Has the user confirmed the payment?",
+   "expected": "no",
+   "state": {
+    "conversation": [
+     {
+      "role": "assistant",
+      "text": "Shall I pay the invoice of 120 EUR now?"
+     },
+     {
+      "role": "user",
+      "text": "Wait, not yet. I need to check the amount first."
+     }
+    ]
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.9613580767266147,
+     "yes": 0.03864192327338535
+    },
+    "evidence": [
+     {
+      "start": 118,
+      "end": 187,
+      "label": "evidence",
+      "probability": 0.6016926043911984,
+      "score": 0.6016926043911984,
+      "observations_ref": [],
+      "state_ref": [
+       "conversation.1.text"
+      ]
+     }
+    ],
+    "context": "conversation.0.role: assistant\nconversation.0.text: Shall I pay the invoice of 120 EUR now?\nconversation.1.role: user\nconversation.1.text: Wait, not yet. I need to check the amount first.",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2591
+  },
+  {
+   "name": "agent-done-yes",
+   "instructions": "Is the task complete?",
+   "expected": "yes",
+   "state": {
+    "task": "Book a table for 4 people at 7 pm",
+    "log": [
+     "Searched restaurants near the office",
+     "Booked a table for 4 at Luigi's at 19:00, confirmation A12"
+    ]
+   },
+   "decision": "no",
+   "correct": false,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.6233873312333781,
+     "yes": 0.3766126687666219
+    },
+    "evidence": [
+     {
+      "start": 84,
+      "end": 89,
+      "label": "evidence",
+      "probability": 0.5124469995498657,
+      "score": 0.5124469995498657,
+      "observations_ref": [],
+      "state_ref": [
+       "log.1"
+      ]
+     },
+     {
+      "start": 91,
+      "end": 105,
+      "label": "evidence",
+      "probability": 0.505942185719808,
+      "score": 0.505942185719808,
+      "observations_ref": [],
+      "state_ref": [
+       "log.1"
+      ]
+     },
+     {
+      "start": 110,
+      "end": 111,
+      "label": "evidence",
+      "probability": 0.5082721710205078,
+      "score": 0.5082721710205078,
+      "observations_ref": [],
+      "state_ref": [
+       "log.1"
+      ]
+     },
+     {
+      "start": 115,
+      "end": 122,
+      "label": "evidence",
+      "probability": 0.5045886437098185,
+      "score": 0.5045886437098185,
+      "observations_ref": [],
+      "state_ref": [
+       "log.1"
+      ]
+     },
+     {
+      "start": 126,
+      "end": 128,
+      "label": "evidence",
+      "probability": 0.5194164514541626,
+      "score": 0.5194164514541626,
+      "observations_ref": [],
+      "state_ref": [
+       "log.1"
+      ]
+     },
+     {
+      "start": 133,
+      "end": 145,
+      "label": "evidence",
+      "probability": 0.503165066242218,
+      "score": 0.503165066242218,
+      "observations_ref": [],
+      "state_ref": [
+       "log.1"
+      ]
+     }
+    ],
+    "context": "task: Book a table for 4 people at 7 pm\nlog.0: Searched restaurants near the office\nlog.1: Booked a table for 4 at Luigi's at 19:00, confirmation A12",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2668
+  },
+  {
+   "name": "agent-done-no",
+   "instructions": "Is the task complete?",
+   "expected": "no",
+   "state": {
+    "task": "Book a table for 4 people at 7 pm",
+    "log": [
+     "Searched restaurants near the office",
+     "Luigi's is fully booked at 19:00",
+     "Waiting for a reply from Trattoria Roma"
+    ]
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.9389372255677829,
+     "yes": 0.06106277443221707
+    },
+    "evidence": [
+     {
+      "start": 84,
+      "end": 123,
+      "label": "evidence",
+      "probability": 0.6692198898111071,
+      "score": 0.6692198898111071,
+      "observations_ref": [],
+      "state_ref": [
+       "log.1"
+      ]
+     }
+    ],
+    "context": "task: Book a table for 4 people at 7 pm\nlog.0: Searched restaurants near the office\nlog.1: Luigi's is fully booked at 19:00\nlog.2: Waiting for a reply from Trattoria Roma",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2948
+  },
+  {
+   "name": "access-yes",
+   "instructions": "Is the user allowed to delete the project?",
+   "expected": "yes",
+   "state": {
+    "policy": "Only admins may delete projects.",
+    "user": {
+     "name": "Ada",
+     "role": "admin"
+    }
+   },
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.014087926052034128,
+     "yes": 0.9859120739479659
+    },
+    "evidence": [
+     {
+      "start": 0,
+      "end": 40,
+      "label": "evidence",
+      "probability": 0.7999401018023491,
+      "score": 0.7999401018023491,
+      "observations_ref": [],
+      "state_ref": [
+       "policy"
+      ]
+     }
+    ],
+    "context": "policy: Only admins may delete projects.\nuser.name: Ada\nuser.role: admin",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2919
+  },
+  {
+   "name": "access-no",
+   "instructions": "Is the user allowed to delete the project?",
+   "expected": "no",
+   "state": {
+    "policy": "Only admins may delete projects.",
+    "user": {
+     "name": "Tim",
+     "role": "viewer"
+    }
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.9705505699471544,
+     "yes": 0.029449430052845636
+    },
+    "evidence": [
+     {
+      "start": 0,
+      "end": 40,
+      "label": "evidence",
+      "probability": 0.7748197913169861,
+      "score": 0.7748197913169861,
+      "observations_ref": [],
+      "state_ref": [
+       "policy"
+      ]
+     }
+    ],
+    "context": "policy: Only admins may delete projects.\nuser.name: Tim\nuser.role: viewer",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2641
+  },
+  {
+   "name": "flight-yes",
+   "instructions": "Is the flight delayed?",
+   "expected": "yes",
+   "state": {
+    "flight": {
+     "number": "LH 2041",
+     "status": "delayed",
+     "scheduled": "10:05",
+     "estimated": "11:40"
+    }
+   },
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.0009107706389311909,
+     "yes": 0.9990892293610688
+    },
+    "evidence": [
+     {
+      "start": 23,
+      "end": 45,
+      "label": "evidence",
+      "probability": 0.9323188424110412,
+      "score": 0.9323188424110412,
+      "observations_ref": [],
+      "state_ref": [
+       "flight.status"
+      ]
+     }
+    ],
+    "context": "flight.number: LH 2041\nflight.status: delayed\nflight.scheduled: 10:05\nflight.estimated: 11:40",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2610
+  },
+  {
+   "name": "flight-no",
+   "instructions": "Is the flight delayed?",
+   "expected": "no",
+   "state": {
+    "flight": {
+     "number": "LH 2041",
+     "status": "on time",
+     "scheduled": "10:05",
+     "estimated": "10:05"
+    }
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.9984448746085164,
+     "yes": 0.0015551253914836652
+    },
+    "evidence": [
+     {
+      "start": 23,
+      "end": 45,
+      "label": "evidence",
+      "probability": 0.6766128341356913,
+      "score": 0.6766128341356913,
+      "observations_ref": [],
+      "state_ref": [
+       "flight.status"
+      ]
+     }
+    ],
+    "context": "flight.number: LH 2041\nflight.status: on time\nflight.scheduled: 10:05\nflight.estimated: 10:05",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2590
+  },
+  {
+   "name": "fever-yes",
+   "instructions": "Does the patient report a fever?",
+   "expected": "yes",
+   "state": {
+    "notes": "Patient reports a fever of 39.2 degrees since yesterday and a dry cough."
+   },
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.0010837954852168652,
+     "yes": 0.9989162045147831
+    },
+    "evidence": [
+     {
+      "start": 7,
+      "end": 79,
+      "label": "evidence",
+      "probability": 0.8873865120112896,
+      "score": 0.8873865120112896,
+      "observations_ref": [],
+      "state_ref": [
+       "notes"
+      ]
+     }
+    ],
+    "context": "notes: Patient reports a fever of 39.2 degrees since yesterday and a dry cough.",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2575
+  },
+  {
+   "name": "fever-no",
+   "instructions": "Does the patient report a fever?",
+   "expected": "no",
+   "state": {
+    "notes": "Patient reports a sprained ankle after jogging. No fever, no other complaints."
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.9988957640511567,
+     "yes": 0.0011042359488433347
+    },
+    "evidence": [
+     {
+      "start": 25,
+      "end": 39,
+      "label": "evidence",
+      "probability": 0.5091775953769684,
+      "score": 0.5091775953769684,
+      "observations_ref": [],
+      "state_ref": [
+       "notes"
+      ]
+     },
+     {
+      "start": 53,
+      "end": 85,
+      "label": "evidence",
+      "probability": 0.6487995013594627,
+      "score": 0.6487995013594627,
+      "observations_ref": [],
+      "state_ref": [
+       "notes"
+      ]
+     }
+    ],
+    "context": "notes: Patient reports a sprained ankle after jogging. No fever, no other complaints.",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2641
+  },
+  {
+   "name": "contract-yes",
+   "instructions": "Does the contract allow termination without notice?",
+   "expected": "yes",
+   "state": {
+    "clause": "Either party may terminate this agreement at any time without notice."
+   },
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.0014965692372719275,
+     "yes": 0.9985034307627281
+    },
+    "evidence": [
+     {
+      "start": 0,
+      "end": 77,
+      "label": "evidence",
+      "probability": 0.8456485739776066,
+      "score": 0.8456485739776066,
+      "observations_ref": [],
+      "state_ref": [
+       "clause"
+      ]
+     }
+    ],
+    "context": "clause: Either party may terminate this agreement at any time without notice.",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2670
+  },
+  {
+   "name": "contract-no",
+   "instructions": "Does the contract allow termination without notice?",
+   "expected": "no",
+   "state": {
+    "clause": "Either party may terminate this agreement with 30 days' written notice."
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.8254418206083096,
+     "yes": 0.17455817939169044
+    },
+    "evidence": [
+     {
+      "start": 8,
+      "end": 79,
+      "label": "evidence",
+      "probability": 0.7475569064800556,
+      "score": 0.7475569064800556,
+      "observations_ref": [],
+      "state_ref": [
+       "clause"
+      ]
+     }
+    ],
+    "context": "clause: Either party may terminate this agreement with 30 days' written notice.",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2607
+  },
+  {
+   "name": "language-yes",
+   "instructions": "Is the reply written in German?",
+   "expected": "yes",
+   "state": {
+    "reply": "Vielen Dank für Ihre Nachricht, wir melden uns morgen bei Ihnen."
+   },
+   "decision": "no",
+   "correct": false,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.72258416988106,
+     "yes": 0.27741583011894
+    },
+    "evidence": [
+     {
+      "start": 5,
+      "end": 71,
+      "label": "evidence",
+      "probability": 0.5509612389973232,
+      "score": 0.5509612389973232,
+      "observations_ref": [],
+      "state_ref": [
+       "reply"
+      ]
+     }
+    ],
+    "context": "reply: Vielen Dank für Ihre Nachricht, wir melden uns morgen bei Ihnen.",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2620
+  },
+  {
+   "name": "language-no",
+   "instructions": "Is the reply written in German?",
+   "expected": "no",
+   "state": {
+    "reply": "Thank you for your message, we will get back to you tomorrow."
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.9645160674470455,
+     "yes": 0.03548393255295449
+    },
+    "evidence": [
+     {
+      "start": 7,
+      "end": 67,
+      "label": "evidence",
+      "probability": 0.5513717486308172,
+      "score": 0.5513717486308172,
+      "observations_ref": [],
+      "state_ref": [
+       "reply"
+      ]
+     }
+    ],
+    "context": "reply: Thank you for your message, we will get back to you tomorrow.",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2713
+  },
+  {
+   "name": "schema-yes",
+   "instructions": "Does the change modify the database schema?",
+   "expected": "yes",
+   "state": {
+    "diff": "ALTER TABLE users ADD COLUMN phone TEXT;"
+   },
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.4829828719734842,
+     "yes": 0.5170171280265158
+    },
+    "evidence": [
+     {
+      "start": 12,
+      "end": 17,
+      "label": "evidence",
+      "probability": 0.5276718735694885,
+      "score": 0.5276718735694885,
+      "observations_ref": [],
+      "state_ref": [
+       "diff"
+      ]
+     }
+    ],
+    "context": "diff: ALTER TABLE users ADD COLUMN phone TEXT;",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2898
+  },
+  {
+   "name": "schema-no",
+   "instructions": "Does the change modify the database schema?",
+   "expected": "no",
+   "state": {
+    "diff": "Fix a typo in the README: 'recieve' -> 'receive'."
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.9910354527781239,
+     "yes": 0.008964547221876078
+    },
+    "evidence": [],
+    "context": "diff: Fix a typo in the README: 'recieve' -> 'receive'.",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2720
+  },
+  {
+   "name": "grounded-yes",
+   "instructions": "Does the answer follow from the context?",
+   "expected": "yes",
+   "state": {
+    "context": "The museum is open from 9 to 17 on weekdays and closed on Mondays.",
+    "answer": "On a Wednesday the museum opens at 9."
+   },
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.22021922561997886,
+     "yes": 0.7797807743800211
+    },
+    "evidence": [
+     {
+      "start": 84,
+      "end": 98,
+      "label": "evidence",
+      "probability": 0.5899776419003805,
+      "score": 0.5899776419003805,
+      "observations_ref": [],
+      "state_ref": [
+       "answer"
+      ]
+     }
+    ],
+    "context": "context: The museum is open from 9 to 17 on weekdays and closed on Mondays.\nanswer: On a Wednesday the museum opens at 9.",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2729
+  },
+  {
+   "name": "grounded-no",
+   "instructions": "Does the answer follow from the context?",
+   "expected": "no",
+   "state": {
+    "context": "The museum is open from 9 to 17 on weekdays and closed on Mondays.",
+    "answer": "The museum is open on Mondays until 20."
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.9850034355357716,
+     "yes": 0.014996564464228394
+    },
+    "evidence": [
+     {
+      "start": 95,
+      "end": 122,
+      "label": "evidence",
+      "probability": 0.6369802157084147,
+      "score": 0.6369802157084147,
+      "observations_ref": [],
+      "state_ref": [
+       "answer"
+      ]
+     }
+    ],
+    "context": "context: The museum is open from 9 to 17 on weekdays and closed on Mondays.\nanswer: The museum is open on Mondays until 20.",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2662
+  },
+  {
+   "name": "attack-yes",
+   "instructions": "Does the comment insult another person?",
+   "expected": "yes",
+   "state": {
+    "comment": "You are an idiot and nobody wants to read your posts."
+   },
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.05552559089546549,
+     "yes": 0.9444744091045345
+    },
+    "evidence": [
+     {
+      "start": 9,
+      "end": 25,
+      "label": "evidence",
+      "probability": 0.5801589041948318,
+      "score": 0.5801589041948318,
+      "observations_ref": [],
+      "state_ref": [
+       "comment"
+      ]
+     },
+     {
+      "start": 30,
+      "end": 36,
+      "label": "evidence",
+      "probability": 0.5568242073059082,
+      "score": 0.5568242073059082,
+      "observations_ref": [],
+      "state_ref": [
+       "comment"
+      ]
+     },
+     {
+      "start": 51,
+      "end": 55,
+      "label": "evidence",
+      "probability": 0.5064475536346436,
+      "score": 0.5064475536346436,
+      "observations_ref": [],
+      "state_ref": [
+       "comment"
+      ]
+     }
+    ],
+    "context": "comment: You are an idiot and nobody wants to read your posts.",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2556
+  },
+  {
+   "name": "attack-no",
+   "instructions": "Does the comment insult another person?",
+   "expected": "no",
+   "state": {
+    "comment": "I disagree with your point about pricing, but thanks for the detailed write-up."
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.9990082671567831,
+     "yes": 0.0009917328432168084
+    },
+    "evidence": [],
+    "context": "comment: I disagree with your point about pricing, but thanks for the detailed write-up.",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2520
+  },
+  {
+   "name": "flag-yes",
+   "instructions": "Is the new checkout enabled for this user?",
+   "expected": "yes",
+   "state": {
+    "flag": {
+     "name": "new_checkout",
+     "enabled_for": "beta testers"
+    },
+    "user": {
+     "name": "Ada",
+     "groups": [
+      "beta testers"
+     ]
+    }
+   },
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.26232513832435067,
+     "yes": 0.7376748616756493
+    },
+    "evidence": [
+     {
+      "start": 24,
+      "end": 54,
+      "label": "evidence",
+      "probability": 0.7146503130594889,
+      "score": 0.7146503130594889,
+      "observations_ref": [],
+      "state_ref": [
+       "flag.enabled_for"
+      ]
+     }
+    ],
+    "context": "flag.name: new_checkout\nflag.enabled_for: beta testers\nuser.name: Ada\nuser.groups.0: beta testers",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2631
+  },
+  {
+   "name": "flag-no",
+   "instructions": "Is the new checkout enabled for this user?",
+   "expected": "no",
+   "state": {
+    "flag": {
+     "name": "new_checkout",
+     "enabled": false
+    },
+    "user": {
+     "name": "Ada",
+     "groups": [
+      "beta testers"
+     ]
+    }
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.9972404188244379,
+     "yes": 0.0027595811755620325
+    },
+    "evidence": [
+     {
+      "start": 0,
+      "end": 43,
+      "label": "evidence",
+      "probability": 0.7307056963443757,
+      "score": 0.7307056963443757,
+      "observations_ref": [],
+      "state_ref": [
+       "flag.name",
+       "flag.enabled"
+      ]
+     }
+    ],
+    "context": "flag.name: new_checkout\nflag.enabled: false\nuser.name: Ada\nuser.groups.0: beta testers",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 3027
+  },
+  {
+   "name": "stock-yes",
+   "instructions": "Is the item in stock?",
+   "expected": "yes",
+   "state": {
+    "item": {
+     "sku": "K-11",
+     "warehouse": "Hamburg",
+     "available": 34
+    }
+   },
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.3346637857988185,
+     "yes": 0.6653362142011815
+    },
+    "evidence": [],
+    "context": "item.sku: K-11\nitem.warehouse: Hamburg\nitem.available: 34",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2772
+  },
+  {
+   "name": "stock-no",
+   "instructions": "Is the item in stock?",
+   "expected": "no",
+   "state": {
+    "item": {
+     "sku": "K-11",
+     "warehouse": "Hamburg",
+     "available": 0,
+     "note": "sold out, restock in December"
+    }
+   },
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.8868417421833219,
+     "yes": 0.11315825781667804
+    },
+    "evidence": [
+     {
+      "start": 57,
+      "end": 97,
+      "label": "evidence",
+      "probability": 0.6886742949485779,
+      "score": 0.6886742949485779,
+      "observations_ref": [],
+      "state_ref": [
+       "item.note"
+      ]
+     }
+    ],
+    "context": "item.sku: K-11\nitem.warehouse: Hamburg\nitem.available: 0\nitem.note: sold out, restock in December",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2805
+  },
+  {
+   "name": "route-billing",
+   "instructions": "Which team should handle the message?",
+   "expected": "billing",
+   "options": {
+    "billing": "Payments, charges, invoices and refunds",
+    "technical": "Errors, bugs and problems using the product",
+    "sales": "New purchases, pricing questions and upgrades"
+   },
+   "state": {
+    "message": "I was charged twice for my subscription this month."
+   },
+   "decision": "billing",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "billing",
+    "probabilities": {
+     "billing": 0.9802919781959474,
+     "technical": 0.008120019186399713,
+     "sales": 0.0115880026176528
+    },
+    "evidence": [],
+    "context": "message: I was charged twice for my subscription this month.",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2805
+  },
+  {
+   "name": "route-technical",
+   "instructions": "Which team should handle the message?",
+   "expected": "technical",
+   "options": {
+    "billing": "Payments, charges, invoices and refunds",
+    "technical": "Errors, bugs and problems using the product",
+    "sales": "New purchases, pricing questions and upgrades"
+   },
+   "state": {
+    "message": "The app crashes every time I open the settings page."
+   },
+   "decision": "technical",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "technical",
+    "probabilities": {
+     "billing": 0.0013368743238087498,
+     "technical": 0.9940454606252623,
+     "sales": 0.004617665050928883
+    },
+    "evidence": [],
+    "context": "message: The app crashes every time I open the settings page.",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2938
+  },
+  {
+   "name": "route-sales",
+   "instructions": "Which team should handle the message?",
+   "expected": "sales",
+   "options": {
+    "billing": "Payments, charges, invoices and refunds",
+    "technical": "Errors, bugs and problems using the product",
+    "sales": "New purchases, pricing questions and upgrades"
+   },
+   "state": {
+    "message": "We are 40 people. What would the enterprise plan cost us?"
+   },
+   "decision": "sales",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "sales",
+    "probabilities": {
+     "billing": 0.24316611129593219,
+     "technical": 0.016704604215907953,
+     "sales": 0.7401292844881598
+    },
+    "evidence": [],
+    "context": "message: We are 40 people. What would the enterprise plan cost us?",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2859
+  },
+  {
+   "name": "review-positive",
+   "instructions": "What is the sentiment of the review?",
+   "expected": "positive",
+   "options": {
+    "positive": null,
+    "neutral": null,
+    "negative": null
+   },
+   "state": {
+    "review": "Arrived early, works perfectly and the battery lasts for days. Love it!"
+   },
+   "decision": "positive",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "positive",
+    "probabilities": {
+     "positive": 0.9950867558513095,
+     "neutral": 0.003551141759622053,
+     "negative": 0.0013621023890683424
+    },
+    "evidence": [
+     {
+      "start": 8,
+      "end": 79,
+      "label": "evidence",
+      "probability": 0.7443013509114583,
+      "score": 0.7443013509114583,
+      "observations_ref": [],
+      "state_ref": [
+       "review"
+      ]
+     }
+    ],
+    "context": "review: Arrived early, works perfectly and the battery lasts for days. Love it!",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2920
+  },
+  {
+   "name": "review-negative",
+   "instructions": "What is the sentiment of the review?",
+   "expected": "negative",
+   "options": {
+    "positive": null,
+    "neutral": null,
+    "negative": null
+   },
+   "state": {
+    "review": "Broke after two days and support never answered. Waste of money."
+   },
+   "decision": "negative",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "negative",
+    "probabilities": {
+     "positive": 0.0020527865111885906,
+     "neutral": 0.0048327562581966885,
+     "negative": 0.9931144572306146
+    },
+    "evidence": [
+     {
+      "start": 0,
+      "end": 72,
+      "label": "evidence",
+      "probability": 0.7093772649765014,
+      "score": 0.7093772649765014,
+      "observations_ref": [],
+      "state_ref": [
+       "review"
+      ]
+     }
+    ],
+    "context": "review: Broke after two days and support never answered. Waste of money.",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2689
+  },
+  {
+   "name": "review-neutral",
+   "instructions": "What is the sentiment of the review?",
+   "expected": "neutral",
+   "options": {
+    "positive": null,
+    "neutral": null,
+    "negative": null
+   },
+   "state": {
+    "review": "The package contained the charger and a manual. Delivery took four days."
+   },
+   "decision": "neutral",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "neutral",
+    "probabilities": {
+     "positive": 0.04663533137232605,
+     "neutral": 0.8182601752374267,
+     "negative": 0.13510449339024724
+    },
+    "evidence": [
+     {
+      "start": 30,
+      "end": 54,
+      "label": "evidence",
+      "probability": 0.5192397832870483,
+      "score": 0.5192397832870483,
+      "observations_ref": [],
+      "state_ref": [
+       "review"
+      ]
+     },
+     {
+      "start": 56,
+      "end": 79,
+      "label": "evidence",
+      "probability": 0.5543264001607895,
+      "score": 0.5543264001607895,
+      "observations_ref": [],
+      "state_ref": [
+       "review"
+      ]
+     }
+    ],
+    "context": "review: The package contained the charger and a manual. Delivery took four days.",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2792
+  },
+  {
+   "name": "severity-high",
+   "instructions": "How severe is the incident?",
+   "expected": "critical",
+   "options": {
+    "critical": "A core service is down for all users",
+    "major": "A feature is degraded for some users",
+    "minor": "Cosmetic or limited impact"
+   },
+   "state": {
+    "incident": {
+     "service": "checkout",
+     "status": "down",
+     "affected": "all users",
+     "since": "10 minutes"
+    }
+   },
+   "decision": "critical",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "critical",
+    "probabilities": {
+     "critical": 0.9601173967394234,
+     "major": 0.00878858184119462,
+     "minor": 0.031094021419381758
+    },
+    "evidence": [],
+    "context": "incident.service: checkout\nincident.status: down\nincident.affected: all users\nincident.since: 10 minutes",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2883
+  },
+  {
+   "name": "severity-minor",
+   "instructions": "How severe is the incident?",
+   "expected": "minor",
+   "options": {
+    "critical": "A core service is down for all users",
+    "major": "A feature is degraded for some users",
+    "minor": "Cosmetic or limited impact"
+   },
+   "state": {
+    "incident": {
+     "service": "settings page",
+     "status": "a button label is misaligned",
+     "affected": "users on small screens"
+    }
+   },
+   "decision": "major",
+   "correct": false,
+   "answer": {
+    "type": "decide",
+    "decision": "major",
+    "probabilities": {
+     "critical": 0.004575143087456546,
+     "major": 0.5016773797977825,
+     "minor": 0.493747477114761
+    },
+    "evidence": [],
+    "context": "incident.service: settings page\nincident.status: a button label is misaligned\nincident.affected: users on small screens",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 2938
+  },
+  {
+   "name": "doc-invoice",
+   "instructions": "What kind of document is this?",
+   "expected": "invoice",
+   "options": {
+    "invoice": "A bill asking for payment",
+    "contract": "An agreement between parties",
+    "letter": "A personal or business letter"
+   },
+   "state": "Invoice no. 2026-117. Amount due: 1,240.00 EUR. Please pay within 14 days to IBAN DE12 3456.",
+   "decision": "invoice",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "invoice",
+    "probabilities": {
+     "invoice": 0.995639197249722,
+     "contract": 0.0023703589921871136,
+     "letter": 0.001990443758090713
+    },
+    "evidence": [
+     {
+      "start": 0,
+      "end": 7,
+      "label": "evidence",
+      "probability": 0.7077759504318237,
+      "score": 0.7077759504318237,
+      "observations_ref": [],
+      "state_ref": []
+     }
+    ],
+    "context": "Invoice no. 2026-117. Amount due: 1,240.00 EUR. Please pay within 14 days to IBAN DE12 3456.",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 3364
+  },
+  {
+   "name": "doc-contract",
+   "instructions": "What kind of document is this?",
+   "expected": "contract",
+   "options": {
+    "invoice": "A bill asking for payment",
+    "contract": "An agreement between parties",
+    "letter": "A personal or business letter"
+   },
+   "state": "This agreement is made between Nordlicht GmbH and Ada Keller. The parties agree to the following terms.",
+   "decision": "contract",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "contract",
+    "probabilities": {
+     "invoice": 0.0010951937864927526,
+     "contract": 0.9974086558922761,
+     "letter": 0.0014961503212310042
+    },
+    "evidence": [
+     {
+      "start": 0,
+      "end": 14,
+      "label": "evidence",
+      "probability": 0.5414620339870453,
+      "score": 0.5414620339870453,
+      "observations_ref": [],
+      "state_ref": []
+     }
+    ],
+    "context": "This agreement is made between Nordlicht GmbH and Ada Keller. The parties agree to the following terms.",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 3766
+  },
+  {
+   "name": "moderate-remove",
+   "instructions": "What should happen with the comment?",
+   "expected": "remove",
+   "options": {
+    "keep": "Respectful and on topic",
+    "review": "Borderline, a moderator should check",
+    "remove": "Spam, threats or insults"
+   },
+   "state": {
+    "comment": "BUY CHEAP PILLS NOW!!! visit cheap-pills.example"
+   },
+   "decision": "remove",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "remove",
+    "probabilities": {
+     "keep": 0.05132006591099353,
+     "review": 0.017234068440626416,
+     "remove": 0.9314458656483801
+    },
+    "evidence": [
+     {
+      "start": 9,
+      "end": 57,
+      "label": "evidence",
+      "probability": 0.5902927084402605,
+      "score": 0.5902927084402605,
+      "observations_ref": [],
+      "state_ref": [
+       "comment"
+      ]
+     }
+    ],
+    "context": "comment: BUY CHEAP PILLS NOW!!! visit cheap-pills.example",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 3568
+  },
+  {
+   "name": "moderate-keep",
+   "instructions": "What should happen with the comment?",
+   "expected": "keep",
+   "options": {
+    "keep": "Respectful and on topic",
+    "review": "Borderline, a moderator should check",
+    "remove": "Spam, threats or insults"
+   },
+   "state": {
+    "comment": "Great article, the section on caching helped me fix our build."
+   },
+   "decision": "keep",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "keep",
+    "probabilities": {
+     "keep": 0.9584150452825166,
+     "review": 0.03403870652099357,
+     "remove": 0.007546248196489899
+    },
+    "evidence": [
+     {
+      "start": 57,
+      "end": 70,
+      "label": "evidence",
+      "probability": 0.5082189043362936,
+      "score": 0.5082189043362936,
+      "observations_ref": [],
+      "state_ref": [
+       "comment"
+      ]
+     }
+    ],
+    "context": "comment: Great article, the section on caching helped me fix our build.",
+    "observations": []
+   },
+   "backend": "webgpu",
+   "ms": 3009
+  },
+  {
+   "name": "image-5",
+   "instructions": "Does the image show a soccer ball?",
+   "expected": "yes",
+   "state": {
+    "listing": {
+     "title": "Fantasy Cup poster"
+    }
+   },
+   "images": [
+    "docs/assets/samples/synthetic/vision_box_span_1_squirrel.webp"
+   ],
+   "region": "the soccer ball",
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.014627055092072738,
+     "yes": 0.9853729449079273
+    },
+    "evidence": [
+     {
+      "start": 34,
+      "end": 98,
+      "label": "evidence",
+      "probability": 0.878107238560915,
+      "score": 0.8773152112960816,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "listing.title: Fantasy Cup poster\nobservations.0: the image shows the soccer ball (confidence 0.99)",
+    "observations": [
+     "the image shows the soccer ball (confidence 0.99)"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 4907
+  },
+  {
+   "name": "image-6",
+   "instructions": "Does the image show a cat?",
+   "expected": "no",
+   "state": {
+    "listing": {
+     "title": "Fantasy Cup poster"
+    }
+   },
+   "images": [
+    "docs/assets/samples/synthetic/vision_box_span_1_squirrel.webp"
+   ],
+   "region": "the cat",
+   "decision": "yes",
+   "correct": false,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.10441794738093557,
+     "yes": 0.8955820526190644
+    },
+    "evidence": [
+     {
+      "start": 34,
+      "end": 90,
+      "label": "evidence",
+      "probability": 0.8745091080665588,
+      "score": 0.8753561462674823,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "listing.title: Fantasy Cup poster\nobservations.0: the image shows the cat (confidence 0.97)",
+    "observations": [
+     "the image shows the cat (confidence 0.97)"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 4497
+  },
+  {
+   "name": "image-7",
+   "instructions": "Does the image show a submarine?",
+   "expected": "no",
+   "state": {
+    "listing": {
+     "title": "Dragon rider print"
+    }
+   },
+   "images": [
+    "docs/assets/samples/synthetic/vision_box_span_2_dragon.webp"
+   ],
+   "region": "the submarine",
+   "decision": "yes",
+   "correct": false,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.0647164946772667,
+     "yes": 0.9352835053227333
+    },
+    "evidence": [
+     {
+      "start": 34,
+      "end": 96,
+      "label": "evidence",
+      "probability": 0.864014450709025,
+      "score": 0.863361303295408,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "listing.title: Dragon rider print\nobservations.0: the image shows the submarine (confidence 0.51)",
+    "observations": [
+     "the image shows the submarine (confidence 0.51)"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 4624
+  },
+  {
+   "name": "image-8",
+   "instructions": "Does the image show a dragon?",
+   "expected": "yes",
+   "state": {
+    "listing": {
+     "title": "Dragon rider print"
+    }
+   },
+   "images": [
+    "docs/assets/samples/synthetic/vision_box_span_2_dragon.webp"
+   ],
+   "region": "the dragon",
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.030527003483214243,
+     "yes": 0.9694729965167858
+    },
+    "evidence": [
+     {
+      "start": 34,
+      "end": 93,
+      "label": "evidence",
+      "probability": 0.8786947210629781,
+      "score": 0.8776228044714246,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "listing.title: Dragon rider print\nobservations.0: the image shows the dragon (confidence 1.00)",
+    "observations": [
+     "the image shows the dragon (confidence 1.00)"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 4407
+  },
+  {
+   "name": "image-9",
+   "instructions": "Does a rabbit pull the spaceship?",
+   "expected": "yes",
+   "state": {},
+   "images": [
+    "docs/assets/samples/synthetic/vision_box_span_3_space.webp"
+   ],
+   "region": "the rabbit",
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.45106601687862946,
+     "yes": 0.5489339831213705
+    },
+    "evidence": [
+     {
+      "start": 0,
+      "end": 12,
+      "label": "evidence",
+      "probability": 0.5321696996688843,
+      "score": 0.5321696996688843,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     },
+     {
+      "start": 20,
+      "end": 42,
+      "label": "evidence",
+      "probability": 0.5185531079769135,
+      "score": 0.5185531079769135,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     },
+     {
+      "start": 44,
+      "end": 59,
+      "label": "evidence",
+      "probability": 0.511200225353241,
+      "score": 0.5095445960760117,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "observations.0: the image shows the rabbit (confidence 1.00)",
+    "observations": [
+     "the image shows the rabbit (confidence 1.00)"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 4405
+  },
+  {
+   "name": "image-10",
+   "instructions": "Is there an octopus in the picture?",
+   "expected": "yes",
+   "state": {},
+   "images": [
+    "docs/assets/samples/synthetic/vision_pinpoint_4.webp"
+   ],
+   "region": "the octopus",
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.026581746359333747,
+     "yes": 0.9734182536406663
+    },
+    "evidence": [
+     {
+      "start": 0,
+      "end": 60,
+      "label": "evidence",
+      "probability": 0.8415256182352702,
+      "score": 0.8418109118938446,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "observations.0: the image shows the octopus (confidence 0.95)",
+    "observations": [
+     "the image shows the octopus (confidence 0.95)"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 4435
+  },
+  {
+   "name": "image-11",
+   "instructions": "Is there a horse in the picture?",
+   "expected": "no",
+   "state": {},
+   "images": [
+    "docs/assets/samples/synthetic/vision_pinpoint_4.webp"
+   ],
+   "region": "the horse",
+   "decision": "yes",
+   "correct": false,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.15502077268673964,
+     "yes": 0.8449792273132604
+    },
+    "evidence": [
+     {
+      "start": 0,
+      "end": 58,
+      "label": "evidence",
+      "probability": 0.8041114449501038,
+      "score": 0.8040730825492314,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "observations.0: the image shows the horse (confidence 0.71)",
+    "observations": [
+     "the image shows the horse (confidence 0.71)"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 4422
+  },
+  {
+   "name": "image-12",
+   "instructions": "Is someone cooking in the picture?",
+   "expected": "yes",
+   "state": {},
+   "images": [
+    "docs/assets/samples/synthetic/vision_pinpoint_2.webp"
+   ],
+   "region": "the cook",
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.09476021273657786,
+     "yes": 0.9052397872634221
+    },
+    "evidence": [
+     {
+      "start": 0,
+      "end": 57,
+      "label": "evidence",
+      "probability": 0.5962706208229065,
+      "score": 0.5960952000958579,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "observations.0: the image shows the cook (confidence 0.83)",
+    "observations": [
+     "the image shows the cook (confidence 0.83)"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 4414
+  },
+  {
+   "name": "image-13",
+   "instructions": "Is there a car in the picture?",
+   "expected": "no",
+   "state": {},
+   "images": [
+    "docs/assets/samples/synthetic/vision_pinpoint_3.webp"
+   ],
+   "region": "the car",
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.8560546363344479,
+     "yes": 0.1439453636655521
+    },
+    "evidence": [
+     {
+      "start": 0,
+      "end": 14,
+      "label": "evidence",
+      "probability": 0.519460012515386,
+      "score": 0.519460012515386,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     },
+     {
+      "start": 16,
+      "end": 64,
+      "label": "evidence",
+      "probability": 0.5805215514623202,
+      "score": 0.5826611916224161,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "observations.0: the image does not show the car (confidence 0.13)",
+    "observations": [
+     "the image does not show the car (confidence 0.13)"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 4528
+  },
+  {
+   "name": "ocr-3",
+   "instructions": "Does the extracted text match the image?",
+   "expected": "yes",
+   "state": {
+    "ocr": "ALPENQUELL\nISOLIERFLASCHE\n750 ML\nLIMITED EDITION"
+   },
+   "images": [
+    "docs/assets/samples/synthetic/ocr_product_engraved.webp"
+   ],
+   "lines": true,
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.14458720912788903,
+     "yes": 0.855412790872111
+    },
+    "evidence": [
+     {
+      "start": 54,
+      "end": 95,
+      "label": "evidence",
+      "probability": 0.7338909573025174,
+      "score": 0.7338909573025174,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "ocr: ALPENQUELL\nISOLIERFLASCHE\n750 ML\nLIMITED EDITION\nobservations.0: OCR text matches the scan",
+    "observations": [
+     "OCR text matches the scan"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 6983
+  },
+  {
+   "name": "ocr-4",
+   "instructions": "Does the extracted text match the image?",
+   "expected": "no",
+   "state": {
+    "ocr": "BERGQUELL\nISOLIERFLASCHE\n750 ML\nLIMITED EDITION"
+   },
+   "images": [
+    "docs/assets/samples/synthetic/ocr_product_engraved.webp"
+   ],
+   "lines": true,
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.6825524191932952,
+     "yes": 0.3174475808067048
+    },
+    "evidence": [
+     {
+      "start": 0,
+      "end": 3,
+      "label": "evidence",
+      "probability": 0.5495191216468811,
+      "score": 0.5495191216468811,
+      "observations_ref": [],
+      "state_ref": [
+       "ocr"
+      ]
+     },
+     {
+      "start": 5,
+      "end": 14,
+      "label": "evidence",
+      "probability": 0.5250512957572937,
+      "score": 0.5250512957572937,
+      "observations_ref": [],
+      "state_ref": [
+       "ocr"
+      ]
+     },
+     {
+      "start": 53,
+      "end": 67,
+      "label": "evidence",
+      "probability": 0.5356246829032898,
+      "score": 0.5356246829032898,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     },
+     {
+      "start": 69,
+      "end": 115,
+      "label": "evidence",
+      "probability": 0.5711081678217108,
+      "score": 0.5731134057044983,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "ocr: BERGQUELL\nISOLIERFLASCHE\n750 ML\nLIMITED EDITION\nobservations.0: OCR text not supported by the scan: \"BERGQUELL\"",
+    "observations": [
+     "OCR text not supported by the scan: \"BERGQUELL\""
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 6641
+  },
+  {
+   "name": "ocr-5",
+   "instructions": "Does the extracted text match the image?",
+   "expected": "yes",
+   "state": {
+    "ocr": "Empfänger:\nMaria Keller\nAhornweg 27\n80469 München"
+   },
+   "images": [
+    "docs/assets/samples/synthetic/ocr_document_digital.webp"
+   ],
+   "lines": true,
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.26075103705567204,
+     "yes": 0.739248962944328
+    },
+    "evidence": [
+     {
+      "start": 55,
+      "end": 96,
+      "label": "evidence",
+      "probability": 0.7021964722209506,
+      "score": 0.7021964722209506,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "ocr: Empfänger:\nMaria Keller\nAhornweg 27\n80469 München\nobservations.0: OCR text matches the scan",
+    "observations": [
+     "OCR text matches the scan"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 6612
+  },
+  {
+   "name": "ocr-6",
+   "instructions": "Does the extracted text match the image?",
+   "expected": "no",
+   "state": {
+    "ocr": "Empfänger:\nMaria Keller\nAhornweg 72\n80469 München"
+   },
+   "images": [
+    "docs/assets/samples/synthetic/ocr_document_digital.webp"
+   ],
+   "lines": true,
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.5295757511997463,
+     "yes": 0.4704242488002537
+    },
+    "evidence": [
+     {
+      "start": 29,
+      "end": 40,
+      "label": "evidence",
+      "probability": 0.5984098017215729,
+      "score": 0.5984098017215729,
+      "observations_ref": [],
+      "state_ref": [
+       "ocr"
+      ]
+     },
+     {
+      "start": 55,
+      "end": 119,
+      "label": "evidence",
+      "probability": 0.671371690928936,
+      "score": 0.6715223828951518,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "ocr: Empfänger:\nMaria Keller\nAhornweg 72\n80469 München\nobservations.0: OCR text not supported by the scan: \"Ahornweg 72\"",
+    "observations": [
+     "OCR text not supported by the scan: \"Ahornweg 72\""
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 6591
+  },
+  {
+   "name": "ocr-7",
+   "instructions": "Does the extracted text match the image?",
+   "expected": "yes",
+   "state": {
+    "ocr": "4. Rückruf an +49 170 555 1284\n5. Türcode: ZX-418-K"
+   },
+   "images": [
+    "docs/assets/samples/synthetic/ocr_letter_handwriting.webp"
+   ],
+   "lines": true,
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.32560623459374893,
+     "yes": 0.6743937654062511
+    },
+    "evidence": [
+     {
+      "start": 57,
+      "end": 98,
+      "label": "evidence",
+      "probability": 0.6661448876063029,
+      "score": 0.6661448876063029,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "ocr: 4. Rückruf an +49 170 555 1284\n5. Türcode: ZX-418-K\nobservations.0: OCR text matches the scan",
+    "observations": [
+     "OCR text matches the scan"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 6164
+  },
+  {
+   "name": "ocr-8",
+   "instructions": "Does the extracted text match the image?",
+   "expected": "no",
+   "state": {
+    "ocr": "4. Rückruf an +49 170 555 1248\n5. Türcode: ZX-418-K"
+   },
+   "images": [
+    "docs/assets/samples/synthetic/ocr_letter_handwriting.webp"
+   ],
+   "lines": true,
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.5206281242615958,
+     "yes": 0.47937187573840423
+    },
+    "evidence": [
+     {
+      "start": 57,
+      "end": 126,
+      "label": "evidence",
+      "probability": 0.5760755413456967,
+      "score": 0.5776607460445828,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "ocr: 4. Rückruf an +49 170 555 1248\n5. Türcode: ZX-418-K\nobservations.0: OCR text not supported by the scan: \"+49 170 555 1248\"",
+    "observations": [
+     "OCR text not supported by the scan: \"+49 170 555 1248\""
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 6194
+  },
+  {
+   "name": "ocr-9",
+   "instructions": "Does the extracted text match the image?",
+   "expected": "yes",
+   "state": {
+    "ocr": "LENA HOFFMANN\nProjektleiterin | Zukunftsforum Berlin\nTechnikmesse 2026 eröffnet neue KI-Initiativen"
+   },
+   "images": [
+    "docs/assets/samples/synthetic/ocr_film_labels.webp"
+   ],
+   "lines": true,
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.15594874336578857,
+     "yes": 0.8440512566342114
+    },
+    "evidence": [
+     {
+      "start": 105,
+      "end": 118,
+      "label": "evidence",
+      "probability": 0.5194806456565857,
+      "score": 0.5194806456565857,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     },
+     {
+      "start": 121,
+      "end": 146,
+      "label": "evidence",
+      "probability": 0.6306433558464051,
+      "score": 0.6306433558464051,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "ocr: LENA HOFFMANN\nProjektleiterin | Zukunftsforum Berlin\nTechnikmesse 2026 eröffnet neue KI-Initiativen\nobservations.0: OCR text matches the scan",
+    "observations": [
+     "OCR text matches the scan"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 6369
+  },
+  {
+   "name": "ocr-10",
+   "instructions": "Does the extracted text match the image?",
+   "expected": "no",
+   "state": {
+    "ocr": "LENA HOFFMANN\nProjektleiterin | Zukunftsforum Berlin\nTechnikmesse 2025 eröffnet neue KI-Initiativen"
+   },
+   "images": [
+    "docs/assets/samples/synthetic/ocr_film_labels.webp"
+   ],
+   "lines": true,
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.5397220241245234,
+     "yes": 0.4602779758754766
+    },
+    "evidence": [
+     {
+      "start": 58,
+      "end": 89,
+      "label": "evidence",
+      "probability": 0.5155546367168427,
+      "score": 0.5155546367168427,
+      "observations_ref": [],
+      "state_ref": [
+       "ocr"
+      ]
+     },
+     {
+      "start": 105,
+      "end": 119,
+      "label": "evidence",
+      "probability": 0.5178879698117574,
+      "score": 0.5178879698117574,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     },
+     {
+      "start": 121,
+      "end": 204,
+      "label": "evidence",
+      "probability": 0.5374228040377299,
+      "score": 0.5378918392317635,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "ocr: LENA HOFFMANN\nProjektleiterin | Zukunftsforum Berlin\nTechnikmesse 2025 eröffnet neue KI-Initiativen\nobservations.0: OCR text not supported by the scan: \"Technikmesse 2025 eröffnet neue KI-Initiativen\"",
+    "observations": [
+     "OCR text not supported by the scan: \"Technikmesse 2025 eröffnet neue KI-Initiativen\""
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 6347
+  },
+  {
+   "name": "ocr-11",
+   "instructions": "Does the extracted text match the image?",
+   "expected": "yes",
+   "state": {
+    "ocr": "DANGER\nGIANT FISH AREA\nATLANTIS 5 km"
+   },
+   "images": [
+    "docs/assets/samples/synthetic/vision_box_span_4_submarine_ocr.webp"
+   ],
+   "lines": true,
+   "decision": "yes",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "yes",
+    "probabilities": {
+     "no": 0.40162761262579627,
+     "yes": 0.5983723873742037
+    },
+    "evidence": [
+     {
+      "start": 42,
+      "end": 83,
+      "label": "evidence",
+      "probability": 0.7581756512324015,
+      "score": 0.7581756512324015,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": []
+     }
+    ],
+    "context": "ocr: DANGER\nGIANT FISH AREA\nATLANTIS 5 km\nobservations.0: OCR text matches the scan",
+    "observations": [
+     "OCR text matches the scan"
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 6632
+  },
+  {
+   "name": "ocr-12",
+   "instructions": "Does the extracted text match the image?",
+   "expected": "no",
+   "state": {
+    "ocr": "DANGER\nGIANT FISH AREA\nATLANTIS 9 km"
+   },
+   "images": [
+    "docs/assets/samples/synthetic/vision_box_span_4_submarine_ocr.webp"
+   ],
+   "lines": true,
+   "decision": "no",
+   "correct": true,
+   "answer": {
+    "type": "decide",
+    "decision": "no",
+    "probabilities": {
+     "no": 0.8617028232758064,
+     "yes": 0.13829717672419364
+    },
+    "evidence": [
+     {
+      "start": 37,
+      "end": 96,
+      "label": "evidence",
+      "probability": 0.5964710046263302,
+      "score": 0.5967352278530598,
+      "observations_ref": [
+       0
+      ],
+      "state_ref": [
+       "ocr"
+      ]
+     }
+    ],
+    "context": "ocr: DANGER\nGIANT FISH AREA\nATLANTIS 9 km\nobservations.0: OCR text not supported by the scan: \"9\"",
+    "observations": [
+     "OCR text not supported by the scan: \"9\""
+    ]
+   },
+   "backend": "webgpu",
+   "ms": 6282
+  }
+ ]
+}

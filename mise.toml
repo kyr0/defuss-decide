@@ -1,0 +1,7 @@
+# Tool versions for local development and CI (`make setup` runs `mise install`; CI uses jdx/mise-action).
+# Node.js and Bun are the runtimes the library is tested in; Python runs the exporters and the fixture generator.
+[tools]
+node = "26.11.1"
+bun = "1.4.3"
+python = "3.12.15"
+uv = "0.13.0"

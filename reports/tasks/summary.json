@@ -1,0 +1,147 @@
+{
+  "version": "0.2.0",
+  "date": "2026-11-01",
+  "precision": "fp32",
+  "platform": "Linux x86_64",
+  "cpu": "AMD EPYC 9V74",
+  "pythonThreads": 2,
+  "nativeThreads": 2,
+  "browserThreads": 1,
+  "unitTests": 60,
+  "models": [
+    {
+      "bundle": "fast-span",
+      "passed": true,
+      "cases": 2,
+      "maxAbsoluteError": {
+        "python": 4.0531158447265625e-06,
+        "node": 4.0531158447265625e-06,
+        "bun": 4.0531158447265625e-06,
+        "browser": 5.7220458984375e-06
+      },
+      "browserInferenceSeconds": [
+        0.731,
+        1.464
+      ],
+      "bundleGraphBytes": 1638858773
+    },
+    {
+      "bundle": "fast-span_set",
+      "passed": true,
+      "cases": 2,
+      "maxAbsoluteError": {
+        "python": 6.67572021484375e-06,
+        "node": 6.67572021484375e-06,
+        "bun": 6.67572021484375e-06,
+        "browser": 7.62939453125e-06
+      },
+      "browserInferenceSeconds": [
+        1.533,
+        0.692
+      ],
+      "bundleGraphBytes": 1638858773
+    },
+    {
+      "bundle": "fast-ner",
+      "passed": true,
+      "cases": 2,
+      "maxAbsoluteError": {
+        "python": 2.384185791015625e-06,
+        "node": 2.384185791015625e-06,
+        "bun": 2.384185791015625e-06,
+        "browser": 4.291534423828125e-06
+      },
+      "browserInferenceSeconds": [
+        1.333,
+        2.625
+      ],
+      "bundleGraphBytes": 1764688325
+    },
+    {
+      "bundle": "fast-relation",
+      "passed": true,
+      "cases": 2,
+      "maxAbsoluteError": {
+        "python": 2.86102294921875e-06,
+        "node": 2.86102294921875e-06,
+        "bun": 2.86102294921875e-06,
+        "browser": 5.245208740234375e-06
+      },
+      "browserInferenceSeconds": [
+        0.598,
+        0.587
+      ],
+      "bundleGraphBytes": 1764688325
+    },
+    {
+      "bundle": "fast-evidence",
+      "passed": true,
+      "cases": 2,
+      "maxAbsoluteError": {
+        "python": 1.3113021850585938e-06,
+        "node": 1.3113021850585938e-06,
+        "bun": 1.3113021850585938e-06,
+        "browser": 2.7418136596679688e-06
+      },
+      "browserInferenceSeconds": [
+        0.847,
+        0.637
+      ],
+      "bundleGraphBytes": 1638858773
+    },
+    {
+      "bundle": "vision-span",
+      "passed": true,
+      "cases": 1,
+      "maxAbsoluteError": {
+        "python": 7.62939453125e-06,
+        "node": 6.198883056640625e-06,
+        "bun": 6.198883056640625e-06,
+        "browser": 5.7220458984375e-06
+      },
+      "browserInferenceSeconds": [
+        48.85
+      ],
+      "bundleGraphBytes": 1062101862
+    },
+    {
+      "bundle": "vision-ocr",
+      "passed": true,
+      "cases": 1,
+      "maxAbsoluteError": {
+        "python": 5.7220458984375e-06,
+        "node": 0.0003323554992675781,
+        "bun": 0.0003323554992675781,
+        "browser": 0.0003428459167480469
+      },
+      "browserInferenceSeconds": [
+        47.95
+      ],
+      "bundleGraphBytes": 1062101862
+    },
+    {
+      "bundle": "vision-box",
+      "passed": true,
+      "cases": 1,
+      "maxAbsoluteError": {
+        "python": 9.59634780883789e-06,
+        "node": 1.3530254364013672e-05,
+        "bun": 1.3530254364013672e-05,
+        "browser": 1.52587890625e-05
+      },
+      "browserInferenceSeconds": [
+        47.282
+      ],
+      "bundleGraphBytes": 1062101862
+    }
+  ],
+  "passed": true,
+  "decodedFixtureComparisons": 39,
+  "providerSwitching": {
+    "node": true,
+    "chromium": true
+  },
+  "browserUIRegionPassed": true,
+  "sourceExportReproducedByteIdentically": true,
+  "productionBuildPassed": true
+}

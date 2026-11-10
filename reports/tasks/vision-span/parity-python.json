@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "model": "vision",
+  "task": "span",
+  "torch": "2.15.0+cpu",
+  "checks": [
+    {
+      "case": "span/wrapper",
+      "max_abs_error": 0.0
+    },
+    {
+      "case": "vision-features",
+      "max_abs_error": 4.26173210144043e-06
+    },
+    {
+      "case": "span/onnx",
+      "max_abs_error": 7.62939453125e-06
+    }
+  ],
+  "scope": "original checkpoint vs portable wrapper and ONNX CPU; JS verification separately checks decoding"
+}

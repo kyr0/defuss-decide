@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" /><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%23397de0'/%3E%3C/svg%3E"><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>Vela3 · spans, OCR & regions</title
+  ><style>
+    :root {
+      font-family: system-ui, sans-serif;
+      color: #e6edf6;
+      background: #101722;
+    }
+    body {
+      max-width: 1080px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+    p {
+      color: #adbed2;
+      line-height: 1.6;
+    }
+    a {
+      color: #8bc9ff;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .card {
+      background: #192333;
+      border: 1px solid #344356;
+      border-radius: 12px;
+      padding: 22px;
+    }
+    label {
+      display: block;
+      margin: 14px 0 6px;
+      font-weight: 600;
+    }
+    input,
+    select,
+    textarea,
+    button {
+      box-sizing: border-box;
+      font: inherit;
+      border-radius: 6px;
+      padding: 10px;
+      background: #101722;
+      border: 1px solid #516176;
+      color: inherit;
+      width: 100%;
+    }
+    textarea {
+      min-height: 160px;
+      resize: vertical;
+    }
+    button {
+      cursor: pointer;
+      background: #397de0;
+      font-weight: bold;
+      margin-top: 18px;
+      border: 0;
+    }
+    button:disabled {
+      opacity: 0.5;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    mark {
+      background: #f8d879;
+      padding: 1px;
+      color: #202020;
+    }
+    .preview {
+      position: relative;
+      display: none;
+    }
+    .preview img {
+      display: block;
+      width: 100%;
+    }
+    .box {
+      position: absolute;
+      border: 3px solid #ffca60;
+      box-sizing: border-box;
+      pointer-events: none;
+    }
+    #highlight {
+      white-space: pre-wrap;
+      line-height: 1.8;
+    }
+    #status {
+      min-height: 24px;
+      color: #8bc9ff;
+    }
+    @media (max-width: 720px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <body>
+    <p>DEFUSS DECISION · VELA3 ONNX POC 0.2</p>
+    <h1>Spans, OCR checks & image regions</h1>
+    <p>
+      Runs locally in this browser after model files load. OCR checks supplied
+      text against the image. Region results are coarse normalized boxes.
+      <a href="index.html">Decision demo</a>
+    </p>
+    <div class="grid">
+      <section class="card">
+        <label for="preset">Task</label
+        ><select id="preset">
+          <option value="fast-ner">Text · named entities</option>
+          <option value="fast-span">Text · described labels</option>
+          <option value="fast-span_set">Text · PII</option>
+          <option value="fast-relation">Text · relation</option>
+          <option value="fast-evidence">Text · evidence</option>
+          <option value="vision-span">Image · unsupported statements</option>
+          <option value="vision-ocr">Image · OCR errors</option>
+          <option value="vision-box">Image · locate region</option></select
+        ><label for="bundle">Model bundle URL</label><input id="bundle" /><label
+          for="backend"
+          >Execution</label
+        ><select id="backend">
+          <option value="auto">Auto · WebGPU, else WASM</option>
+          <option value="webgpu">WebGPU · GPU</option>
+          <option value="wasm">WASM · CPU</option></select
+        ><label for="state">State · text or JSON</label
+        ><textarea id="state"></textarea
+        ><label for="question">Question · JSON</label
+        ><textarea id="question"></textarea
+        ><label for="image">Image · required for vision tasks</label
+        ><input type="file" id="image" accept="image/*" /><button id="run">
+          Load adapter & run
+        </button>
+        <p id="status" role="status"></p>
+      </section>
+      <section class="card">
+        <h2>Result</h2>
+        <div class="preview" id="preview">
+          <img id="picture" alt="Input image" />
+          <div id="region" class="box" hidden></div>
+        </div>
+        <p id="highlight"></p>
+        <pre id="result">Choose a task, then run it.</pre>
+      </section>
+    </div>
+    <script type="module" src="/examples/browser/tasks.ts"></script>
+  </body>
+</html>

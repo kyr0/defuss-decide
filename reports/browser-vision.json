@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "model": "vllm-sr/vela3-fast-vision",
+  "precision": "fp32",
+  "backend": "wasm",
+  "results": [
+    {
+      "case": "red",
+      "tokenIdsExact": true,
+      "maxProbabilityError": 7.521913271135716e-7,
+      "ms": 46147.549999999814
+    },
+    {
+      "case": "blue",
+      "tokenIdsExact": true,
+      "maxProbabilityError": 0.000007754354605260527,
+      "ms": 49556.235000000335
+    },
+    {
+      "case": "two",
+      "tokenIdsExact": true,
+      "maxProbabilityError": 0.0000027954465354751434,
+      "ms": 99253.90500000026
+    },
+    {
+      "case": "text",
+      "tokenIdsExact": true,
+      "maxProbabilityError": 2.915416453808106e-7,
+      "ms": 101.9449999993667
+    }
+  ],
+  "browser": "153.0.8010.0"
+}

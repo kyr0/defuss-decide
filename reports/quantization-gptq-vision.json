@@ -1,0 +1,229 @@
+{
+ "date": "2026-11-09",
+ "tool": "python/quantize_gptq_vision.py",
+ "calibration": 48,
+ "heldOut": 24,
+ "families": {
+  "raw": {
+   "bundles": [
+    "vision-span",
+    "vision-ocr"
+   ],
+   "shared": {
+    "image": {
+     "file": "backbone/vision/q4/image.onnx.data",
+     "bytes": 49102848
+    },
+    "text": {
+     "file": "backbone/vision/q4/text.onnx.data",
+     "bytes": 77426688
+    }
+   }
+  },
+  "v2": {
+   "bundles": [
+    "vision-box"
+   ]
+  },
+  "h2": {
+   "bundles": [
+    "decision/vision"
+   ]
+  }
+ },
+ "bundles": {
+  "vision-span": {
+   "counts": {
+    "vision": {
+     "int4 shared": 72,
+     "int4 own": 1,
+     "int8": 0,
+     "fp32": 126,
+     "embed": 0
+    },
+    "task": {
+     "int4 shared": 140,
+     "int4 own": 28,
+     "int8": 336,
+     "fp32": 54,
+     "embed": 1
+    }
+   },
+   "parity": [
+    {
+     "case": "vision-span/vision/0/q4-vs-dequantized",
+     "max_abs_error": 1.1742115020751953e-05
+    },
+    {
+     "case": "vision-span/task/0/q4-vs-dequantized",
+     "max_abs_error": 0.0
+    },
+    {
+     "case": "vision-span/vision/1/q4-vs-dequantized",
+     "max_abs_error": 1.7851591110229492e-05
+    },
+    {
+     "case": "vision-span/task/1/q4-vs-dequantized",
+     "max_abs_error": 0.0
+    }
+   ],
+   "heldOut": {
+    "inputs": 24,
+    "meanMaxLogitDiff": 0.3332,
+    "maxLogitDiff": 4.9057
+   },
+   "bytes": {
+    "vision": 60742452,
+    "task": 110108538
+   }
+  },
+  "vision-ocr": {
+   "counts": {
+    "vision": {
+     "int4 shared": 72,
+     "int4 own": 1,
+     "int8": 0,
+     "fp32": 126,
+     "embed": 0
+    },
+    "task": {
+     "int4 shared": 140,
+     "int4 own": 28,
+     "int8": 336,
+     "fp32": 54,
+     "embed": 1
+    }
+   },
+   "parity": [
+    {
+     "case": "vision-ocr/vision/0/q4-vs-dequantized",
+     "max_abs_error": 1.1563301086425781e-05
+    },
+    {
+     "case": "vision-ocr/task/0/q4-vs-dequantized",
+     "max_abs_error": 0.0
+    },
+    {
+     "case": "vision-ocr/vision/1/q4-vs-dequantized",
+     "max_abs_error": 6.895512342453003e-06
+    },
+    {
+     "case": "vision-ocr/task/1/q4-vs-dequantized",
+     "max_abs_error": 0.0
+    }
+   ],
+   "heldOut": {
+    "inputs": 24,
+    "meanMaxLogitDiff": 1.9283,
+    "maxLogitDiff": 5.3837
+   },
+   "bytes": {
+    "vision": 60742452,
+    "task": 110108538
+   }
+  },
+  "vision-box": {
+   "counts": {
+    "vision": {
+     "int4 shared": 0,
+     "int4 own": 73,
+     "int8": 0,
+     "fp32": 126,
+     "embed": 0
+    },
+    "task": {
+     "int4 shared": 0,
+     "int4 own": 168,
+     "int8": 336,
+     "fp32": 54,
+     "embed": 1
+    }
+   },
+   "parity": [
+    {
+     "case": "vision-box/vision/0/q4-vs-dequantized",
+     "max_abs_error": 5.7220458984375e-06
+    },
+    {
+     "case": "vision-box/task/0/q4-vs-dequantized",
+     "max_abs_error": 0.0
+    },
+    {
+     "case": "vision-box/vision/1/q4-vs-dequantized",
+     "max_abs_error": 6.9141387939453125e-06
+    },
+    {
+     "case": "vision-box/task/1/q4-vs-dequantized",
+     "max_abs_error": 0.0
+    }
+   ],
+   "heldOut": {
+    "inputs": 24,
+    "meanMaxLogitDiff": 1.6687,
+    "maxLogitDiff": 6.9437
+   },
+   "bytes": {
+    "vision": 60742032,
+    "task": 110107403
+   }
+  },
+  "decision/vision": {
+   "counts": {
+    "vision": {
+     "int4 shared": 0,
+     "int4 own": 73,
+     "int8": 0,
+     "fp32": 126,
+     "embed": 0
+    },
+    "decision": {
+     "int4 shared": 0,
+     "int4 own": 168,
+     "int8": 0,
+     "fp32": 54,
+     "embed": 1
+    }
+   },
+   "parity": [
+    {
+     "case": "decision/vision/vision/0/q4-vs-dequantized",
+     "max_abs_error": 4.887580871582031e-06
+    },
+    {
+     "case": "decision/vision/decision/0/q4-vs-dequantized",
+     "max_abs_error": 0.0
+    },
+    {
+     "case": "decision/vision/vision/1/q4-vs-dequantized",
+     "max_abs_error": 1.0579824447631836e-05
+    },
+    {
+     "case": "decision/vision/decision/1/q4-vs-dequantized",
+     "max_abs_error": 0.0
+    }
+   ],
+   "heldOut": {
+    "inputs": 24,
+    "flips": 0,
+    "meanShift": 0.0247,
+    "maxShift": 0.0976
+   },
+   "fixtureFlips": [],
+   "bytes": {
+    "vision": 60742032,
+    "decision": 91505840
+   }
+  }
+ },
+ "javascript": {
+  "vision-span": "passed: scripts/verify-quantized.ts in Node.js CPU and WebGPU and Bun, scripts/browser-tasks.ts in Chromium WASM and WebGPU and WebKit WebGPU; max logit error 0.061, max score drift under 0.0001",
+  "vision-ocr": "passed in the same six runs; max logit error 0.629, max score drift 0.0004",
+  "decision/vision": "passed: scripts/verify-js.ts in Node.js CPU and WebGPU and Bun, scripts/browser-test.ts in Chromium WASM; token ids exact, max probability error 0.0134 (limit 0.02)",
+  "vision-box": "rejected: scripts/verify-quantized.ts, box/point x 0.28125, y 0.28125 became x 0.71875, y 0.34375"
+ },
+ "memory": {
+  "raw": "peak resident 13.8 GB",
+  "v2": "peak resident 7.6 GB",
+  "h2": "peak resident 9.7 GB"
+ }
+}

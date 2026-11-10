@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "model": "vllm-sr/vela3-fast",
+  "task": "evidence",
+  "precision": "w4a32",
+  "maxLogitError": 0.170876145362854,
+  "maxScoreDrift": 0.009537348255127198,
+  "checks": [
+    {
+      "name": "evidence",
+      "maxLogitError": 0.1381206512451172,
+      "decodedOutputMatched": true,
+      "milliseconds": 790
+    },
+    {
+      "name": "support",
+      "maxLogitError": 0.170876145362854,
+      "decodedOutputMatched": true,
+      "milliseconds": 678
+    }
+  ],
+  "backend": "wasm",
+  "browser": "156.0.8078.4"
+}

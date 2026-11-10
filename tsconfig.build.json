@@ -1,0 +1,14 @@
+{
+  // The published library: src/*.ts → lib/*.js with declarations (`bun run build:lib`; e2e packs the result).
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "rootDir": "src",
+    "outDir": "lib",
+    "declaration": true,
+    "types": ["node"],
+    "lib": ["es2022", "dom", "dom.iterable"]
+  },
+  "include": ["src"],
+  "exclude": []
+}

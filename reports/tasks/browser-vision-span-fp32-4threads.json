@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "model": "vllm-sr/vela3-fast-vision",
+  "task": "span",
+  "checks": [
+    {
+      "name": "span",
+      "maxLogitError": 0.000005245208740234375,
+      "decodedOutputMatched": true,
+      "milliseconds": 6657
+    }
+  ],
+  "backend": "wasm",
+  "browser": "156.0.8078.4"
+}

@@ -1,0 +1,209 @@
+{
+  "date": "2026-11-08",
+  "tool": "python/quantize_gptq.py",
+  "graphs": {
+    "decision": {
+      "counts": {
+        "int4 shared": 168,
+        "int4 own": 0,
+        "int8": 0,
+        "fp32": 60,
+        "embed": 1
+      },
+      "heldOut": {
+        "inputs": 177,
+        "flips": 3,
+        "meanShift": 0.0112,
+        "maxShift": 0.1663
+      },
+      "labelled": {
+        "inputs": 56,
+        "flips": 0,
+        "meanShift": 0.0174,
+        "maxShift": 0.2247,
+        "correctFp32": 52,
+        "correctQ4": 52
+      },
+      "fixtureFlips": [
+        "noul"
+      ],
+      "parity": [
+        {
+          "case": "billing/onnx-vs-pytorch",
+          "max_abs_error": 4.172325134277344e-06
+        },
+        {
+          "case": "noul/onnx-vs-pytorch",
+          "max_abs_error": 1.1324882507324219e-06
+        },
+        {
+          "case": "json/onnx-vs-pytorch",
+          "max_abs_error": 3.0994415283203125e-06
+        },
+        {
+          "case": "long/onnx-vs-pytorch",
+          "max_abs_error": 1.6689300537109375e-06
+        },
+        {
+          "case": "empty/onnx-vs-pytorch",
+          "max_abs_error": 2.384185791015625e-07
+        }
+      ],
+      "bytes": {
+        "graph": 670901,
+        "own": 11762688,
+        "shared": 219063040
+      }
+    },
+    "evidence": {
+      "counts": {
+        "int4 shared": 140,
+        "int4 own": 28,
+        "int8": 336,
+        "fp32": 55,
+        "embed": 1
+      },
+      "heldOut": {
+        "inputs": 60,
+        "meanMaxLogitDiff": 0.1504,
+        "maxLogitDiff": 0.4214
+      },
+      "parity": [
+        {
+          "case": "evidence/onnx-vs-pytorch",
+          "max_abs_error": 2.1457672119140625e-06
+        },
+        {
+          "case": "support/onnx-vs-pytorch",
+          "max_abs_error": 1.5497207641601562e-06
+        }
+      ],
+      "bytes": {
+        "graph": 915182,
+        "own": 66412544,
+        "shared": 219063040
+      }
+    },
+    "ner": {
+      "counts": {
+        "int4 shared": 140,
+        "int4 own": 28,
+        "int8": 336,
+        "fp32": 55,
+        "embed": 1
+      },
+      "heldOut": {
+        "inputs": 60,
+        "meanMaxLogitDiff": 0.29,
+        "maxLogitDiff": 1.1276
+      },
+      "parity": [
+        {
+          "case": "entities/onnx-vs-pytorch",
+          "max_abs_error": 2.86102294921875e-06
+        },
+        {
+          "case": "unicode/onnx-vs-pytorch",
+          "max_abs_error": 2.205371856689453e-06
+        }
+      ],
+      "bytes": {
+        "graph": 915224,
+        "own": 97912832,
+        "shared": 219063040
+      }
+    },
+    "relation": {
+      "counts": {
+        "int4 shared": 140,
+        "int4 own": 28,
+        "int8": 336,
+        "fp32": 55,
+        "embed": 1
+      },
+      "heldOut": {
+        "inputs": 60,
+        "meanMaxLogitDiff": 0.3681,
+        "maxLogitDiff": 0.8694
+      },
+      "parity": [
+        {
+          "case": "employment/onnx-vs-pytorch",
+          "max_abs_error": 3.337860107421875e-06
+        },
+        {
+          "case": "multi/onnx-vs-pytorch",
+          "max_abs_error": 2.1457672119140625e-06
+        }
+      ],
+      "bytes": {
+        "graph": 916064,
+        "own": 97912832,
+        "shared": 219063040
+      }
+    },
+    "span": {
+      "counts": {
+        "int4 shared": 140,
+        "int4 own": 28,
+        "int8": 336,
+        "fp32": 55,
+        "embed": 1
+      },
+      "heldOut": {
+        "inputs": 60,
+        "meanMaxLogitDiff": 0.4236,
+        "maxLogitDiff": 1.0784
+      },
+      "parity": [
+        {
+          "case": "description/onnx-vs-pytorch",
+          "max_abs_error": 3.0994415283203125e-06
+        },
+        {
+          "case": "unicode/onnx-vs-pytorch",
+          "max_abs_error": 3.2186508178710938e-06
+        }
+      ],
+      "bytes": {
+        "graph": 915182,
+        "own": 66412544,
+        "shared": 219063040
+      }
+    },
+    "span_set": {
+      "counts": {
+        "int4 shared": 140,
+        "int4 own": 28,
+        "int8": 336,
+        "fp32": 55,
+        "embed": 1
+      },
+      "heldOut": {
+        "inputs": 60,
+        "meanMaxLogitDiff": 0.3049,
+        "maxLogitDiff": 0.9213
+      },
+      "parity": [
+        {
+          "case": "pii/onnx-vs-pytorch",
+          "max_abs_error": 5.245208740234375e-06
+        },
+        {
+          "case": "halu/onnx-vs-pytorch",
+          "max_abs_error": 5.960464477539062e-07
+        }
+      ],
+      "bytes": {
+        "graph": 915182,
+        "own": 66412544,
+        "shared": 219063040
+      }
+    }
+  },
+  "shared": {
+    "file": "backbone/fast/q4/backbone.onnx.data",
+    "bytes": 219063040,
+    "sha256": "4791b8ad041e153c915b291414a1e4a1911aca3613927e54df1d96c48093cd2c"
+  }
+}

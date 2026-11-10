@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "task": "fast-ner",
+  "fileHashesIdentical": true,
+  "before": {
+    "task.onnx.data": "dc20e6e65e78d2becea896c239cf5b916f3431129b9a90dab64a4728acf227e6",
+    "task.onnx": "785f47e2098b641e3fdef9a414a989f2b4aa97ba12f9e14248839b5640c2584d"
+  },
+  "after": {
+    "task.onnx.data": "dc20e6e65e78d2becea896c239cf5b916f3431129b9a90dab64a4728acf227e6",
+    "task.onnx": "785f47e2098b641e3fdef9a414a989f2b4aa97ba12f9e14248839b5640c2584d"
+  }
+}

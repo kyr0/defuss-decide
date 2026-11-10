@@ -1,0 +1,135 @@
+{
+  "runtime": "node v26.11.1",
+  "platform": "darwin/arm64",
+  "precision": "fp32",
+  "backend": "cpu",
+  "threads": "default",
+  "rows": [
+    {
+      "bundle": "evidence/fp32",
+      "fixture": "evidence",
+      "backend": "cpu",
+      "loadMs": 1797,
+      "medianMs": 26
+    },
+    {
+      "bundle": "evidence/fp32",
+      "fixture": "support",
+      "backend": "cpu",
+      "loadMs": 1797,
+      "medianMs": 28
+    },
+    {
+      "bundle": "evidence/fp32",
+      "fixture": "evidence, about 1,800 tokens",
+      "backend": "cpu",
+      "loadMs": 1797,
+      "medianMs": 1503
+    },
+    {
+      "bundle": "ner/fp32",
+      "fixture": "entities",
+      "backend": "cpu",
+      "loadMs": 2565,
+      "medianMs": 25
+    },
+    {
+      "bundle": "ner/fp32",
+      "fixture": "unicode",
+      "backend": "cpu",
+      "loadMs": 2565,
+      "medianMs": 32
+    },
+    {
+      "bundle": "ner/fp32",
+      "fixture": "entities, about 1,800 tokens",
+      "backend": "cpu",
+      "loadMs": 2565,
+      "medianMs": 1560
+    },
+    {
+      "bundle": "relation/fp32",
+      "fixture": "employment",
+      "backend": "cpu",
+      "loadMs": 2207,
+      "medianMs": 33
+    },
+    {
+      "bundle": "relation/fp32",
+      "fixture": "multi",
+      "backend": "cpu",
+      "loadMs": 2207,
+      "medianMs": 29
+    },
+    {
+      "bundle": "relation/fp32",
+      "fixture": "employment, about 1,800 tokens",
+      "backend": "cpu",
+      "loadMs": 2207,
+      "medianMs": 1524
+    },
+    {
+      "bundle": "span/fp32",
+      "fixture": "description",
+      "backend": "cpu",
+      "loadMs": 2133,
+      "medianMs": 29
+    },
+    {
+      "bundle": "span/fp32",
+      "fixture": "unicode",
+      "backend": "cpu",
+      "loadMs": 2133,
+      "medianMs": 42
+    },
+    {
+      "bundle": "span/fp32",
+      "fixture": "description, about 1,800 tokens",
+      "backend": "cpu",
+      "loadMs": 2133,
+      "medianMs": 1421
+    },
+    {
+      "bundle": "span_set/fp32",
+      "fixture": "pii",
+      "backend": "cpu",
+      "loadMs": 1974,
+      "medianMs": 37
+    },
+    {
+      "bundle": "span_set/fp32",
+      "fixture": "halu",
+      "backend": "cpu",
+      "loadMs": 1974,
+      "medianMs": 22
+    },
+    {
+      "bundle": "span_set/fp32",
+      "fixture": "pii, about 1,800 tokens",
+      "backend": "cpu",
+      "loadMs": 1974,
+      "medianMs": 1141
+    },
+    {
+      "bundle": "vision-box/fp32",
+      "fixture": "box",
+      "backend": "cpu",
+      "loadMs": 1467,
+      "medianMs": 1357
+    },
+    {
+      "bundle": "vision-ocr/fp32",
+      "fixture": "ocr",
+      "backend": "cpu",
+      "loadMs": 1773,
+      "medianMs": 1367
+    },
+    {
+      "bundle": "vision-span/fp32",
+      "fixture": "span",
+      "backend": "cpu",
+      "loadMs": 1592,
+      "medianMs": 1328
+    }
+  ]
+}

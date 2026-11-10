@@ -1,0 +1,21 @@
+{
+  "model": "vllm-sr/vela3-fast",
+  "source_precision": "fp32",
+  "candidates": [
+    {
+      "mode": "dynamic INT8",
+      "passed": false,
+      "failed_case": "billing",
+      "max_probability_error": 0.1797381118717622,
+      "tolerance": 0.05
+    },
+    {
+      "mode": "weight-only INT8",
+      "passed": false,
+      "failed_case": "noul",
+      "max_probability_error": 0.02056106576548211,
+      "tolerance": 0.02
+    }
+  ],
+  "note": "These are first failing cases, not measured maxima across all tasks. Candidates have no validated manifest."
+}

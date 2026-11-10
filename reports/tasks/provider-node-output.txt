@@ -1,0 +1,113 @@
+Verified: kernel denies socket creation and network sends for this command.
+{
+  "provider": "vela3",
+  "model": "vllm-sr/vela3-fast",
+  "precision": "fp32",
+  "offsetUnit": "unicode-code-point",
+  "answers": {
+    "entities": {
+      "type": "span",
+      "target": "user",
+      "head": "ner",
+      "threshold": 0.6,
+      "spans": [
+        {
+          "start": 0,
+          "end": 3,
+          "label": "person",
+          "probability": 0.690393328666687,
+          "text": "Ada",
+          "score": 0.690393328666687
+        },
+        {
+          "start": 13,
+          "end": 19,
+          "label": "city",
+          "probability": 0.8858760595321655,
+          "text": "London",
+          "score": 0.8858760595321655
+        }
+      ]
+    },
+    "pii": {
+      "type": "span",
+      "target": "user",
+      "head": "span_set",
+      "threshold": 0.35,
+      "spans": [
+        {
+          "start": 28,
+          "end": 43,
+          "label": "EMAIL_ADDRESS",
+          "probability": 0.9995006322860718,
+          "text": "ada@example.org",
+          "score": 0.9995006322860718
+        }
+      ]
+    }
+  },
+  "usage": {
+    "input_tokens": 51,
+    "output_tokens": 0
+  }
+}
+{
+  "provider": "vela3",
+  "model": "vllm-sr/vela3-fast-vision",
+  "precision": "fp32",
+  "offsetUnit": "unicode-code-point",
+  "answers": {
+    "errors": {
+      "type": "span",
+      "target": "ocr",
+      "head": "ocr_check",
+      "threshold": 0.45,
+      "spans": [
+        {
+          "start": 0,
+          "end": 11,
+          "label": "ocr_error",
+          "text": "Invoice 128",
+          "score": 0.9995687305927277
+        },
+        {
+          "start": 19,
+          "end": 28,
+          "label": "ocr_error",
+          "text": "EUR 92.00",
+          "score": 0.999264195561409
+        }
+      ]
+    }
+  },
+  "usage": {
+    "input_tokens": 366,
+    "output_tokens": 0
+  }
+}
+{
+  "provider": "vela3",
+  "model": "vllm-sr/vela3-fast-vision",
+  "precision": "fp32",
+  "offsetUnit": "unicode-code-point",
+  "answers": {
+    "location": {
+      "type": "box",
+      "box": {
+        "top": 0.1875,
+        "bottom": 0.75,
+        "left": 0.1875,
+        "right": 0.75
+      },
+      "point": {
+        "y": 0.28125,
+        "x": 0.28125
+      },
+      "confidence": 0.9872971773147583
+    }
+  },
+  "usage": {
+    "input_tokens": 340,
+    "output_tokens": 0
+  }
+}

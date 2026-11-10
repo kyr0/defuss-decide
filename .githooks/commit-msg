@@ -1,0 +1,7 @@
+#!/bin/sh
+# Rejects commit messages that credit an AI assistant as co-author or generator (the maintainer's rule).
+# Installed by `make setup` (git config core.hooksPath .githooks); scripts/check-repo.mjs checks the history in CI.
+if grep -Eiq '^(co-authored-by:.*(claude|anthropic|openai|chatgpt|gpt-[0-9]|copilot|gemini|cursor)|.*generated with \[?claude code)' "$1"; then
+  echo "commit-msg: remove the AI co-author or generator line; this repository does not record AI assistants as authors." >&2
+  exit 1
+fi

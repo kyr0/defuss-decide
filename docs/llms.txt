@@ -1,0 +1,90 @@
+# defuss-decide
+
+> Typed yes/no and multiple-choice decisions, labelled text spans and image regions from small validated ONNX models, in Node.js, Bun and the browser. The model, kyr0/winzling-decide-1.0 on Hugging Face, is Vela3-fast by the vLLM Semantic Router team, exported and quantized by Aron Homberg. No Python at runtime, no inference server, no data leaving the process or tab. MIT license.
+
+Use it when an app or agent needs a structured answer about JSON, text or an image without calling a hosted LLM: "Is the order fulfilled?", "Which spans are personal data?", "Which words of this answer does the image not support?", "Where is the red square?". Answers are numbers and offsets, never generated text, so every answer can be checked against the input.
+
+## What you get back
+
+- `decide`: the decision (`yes`/`no`, or one of your options), a probability per option, and evidence passages that reference the state fields they cover (`state_ref`, e.g. `["order.status"]`) and the image observations (`observations_ref`).
+- `relate`: paragraphs ranked by `supports`, `refutes` and `relates` scores against a statement, for knowledge-graph edges.
+- `span` (with `task` or by label): character spans with label and score. Offsets are Unicode code points with an exclusive `end`, as in Python; cut with `Array.from(text).slice(start, end)`.
+- `box`: a coarse normalized box (`top`, `bottom`, `left`, `right` in 0..1, origin top left), a point and a confidence.
+
+## Example (Node.js or Bun)
+
+```js
+import { loadVelaProvider } from "defuss-decide/node";
+
+// Every task from models/ (hf download kyr0/winzling-decide-1.0), each in its smallest published precision.
+const vela = await loadVelaProvider();
+try {
+  const r = await vela.systemOne({
+    state: { order: { id: 17, status: "delivered", items: [{ sku: "A1", ordered: 2, shipped: 2 }] } },
+    questions: { fulfilled: { type: "decide", instructions: "Is the order fulfilled?" } },
+  });
+  const { decision, probabilities, evidence } = r.answers.fulfilled;
+  console.log(decision, probabilities.yes.toFixed(2)); // yes 0.97
+  console.log(JSON.stringify(evidence.map((s) => s.state_ref))); // [["order.status"]]
+} finally {
+  await vela.dispose();
+}
+```
+
+Without arguments, `loadVelaProvider()` loads every task of kyr0/winzling-decide-1.0 in its smallest published precision (q4, else q8): in Node.js and Bun from `models/`, in the browser from a pinned commit on Hugging Face. `winzlingBundles(base, precision)` gives the folder map for another location or a larger precision.
+
+In the browser, import `defuss-decide/web` and pass bundle URLs, or none for the defaults; `backend: "auto"` runs on WebGPU when the browser grants an adapter and on WASM otherwise. Images can be `File`/`Blob` objects, URLs or `{data, width, height}` RGB bytes. To load from Hugging Face, use folder URLs of a pinned commit (`https://huggingface.co/kyr0/winzling-decide-1.0/resolve/<commit>/vela3-fast-onnx/ner/q8/`) with `brotli: true` (fetches the `.br` copies and decodes them with defuss-brotli) and `cache: "<name>"` (keeps the decoded files in the Cache API, so a later load downloads nothing); `onProgress` receives `{stage: "download", file, loaded, total, cached}` per file.
+
+## Install
+
+Package name `defuss-decide` (ESM, TypeScript declarations included): `bun add defuss-decide`, `pnpm add defuss-decide`, `npm install defuss-decide` or `yarn add defuss-decide`. Until the package is published, install it from a checkout: `git clone https://github.com/kyr0/defuss-decision.git`, then `bun add ../defuss-decision` in your app.
+
+Model bundles are on Hugging Face as kyr0/winzling-decide-1.0 (`hf download kyr0/winzling-decide-1.0 --exclude "*.br" --local-dir models` for the Node.js default), or exported from the pinned upstream checkpoints with `uv run python/export_tasks.py` (see documentation/models.md). An export writes `manifest.json` with `validated: true` only after ONNX Runtime matched PyTorch on reference fixtures; the loaders refuse bundles without it.
+
+## Measured (Apple M-series Mac, recorded in reports/)
+
+- Download, four text tasks: 482 MB as q4 Brotli files sharing one 202 MB backbone file, against 6.1 GB as FP32 Brotli files (12.7x smaller); on disk 535 MB against 6.7 GB.
+- Agreement with FP32 after quantization: the largest change of any decoded score on the reference inputs is at most 0.0058 for q8 and 0.0146 for q4 (publishing limit 0.02); no bundle changes an answer. FP32 itself differs from the original PyTorch model by at most 0.0003.
+- Browser, WebGPU, q8: 79 to 90 ms per short text question in Chromium and WebKit; 0.38 to 0.41 s per image question (21 to 26 s on single-threaded WASM).
+- Node.js, q8: 32 ms per short text question on the CPU; on WebGPU 0.35 s for 1,800 tokens (2.1 s on the CPU) and 0.30 s per image question (1.7 s on the CPU).
+- Decisions on 81 labelled questions over JSON, text and images: 74 answered as labelled.
+- Same answers in four runtimes: Node.js, Bun, Chromium and WebKit run the same code; the test suites run in all four.
+
+## Bundles
+
+| Bundle | Answers | Precisions |
+| --- | --- | --- |
+| `decision/fast` | yes/no or option probabilities for text and JSON state | FP32, q4 (not validated: 3 of 177 test decisions change) |
+| `decision/vision` | decisions that also read images | FP32, q4 |
+| `evidence` | passages that support an answer | FP32, q8, q4 |
+| `span` | labels with free-text descriptions, toxicity | FP32, q8, q4 |
+| `span_set` | PII labels, `unsupported` claims | FP32, q8, q4 |
+| `relation` | relation questions ("employer of Ada") | FP32, q8, q4 |
+| `ner` | entity labels | FP32, q8 |
+| `vision-span` | answer words the image does not support | FP32, q8, q4 |
+| `vision-ocr` | where given OCR text disagrees with the scan | FP32, q8, q4 |
+| `vision-box` | where a described object is | FP32, q8 |
+
+## Limits that change how you call it
+
+- Input budget: 2,048 tokens per question; answers and OCR texts for the image tasks up to 768 tokens. Longer input fails with an error; nothing is truncated.
+- One image per span, OCR or region question. OCR checking compares given text with the scan; it does not read text itself.
+- The provider keeps one backbone resident and loads bundles on first use; group questions for the same bundle into one request.
+- The upstream models are English-oriented. Parity tests prove the port reproduces the original models, not how well the models fit your data.
+
+## Docs
+
+- [README](https://github.com/kyr0/defuss-decision/blob/main/README.md): overview, install, Node.js, Bun and browser usage, data contract
+- [API reference](https://github.com/kyr0/defuss-decision/blob/main/documentation/api.md): every export, question shape, answer shape and error
+- [Decisions](https://github.com/kyr0/defuss-decision/blob/main/documentation/decide.md): the decide pipeline, its options and what it was measured on
+- [Graph relations](https://github.com/kyr0/defuss-decision/blob/main/documentation/relate.md): ranking paragraphs against a statement
+- [Models](https://github.com/kyr0/defuss-decision/blob/main/documentation/models.md): export, quantization (q8, GPTQ q4 with shared backbones) and Brotli copies
+- [Performance](https://github.com/kyr0/defuss-decision/blob/main/documentation/performance.md): latency per runtime, backend and precision
+- [Validation](https://github.com/kyr0/defuss-decision/blob/main/documentation/VALIDATION.md): how parity is checked
+- [Model card](https://github.com/kyr0/defuss-decision/blob/main/models/README.md): sizes and quality per bundle and precision
+
+## Optional
+
+- [Architecture](https://github.com/kyr0/defuss-decision/blob/main/ARCH.md): module map, security and privacy notes
+- [Research](https://github.com/kyr0/defuss-decision/blob/main/documentation/RESEARCH.md): why Vela3 and how the decision heads were chosen
+- [Custom adaptations](https://www.linkedin.com/in/aronhomberg/): new decision types, smaller models, integration and on-premise deployments by the author, Aron Homberg

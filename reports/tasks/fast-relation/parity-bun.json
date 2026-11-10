@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "model": "vllm-sr/vela3-fast",
+  "task": "relation",
+  "checks": [
+    {
+      "name": "employment",
+      "maxLogitError": 0.00000286102294921875,
+      "decodedOutputMatched": true,
+      "milliseconds": 130
+    },
+    {
+      "name": "multi",
+      "maxLogitError": 0.00000286102294921875,
+      "decodedOutputMatched": true,
+      "milliseconds": 123
+    }
+  ],
+  "runtime": "Bun 1.4.4"
+}

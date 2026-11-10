@@ -1,0 +1,107 @@
+{
+  "runtime": "node v26.11.1",
+  "platform": "darwin/arm64",
+  "precision": "q4",
+  "backend": "cpu",
+  "threads": "default",
+  "rows": [
+    {
+      "bundle": "evidence/q4",
+      "fixture": "evidence",
+      "backend": "cpu",
+      "loadMs": 1600,
+      "medianMs": 114
+    },
+    {
+      "bundle": "evidence/q4",
+      "fixture": "support",
+      "backend": "cpu",
+      "loadMs": 1600,
+      "medianMs": 81
+    },
+    {
+      "bundle": "evidence/q4",
+      "fixture": "evidence, about 1,800 tokens",
+      "backend": "cpu",
+      "loadMs": 1600,
+      "medianMs": 4969
+    },
+    {
+      "bundle": "relation/q4",
+      "fixture": "employment",
+      "backend": "cpu",
+      "loadMs": 1408,
+      "medianMs": 67
+    },
+    {
+      "bundle": "relation/q4",
+      "fixture": "multi",
+      "backend": "cpu",
+      "loadMs": 1408,
+      "medianMs": 70
+    },
+    {
+      "bundle": "relation/q4",
+      "fixture": "employment, about 1,800 tokens",
+      "backend": "cpu",
+      "loadMs": 1408,
+      "medianMs": 5051
+    },
+    {
+      "bundle": "span/q4",
+      "fixture": "description",
+      "backend": "cpu",
+      "loadMs": 1408,
+      "medianMs": 79
+    },
+    {
+      "bundle": "span/q4",
+      "fixture": "unicode",
+      "backend": "cpu",
+      "loadMs": 1408,
+      "medianMs": 134
+    },
+    {
+      "bundle": "span/q4",
+      "fixture": "description, about 1,800 tokens",
+      "backend": "cpu",
+      "loadMs": 1408,
+      "medianMs": 4888
+    },
+    {
+      "bundle": "span_set/q4",
+      "fixture": "pii",
+      "backend": "cpu",
+      "loadMs": 1389,
+      "medianMs": 155
+    },
+    {
+      "bundle": "span_set/q4",
+      "fixture": "halu",
+      "backend": "cpu",
+      "loadMs": 1389,
+      "medianMs": 84
+    },
+    {
+      "bundle": "span_set/q4",
+      "fixture": "pii, about 1,800 tokens",
+      "backend": "cpu",
+      "loadMs": 1389,
+      "medianMs": 5019
+    },
+    {
+      "bundle": "vision-ocr/q4",
+      "fixture": "ocr",
+      "backend": "cpu",
+      "loadMs": 1405,
+      "medianMs": 4013
+    },
+    {
+      "bundle": "vision-span/q4",
+      "fixture": "span",
+      "backend": "cpu",
+      "loadMs": 1365,
+      "medianMs": 4201
+    }
+  ]
+}

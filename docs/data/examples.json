@@ -1,0 +1,1644 @@
+[
+ {
+  "id": "decide",
+  "dir": "decide",
+  "kind": "decide",
+  "label": "Typed Decisions",
+  "choices": [
+   {
+    "id": "order",
+    "title": "Order fulfilled?",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": {
+     "order": {
+      "id": 17,
+      "status": "delivered",
+      "items": [
+       {
+        "sku": "A1",
+        "ordered": 2,
+        "shipped": 2
+       }
+      ],
+      "delivered_at": "2026-11-03"
+     }
+    },
+    "question": {
+     "type": "decide",
+     "instructions": "Is the order fulfilled?"
+    },
+    "answer": {
+     "type": "decide",
+     "decision": "yes",
+     "probabilities": {
+      "no": 0.05684508772849817,
+      "yes": 0.9431549122715018
+     },
+     "evidence": [
+      {
+       "start": 13,
+       "end": 36,
+       "label": "evidence",
+       "probability": 0.7879178643226623,
+       "score": 0.7879178643226623,
+       "observations_ref": [],
+       "state_ref": [
+        "order.status"
+       ]
+      }
+     ],
+     "context": "order.id: 17\norder.status: delivered\norder.items.0.sku: A1\norder.items.0.ordered: 2\norder.items.0.shipped: 2\norder.delivered_at: 2026-11-03",
+     "observations": []
+    }
+   },
+   {
+    "id": "payment",
+    "title": "Payment confirmed?",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": {
+     "conversation": [
+      {
+       "role": "assistant",
+       "text": "Shall I pay the invoice of 120 EUR now?"
+      },
+      {
+       "role": "user",
+       "text": "Wait, not yet. I need to check the amount first."
+      }
+     ]
+    },
+    "question": {
+     "type": "decide",
+     "instructions": "Has the user confirmed the payment?"
+    },
+    "answer": {
+     "type": "decide",
+     "decision": "no",
+     "probabilities": {
+      "no": 0.9613580767266147,
+      "yes": 0.03864192327338535
+     },
+     "evidence": [
+      {
+       "start": 118,
+       "end": 187,
+       "label": "evidence",
+       "probability": 0.6044913153899344,
+       "score": 0.6044913153899344,
+       "observations_ref": [],
+       "state_ref": [
+        "conversation.1.text"
+       ]
+      }
+     ],
+     "context": "conversation.0.role: assistant\nconversation.0.text: Shall I pay the invoice of 120 EUR now?\nconversation.1.role: user\nconversation.1.text: Wait, not yet. I need to check the amount first.",
+     "observations": []
+    }
+   },
+   {
+    "id": "access",
+    "title": "Delete allowed?",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": {
+     "policy": "Only admins may delete projects.",
+     "user": {
+      "name": "Tim",
+      "role": "viewer"
+     }
+    },
+    "question": {
+     "type": "decide",
+     "instructions": "Is the user allowed to delete the project?"
+    },
+    "answer": {
+     "type": "decide",
+     "decision": "no",
+     "probabilities": {
+      "no": 0.9705505699471544,
+      "yes": 0.029449430052845636
+     },
+     "evidence": [
+      {
+       "start": 0,
+       "end": 40,
+       "label": "evidence",
+       "probability": 0.77602569013834,
+       "score": 0.77602569013834,
+       "observations_ref": [],
+       "state_ref": [
+        "policy"
+       ]
+      }
+     ],
+     "context": "policy: Only admins may delete projects.\nuser.name: Tim\nuser.role: viewer",
+     "observations": []
+    }
+   },
+   {
+    "id": "grounded",
+    "title": "Answer grounded?",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": {
+     "context": "The museum is open from 9 to 17 on weekdays and closed on Mondays.",
+     "answer": "The museum is open on Mondays until 20."
+    },
+    "question": {
+     "type": "decide",
+     "instructions": "Does the answer follow from the context?"
+    },
+    "answer": {
+     "type": "decide",
+     "decision": "no",
+     "probabilities": {
+      "no": 0.9850034355357716,
+      "yes": 0.014996564464228394
+     },
+     "evidence": [
+      {
+       "start": 95,
+       "end": 122,
+       "label": "evidence",
+       "probability": 0.6363158921400706,
+       "score": 0.6363158921400706,
+       "observations_ref": [],
+       "state_ref": [
+        "answer"
+       ]
+      }
+     ],
+     "context": "context: The museum is open from 9 to 17 on weekdays and closed on Mondays.\nanswer: The museum is open on Mondays until 20.",
+     "observations": []
+    }
+   },
+   {
+    "id": "route",
+    "title": "Route a message",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": {
+     "message": "I was charged twice for my subscription this month."
+    },
+    "question": {
+     "type": "decide",
+     "instructions": "Which team should handle the message?",
+     "options": {
+      "billing": "Payments, charges, invoices and refunds",
+      "technical": "Errors, bugs and problems using the product",
+      "sales": "New purchases, pricing questions and upgrades"
+     }
+    },
+    "answer": {
+     "type": "decide",
+     "decision": "billing",
+     "probabilities": {
+      "billing": 0.9802919781959474,
+      "technical": 0.008120019186399713,
+      "sales": 0.0115880026176528
+     },
+     "evidence": [],
+     "context": "message: I was charged twice for my subscription this month.",
+     "observations": []
+    }
+   },
+   {
+    "id": "review",
+    "title": "Review sentiment",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": {
+     "review": "Broke after two days and support never answered. Waste of money."
+    },
+    "question": {
+     "type": "decide",
+     "instructions": "What is the sentiment of the review?",
+     "options": {
+      "positive": null,
+      "neutral": null,
+      "negative": null
+     }
+    },
+    "answer": {
+     "type": "decide",
+     "decision": "negative",
+     "probabilities": {
+      "positive": 0.0020527865111885906,
+      "neutral": 0.0048327562581966885,
+      "negative": 0.9931144572306146
+     },
+     "evidence": [
+      {
+       "start": 0,
+       "end": 72,
+       "label": "evidence",
+       "probability": 0.7086588780085246,
+       "score": 0.7086588780085246,
+       "observations_ref": [],
+       "state_ref": [
+        "review"
+       ]
+      }
+     ],
+     "context": "review: Broke after two days and support never answered. Waste of money.",
+     "observations": []
+    }
+   },
+   {
+    "id": "contract",
+    "title": "Termination clause",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": {
+     "clause": "Either party may terminate this agreement with 30 days' written notice."
+    },
+    "question": {
+     "type": "decide",
+     "instructions": "Does the contract allow termination without notice?"
+    },
+    "answer": {
+     "type": "decide",
+     "decision": "no",
+     "probabilities": {
+      "no": 0.8254418206083096,
+      "yes": 0.17455817939169044
+     },
+     "evidence": [
+      {
+       "start": 8,
+       "end": 79,
+       "label": "evidence",
+       "probability": 0.7448621759047875,
+       "score": 0.7448621759047875,
+       "observations_ref": [],
+       "state_ref": [
+        "clause"
+       ]
+      }
+     ],
+     "context": "clause: Either party may terminate this agreement with 30 days' written notice.",
+     "observations": []
+    }
+   },
+   {
+    "id": "squirrel",
+    "title": "Soccer squirrel",
+    "image": "assets/samples/synthetic/vision_box_span_1_squirrel.webp",
+    "alt": "A squirrel in a blue jersey kicks a soccer ball while a dog in a cap cheers; the scoreboard reads 2 to 1.",
+    "width": 1024,
+    "height": 576,
+    "state": {
+     "listing": {
+      "title": "Fantasy Cup poster",
+      "sport": "soccer"
+     }
+    },
+    "question": {
+     "type": "decide",
+     "instructions": "Does the image show a soccer ball?",
+     "region": "the soccer ball"
+    },
+    "answer": {
+     "type": "decide",
+     "decision": "yes",
+     "probabilities": {
+      "no": 0.00893791998041571,
+      "yes": 0.9910620800195843
+     },
+     "evidence": [
+      {
+       "start": 56,
+       "end": 120,
+       "label": "evidence",
+       "probability": 0.8855408504605293,
+       "score": 0.8858301560084025,
+       "observations_ref": [
+        0
+       ],
+       "state_ref": []
+      }
+     ],
+     "context": "listing.title: Fantasy Cup poster\nlisting.sport: soccer\nobservations.0: the image shows the soccer ball (confidence 0.99)",
+     "observations": [
+      "the image shows the soccer ball (confidence 0.99)"
+     ]
+    }
+   },
+   {
+    "id": "dragon",
+    "title": "Dragon rider",
+    "image": "assets/samples/synthetic/vision_box_span_2_dragon.webp",
+    "alt": "A woman in a red cape rides an orange dragon above the clouds; an airship and a floating castle are in the sky.",
+    "width": 1024,
+    "height": 576,
+    "state": {
+     "listing": {
+      "title": "Dragon rider print"
+     }
+    },
+    "question": {
+     "type": "decide",
+     "instructions": "Does the image show a submarine?",
+     "region": "the submarine"
+    },
+    "answer": {
+     "type": "decide",
+     "decision": "no",
+     "probabilities": {
+      "no": 0.9270285323675337,
+      "yes": 0.0729714676324663
+     },
+     "evidence": [
+      {
+       "start": 34,
+       "end": 104,
+       "label": "evidence",
+       "probability": 0.8146336183828466,
+       "score": 0.8137070350348949,
+       "observations_ref": [
+        0
+       ],
+       "state_ref": []
+      }
+     ],
+     "context": "listing.title: Dragon rider print\nobservations.0: the image does not show the submarine (confidence 0.49)",
+     "observations": [
+      "the image does not show the submarine (confidence 0.49)"
+     ]
+    }
+   },
+   {
+    "id": "bottle",
+    "title": "Engraved bottle",
+    "image": "assets/samples/synthetic/ocr_product_engraved.webp",
+    "alt": "A steel bottle engraved ALPENQUELL, ISOLIERFLASCHE, 750 ML, LIMITED EDITION.",
+    "width": 1024,
+    "height": 768,
+    "state": {
+     "ocr": "ALPENQUELL\nISOLIERFLASCHE\n750 ML\nLIMITED EDITION"
+    },
+    "question": {
+     "type": "decide",
+     "instructions": "Does the extracted text match the photo?",
+     "region": "the engraved brand name"
+    },
+    "answer": {
+     "type": "decide",
+     "decision": "yes",
+     "probabilities": {
+      "no": 0.14377079322687936,
+      "yes": 0.8562292067731206
+     },
+     "evidence": [
+      {
+       "start": 128,
+       "end": 169,
+       "label": "evidence",
+       "probability": 0.7581561538908217,
+       "score": 0.7581561538908217,
+       "observations_ref": [
+        1
+       ],
+       "state_ref": []
+      }
+     ],
+     "context": "ocr: ALPENQUELL\nISOLIERFLASCHE\n750 ML\nLIMITED EDITION\nobservations.0: the image shows the engraved brand name (confidence 0.99)\nobservations.1: OCR text matches the scan",
+     "observations": [
+      "the image shows the engraved brand name (confidence 0.99)",
+      "OCR text matches the scan"
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "relate",
+  "dir": "relate",
+  "kind": "relate",
+  "label": "Graph Relations",
+  "choices": [
+   {
+    "id": "sky",
+    "title": "The sky is blue",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": [
+     "Photo of a blue sky over the city.",
+     "Photo of a green sky over the city.",
+     "The sky is usually blue on Earth when it is not cloudy.",
+     "Rayleigh scattering of sunlight makes the daytime sky look blue.",
+     "Clouds form when water vapour condenses into droplets.",
+     "Add two cups of flour and stir until smooth."
+    ],
+    "question": {
+     "type": "relate",
+     "statement": "The sky is blue."
+    },
+    "answer": {
+     "type": "relate",
+     "by": "supports",
+     "ranking": [
+      {
+       "key": "3",
+       "supports": 0.7163908702786723,
+       "refutes": 0.005504868864308779,
+       "relates": 0.9632416601702014
+      },
+      {
+       "key": "0",
+       "supports": 0.6598175995179739,
+       "refutes": 0.00933485920186271,
+       "relates": 0.9417855416215668
+      },
+      {
+       "key": "2",
+       "supports": 0.597175550223522,
+       "refutes": 0.009755357955754345,
+       "relates": 0.9715161099672057
+      },
+      {
+       "key": "1",
+       "supports": 0.008063574221861127,
+       "refutes": 0.8313232850128682,
+       "relates": 0.9020446629701355
+      },
+      {
+       "key": "4",
+       "supports": 0.00797006303347701,
+       "refutes": 0.11599502441419669,
+       "relates": 0.36760895928814463
+      },
+      {
+       "key": "5",
+       "supports": 0.000765932136801689,
+       "refutes": 0.12964192796772633,
+       "relates": 0.15618595730282026
+      }
+     ]
+    }
+   },
+   {
+    "id": "sky-qualified",
+    "title": "Usually blue, if not cloudy",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": [
+     "Photo of a clear blue sky over the city.",
+     "Earth's sky is never blue, not even on clear days.",
+     "On a cloudy day the sky over Berlin was grey.",
+     "On Mars the daytime sky is a pale butterscotch colour.",
+     "Rayleigh scattering of sunlight makes the daytime sky look blue.",
+     "Add two cups of flour and stir until smooth."
+    ],
+    "question": {
+     "type": "relate",
+     "statement": "The sky is usually blue on Earth when it is not cloudy."
+    },
+    "answer": {
+     "type": "relate",
+     "by": "supports",
+     "ranking": [
+      {
+       "key": "4",
+       "supports": 0.3549421429049841,
+       "refutes": 0.04183518894243205,
+       "relates": 0.9088890126845025
+      },
+      {
+       "key": "0",
+       "supports": 0.24902884439138268,
+       "refutes": 0.01893611372372667,
+       "relates": 0.8861646919246506
+      },
+      {
+       "key": "2",
+       "supports": 0.13366087301358207,
+       "refutes": 0.107671681070279,
+       "relates": 0.8163093337187213
+      },
+      {
+       "key": "3",
+       "supports": 0.034669783574218696,
+       "refutes": 0.33601483733724313,
+       "relates": 0.6587376836940708
+      },
+      {
+       "key": "1",
+       "supports": 0.0010918727640161288,
+       "refutes": 0.9700920988884899,
+       "relates": 0.9879217322310478
+      },
+      {
+       "key": "5",
+       "supports": 0.0004187130438130703,
+       "refutes": 0.04947820535661895,
+       "relates": 0.05955016047372064
+      }
+     ]
+    }
+   },
+   {
+    "id": "meeting",
+    "title": "Meeting moved, CEO ill",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": [
+     "Since the CEO was sick, the meeting now takes place on Thursday.",
+     "The meeting was moved to Thursday because the room was double-booked.",
+     "The meeting was moved to Thursday.",
+     "The meeting still takes place on Tuesday as planned.",
+     "The volcano last erupted in 1980."
+    ],
+    "question": {
+     "type": "relate",
+     "statement": "The meeting was moved to Thursday because the CEO was ill."
+    },
+    "answer": {
+     "type": "relate",
+     "by": "supports",
+     "ranking": [
+      {
+       "key": "0",
+       "supports": 0.9864681466184124,
+       "refutes": 0.0014208127156496854,
+       "relates": 0.9976940748268782
+      },
+      {
+       "key": "2",
+       "supports": 0.9154337601744315,
+       "refutes": 0.002802259308288998,
+       "relates": 0.9810402302000452
+      },
+      {
+       "key": "1",
+       "supports": 0.0018149316882218262,
+       "refutes": 0.4421060673865059,
+       "relates": 0.5471719101368863
+      },
+      {
+       "key": "3",
+       "supports": 0.0015615354113923585,
+       "refutes": 0.9495617725435426,
+       "relates": 0.9638121270758817
+      },
+      {
+       "key": "4",
+       "supports": 0.001281560455443563,
+       "refutes": 0.07311205948392237,
+       "relates": 0.08608054612694471
+      }
+     ]
+    }
+   },
+   {
+    "id": "server",
+    "title": "Server down, disk full",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": [
+     "At 03:12 the monitoring raised an alert. The data disk had reached 100 percent usage, which made the database exit and took the server down. The disk was expanded at 04:00.",
+     "At 03:12 the monitoring raised an alert. The disk had plenty of free space; a faulty memory module caused the crash.",
+     "The server rebooted at 04:00 after planned maintenance.",
+     "The marketing team launched a new campaign."
+    ],
+    "question": {
+     "type": "relate",
+     "statement": "The server crashed because the disk was full."
+    },
+    "answer": {
+     "type": "relate",
+     "by": "supports",
+     "ranking": [
+      {
+       "key": "0",
+       "supports": 0.9252359912821478,
+       "refutes": 0.005020110718164579,
+       "relates": 0.9921517535132376
+      },
+      {
+       "key": "2",
+       "supports": 0.006815864804280791,
+       "refutes": 0.14621219481470452,
+       "relates": 0.6883146285568869
+      },
+      {
+       "key": "1",
+       "supports": 0.004996696373117682,
+       "refutes": 0.9107574516427281,
+       "relates": 0.9572154477180922
+      },
+      {
+       "key": "3",
+       "supports": 0.0008544881256207346,
+       "refutes": 0.07128688674310078,
+       "relates": 0.09443931957549778
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "evidence",
+  "dir": "evidence",
+  "kind": "fast",
+  "label": "Evidence",
+  "choices": [
+   {
+    "id": "fixture-evidence",
+    "title": "Fixture: evidence",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": {
+     "user": "Where does Ada live?",
+     "context": "Ada lives in London. Bob lives in Paris.",
+     "answer": "London"
+    },
+    "question": {
+     "type": "span",
+     "target": "context",
+     "criteria": [
+      "evidence"
+     ]
+    },
+    "answer": {
+     "type": "span",
+     "target": "context",
+     "spans": [
+      {
+       "start": 0,
+       "end": 19,
+       "label": "evidence",
+       "probability": 0.7338505387306213,
+       "text": "Ada lives in London",
+       "score": 0.7338505030717547
+      }
+     ],
+     "head": "span",
+     "head_reason": "span adapter; evidence question, short bucket (11 target tokens)",
+     "threshold": 0.5
+    }
+   },
+   {
+    "id": "fixture-support",
+    "title": "Fixture: support",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": "The Moon orbits Earth. Mars orbits the Sun.",
+    "question": {
+     "type": "span",
+     "instructions": "Which spans support the claim that the Moon orbits Earth?",
+     "criteria": {
+      "support": "Supporting text"
+     }
+    },
+    "answer": {
+     "type": "span",
+     "target": "user",
+     "spans": [],
+     "head": "span",
+     "head_reason": "span adapter; evidence question, short bucket (10 target tokens)",
+     "threshold": 0.5
+    }
+   }
+  ]
+ },
+ {
+  "id": "ner",
+  "dir": "ner",
+  "kind": "fast",
+  "label": "NER",
+  "choices": [
+   {
+    "id": "fixture-entities",
+    "title": "Fixture: entities",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": "Ada Lovelace lived in London.",
+    "question": {
+     "type": "span",
+     "criteria": [
+      "person",
+      "city"
+     ]
+    },
+    "answer": {
+     "type": "span",
+     "target": "user",
+     "spans": [
+      {
+       "start": 0,
+       "end": 12,
+       "label": "person",
+       "probability": 0.8357934951782227,
+       "text": "Ada Lovelace",
+       "score": 0.8357935079659684
+      },
+      {
+       "start": 22,
+       "end": 28,
+       "label": "city",
+       "probability": 0.9095484614372253,
+       "text": "London",
+       "score": 0.9095484631340968
+      }
+     ],
+     "head": "ner",
+     "head_reason": "ner adapter; open labels, names only",
+     "threshold": 0.6
+    }
+   },
+   {
+    "id": "fixture-unicode",
+    "title": "Fixture: unicode",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": "👋 Zoë besucht München und 東京.",
+    "question": {
+     "type": "span",
+     "criteria": [
+      "person",
+      "city"
+     ]
+    },
+    "answer": {
+     "type": "span",
+     "target": "user",
+     "spans": [
+      {
+       "start": 14,
+       "end": 21,
+       "label": "city",
+       "probability": 0.7758849263191223,
+       "text": "München",
+       "score": 0.7758848983298935
+      },
+      {
+       "start": 26,
+       "end": 28,
+       "label": "city",
+       "probability": 0.626634955406189,
+       "text": "東京",
+       "score": 0.626634955939288
+      }
+     ],
+     "head": "ner",
+     "head_reason": "ner adapter; open labels, names only",
+     "threshold": 0.6
+    }
+   }
+  ]
+ },
+ {
+  "id": "relation",
+  "dir": "relation",
+  "kind": "fast",
+  "label": "Relations",
+  "choices": [
+   {
+    "id": "fixture-employment",
+    "title": "Fixture: employment",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": "Ada works at Acme in London.",
+    "question": {
+     "type": "span",
+     "instructions": "Which spans are the employer of Ada?",
+     "criteria": [
+      "employer"
+     ]
+    },
+    "answer": {
+     "type": "span",
+     "target": "user",
+     "spans": [
+      {
+       "start": 13,
+       "end": 17,
+       "label": "employer",
+       "probability": 0.7987654805183411,
+       "text": "Acme",
+       "score": 0.798765466200075
+      }
+     ],
+     "head": "relation",
+     "head_reason": "relation adapter; relation question (pair)",
+     "threshold": 0.55
+    }
+   },
+   {
+    "id": "fixture-multi",
+    "title": "Fixture: multi",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": "Ada works at Acme in London.",
+    "question": {
+     "type": "span",
+     "instructions": "Find the related employer and city for Ada.",
+     "criteria": [
+      "employer",
+      "city"
+     ]
+    },
+    "answer": {
+     "type": "span",
+     "target": "user",
+     "spans": [
+      {
+       "start": 13,
+       "end": 17,
+       "label": "employer",
+       "probability": 0.5426420569419861,
+       "text": "Acme",
+       "score": 0.5426420692789182
+      },
+      {
+       "start": 21,
+       "end": 27,
+       "label": "city",
+       "probability": 0.5859254598617554,
+       "text": "London",
+       "score": 0.5859254736093154
+      }
+     ],
+     "head": "relation",
+     "head_reason": "relation adapter; relation question (multi)",
+     "threshold": 0.45
+    }
+   }
+  ]
+ },
+ {
+  "id": "span",
+  "dir": "span",
+  "kind": "fast",
+  "label": "Labeled Spans",
+  "choices": [
+   {
+    "id": "fixture-description",
+    "title": "Fixture: description",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": "Ada Lovelace wrote notes about computing.",
+    "question": {
+     "type": "span",
+     "criteria": {
+      "person": "A named human being"
+     }
+    },
+    "answer": {
+     "type": "span",
+     "target": "user",
+     "spans": [
+      {
+       "start": 0,
+       "end": 12,
+       "label": "person",
+       "probability": 0.8002910017967224,
+       "text": "Ada Lovelace",
+       "score": 0.8002909777642812
+      }
+     ],
+     "head": "span",
+     "head_reason": "span adapter; open labels",
+     "threshold": 0.6
+    }
+   },
+   {
+    "id": "fixture-unicode",
+    "title": "Fixture: unicode",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": "Grüße 👋 — Zoë in 東京. Email: zoe@example.org",
+    "question": {
+     "type": "span",
+     "criteria": {
+      "person": "A named human",
+      "city": "A city",
+      "email": "An email address"
+     }
+    },
+    "answer": {
+     "type": "span",
+     "target": "user",
+     "spans": [
+      {
+       "start": 17,
+       "end": 19,
+       "label": "city",
+       "probability": 0.776195764541626,
+       "text": "東京",
+       "score": 0.7761957371995767
+      },
+      {
+       "start": 28,
+       "end": 43,
+       "label": "email",
+       "probability": 0.9195370674133301,
+       "text": "zoe@example.org",
+       "score": 0.9195370702151691
+      }
+     ],
+     "head": "span",
+     "head_reason": "span adapter; open labels",
+     "threshold": 0.6
+    }
+   }
+  ]
+ },
+ {
+  "id": "span_set",
+  "dir": "span_set",
+  "kind": "fast",
+  "label": "PII & Claims",
+  "choices": [
+   {
+    "id": "fixture-pii",
+    "title": "Fixture: pii",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": "Contact Ada at ada@example.org or call +1 202 555 0147.",
+    "question": {
+     "type": "span",
+     "criteria": [
+      "EMAIL_ADDRESS",
+      "PHONE_NUMBER"
+     ]
+    },
+    "answer": {
+     "type": "span",
+     "target": "user",
+     "spans": [
+      {
+       "start": 15,
+       "end": 30,
+       "label": "EMAIL_ADDRESS",
+       "probability": 0.9999403953552246,
+       "text": "ada@example.org",
+       "score": 0.9999403844588682
+      },
+      {
+       "start": 39,
+       "end": 54,
+       "label": "PHONE_NUMBER",
+       "probability": 0.9981178045272827,
+       "text": "+1 202 555 0147",
+       "score": 0.9981177780103495
+      }
+     ],
+     "head": "span_set",
+     "head_reason": "span_set adapter; pii label set, short bucket (27 target tokens)",
+     "threshold": 0.35
+    }
+   },
+   {
+    "id": "fixture-halu",
+    "title": "Fixture: halu",
+    "image": null,
+    "alt": null,
+    "width": null,
+    "height": null,
+    "state": {
+     "context": "The object is red.",
+     "answer": "The object is blue."
+    },
+    "question": {
+     "type": "span",
+     "criteria": [
+      "unsupported"
+     ]
+    },
+    "answer": {
+     "type": "span",
+     "target": "answer",
+     "spans": [
+      {
+       "start": 14,
+       "end": 18,
+       "label": "unsupported",
+       "probability": 0.9676574468612671,
+       "text": "blue",
+       "score": 0.9676574212569452
+      }
+     ],
+     "head": "span_set",
+     "head_reason": "span_set adapter; halu label set",
+     "threshold": 0.45
+    }
+   }
+  ]
+ },
+ {
+  "id": "vision-box",
+  "dir": "vision-box",
+  "kind": "vision",
+  "label": "Image Regions",
+  "choices": [
+   {
+    "id": "squirrel",
+    "title": "Soccer squirrel",
+    "image": "assets/samples/synthetic/vision_box_span_1_squirrel.webp",
+    "alt": "A squirrel in a blue jersey kicks a soccer ball while a dog in a cap cheers; the scoreboard reads 2 to 1.",
+    "width": 1024,
+    "height": 576,
+    "state": "",
+    "question": {
+     "type": "box",
+     "instructions": "the soccer ball"
+    },
+    "answer": {
+     "type": "box",
+     "box": {
+      "top": 0.625,
+      "bottom": 0.875,
+      "left": 0.625,
+      "right": 0.75
+     },
+     "point": {
+      "y": 0.78125,
+      "x": 0.65625
+     },
+     "confidence": 0.9910073280334473
+    }
+   },
+   {
+    "id": "dragon",
+    "title": "Dragon rider",
+    "image": "assets/samples/synthetic/vision_box_span_2_dragon.webp",
+    "alt": "A woman in a red cape rides an orange dragon above the clouds; an airship and a floating castle are in the sky.",
+    "width": 1024,
+    "height": 576,
+    "state": "",
+    "question": {
+     "type": "box",
+     "instructions": "the dragon's head"
+    },
+    "answer": {
+     "type": "box",
+     "box": {
+      "top": 0.25,
+      "bottom": 1,
+      "left": 0,
+      "right": 1
+     },
+     "point": {
+      "y": 0.46875,
+      "x": 0.53125
+     },
+     "confidence": 0.9887259006500244
+    }
+   },
+   {
+    "id": "space",
+    "title": "Space rabbit",
+    "image": "assets/samples/synthetic/vision_box_span_3_space.webp",
+    "alt": "A rabbit in goggles pulls a small spaceship with a cat pilot across the surface of the moon.",
+    "width": 1024,
+    "height": 576,
+    "state": "",
+    "question": {
+     "type": "box",
+     "instructions": "the rabbit"
+    },
+    "answer": {
+     "type": "box",
+     "box": {
+      "top": 0.25,
+      "bottom": 0.875,
+      "left": 0.375,
+      "right": 0.9375
+     },
+     "point": {
+      "y": 0.46875,
+      "x": 0.78125
+     },
+     "confidence": 0.9972109794616699
+    }
+   },
+   {
+    "id": "submarine",
+    "title": "Submarine comic",
+    "image": "assets/samples/synthetic/vision_box_span_4_submarine_ocr.webp",
+    "alt": "A comic panel: a giant fish swallows a yellow submarine; signs read DANGER GIANT FISH AREA and ATLANTIS 5 km.",
+    "width": 1024,
+    "height": 576,
+    "state": "",
+    "question": {
+     "type": "box",
+     "instructions": "the yellow submarine"
+    },
+    "answer": {
+     "type": "box",
+     "box": {
+      "top": 0.25,
+      "bottom": 0.625,
+      "left": 0.4375,
+      "right": 0.75
+     },
+     "point": {
+      "y": 0.53125,
+      "x": 0.59375
+     },
+     "confidence": 0.7935823202133179
+    }
+   },
+   {
+    "id": "library",
+    "title": "Magic library",
+    "image": "assets/samples/synthetic/vision_pinpoint_1.webp",
+    "alt": "A magic library: a cat sleeps on an open book, a small dragon reads a scroll, two goblins carry a magnifying glass, an owl sits on the chandelier.",
+    "width": 1024,
+    "height": 768,
+    "state": "",
+    "question": {
+     "type": "box",
+     "instructions": "the sleeping cat"
+    },
+    "answer": {
+     "type": "box",
+     "box": {
+      "top": 0.5625,
+      "bottom": 0.875,
+      "left": 0.0625,
+      "right": 0.5
+     },
+     "point": {
+      "y": 0.78125,
+      "x": 0.21875
+     },
+     "confidence": 0.9877710938453674
+    }
+   },
+   {
+    "id": "kitchen",
+    "title": "Wizard kitchen",
+    "image": "assets/samples/synthetic/vision_pinpoint_2.webp",
+    "alt": "A wizard flips pancakes in a kitchen; a treasure chest with a tongue holds socks, a unicorn teapot steams on the stove.",
+    "width": 1024,
+    "height": 768,
+    "state": "",
+    "question": {
+     "type": "box",
+     "instructions": "the treasure chest"
+    },
+    "answer": {
+     "type": "box",
+     "box": {
+      "top": 0.625,
+      "bottom": 0.875,
+      "left": 0.6875,
+      "right": 1
+     },
+     "point": {
+      "y": 0.78125,
+      "x": 0.78125
+     },
+     "confidence": 0.7339479327201843
+    }
+   },
+   {
+    "id": "market",
+    "title": "Goose knight",
+    "image": "assets/samples/synthetic/vision_pinpoint_3.webp",
+    "alt": "A knight rides a goose through a market; a skeleton plays the lute and a winged donut flies over the stalls.",
+    "width": 1024,
+    "height": 768,
+    "state": "",
+    "question": {
+     "type": "box",
+     "instructions": "the knight riding a goose"
+    },
+    "answer": {
+     "type": "box",
+     "box": {
+      "top": 0.1875,
+      "bottom": 0.8125,
+      "left": 0.25,
+      "right": 0.625
+     },
+     "point": {
+      "y": 0.46875,
+      "x": 0.40625
+     },
+     "confidence": 0.908692479133606
+    }
+   },
+   {
+    "id": "reef",
+    "title": "Mermaid workshop",
+    "image": "assets/samples/synthetic/vision_pinpoint_4.webp",
+    "alt": "Under the sea a mermaid repairs a yellow submarine; an octopus holds tools and a crab carries a map.",
+    "width": 1024,
+    "height": 768,
+    "state": "",
+    "question": {
+     "type": "box",
+     "instructions": "the octopus"
+    },
+    "answer": {
+     "type": "box",
+     "box": {
+      "top": 0.3125,
+      "bottom": 0.5625,
+      "left": 0.625,
+      "right": 1
+     },
+     "point": {
+      "y": 0.40625,
+      "x": 0.84375
+     },
+     "confidence": 0.9557948708534241
+    }
+   },
+   {
+    "id": "fixture-box",
+    "title": "Fixture: box",
+    "image": "assets/samples/vision-box.png",
+    "alt": "Rendered fixture: a red square on white",
+    "width": 512,
+    "height": 512,
+    "state": "",
+    "question": {
+     "type": "box",
+     "instructions": "the red square"
+    },
+    "answer": {
+     "type": "box",
+     "box": {
+      "top": 0.1875,
+      "bottom": 0.75,
+      "left": 0.1875,
+      "right": 0.75
+     },
+     "point": {
+      "y": 0.28125,
+      "x": 0.28125
+     },
+     "confidence": 0.9872972965240479
+    }
+   }
+  ]
+ },
+ {
+  "id": "vision-ocr",
+  "dir": "vision-ocr",
+  "kind": "vision",
+  "label": "OCR Check",
+  "choices": [
+   {
+    "id": "submarine",
+    "title": "Submarine comic",
+    "image": "assets/samples/synthetic/vision_box_span_4_submarine_ocr.webp",
+    "alt": "A comic panel: a giant fish swallows a yellow submarine; signs read DANGER GIANT FISH AREA and ATLANTIS 5 km.",
+    "width": 1024,
+    "height": 576,
+    "state": {
+     "ocr": "The Lost Submarine Adventure!\nDANGER\nGIANT FISH AREA\nATLANTIS 9 km"
+    },
+    "question": {
+     "type": "span",
+     "task": "ocr_check",
+     "criteria": [
+      "ocr_error"
+     ]
+    },
+    "answer": {
+     "type": "span",
+     "target": "ocr",
+     "head": "ocr_check",
+     "threshold": 0.45,
+     "spans": [
+      {
+       "start": 62,
+       "end": 63,
+       "label": "ocr_error",
+       "text": "9",
+       "score": 0.931624710559845
+      }
+     ]
+    }
+   },
+   {
+    "id": "letter",
+    "title": "Appointment letter",
+    "image": "assets/samples/synthetic/ocr_document_digital.webp",
+    "alt": "A printed German letter from Nordlicht Service GmbH to Maria Keller confirming an appointment on 18.11.2026 at 14:30.",
+    "width": 725,
+    "height": 1024,
+    "state": {
+     "ocr": "Empfänger:\nMaria Keller\nAhornweg 72\n80469 München"
+    },
+    "question": {
+     "type": "span",
+     "task": "ocr_check",
+     "criteria": [
+      "ocr_error"
+     ]
+    },
+    "answer": {
+     "type": "span",
+     "target": "ocr",
+     "head": "ocr_check",
+     "threshold": 0.45,
+     "spans": [
+      {
+       "start": 17,
+       "end": 35,
+       "label": "ocr_error",
+       "text": "Keller\nAhornweg 72",
+       "score": 0.9616440733273824
+      }
+     ]
+    }
+   },
+   {
+    "id": "broadcast",
+    "title": "News caption",
+    "image": "assets/samples/synthetic/ocr_film_labels.webp",
+    "alt": "A live TV interview; the caption reads LENA HOFFMANN, Projektleiterin, Zukunftsforum Berlin, Technikmesse 2026 eröffnet neue KI-Initiativen.",
+    "width": 1024,
+    "height": 576,
+    "state": {
+     "ocr": "LIVE\nLENA HOFFMANN\nProjektleiterin | Zukunftsforum Berlin\nTechnikmesse 2025 eröffnet neue KI-Initiativen"
+    },
+    "question": {
+     "type": "span",
+     "task": "ocr_check",
+     "criteria": [
+      "ocr_error"
+     ]
+    },
+    "answer": {
+     "type": "span",
+     "target": "ocr",
+     "head": "ocr_check",
+     "threshold": 0.45,
+     "spans": [
+      {
+       "start": 58,
+       "end": 104,
+       "label": "ocr_error",
+       "text": "Technikmesse 2025 eröffnet neue KI-Initiativen",
+       "score": 0.9994842767715454
+      }
+     ]
+    }
+   },
+   {
+    "id": "notes",
+    "title": "Handwritten notes",
+    "image": "assets/samples/synthetic/ocr_letter_handwriting.webp",
+    "alt": "A handwritten German to-do list dated Montag, 16.11.2026, with a phone number +49 170 555 1284 and the door code ZX-418-K.",
+    "width": 1024,
+    "height": 768,
+    "state": {
+     "ocr": "Einkauf & Notizen\nMontag, 16.11.2026\n1. Brot und Äpfel kaufen\n2. Termin bei Dr. Weber um 09:30\n3. Paket für Lena abholen\n4. Rückruf an +49 170 555 1248\n5. Türcode: ZX-418-K"
+    },
+    "question": {
+     "type": "span",
+     "task": "ocr_check",
+     "criteria": [
+      "ocr_error"
+     ]
+    },
+    "answer": {
+     "type": "span",
+     "target": "ocr",
+     "head": "ocr_check",
+     "threshold": 0.45,
+     "spans": [
+      {
+       "start": 124,
+       "end": 151,
+       "label": "ocr_error",
+       "text": "Rückruf an +49 170 555 1248",
+       "score": 0.9974885838372367
+      }
+     ]
+    }
+   },
+   {
+    "id": "bottle",
+    "title": "Engraved bottle",
+    "image": "assets/samples/synthetic/ocr_product_engraved.webp",
+    "alt": "A steel bottle engraved ALPENQUELL, ISOLIERFLASCHE, 750 ML, LIMITED EDITION.",
+    "width": 1024,
+    "height": 768,
+    "state": {
+     "ocr": "BERGQUELL\nISOLIERFLASCHE\n750 ML\nLIMITED EDITION"
+    },
+    "question": {
+     "type": "span",
+     "task": "ocr_check",
+     "criteria": [
+      "ocr_error"
+     ]
+    },
+    "answer": {
+     "type": "span",
+     "target": "ocr",
+     "head": "ocr_check",
+     "threshold": 0.45,
+     "spans": [
+      {
+       "start": 0,
+       "end": 9,
+       "label": "ocr_error",
+       "text": "BERGQUELL",
+       "score": 0.9994152784347534
+      }
+     ]
+    }
+   },
+   {
+    "id": "fixture-ocr",
+    "title": "Fixture: ocr",
+    "image": "assets/samples/vision-ocr.png",
+    "alt": "Rendered scan: Invoice 123, Total: EUR 42.00",
+    "width": 512,
+    "height": 512,
+    "state": {
+     "ocr": "Invoice 128\nTotal: EUR 92.00"
+    },
+    "question": {
+     "type": "span",
+     "task": "ocr_check",
+     "criteria": [
+      "ocr_error"
+     ]
+    },
+    "answer": {
+     "type": "span",
+     "target": "ocr",
+     "spans": [
+      {
+       "start": 0,
+       "end": 11,
+       "label": "ocr_error",
+       "text": "Invoice 128",
+       "score": 0.9996441602706909
+      },
+      {
+       "start": 19,
+       "end": 28,
+       "label": "ocr_error",
+       "text": "EUR 92.00",
+       "score": 0.9994722604751587
+      }
+     ],
+     "head": "ocr_check",
+     "threshold": 0.45
+    }
+   }
+  ]
+ },
+ {
+  "id": "vision-span",
+  "dir": "vision-span",
+  "kind": "vision",
+  "label": "Image Claims",
+  "choices": [
+   {
+    "id": "squirrel",
+    "title": "Soccer squirrel",
+    "image": "assets/samples/synthetic/vision_box_span_1_squirrel.webp",
+    "alt": "A squirrel in a blue jersey kicks a soccer ball while a dog in a cap cheers; the scoreboard reads 2 to 1.",
+    "width": 1024,
+    "height": 576,
+    "state": {
+     "user": "Describe the picture.",
+     "answer": "A squirrel in a blue jersey kicks a soccer ball. The scoreboard shows 2 to 1. A cat is the goalkeeper."
+    },
+    "question": {
+     "type": "span",
+     "criteria": [
+      "unsupported"
+     ]
+    },
+    "answer": {
+     "type": "span",
+     "target": "answer",
+     "head": "image_halu",
+     "threshold": 0.05,
+     "spans": [
+      {
+       "start": 78,
+       "end": 102,
+       "label": "unsupported",
+       "text": "A cat is the goalkeeper.",
+       "score": 0.9981436630090078
+      }
+     ]
+    }
+   },
+   {
+    "id": "space",
+    "title": "Space rabbit",
+    "image": "assets/samples/synthetic/vision_box_span_3_space.webp",
+    "alt": "A rabbit in goggles pulls a small spaceship with a cat pilot across the surface of the moon.",
+    "width": 1024,
+    "height": 576,
+    "state": {
+     "user": "Describe the picture.",
+     "answer": "A rabbit pulls a spaceship across the moon. A dog flies the spaceship."
+    },
+    "question": {
+     "type": "span",
+     "criteria": [
+      "unsupported"
+     ]
+    },
+    "answer": {
+     "type": "span",
+     "target": "answer",
+     "head": "image_halu",
+     "threshold": 0.05,
+     "spans": [
+      {
+       "start": 44,
+       "end": 70,
+       "label": "unsupported",
+       "text": "A dog flies the spaceship.",
+       "score": 0.17085046569506326
+      }
+     ]
+    }
+   },
+   {
+    "id": "fixture-span",
+    "title": "Fixture: span",
+    "image": "assets/samples/vision-span.png",
+    "alt": "Rendered fixture: a red square on white",
+    "width": 512,
+    "height": 512,
+    "state": {
+     "user": "Describe the picture.",
+     "answer": "A blue circle on a white background."
+    },
+    "question": {
+     "type": "span",
+     "criteria": [
+      "unsupported"
+     ]
+    },
+    "answer": {
+     "type": "span",
+     "target": "answer",
+     "spans": [
+      {
+       "start": 0,
+       "end": 36,
+       "label": "unsupported",
+       "text": "A blue circle on a white background.",
+       "score": 0.9992934465408325
+      }
+     ],
+     "head": "image_halu",
+     "threshold": 0.05
+    }
+   }
+  ]
+ }
+]

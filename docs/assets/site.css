@@ -1,0 +1,413 @@
+/* Page layout and the demo's own pieces. Colors, radii and shadows come from defuss-shadcn tokens; the page overrides a
+   few of them below for its brand color and for WCAG AA contrast (4.5:1 for text) in both themes. */
+/* One knob for the whole site: every rem-based size (text, spacing, components) scales by 1.25. */
+html { font-size: 125%; }
+
+:root {
+  --primary: oklch(0.47 0.21 276); --primary-foreground: oklch(0.99 0 0); --ring: oklch(0.55 0.2 276);
+  --muted-foreground: oklch(0.45 0 0);
+  --dd-brand: oklch(0.47 0.21 276); --dd-brand-soft: color-mix(in oklab, var(--dd-brand) 12%, var(--background));
+  --dd-logo-bg: var(--dd-brand); --dd-logo-ink: #fff; --dd-logo-accent: oklch(0.88 0.13 165);
+  --dd-hero-ink: oklch(0.99 0 0); --dd-hero-muted: oklch(0.9 0.02 276);
+  /* chart series: original weights, then FP32, q8, q4 (or CPU/WASM, WebKit, WebGPU): hue and lightness both differ */
+  --dd-c-0: oklch(0.78 0 0); --dd-c-1: oklch(0.76 0.14 70); --dd-c-2: oklch(0.6 0.11 190); --dd-c-3: oklch(0.47 0.21 276);
+}
+.dark {
+  --primary: oklch(0.74 0.14 276); --primary-foreground: oklch(0.17 0.03 276); --ring: oklch(0.7 0.14 276);
+  --muted-foreground: oklch(0.76 0 0); --destructive-foreground: oklch(0.16 0 0);
+  --dd-brand: oklch(0.74 0.14 276);
+  --dd-c-0: oklch(0.5 0 0); --dd-c-1: oklch(0.8 0.13 75); --dd-c-2: oklch(0.72 0.11 190); --dd-c-3: oklch(0.72 0.15 276);
+}
+@layer components {
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-padding-top: 5.5rem; }
+  body { margin: 0; font-size: 1rem; line-height: 1.65; background: var(--background); color: var(--foreground); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  [hidden] { display: none !important; }
+  .dd-page { overflow-x: clip; }
+  .dd-main { display: flex; flex-direction: column; gap: clamp(5rem, 11vw, 9rem); padding-block-end: clamp(5rem, 10vw, 8rem); }
+  .dd-section { width: 100%; max-width: 76rem; margin-inline: auto; padding-inline: clamp(1rem, 4vw, 2rem); scroll-margin-top: 5.5rem; }
+  .dd-icon { width: 1em; height: 1em; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .dd-logo { width: 1.75rem; height: 1.75rem; flex: none; }
+  .mk-footer-copy a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+  code { font-family: var(--font-mono); font-size: .9em; }
+  .dd-skip { position: absolute; inset-inline-start: 1rem; inset-block-start: -4rem; z-index: 60; padding: .625rem 1rem; border-radius: var(--radius-md); background: var(--primary); color: var(--primary-foreground); font-weight: 600; }
+  .dd-skip:focus-visible { inset-block-start: 1rem; }
+
+  /* header: away from the top edge, the brand mark in the logo colors */
+  .dd-header { margin-block-start: .75rem; }
+  .dd-header .mk-header-brand { gap: .625rem; font-weight: 700; letter-spacing: -.01em; }
+  .dd-lang .toggle { min-width: 2.5rem; font-weight: 600; }
+  .mk-header-nav .nav-menu-link[aria-current="location"] { color: var(--foreground); text-decoration: underline; text-decoration-color: var(--dd-brand); text-decoration-thickness: 2px; text-underline-offset: 6px; }
+
+  /* section heads: eyebrow, title with its deep link, lead */
+  .dd-section-head { display: flex; flex-direction: column; gap: .75rem; max-width: 46rem; margin-block-end: clamp(2rem, 5vw, 3rem); }
+  .dd-eyebrow { margin: 0; font-size: .875rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--dd-brand); }
+  .dd-section-head h2, .dd-enterprise h2 { margin: 0; font-size: clamp(1.875rem, 4.2vw, 2.75rem); line-height: 1.12; letter-spacing: -.025em; font-weight: 750; text-wrap: balance; }
+  .dd-section-lead { margin: 0; font-size: clamp(1.0625rem, 1.6vw, 1.25rem); line-height: 1.6; color: var(--muted-foreground); text-wrap: pretty; }
+  .heading-anchor { text-decoration: none; }
+  h2 > .heading-anchor, h3 > .heading-anchor { margin-inline-end: .35em; font-weight: 500; }
+  .heading-anchor:hover, .heading-anchor:focus-visible { color: var(--dd-brand); }
+
+  /* hero: a deliberate dark band in both themes, the shader behind it, a solid color under the shader so the text
+     keeps its contrast when the shader is hidden (prefers-contrast: more, no WebGL2) */
+  .dd-hero { position: relative; isolation: isolate; overflow: hidden; width: min(100% - 2 * clamp(.75rem, 3vw, 2rem), 80rem); margin: clamp(.75rem, 2vw, 1.5rem) auto 0;
+    border-radius: clamp(1rem, 2.5vw, 2rem); background: #0b0d22; color: var(--dd-hero-ink); scroll-margin-top: 5.5rem;
+    box-shadow: 0 40px 120px -40px oklch(0.4 0.2 276 / .55); }
+  .dd-hero::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(180deg, oklch(0.12 0.03 276 / .35), oklch(0.12 0.03 276 / .7)); }
+  /* The dot layer: above the darkening overlay, screened onto the gradient, strongest at the upper right and fading
+     under the copy, which stays above it. */
+  .dd-hero .dd-hero-dots { z-index: 0; opacity: .8; mix-blend-mode: screen; mask-image: radial-gradient(85% 95% at 78% 22%, #000, transparent 78%); }
+  .dd-hero-inner { position: relative; z-index: 1; }
+  .dd-hero-inner { display: grid; gap: clamp(2.5rem, 5vw, 4rem); grid-template-columns: minmax(0, 1fr); padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 5vw, 4rem) clamp(2.5rem, 6vw, 4.5rem); }
+  @media (min-width: 64rem) { .dd-hero-inner { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); align-items: center; } }
+  /* The copy is a size container: the title scales with its column, not the viewport, so long German words and the
+     rotating phrases (which never wrap) stay out of the side column; a word that still does not fit breaks. */
+  .dd-hero-copy { display: flex; flex-direction: column; gap: 1.5rem; align-items: flex-start; min-width: 0; container-type: inline-size; }
+  .dd-hero-copy > * { max-width: 100%; }
+  .dd-hero-pill { display: inline-flex; align-items: center; gap: .625rem; padding: .3rem .875rem .3rem .3rem; border: 1px solid oklch(1 0 0 / .25); border-radius: 999px;
+    background: oklch(1 0 0 / .08); color: var(--dd-hero-ink); font-size: .9375rem; text-decoration: none; backdrop-filter: blur(8px); }
+  .dd-hero-pill:hover { background: oklch(1 0 0 / .14); }
+  .dd-hero-pill .badge { background: var(--dd-logo-accent); color: oklch(0.2 0.03 165); }
+  .dd-hero-title { margin: 0; font-size: clamp(2rem, 9cqi, 4.5rem); line-height: 1.04; letter-spacing: -.035em; font-weight: 800; text-wrap: balance;
+    overflow-wrap: break-word; }
+  .dd-hero-rotate { display: block; line-height: 1.2; color: var(--dd-logo-accent); }
+  .dd-hero-lead { margin: 0; max-width: 40rem; font-size: clamp(1.125rem, 1.8vw, 1.3125rem); line-height: 1.6; color: var(--dd-hero-muted); text-wrap: pretty; }
+  .dd-hero-lead strong { color: var(--dd-hero-ink); }
+  .dd-hero-lead a, .dd-hero-note a { color: var(--dd-hero-ink); text-decoration: underline; text-decoration-color: oklch(1 0 0 / .45); text-underline-offset: .2em; }
+  .dd-hero-lead a:hover, .dd-hero-note a:hover { text-decoration-color: currentColor; }
+  .dd-hero-note { margin: 0; font-size: .9375rem; line-height: 1.65; color: var(--dd-hero-muted); }
+  .dd-ext { width: .8em; height: .8em; margin-inline-start: .15em; vertical-align: -.05em; }
+  /* The main call to action in a white glow (defuss-shadcn aura, shapes.css): the glow follows the button's radius. */
+  .dd-cta-aura { display: inline-grid; --shape-round: var(--radius-md); --shape-ink: oklch(1 0 0); }
+  /* The closing call to action: the theme's muted surface with a faint brand tint, so it sits in the page in both themes
+     instead of a dark slab against a light page. */
+  .dd-cta .mk-cta-inner { border: 1px solid var(--border);
+    background: radial-gradient(55% 90% at 12% 0%, color-mix(in oklab, var(--primary) 14%, transparent), transparent 70%),
+      radial-gradient(45% 90% at 92% 100%, color-mix(in oklab, var(--dd-c-2) 14%, transparent), transparent 70%), var(--muted); }
+  .dd-hero-actions { display: flex; gap: .75rem; flex-wrap: wrap; }
+  .dd-hero .btn:not(.dd-btn-glass):not(.dd-copy) { background: var(--dd-hero-ink); color: oklch(0.2 0.05 276); }
+  .dd-hero .btn:not(.dd-btn-glass):not(.dd-copy):hover { background: oklch(0.9 0.03 276); }
+  .dd-btn-glass { border: 1px solid oklch(1 0 0 / .35); background: oklch(1 0 0 / .06); color: var(--dd-hero-ink); }
+  .dd-btn-glass:hover { background: oklch(1 0 0 / .14); color: var(--dd-hero-ink); }
+  .dd-hero .dd-install { width: min(100%, 30rem); }
+  .dd-hero .dd-pm .toggle { color: var(--dd-hero-muted); border-color: oklch(1 0 0 / .3); background: transparent; }
+  .dd-hero .dd-pm .toggle[aria-pressed="true"] { color: oklch(0.2 0.05 276); background: var(--dd-hero-ink); }
+  .dd-hero .dd-mockup { --mockup-code-bg: oklch(0.1 0.02 276 / .75); background: oklch(0.1 0.02 276 / .72); color: var(--dd-hero-ink); border: 1px solid oklch(1 0 0 / .18); }
+  .dd-hero .dd-mockup .dd-copy { color: var(--dd-hero-muted); }
+
+  /* hero side: a recorded question and answer above the numbers */
+  .dd-hero-side { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+  .dd-hero-answer { margin: 0; display: flex; flex-direction: column; gap: .75rem; padding: clamp(1rem, 2.5vw, 1.5rem); border-radius: var(--radius-xl);
+    background: oklch(0.12 0.03 276 / .78); border: 1px solid oklch(1 0 0 / .16); backdrop-filter: blur(10px); }
+  .dd-hero-answer figcaption, .dd-hero-evidence > span:first-child { font-size: .8125rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--dd-hero-muted); }
+  .dd-hero-question { margin: 0; display: flex; align-items: flex-start; gap: .75rem; padding: .75rem 1rem; border-inline-start: 3px solid var(--dd-logo-accent);
+    border-radius: 0 .625rem .625rem 0; background: oklch(1 0 0 / .07); font-size: 1.125rem; font-weight: 600; line-height: 1.45; color: var(--dd-hero-ink); }
+  .dd-hero-question p { margin: 0; min-width: 0; overflow-wrap: break-word; }
+  .dd-hero-question .dd-icon { flex: none; width: 1.75rem; height: 1.75rem; padding: .3rem; border-radius: 999px; background: oklch(1 0 0 / .14); color: var(--dd-hero-ink); }
+  .dd-hero-options { display: grid; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+  .dd-hero-options li { display: grid; grid-template-columns: 1fr auto; row-gap: .3rem; font-size: 1rem; color: var(--dd-hero-muted); }
+  .dd-hero-options li[data-chosen] { color: var(--dd-hero-ink); font-weight: 600; }
+  .dd-hero-p { font-family: var(--font-mono, ui-monospace, monospace); font-variant-numeric: tabular-nums; }
+  .dd-hero-options .dd-bar { grid-column: 1 / -1; height: .375rem; border-radius: 999px;
+    background: linear-gradient(90deg, var(--dd-logo-accent) var(--dd-bar), oklch(1 0 0 / .14) var(--dd-bar)); }
+  .dd-hero-options li:not([data-chosen]) .dd-bar { background: linear-gradient(90deg, var(--dd-hero-muted) var(--dd-bar), oklch(1 0 0 / .14) var(--dd-bar)); }
+  .dd-hero-evidence { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem; }
+  .dd-hero-evidence samp { padding: .15rem .45rem; border-radius: .375rem; font-family: var(--font-mono, ui-monospace, monospace); font-size: .9375rem; color: var(--dd-hero-ink);
+    background: oklch(0.88 0.13 165 / .16); box-shadow: inset 0 -2px 0 var(--dd-logo-accent); }
+
+  /* hero numbers: value first, its meaning under it */
+  .dd-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin: 0; overflow: hidden; border-radius: var(--radius-xl);
+    background: oklch(1 0 0 / .16); border: 1px solid oklch(1 0 0 / .16); }
+  .dd-stat { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: .375rem; padding: clamp(1rem, 2.5vw, 1.5rem); background: oklch(0.12 0.03 276 / .78); backdrop-filter: blur(10px); }
+  .dd-stat dt { font-size: .9375rem; line-height: 1.45; color: var(--dd-hero-muted); }
+  .dd-stat dd { margin: 0; font-size: clamp(1.875rem, 3.6vw, 2.625rem); font-weight: 800; letter-spacing: -.03em; line-height: 1; font-variant-numeric: tabular-nums; color: var(--dd-hero-ink); }
+  .dd-stat dd { display: flex; flex-direction: column; align-items: flex-start; gap: .875rem; }
+  .dd-stat-icon { width: 2.25rem; height: 2.25rem; padding: .5rem; border-radius: .75rem; color: var(--dd-logo-accent);
+    background: oklch(0.88 0.13 165 / .14); box-shadow: inset 0 0 0 1px oklch(0.88 0.13 165 / .28); }
+  .dd-stat:first-child dd { color: var(--dd-logo-accent); }
+
+  /* why: six benefits */
+  .dd-usp-grid { display: grid; gap: clamp(1rem, 2vw, 1.5rem); grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); }
+  .dd-usp { display: flex; flex-direction: column; gap: .625rem; padding: clamp(1.25rem, 2.5vw, 1.75rem); border: 1px solid var(--border); border-radius: var(--radius-xl); background: var(--card); }
+  .dd-usp-icon { display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: var(--radius-lg); font-size: 1.375rem; color: var(--dd-brand); background: var(--dd-brand-soft); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--dd-brand) 25%, transparent); }
+  .dd-usp h3 { margin: .25rem 0 0; font-size: 1.1875rem; line-height: 1.3; letter-spacing: -.01em; }
+  .dd-usp p { margin: 0; font-size: 1rem; line-height: 1.6; color: var(--muted-foreground); text-wrap: pretty; }
+
+  /* examples */
+  .dd-window { display: flex; flex-direction: column; gap: 1.25rem; margin-block-start: 2.5rem; padding: clamp(.75rem, 2.5vw, 1.5rem);
+    background-color: var(--card); border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-2xl), 0 30px 80px -30px color-mix(in oklab, var(--chart-2) 45%, transparent); }
+  .dd-tabs .tab-list { margin-block-end: 1.25rem; overflow-x: auto; }
+  .dd-panel { display: flex; flex-direction: column; gap: 1.25rem; }
+  .dd-panel-intro { margin: 0; color: var(--muted-foreground); }
+  .dd-state-text { margin: 0; }
+  .dd-sample { font: inherit; }
+  .dd-json { margin: 0; padding: .75rem 1rem; max-height: 22rem; overflow: auto; border-radius: var(--radius-lg); background: var(--muted); font-size: .75rem; line-height: 1.5; }
+  .dd-raw summary { cursor: pointer; font-size: .8125rem; color: var(--muted-foreground); }
+  .dd-highlight { margin: 0; padding: .75rem 1rem; border: 1px solid var(--border); border-radius: var(--radius-lg); white-space: pre-wrap; line-height: 2.2; overflow-wrap: anywhere; }
+  .dd-mark { --dd-tone: var(--chart-1); position: relative; padding: .1em .2em; border-radius: .25rem; color: inherit;
+    background: color-mix(in oklab, var(--dd-tone) 28%, transparent); box-shadow: inset 0 -2px 0 var(--dd-tone); }
+  .dd-mark-label { margin-inline-start: .3em; padding: 0 .3em; border-radius: .2rem; font-family: var(--font-mono); font-size: .625rem; vertical-align: .15em;
+    background: color-mix(in oklab, var(--dd-tone) 55%, var(--foreground)); color: var(--background); }
+  .dd-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: end; white-space: nowrap; }
+  .dd-empty, .dd-muted { margin: 0; color: var(--muted-foreground); font-size: .875rem; }
+  .dd-figure { margin: 0; max-width: 22rem; }
+  /* the frame clips the dimming shadow around the box to the image */
+  .dd-frame { position: relative; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius-md); background: #fff; }
+  .dd-frame img { display: block; width: 100%; height: auto; }
+  .dd-box { position: absolute; border: 3px solid var(--chart-4); border-radius: .25rem; box-shadow: 0 0 0 9999px color-mix(in oklab, #000 22%, transparent); pointer-events: none; }
+  .dd-point { position: absolute; width: .75rem; height: .75rem; margin: -.375rem 0 0 -.375rem; border-radius: 50%; background: var(--chart-4); outline: 2px solid #fff; pointer-events: none; }
+  .dd-figure figcaption { margin-top: .5rem; font-size: .75rem; color: var(--muted-foreground); font-family: var(--font-mono); }
+
+  /* run settings */
+  .dd-settings { padding: .75rem 1rem; border: 1px solid var(--border); border-radius: var(--radius-lg); }
+  .dd-settings summary { display: flex; align-items: center; gap: .5rem; cursor: pointer; font-size: .875rem; font-weight: 500; }
+  .dd-settings[open] summary { margin-block-end: .75rem; }
+  .dd-settings > .dd-hint { display: block; margin: 0 0 1rem; }
+  .dd-field { display: flex; flex-direction: column; gap: .375rem; min-width: 0; flex: 1 1 10rem; }
+  .dd-field-wide { flex: 3 1 18rem; }
+  .dd-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .dd-hint { font-size: .75rem; color: var(--muted-foreground); }
+  .dd-actions { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .dd-status { margin: 0; font-size: .8125rem; color: var(--muted-foreground); }
+  .dd-status:empty { display: none; }
+  .dd-progress { display: grid; gap: .75rem; }
+  .dd-progress[hidden], .dd-progress [hidden] { display: none; }
+  .dd-progress .progress-header { gap: .75rem; font-size: .8125rem; }
+  .dd-progress .progress-label { min-width: 0; overflow-wrap: anywhere; }
+  .dd-progress .progress-value { flex: none; font-variant-numeric: tabular-nums; }
+
+  /* how it works: the diagram, then three notes */
+  .dd-pipeline { margin: 0; padding: clamp(1rem, 3vw, 2rem); border: 1px solid var(--border); border-radius: var(--radius-xl); background: var(--card); overflow-x: auto; }
+  .dd-notes { display: grid; gap: clamp(1rem, 2vw, 1.5rem); grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); margin-block-start: clamp(1.5rem, 3vw, 2.5rem); }
+  .dd-note h3 { margin: 0 0 .5rem; font-size: 1.125rem; line-height: 1.35; }
+  .dd-note p { margin: 0; color: var(--muted-foreground); text-wrap: pretty; }
+
+  /* numbers: three charts, each with its factors, its data table and its source */
+  .dd-charts { display: grid; gap: clamp(1.25rem, 2.5vw, 2rem); }
+  .dd-chart { display: flex; flex-direction: column; gap: 1rem; margin: 0; padding: clamp(1.25rem, 2.5vw, 1.75rem); border: 1px solid var(--border); border-radius: var(--radius-xl); background: var(--card); scroll-margin-top: 5.5rem; }
+  .dd-chart-head { display: flex; flex-direction: column; gap: .375rem; }
+  .dd-chart .chart-title { display: flex; align-items: center; gap: .5rem; margin: 0; font-size: 1.25rem; line-height: 1.3; }
+  .dd-chart .chart-title .dd-icon { color: var(--dd-brand); }
+  .dd-chart .chart-dek { margin: 0; font-size: .9375rem; color: var(--muted-foreground); text-wrap: pretty; }
+  .dd-chart .chart { min-height: 20rem; }
+  .dd-chart .chart-source { margin: 0; font-size: .875rem; color: var(--muted-foreground); }
+  .dd-controls { display: flex; flex-wrap: wrap; gap: .75rem 1.25rem; }
+  .dd-factor .toggle { font-size: .875rem; }
+  .dd-factor .toggle:disabled { opacity: .45; }
+  /* The numbers under each chart: a bordered card with its caption on top; figures right-aligned (.dd-num). */
+  .dd-data .table-container { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow-x: auto; }
+  .dd-data table { width: 100%; margin: 0; font-size: .875rem; border-collapse: collapse; }
+  .dd-data caption { caption-side: top; padding: .625rem .875rem; text-align: start; font-size: .8125rem; font-weight: 600; color: var(--muted-foreground); border-block-end: 1px solid var(--border); background: var(--muted); }
+  .dd-data thead th { font-family: inherit; font-size: .8125rem; font-weight: 600; color: var(--muted-foreground); white-space: nowrap; }
+  .dd-data thead th:first-child { text-align: start; }
+  .dd-data :is(th, td) { padding: .5rem .875rem; }
+  .dd-data tbody th { font-weight: 500; text-align: start; }
+  .dd-data tbody tr:last-child > * { border-block-end: 0; }
+  /* Alternate rows on the muted surface, so a row reads across from its name to its figures. */
+  .dd-data tbody tr:nth-child(even) { background: color-mix(in oklab, var(--muted) 70%, transparent); }
+  /* opened from disk no chart draws (the head script marks it): the data tables stand in. Over HTTP the chart areas
+     keep their height from the first paint, so a deep link below them lands where it points. */
+  html[data-static] .dd-chart .chart { display: none; }
+
+  /* for teams: a brand-tinted band with the offer and a contrasting card */
+  .dd-enterprise { position: relative; isolation: isolate; padding-block: clamp(3.5rem, 8vw, 6rem); scroll-margin-top: 5.5rem;
+    background: radial-gradient(60% 80% at 15% 20%, color-mix(in oklab, var(--dd-brand) 14%, transparent), transparent 70%), var(--dd-brand-soft);
+    border-block: 1px solid color-mix(in oklab, var(--dd-brand) 22%, var(--border)); }
+  .dd-enterprise-inner { display: grid; gap: clamp(2rem, 5vw, 4rem); align-items: center; width: 100%; max-width: 76rem; margin-inline: auto; padding-inline: clamp(1rem, 4vw, 2rem); }
+  @media (min-width: 60rem) { .dd-enterprise-inner { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); } }
+  .dd-enterprise-copy { display: flex; flex-direction: column; gap: 1rem; }
+  .dd-ent-list { display: grid; gap: .75rem; margin: .5rem 0 0; padding: 0; list-style: none; }
+  .dd-ent-list li { position: relative; padding-inline-start: 1.75rem; font-size: 1.0625rem; line-height: 1.55; }
+  .dd-ent-list li::before { content: ""; position: absolute; inset-inline-start: 0; inset-block-start: .45em; width: .875rem; height: .875rem; border-radius: 50%;
+    background: var(--dd-brand); box-shadow: 0 0 0 4px color-mix(in oklab, var(--dd-brand) 20%, transparent); }
+  .dd-ent-card { display: flex; flex-direction: column; gap: 1.25rem; padding: clamp(1.5rem, 3vw, 2rem); border: 1px solid color-mix(in oklab, var(--dd-brand) 30%, var(--border)); border-radius: 1.5rem;
+    background: var(--card); box-shadow: 0 30px 80px -40px color-mix(in oklab, var(--dd-brand) 60%, transparent); }
+  .dd-ent-person { display: flex; align-items: center; gap: 1rem; }
+  .dd-ent-portrait { width: 5.5rem; flex: none; }
+  .dd-ent-portrait img { display: block; width: 100%; height: auto; }
+  .dd-ent-name { margin: 0; font-size: 1.375rem; font-weight: 700; }
+  .dd-ent-role { margin: 0; font-size: .9375rem; line-height: 1.5; color: var(--muted-foreground); }
+  .dd-ent-card .btn { align-self: flex-start; }
+
+  /* get started: vertical steps with their code windows */
+  .dd-steps { max-width: 72rem; }
+  .dd-steps .step-content { display: flex; flex-direction: column; gap: .625rem; min-width: 0; padding-block-end: 2rem; }
+  .dd-steps .step-title { margin: 0; font-size: 1.25rem; line-height: 1.35; font-weight: 700; }
+  .dd-steps .step-description { margin: 0; font-size: 1rem; color: var(--muted-foreground); }
+  .dd-steps .step[data-status] .step-indicator { flex: none; background: var(--dd-brand); color: var(--primary-foreground); border-color: var(--dd-brand); font-weight: 700; }
+
+  /* code windows: Shiki-colored mockup-code with a copy button */
+  .dd-install { display: flex; flex-direction: column; gap: .625rem; }
+  .dd-mockup { position: relative; max-width: 100%; margin: 0; overflow-x: auto; font-size: .9375rem; border: 1px solid var(--border); }
+  .dd-mockup pre { padding-inline-end: 3rem; }
+  .dd-mockup .dd-copy { position: absolute; inset-block-start: .375rem; inset-inline-end: .375rem; }
+  .dd-mockup[data-title] .dd-copy { inset-block-start: .25rem; }
+  .dd-mockup code span[style] { color: var(--shiki-light); }
+  .dark .dd-mockup code span[style] { color: var(--shiki-dark); }
+  .dd-hero .dd-mockup code span[style] { color: var(--shiki-dark); }
+
+/* Shiki tokens carry both theme colors as variables (scripts/highlight.ts); the page theme picks one. */
+.dd-shiki span[style] { color: var(--shiki-light); }
+.dark .dd-shiki span[style] { color: var(--shiki-dark); }
+.dd-shiki .line { display: block; min-height: 1lh; }
+.dd-json code .line { white-space: pre-wrap; overflow-wrap: anywhere; }
+
+/* tab icons */
+/* ten tabs wrap onto a second row instead of squeezing their labels */
+.dd-tabs .tab-list { display: flex; flex-wrap: wrap; height: auto; width: auto; justify-content: flex-start; gap: .25rem; }
+/* icon on top, the label under it on up to two lines; five tiles per row, so ten tabs fill two even rows */
+.dd-tabs .tab-list { gap: .375rem; width: 100%; }
+.dd-tabs .tab-trigger { flex: 1 1 calc(20% - .375rem); display: inline-flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: .375rem; min-width: 6.25rem; height: auto; min-height: 4.75rem; padding: .625rem .5rem; white-space: normal; text-align: center; line-height: 1.2; overflow: visible; }
+.dd-tabs .tab-trigger .dd-icon { width: 1.375rem; height: 1.375rem; }
+/* the change column of the quality table reads as a loss */
+/* mixed toward the text color: plain --destructive is 4.49:1 on the tinted rows in light mode, below AA */
+#measured-quality .dd-data tbody td:last-child { color: color-mix(in oklab, var(--destructive) 80%, var(--foreground)); }
+
+/* sample pickers: a row of thumbnails with titles */
+.dd-picker { display: flex; gap: .5rem; overflow-x: auto; padding-block-end: .25rem; }
+.dd-thumb { flex: none; display: flex; flex-direction: column; align-items: center; gap: .25rem; width: 6.5rem; padding: .25rem; border: 1px solid var(--border);
+  border-radius: var(--radius-md); background: var(--card); color: var(--foreground); font: inherit; font-size: .6875rem; line-height: 1.3; cursor: pointer; text-align: center; }
+.dd-thumb img { display: block; width: 100%; height: 3.6rem; object-fit: cover; border-radius: calc(var(--radius-md) - .125rem); }
+.dd-thumb-icon { width: 100%; height: 3.6rem; padding: .9rem; color: var(--muted-foreground); }
+.dd-thumb[aria-pressed="true"] { border-color: var(--primary); box-shadow: 0 0 0 2px color-mix(in oklab, var(--primary) 35%, transparent); }
+.dd-thumb:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+/* highlighted editors: a transparent textarea over the highlighted copy of its text, both with the same metrics */
+.dd-editor { position: relative; display: grid; border: 1px solid var(--input); border-radius: var(--radius-md); background: var(--muted); }
+.dd-editor:focus-within { outline: 2px solid var(--ring); outline-offset: 1px; }
+.dd-editor > * { grid-area: 1 / 1; margin: 0; padding: .5rem .75rem; border: 0; font-family: var(--font-mono); font-size: .8125rem; line-height: 1.5;
+  white-space: pre-wrap; overflow-wrap: anywhere; tab-size: 2; }
+.dd-editor-view { overflow: hidden; pointer-events: none; color: var(--foreground); }
+.dd-editor-view code { font: inherit; }
+.dd-editor-input { resize: vertical; min-height: 7.5rem; overflow: auto; background: transparent; color: transparent; caret-color: var(--foreground); outline: none; }
+.dd-editor-input::selection { background: color-mix(in oklab, var(--primary) 30%, transparent); color: transparent; }
+/* forced colors replace the transparent text with the system color; show the textarea alone then */
+@media (forced-colors: active) {
+  .dd-editor-view { display: none; }
+  .dd-editor-input { color: CanvasText; }
+}
+
+/* ---- playground: examples to pick, State → Question, then the result ------------------------------------------------ */
+.dd-play { display: flex; flex-direction: column; gap: 1rem; }
+.dd-pick { display: flex; gap: .75rem; align-items: flex-start; flex-wrap: wrap; }
+.dd-pick .dd-picker { flex: 1 1 20rem; min-width: 0; }
+/* the own-image drop zone: a tile beside the thumbnails, its chosen file listed under the zone */
+.dd-drop { flex: 0 1 15rem; gap: .375rem; align-content: start; }
+.dd-drop .file-drop-zone { gap: .125rem; padding: .625rem .75rem; min-height: 6.25rem; align-content: center; border-radius: var(--radius-md); }
+.dd-drop .file-drop-icon { width: 2rem; height: 2rem; margin: 0; }
+.dd-drop .file-drop-icon svg { width: 1.125rem; height: 1.125rem; }
+.dd-drop .file-drop-title { font-size: .8125rem; }
+.dd-drop .file-drop-hint { font-size: .6875rem; }
+.dd-drop .file-drop-item { padding: .25rem .25rem .25rem .375rem; gap: .5rem; }
+
+/* the input row: State, an arrow, Question; stacked on narrow screens with the arrow pointing down */
+.dd-flow { display: grid; grid-template-columns: minmax(0, 1fr) 2.5rem minmax(0, 1fr); gap: .5rem; align-items: stretch; }
+.dd-arrow { display: block; fill: none; stroke: color-mix(in oklab, var(--muted-foreground) 70%, transparent); stroke-width: 2.25; stroke-linecap: round; stroke-linejoin: round; }
+.dd-arrow-side { width: 2.5rem; height: 1.25rem; align-self: center; }
+.dd-arrow-down { width: 1.5rem; height: 2.5rem; margin: -.25rem auto; }
+@media (max-width: 48rem) {
+  .dd-flow { grid-template-columns: minmax(0, 1fr); }
+  .dd-arrow-side { width: 1.25rem; height: 2.5rem; justify-self: center; rotate: 90deg; }
+}
+.dd-editor-card { display: flex; flex-direction: column; min-width: 0; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--card); overflow: hidden; }
+.dd-editor-card:focus-within { border-color: var(--ring); box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 25%, transparent); }
+.dd-editor-head { display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding: .375rem .5rem .375rem .75rem; border-bottom: 1px solid var(--border); background: var(--muted); }
+.dd-editor-label { font-size: .75rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted-foreground); }
+.dd-editor-card .dd-editor { flex: 1; border: 0; border-radius: 0; background: transparent; }
+.dd-editor-card .dd-editor:focus-within { outline: none; }
+.dd-editor-card .dd-editor-input { min-height: 8rem; max-height: 28rem; }
+.dd-editor-input::placeholder { color: var(--muted-foreground); font-family: var(--font-sans); }
+
+/* wide screens: inputs on the left, the result on the right, both in view */
+@media (min-width: 75rem) {
+  .dd-play { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem 1.5rem; align-items: start; }
+  .dd-play > .dd-pick { grid-column: 1 / -1; }
+  .dd-play > .dd-flow { grid-column: 1; grid-template-columns: minmax(0, 1fr); }
+  .dd-play > .dd-flow .dd-arrow-side { width: 1.25rem; height: 2.5rem; justify-self: center; rotate: 90deg; }
+  .dd-play > .dd-arrow-down { display: none; }
+  .dd-play > .dd-result { grid-column: 2; grid-row: 2 / span 2; position: sticky; top: 5.5rem; }
+}
+/* the result: full width under the inputs */
+.dd-result { display: flex; flex-direction: column; gap: .75rem; padding: 1rem clamp(.75rem, 2vw, 1.25rem) 1.25rem; }
+.dd-result-head { display: flex; align-items: center; justify-content: space-between; gap: .75rem; flex-wrap: wrap; }
+.dd-result-title { margin: 0; font-size: 1rem; }
+.dd-result-body { display: flex; flex-direction: column; gap: .75rem; min-width: 0; }
+.dd-recorded, .dd-live-out { display: flex; flex-direction: column; gap: .75rem; min-width: 0; }
+.dd-recorded[hidden], .dd-live-out[hidden] { display: none; }
+.dd-source { margin: 0; font-size: .75rem; color: var(--muted-foreground); }
+.dd-stale { margin: 0; padding: .5rem .75rem; border-radius: var(--radius-md); font-size: .8125rem; background: color-mix(in srgb, var(--chart-4) 14%, transparent); }
+.dd-result:has(.dd-stale:not([hidden])) .dd-result-body { opacity: .55; }
+.dd-result-label { margin: .25rem 0 0; font-size: .75rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted-foreground); }
+.dd-figure { max-width: min(100%, 40rem); }
+.dd-observations { margin: 0; padding-left: 1.25rem; font-size: .875rem; }
+
+/* decisions: one tile per option, yes and no side by side, the chosen one emphasized */
+.dd-verdict { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: .75rem; }
+.dd-option { --dd-tone: var(--muted-foreground); position: relative; display: grid; grid-template-columns: auto 1fr auto; align-items: center; column-gap: .5rem; row-gap: .5rem;
+  padding: .75rem 1rem; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--card); color: var(--muted-foreground); }
+.dd-option::before { content: ""; }
+.dd-option[data-tone="yes"] { --dd-tone: oklch(.62 .17 145); }
+.dd-option[data-tone="no"] { --dd-tone: oklch(.6 .21 25); }
+/* yes and no carry a drawn check and cross (lucide's circle-check and circle-x) in their tone, no emoji */
+.dd-option[data-tone="yes"] { --dd-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='m8.5 12 2.5 2.5 4.5-5'/%3E%3C/svg%3E"); }
+.dd-option[data-tone="no"] { --dd-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='m15 9-6 6M9 9l6 6'/%3E%3C/svg%3E"); }
+.dd-option[data-tone="yes"]::before, .dd-option[data-tone="no"]::before { width: 1.25rem; height: 1.25rem; background: var(--dd-tone);
+  -webkit-mask: var(--dd-icon) center / contain no-repeat; mask: var(--dd-icon) center / contain no-repeat; }
+.dd-option-name { font-weight: 600; font-size: 1rem; text-transform: capitalize; }
+.dd-option-p { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 1rem; }
+.dd-option .dd-bar { grid-column: 1 / -1; margin: 0; height: .375rem; border-radius: 9999px;
+  background: linear-gradient(90deg, var(--dd-tone) var(--dd-bar), color-mix(in oklab, var(--muted-foreground) 16%, transparent) var(--dd-bar)); }
+.dd-option[data-chosen] { color: var(--foreground); border-color: var(--dd-tone); background: color-mix(in srgb, var(--dd-tone) 9%, var(--card));
+  box-shadow: 0 0 0 1px var(--dd-tone); }
+.dd-option[data-tone="option"][data-chosen] { --dd-tone: var(--primary); }
+/* the option not chosen recedes by its icon and bar; its text keeps full contrast */
+.dd-option:not([data-chosen])::before, .dd-option:not([data-chosen]) .dd-bar { opacity: .7; }
+.dd-option-chosen { position: absolute; inset-block-start: -.6rem; inset-inline-end: .75rem; padding: 0 .4rem; border-radius: 9999px; font-size: .625rem; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--background);
+  /* the tone moved toward the text color: darker in light mode, lighter in dark mode, readable on both */
+  background: color-mix(in oklab, var(--dd-tone) 60%, var(--foreground)); }
+
+/* every table: header row on the muted color, body rows striped */
+.dd-table .table { font-size: .8125rem; }
+.dd-table tbody .table-row:nth-child(even) { background-color: color-mix(in oklab, var(--muted) 55%, transparent); }
+.dd-table tbody .table-row:hover { background-color: var(--muted); }
+.dd-table .table-cell { vertical-align: middle; }
+.dd-table .dd-num { white-space: nowrap; }
+
+/* relate rankings: one row per paragraph, a bar per score, the ranking's score emphasized */
+.dd-relate-wrap { display: flex; flex-direction: column; gap: .75rem; }
+.dd-relate .table-cell:nth-child(2) { min-width: 16rem; }
+.dd-relate .dd-by { font-weight: 600; color: var(--foreground); }
+.dd-bar { display: block; height: .25rem; margin-block-end: .2rem; border-radius: .125rem;
+  background: linear-gradient(90deg, var(--chart-2) var(--dd-bar), color-mix(in oklab, var(--muted-foreground) 18%, transparent) var(--dd-bar)); }
+.dd-relate .dd-by .dd-bar { background: linear-gradient(90deg, var(--chart-1) var(--dd-bar), color-mix(in oklab, var(--muted-foreground) 18%, transparent) var(--dd-bar)); }
+.dd-sort { display: flex; gap: .375rem; flex-wrap: wrap; }
+
+/* footer: the consulting card, a leaf-cornered panel with a squircle portrait in a gold halo (as on defuss-vae) */
+.dd-icon-fill { fill: currentColor; stroke: none; }
+.dd-ext { width: .75em; height: .75em; margin-inline-start: .15em; opacity: .75; }
+.dd-ad { --shape-round: 2rem; display: flex; flex-direction: column; gap: .875rem; padding: 1.25rem;
+  border: 1px solid var(--border); box-shadow: var(--shadow-lg);
+  background: linear-gradient(135deg, color-mix(in oklab, var(--chart-1) 16%, var(--card)), var(--card) 65%); }
+.dd-ad-head { display: flex; align-items: center; gap: .875rem; }
+.dd-ad-portrait { width: 5.5rem; flex: none; }
+.dd-ad-portrait img { display: block; width: 100%; height: auto; }
+.dd-ad-name { margin: 0; font-size: 1.25rem; font-weight: 600; color: var(--foreground); }
+.dd-ad-role { margin: 0; font-size: .8125rem; line-height: 1.5; color: var(--muted-foreground); }
+.dd-ad .btn { align-self: flex-start; }
+/* the card is the footer's widest column on large screens */
+@media (min-width: 64rem) { .dd-footer-nav.mk-footer-nav { grid-template-columns: 1fr 1fr 1fr 1.8fr; } }
+
+/* maximize buttons over images, and the image dialog (defuss-shadcn lightbox) */
+.dd-thumb-wrap { position: relative; flex: none; display: flex; }
+.dd-max { position: absolute; inset-block-start: .375rem; inset-inline-end: .375rem; z-index: 1; display: grid; place-items: center;
+  width: 1.75rem; height: 1.75rem; padding: 0; border: 0; border-radius: var(--radius-md); background: oklch(0 0 0 / .55); color: #fff; cursor: zoom-in; }
+.dd-max:hover { background: oklch(0 0 0 / .75); }
+.dd-max:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.dd-max .dd-icon { width: .875rem; height: .875rem; }
+.dd-thumb-wrap .dd-max { inset-block-start: .5rem; inset-inline-end: .5rem; width: 1.5rem; height: 1.5rem; }
+.dd-max-inline { position: static; background: transparent; color: var(--muted-foreground); }
+.dd-max-inline:hover { background: var(--accent); color: var(--accent-foreground); }
+.file-drop-item:has(.dd-max-inline) { grid-template-columns: auto minmax(0, 1fr) auto auto; }
+.dd-lightbox .image-lightbox-content > .dd-frame { max-width: 90vw; max-height: 85vh; }
+.dd-lightbox .image-lightbox-btn .dd-icon { width: 1rem; height: 1rem; }

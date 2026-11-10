@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "case": "billing/wrapper",
+      "max_abs_error": 1.7881393432617188e-07
+    },
+    {
+      "case": "billing/onnx",
+      "max_abs_error": 1.9073486328125e-06
+    },
+    {
+      "case": "billing/probabilities",
+      "max_abs_error": 2.5788045471264454e-07
+    },
+    {
+      "case": "noul/wrapper",
+      "max_abs_error": 1.1920928955078125e-07
+    },
+    {
+      "case": "noul/onnx",
+      "max_abs_error": 1.7881393432617188e-06
+    },
+    {
+      "case": "noul/probabilities",
+      "max_abs_error": 4.69166289707168e-07
+    },
+    {
+      "case": "json/wrapper",
+      "max_abs_error": 2.384185791015625e-07
+    },
+    {
+      "case": "json/onnx",
+      "max_abs_error": 5.960464477539062e-07
+    },
+    {
+      "case": "json/probabilities",
+      "max_abs_error": 1.8734983309176556e-07
+    },
+    {
+      "case": "long/wrapper",
+      "max_abs_error": 8.940696716308594e-08
+    },
+    {
+      "case": "long/onnx",
+      "max_abs_error": 1.430511474609375e-06
+    },
+    {
+      "case": "long/probabilities",
+      "max_abs_error": 1.1617090237003858e-07
+    },
+    {
+      "case": "empty/wrapper",
+      "max_abs_error": 2.384185791015625e-07
+    },
+    {
+      "case": "empty/onnx",
+      "max_abs_error": 9.5367431640625e-07
+    },
+    {
+      "case": "empty/probabilities",
+      "max_abs_error": 0.0
+    }
+  ],
+  "torch": "2.15.0+cpu",
+  "tests": "real checkpoint; eager FP32 vs portable wrapper vs ONNX Runtime CPU"
+}

@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "model": "vllm-sr/vela3-fast-vision",
+  "task": "ocr",
+  "precision": "w4a32",
+  "maxLogitError": 0.6168723106384277,
+  "maxScoreDrift": 0.00035299360752105713,
+  "checks": [
+    {
+      "name": "ocr",
+      "maxLogitError": 0.6168723106384277,
+      "decodedOutputMatched": true,
+      "milliseconds": 25738
+    }
+  ],
+  "backend": "wasm",
+  "browser": "156.0.8078.4"
+}

@@ -1,0 +1,25 @@
+{
+  // Type-checks every TypeScript file of the repository (`make lint`); nothing is emitted. Node.js 26 and Bun run
+  // scripts/*.ts directly by stripping types, so imports name the .ts files and only erasable syntax is allowed.
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "lib": ["es2022", "dom", "dom.iterable"],
+    "types": ["node"],
+    "strict": true,
+    "noEmit": true,
+    "rewriteRelativeImportExtensions": true,
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "checkJs": false
+  },
+  "include": ["src", "scripts", "examples", "tests", "*.config.ts"],
+  "exclude": ["tests/types", "tests/fixtures"]
+}

@@ -1,0 +1,250 @@
+[
+  {
+    "name": "employment",
+    "state": "Ada works at Acme in London.",
+    "question": {
+      "type": "span",
+      "instructions": "Which spans are the employer of Ada?",
+      "criteria": [
+        "employer"
+      ]
+    },
+    "ids": [
+      0,
+      49158,
+      37846,
+      259,
+      49155,
+      49156,
+      4503,
+      81,
+      1806,
+      418,
+      3536,
+      1558,
+      281,
+      4528,
+      30,
+      0
+    ],
+    "wordPositions": [
+      6,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14
+    ],
+    "labelPositions": [
+      1
+    ],
+    "offsets": [
+      [
+        0,
+        3
+      ],
+      [
+        4,
+        9
+      ],
+      [
+        10,
+        12
+      ],
+      [
+        13,
+        17
+      ],
+      [
+        18,
+        20
+      ],
+      [
+        21,
+        27
+      ],
+      [
+        27,
+        28
+      ]
+    ],
+    "names": [
+      "employer"
+    ],
+    "logits": [
+      [
+        -2.0928008556365967
+      ],
+      [
+        -3.2508153915405273
+      ],
+      [
+        -2.978623628616333
+      ],
+      [
+        1.378596305847168
+      ],
+      [
+        -0.29308149218559265
+      ],
+      [
+        -0.8428134918212891
+      ],
+      [
+        -3.0094268321990967
+      ]
+    ],
+    "answer": {
+      "type": "span",
+      "target": "user",
+      "spans": [
+        {
+          "start": 13,
+          "end": 17,
+          "label": "employer",
+          "probability": 0.7987654805183411,
+          "text": "Acme",
+          "score": 0.798765466200075
+        }
+      ],
+      "head": "relation",
+      "head_reason": "relation adapter; relation question (pair)",
+      "threshold": 0.55
+    }
+  },
+  {
+    "name": "multi",
+    "state": "Ada works at Acme in London.",
+    "question": {
+      "type": "span",
+      "instructions": "Find the related employer and city for Ada.",
+      "criteria": [
+        "employer",
+        "city"
+      ]
+    },
+    "ids": [
+      0,
+      49158,
+      37846,
+      259,
+      49158,
+      20721,
+      49155,
+      49156,
+      4503,
+      81,
+      1806,
+      418,
+      3536,
+      1558,
+      281,
+      4528,
+      30,
+      0
+    ],
+    "wordPositions": [
+      8,
+      10,
+      11,
+      12,
+      14,
+      15,
+      16
+    ],
+    "labelPositions": [
+      1,
+      4
+    ],
+    "offsets": [
+      [
+        0,
+        3
+      ],
+      [
+        4,
+        9
+      ],
+      [
+        10,
+        12
+      ],
+      [
+        13,
+        17
+      ],
+      [
+        18,
+        20
+      ],
+      [
+        21,
+        27
+      ],
+      [
+        27,
+        28
+      ]
+    ],
+    "names": [
+      "employer",
+      "city"
+    ],
+    "logits": [
+      [
+        -2.3140923976898193,
+        -4.1363067626953125
+      ],
+      [
+        -3.491438627243042,
+        -5.209856033325195
+      ],
+      [
+        -3.236502170562744,
+        -5.345996856689453
+      ],
+      [
+        0.17098362743854523,
+        -3.0762264728546143
+      ],
+      [
+        -0.9232652187347412,
+        -3.412371873855591
+      ],
+      [
+        -1.9912693500518799,
+        0.3471466302871704
+      ],
+      [
+        -3.4602408409118652,
+        -4.355833053588867
+      ]
+    ],
+    "answer": {
+      "type": "span",
+      "target": "user",
+      "spans": [
+        {
+          "start": 13,
+          "end": 17,
+          "label": "employer",
+          "probability": 0.5426420569419861,
+          "text": "Acme",
+          "score": 0.5426420692789182
+        },
+        {
+          "start": 21,
+          "end": 27,
+          "label": "city",
+          "probability": 0.5859254598617554,
+          "text": "London",
+          "score": 0.5859254736093154
+        }
+      ],
+      "head": "relation",
+      "head_reason": "relation adapter; relation question (multi)",
+      "threshold": 0.45
+    }
+  }
+]

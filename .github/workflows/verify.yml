@@ -1,0 +1,32 @@
+# CI runs the same gate as local development (`make verify`: lint, unit and browser tests, coverage, e2e), so CI
+# cannot drift from it. Vitest runs the unit tests in Node.js, `bun test` in Bun, Vitest browser mode and the
+# Playwright e2e in real Chromium and WebKit.
+name: verify
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      # Full history: scripts/check-repo.ts rejects AI co-author trailers in every commit, not only the last one.
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      # Node.js, Bun and Python at the versions in mise.toml.
+      - uses: jdx/mise-action@v5
+      # Locked dependencies, Playwright's Chromium and WebKit, git hooks.
+      - run: make setup
+      # The system libraries Chromium and WebKit need on Ubuntu. After `make setup`, so bunx runs the locked
+      # Playwright version and installs the libraries for exactly the browsers it downloaded.
+      - run: bunx playwright install-deps chromium webkit
+      - run: make verify
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: e2e-report
+          path: output/e2e/*.json
+          if-no-files-found: ignore

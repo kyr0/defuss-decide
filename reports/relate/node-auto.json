@@ -1,0 +1,1320 @@
+{
+ "runtime": "node v26.11.1",
+ "platform": "darwin/arm64",
+ "backend": "webgpu",
+ "first": {
+  "summary": {
+   "supports": {
+    "auc": 0.9841269841269842,
+    "top": 9,
+    "of": 9
+   },
+   "refutes": {
+    "auc": 1,
+    "top": 9,
+    "of": 9
+   },
+   "relates": {
+    "auc": 1,
+    "top": 9,
+    "of": 9
+   }
+  },
+  "statements": [
+   {
+    "statement": "The sky is blue.",
+    "quality": {
+     "supports": {
+      "auc": 1,
+      "top": true
+     },
+     "refutes": {
+      "auc": 1,
+      "top": true
+     },
+     "relates": {
+      "auc": 1,
+      "top": true
+     }
+    },
+    "paragraphs": [
+     {
+      "text": "Photo of a blue sky over the city.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.6598175995179739,
+       "refutes": 0.00933485920186271,
+       "relates": 0.9417855416215668
+      }
+     },
+     {
+      "text": "Photo of a green sky over the city.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1,
+      "scores": {
+       "supports": 0.008063574221861127,
+       "refutes": 0.8313232850128682,
+       "relates": 0.9020446629701355
+      }
+     },
+     {
+      "text": "The sky is usually blue on Earth when it is not cloudy.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.597175550223522,
+       "refutes": 0.009755357955754345,
+       "relates": 0.9715161099672057
+      }
+     },
+     {
+      "text": "Rayleigh scattering of sunlight makes the daytime sky look blue.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.7163908702786723,
+       "refutes": 0.005504868864308779,
+       "relates": 0.9632416601702014
+      }
+     },
+     {
+      "text": "Clouds form when water vapour condenses into droplets.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.00797006303347701,
+       "refutes": 0.11599502441419669,
+       "relates": 0.36760895928814463
+      }
+     },
+     {
+      "text": "Add two cups of flour and stir until smooth.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0,
+      "scores": {
+       "supports": 0.000765932136801689,
+       "refutes": 0.12964192796772633,
+       "relates": 0.15618595730282026
+      }
+     }
+    ],
+    "ms": 1635
+   },
+   {
+    "statement": "The sky is usually blue on Earth when it is not cloudy.",
+    "quality": {
+     "supports": {
+      "auc": 1,
+      "top": true
+     },
+     "refutes": {
+      "auc": 1,
+      "top": true
+     },
+     "relates": {
+      "auc": 1,
+      "top": true
+     }
+    },
+    "paragraphs": [
+     {
+      "text": "Photo of a clear blue sky over the city.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.24902884439138268,
+       "refutes": 0.01893611372372667,
+       "relates": 0.8861646919246506
+      }
+     },
+     {
+      "text": "Earth's sky is never blue, not even on clear days.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1,
+      "scores": {
+       "supports": 0.0010918727640161288,
+       "refutes": 0.9700920988884899,
+       "relates": 0.9879217322310478
+      }
+     },
+     {
+      "text": "On a cloudy day the sky over Berlin was grey.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.13366087301358207,
+       "refutes": 0.107671681070279,
+       "relates": 0.8163093337187213
+      }
+     },
+     {
+      "text": "On Mars the daytime sky is a pale butterscotch colour.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.034669783574218696,
+       "refutes": 0.33601483733724313,
+       "relates": 0.6587376836940708
+      }
+     },
+     {
+      "text": "Rayleigh scattering of sunlight makes the daytime sky look blue.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.3549421429049841,
+       "refutes": 0.04183518894243205,
+       "relates": 0.9088890126845025
+      }
+     },
+     {
+      "text": "Add two cups of flour and stir until smooth.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0,
+      "scores": {
+       "supports": 0.0004187130438130703,
+       "refutes": 0.04947820535661895,
+       "relates": 0.05955016047372064
+      }
+     }
+    ],
+    "ms": 348
+   },
+   {
+    "statement": "Regular exercise lowers blood pressure.",
+    "quality": {
+     "supports": {
+      "auc": 1,
+      "top": true
+     },
+     "refutes": {
+      "auc": 1,
+      "top": true
+     },
+     "relates": {
+      "auc": 1,
+      "top": true
+     }
+    },
+    "paragraphs": [
+     {
+      "text": "A meta-analysis found that aerobic training reduced systolic blood pressure by about 5 mmHg.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.5594942942858582,
+       "refutes": 0.01551531492888551,
+       "relates": 0.9643373748762107
+      }
+     },
+     {
+      "text": "In the trial, blood pressure did not change after twelve weeks of daily running.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1,
+      "scores": {
+       "supports": 0.017241943193358006,
+       "refutes": 0.6071129598500269,
+       "relates": 0.8768250277488817
+      }
+     },
+     {
+      "text": "Exercise improves sleep quality in older adults.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.005253145058401543,
+       "refutes": 0.05996157821295425,
+       "relates": 0.36254015461412237
+      }
+     },
+     {
+      "text": "High salt intake raises blood pressure.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.00921554803394744,
+       "refutes": 0.191486480297555,
+       "relates": 0.5060675796222465
+      }
+     },
+     {
+      "text": "The museum opens at nine on weekdays.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0,
+      "scores": {
+       "supports": 0.0007842393082088816,
+       "refutes": 0.0456759590051767,
+       "relates": 0.07030996181290572
+      }
+     }
+    ],
+    "ms": 391
+   },
+   {
+    "statement": "The bridge was closed because of storm damage.",
+    "quality": {
+     "supports": {
+      "auc": 0.8571428571428571,
+      "top": true
+     },
+     "refutes": {
+      "auc": 1,
+      "top": true
+     },
+     "relates": {
+      "auc": 1,
+      "top": true
+     }
+    },
+    "paragraphs": [
+     {
+      "text": "Storm Ciara damaged the bridge's cables, so the city closed it on Monday.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.9665879510411506,
+       "refutes": 0.001397863825451588,
+       "relates": 0.9972588681835162
+      }
+     },
+     {
+      "text": "The bridge closed on Monday for scheduled painting; the storm caused no damage there.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1,
+      "scores": {
+       "supports": 0.0018249169747043227,
+       "refutes": 0.9415093112625382,
+       "relates": 0.9618352077841598
+      }
+     },
+     {
+      "text": "The bridge was closed on Monday.",
+      "supports": 0.5,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.01113177047382259,
+       "refutes": 0.009704065618396302,
+       "relates": 0.9255793317737232
+      }
+     },
+     {
+      "text": "The storm damaged several roofs in the old town.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.021172858604548386,
+       "refutes": 0.03175562383754745,
+       "relates": 0.6479394053964007
+      }
+     },
+     {
+      "text": "Tickets for the concert are sold out.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0,
+      "scores": {
+       "supports": 0.0008219450827804698,
+       "refutes": 0.04135878756493923,
+       "relates": 0.06559098044150491
+      }
+     }
+    ],
+    "ms": 400
+   },
+   {
+    "statement": "The company's revenue grew in 2025.",
+    "quality": {
+     "supports": {
+      "auc": 1,
+      "top": true
+     },
+     "refutes": {
+      "auc": 1,
+      "top": true
+     },
+     "relates": {
+      "auc": 1,
+      "top": true
+     }
+    },
+    "paragraphs": [
+     {
+      "text": "Revenue rose 12 percent to 4.1 billion euros in 2025.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.9723286716524789,
+       "refutes": 0.0013509465171248007,
+       "relates": 0.9969649353313063
+      }
+     },
+     {
+      "text": "Revenue fell from 4.1 to 3.6 billion euros in 2025.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1,
+      "scores": {
+       "supports": 0.00495129307342344,
+       "refutes": 0.9612231195412554,
+       "relates": 0.9803354641448215
+      }
+     },
+     {
+      "text": "The company opened two new offices in 2025.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.0016540656917746065,
+       "refutes": 0.011189345962590578,
+       "relates": 0.6250170279766816
+      }
+     },
+     {
+      "text": "Analysts expect revenue to grow in 2026.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.0034332780761184654,
+       "refutes": 0.03828058205044597,
+       "relates": 0.8017597061732146
+      }
+     },
+     {
+      "text": "Penguins live mostly in the southern hemisphere.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0,
+      "scores": {
+       "supports": 0.0006985114041675417,
+       "refutes": 0.023901575780000676,
+       "relates": 0.04310338205529829
+      }
+     }
+    ],
+    "ms": 369
+   },
+   {
+    "statement": "Coffee contains caffeine.",
+    "quality": {
+     "supports": {
+      "auc": 1,
+      "top": true
+     },
+     "refutes": {
+      "auc": 1,
+      "top": true
+     },
+     "relates": {
+      "auc": 1,
+      "top": true
+     }
+    },
+    "paragraphs": [
+     {
+      "text": "A cup of brewed coffee has about 95 mg of caffeine.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.9320947388050027,
+       "refutes": 0.00223209138702786,
+       "relates": 0.9938366145356908
+      }
+     },
+     {
+      "text": "Coffee contains no caffeine at all.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1,
+      "scores": {
+       "supports": 0.00031831743188824303,
+       "refutes": 0.9916930701308484,
+       "relates": 0.995003068799578
+      }
+     },
+     {
+      "text": "Even decaffeinated coffee still contains small amounts of caffeine.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.772385324606784,
+       "refutes": 0.0318724453315978,
+       "relates": 0.9756817144854165
+      }
+     },
+     {
+      "text": "Tea is grown in India, China and Kenya.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0.5,
+      "scores": {
+       "supports": 0.019685720432217273,
+       "refutes": 0.049506169638845465,
+       "relates": 0.3017245698020836
+      }
+     },
+     {
+      "text": "The train leaves from platform 4.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0,
+      "scores": {
+       "supports": 0.0010348263231035359,
+       "refutes": 0.21897332304927522,
+       "relates": 0.24551025257633263
+      }
+     }
+    ],
+    "ms": 362
+   },
+   {
+    "statement": "The patient is allergic to penicillin.",
+    "quality": {
+     "supports": {
+      "auc": 1,
+      "top": true
+     },
+     "refutes": {
+      "auc": 1,
+      "top": true
+     },
+     "relates": {
+      "auc": 1,
+      "top": true
+     }
+    },
+    "paragraphs": [
+     {
+      "text": "Allergies: penicillin (rash, 2019).",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.5445954101218765,
+       "refutes": 0.015047758043029493,
+       "relates": 0.961031718306927
+      }
+     },
+     {
+      "text": "No known drug allergies.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1,
+      "scores": {
+       "supports": 0.0032350637573203603,
+       "refutes": 0.677211511764339,
+       "relates": 0.7576575303661732
+      }
+     },
+     {
+      "text": "The patient takes metformin for type 2 diabetes.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0.5,
+      "scores": {
+       "supports": 0.000811301938806147,
+       "refutes": 0.0715106797541658,
+       "relates": 0.08875504669819811
+      }
+     },
+     {
+      "text": "The parking garage closes at midnight.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0,
+      "scores": {
+       "supports": 0.0013205022197120288,
+       "refutes": 0.03549460903675771,
+       "relates": 0.05584743146507143
+      }
+     }
+    ],
+    "ms": 294
+   },
+   {
+    "statement": "Berlin is the capital of Germany.",
+    "quality": {
+     "supports": {
+      "auc": 1,
+      "top": true
+     },
+     "refutes": {
+      "auc": 1,
+      "top": true
+     },
+     "relates": {
+      "auc": 1,
+      "top": true
+     }
+    },
+    "paragraphs": [
+     {
+      "text": "Germany's capital and largest city is Berlin.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.9669692202277318,
+       "refutes": 0.0021729660184177492,
+       "relates": 0.9962688918383044
+      }
+     },
+     {
+      "text": "Bonn is the capital of Germany.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1,
+      "scores": {
+       "supports": 0.0016809067240882057,
+       "refutes": 0.9320768052098322,
+       "relates": 0.9606106242435944
+      }
+     },
+     {
+      "text": "Bonn was the capital of West Germany until 1990.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.08557772764914374,
+       "refutes": 0.38335978153672784,
+       "relates": 0.7749449549683495
+      }
+     },
+     {
+      "text": "Berlin has around 3.7 million inhabitants.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.028685501260748505,
+       "refutes": 0.044493116125091554,
+       "relates": 0.7557451302177823
+      }
+     },
+     {
+      "text": "Photosynthesis turns light into chemical energy.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0,
+      "scores": {
+       "supports": 0.00045012928963122304,
+       "refutes": 0.062416811784110064,
+       "relates": 0.07493192275484961
+      }
+     }
+    ],
+    "ms": 359
+   },
+   {
+    "statement": "The order was delivered on time.",
+    "quality": {
+     "supports": {
+      "auc": 1,
+      "top": true
+     },
+     "refutes": {
+      "auc": 1,
+      "top": true
+     },
+     "relates": {
+      "auc": 1,
+      "top": true
+     }
+    },
+    "paragraphs": [
+     {
+      "text": "The parcel left the warehouse on 3 March. It arrived on 5 March, the promised delivery date, and the customer signed for it.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.4944668612807514,
+       "refutes": 0.3281330193056232,
+       "relates": 0.9406770669301429
+      }
+     },
+     {
+      "text": "The parcel arrived on 9 March, four days after the promised date.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1,
+      "scores": {
+       "supports": 0.012376419978927591,
+       "refutes": 0.893663489981737,
+       "relates": 0.9418400011340393
+      }
+     },
+     {
+      "text": "The customer asked to change the delivery address.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.0007261169447919814,
+       "refutes": 0.2214398726384686,
+       "relates": 0.40634490593697814
+      }
+     },
+     {
+      "text": "Our newsletter covers spring fashion.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0,
+      "scores": {
+       "supports": 0.0019305809267874065,
+       "refutes": 0.024943114481634426,
+       "relates": 0.08829805974754446
+      }
+     }
+    ],
+    "ms": 319
+   }
+  ]
+ },
+ "second": {
+  "summary": {
+   "supports": {
+    "auc": 1,
+    "top": 8,
+    "of": 8
+   },
+   "refutes": {
+    "auc": 1,
+    "top": 8,
+    "of": 8
+   },
+   "relates": {
+    "auc": 1,
+    "top": 8,
+    "of": 8
+   }
+  },
+  "statements": [
+   {
+    "statement": "Smoking causes lung cancer.",
+    "quality": {
+     "supports": {
+      "auc": 1,
+      "top": true
+     },
+     "refutes": {
+      "auc": 1,
+      "top": true
+     },
+     "relates": {
+      "auc": 1,
+      "top": true
+     }
+    },
+    "paragraphs": [
+     {
+      "text": "Long-term studies show that smoking is the leading cause of lung cancer.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.9638412992271681,
+       "refutes": 0.0016486733728404467,
+       "relates": 0.996654668407101
+      }
+     },
+     {
+      "text": "Lung cancer is more common among smokers, but this study could not establish that smoking causes it.",
+      "supports": 0.5,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.027042440665576907,
+       "refutes": 0.561823121496276,
+       "relates": 0.9529059687284361
+      }
+     },
+     {
+      "text": "Smoking has no effect on the risk of lung cancer.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1,
+      "scores": {
+       "supports": 0.0006335278330624577,
+       "refutes": 0.9852005505008927,
+       "relates": 0.9918462541529762
+      }
+     },
+     {
+      "text": "Air pollution also increases the risk of lung cancer.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.0268053670407042,
+       "refutes": 0.1582230409850966,
+       "relates": 0.7828295207680259
+      }
+     },
+     {
+      "text": "The bakery sells rye bread on Saturdays.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0,
+      "scores": {
+       "supports": 0.00047123254004625585,
+       "refutes": 0.06078210860168605,
+       "relates": 0.07038538375735792
+      }
+     }
+    ],
+    "ms": 398
+   },
+   {
+    "statement": "The meeting was moved to Thursday because the CEO was ill.",
+    "quality": {
+     "supports": {
+      "auc": 1,
+      "top": true
+     },
+     "refutes": {
+      "auc": 1,
+      "top": true
+     },
+     "relates": {
+      "auc": 1,
+      "top": true
+     }
+    },
+    "paragraphs": [
+     {
+      "text": "Since the CEO was sick, the meeting now takes place on Thursday.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.9864681466184124,
+       "refutes": 0.0014208127156496854,
+       "relates": 0.9976940748268782
+      }
+     },
+     {
+      "text": "The meeting was moved to Thursday because the room was double-booked.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1,
+      "scores": {
+       "supports": 0.0018149316882218262,
+       "refutes": 0.4421060673865059,
+       "relates": 0.5471719101368863
+      }
+     },
+     {
+      "text": "The meeting was moved to Thursday.",
+      "supports": 0.5,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.9154337601744315,
+       "refutes": 0.002802259308288998,
+       "relates": 0.9810402302000452
+      }
+     },
+     {
+      "text": "The meeting still takes place on Tuesday as planned.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1,
+      "scores": {
+       "supports": 0.0015615354113923585,
+       "refutes": 0.9495617725435426,
+       "relates": 0.9638121270758817
+      }
+     },
+     {
+      "text": "The volcano last erupted in 1980.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0,
+      "scores": {
+       "supports": 0.001281560455443563,
+       "refutes": 0.07311205948392237,
+       "relates": 0.08608054612694471
+      }
+     }
+    ],
+    "ms": 352
+   },
+   {
+    "statement": "All swans are white.",
+    "quality": {
+     "supports": {
+      "auc": 1,
+      "top": true
+     },
+     "refutes": {
+      "auc": 1,
+      "top": true
+     },
+     "relates": {
+      "auc": 1,
+      "top": true
+     }
+    },
+    "paragraphs": [
+     {
+      "text": "Black swans live in Australia.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1,
+      "scores": {
+       "supports": 0.0014143270195520717,
+       "refutes": 0.859442867163173,
+       "relates": 0.8995697868292448
+      }
+     },
+     {
+      "text": "Every swan we observed in the park was white.",
+      "supports": 0.5,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.9255649944819974,
+       "refutes": 0.0029179371497359795,
+       "relates": 0.9932536078750517
+      }
+     },
+     {
+      "text": "Swans are large water birds related to geese.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.002311611366600634,
+       "refutes": 0.26574739415648774,
+       "relates": 0.7914252111592199
+      }
+     },
+     {
+      "text": "The stock market closed higher today.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0,
+      "scores": {
+       "supports": 0.0034039349847541167,
+       "refutes": 0.13768355842161706,
+       "relates": 0.19701479470476835
+      }
+     }
+    ],
+    "ms": 243
+   },
+   {
+    "statement": "The drug reduced symptoms in the trial.",
+    "quality": {
+     "supports": {
+      "auc": 1,
+      "top": true
+     },
+     "refutes": {
+      "auc": 1,
+      "top": true
+     },
+     "relates": {
+      "auc": 1,
+      "top": true
+     }
+    },
+    "paragraphs": [
+     {
+      "text": "Patients on the drug reported fewer symptoms than those on placebo.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.8850833468470463,
+       "refutes": 0.004199262691080051,
+       "relates": 0.9828705339708084
+      }
+     },
+     {
+      "text": "Symptoms did not differ between the drug and the placebo group.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1,
+      "scores": {
+       "supports": 0.007016538731327158,
+       "refutes": 0.8324892133402938,
+       "relates": 0.9330826946027373
+      }
+     },
+     {
+      "text": "The trial enrolled 240 patients over two years.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.005312132782107757,
+       "refutes": 0.010928214084055277,
+       "relates": 0.5300043779364594
+      }
+     },
+     {
+      "text": "The concert hall seats 2,000 people.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0,
+      "scores": {
+       "supports": 0.0007430924317389318,
+       "refutes": 0.017377730092228448,
+       "relates": 0.0314005532284084
+      }
+     }
+    ],
+    "ms": 229
+   },
+   {
+    "statement": "Ada lives in London.",
+    "quality": {
+     "supports": {
+      "auc": 1,
+      "top": true
+     },
+     "refutes": {
+      "auc": 1,
+      "top": true
+     },
+     "relates": {
+      "auc": 1,
+      "top": true
+     }
+    },
+    "paragraphs": [
+     {
+      "text": "Ada's flat is in Camden, in north London.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.6721838236231034,
+       "refutes": 0.01359912855722352,
+       "relates": 0.9468430521896463
+      }
+     },
+     {
+      "text": "Ada moved from London to Paris last year and lives there now.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1,
+      "scores": {
+       "supports": 0.0006416669894681506,
+       "refutes": 0.9840196442574595,
+       "relates": 0.9887662462642612
+      }
+     },
+     {
+      "text": "Ada was born in London.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.01090979561999005,
+       "refutes": 0.1633875472963429,
+       "relates": 0.6479824260059981
+      }
+     },
+     {
+      "text": "The recipe uses three eggs.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0,
+      "scores": {
+       "supports": 0.0008323192676281189,
+       "refutes": 0.03273559115266372,
+       "relates": 0.04858492923026825
+      }
+     }
+    ],
+    "ms": 286
+   },
+   {
+    "statement": "The price of the product increased.",
+    "quality": {
+     "supports": {
+      "auc": 1,
+      "top": true
+     },
+     "refutes": {
+      "auc": 1,
+      "top": true
+     },
+     "relates": {
+      "auc": 1,
+      "top": true
+     }
+    },
+    "paragraphs": [
+     {
+      "text": "The product now costs 24 euros instead of 19.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.9683886573333074,
+       "refutes": 0.002741690983885845,
+       "relates": 0.9946710497427254
+      }
+     },
+     {
+      "text": "The product's price fell by 10 percent.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1,
+      "scores": {
+       "supports": 0.0007313393608890202,
+       "refutes": 0.9794451380894136,
+       "relates": 0.9879605591425906
+      }
+     },
+     {
+      "text": "Sales of the product doubled last quarter.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.012434123243796362,
+       "refutes": 0.143314414268106,
+       "relates": 0.8294109434271612
+      }
+     },
+     {
+      "text": "The river flooded the village.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0,
+      "scores": {
+       "supports": 0.00044156540245576857,
+       "refutes": 0.07242020667701382,
+       "relates": 0.082121263920377
+      }
+     }
+    ],
+    "ms": 199
+   },
+   {
+    "statement": "The server crashed because the disk was full.",
+    "quality": {
+     "supports": {
+      "auc": 1,
+      "top": true
+     },
+     "refutes": {
+      "auc": 1,
+      "top": true
+     },
+     "relates": {
+      "auc": 1,
+      "top": true
+     }
+    },
+    "paragraphs": [
+     {
+      "text": "At 03:12 the monitoring raised an alert. The data disk had reached 100 percent usage, which made the database exit and took the server down. The disk was expanded at 04:00.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.9252359912821478,
+       "refutes": 0.005020110718164579,
+       "relates": 0.9921517535132376
+      }
+     },
+     {
+      "text": "At 03:12 the monitoring raised an alert. The disk had plenty of free space; a faulty memory module caused the crash.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1,
+      "scores": {
+       "supports": 0.004996696373117682,
+       "refutes": 0.9107574516427281,
+       "relates": 0.9572154477180922
+      }
+     },
+     {
+      "text": "The server rebooted at 04:00 after planned maintenance.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.006815864804280791,
+       "refutes": 0.14621219481470452,
+       "relates": 0.6883146285568869
+      }
+     },
+     {
+      "text": "The marketing team launched a new campaign.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0,
+      "scores": {
+       "supports": 0.0008544881256207346,
+       "refutes": 0.07128688674310078,
+       "relates": 0.09443931957549778
+      }
+     }
+    ],
+    "ms": 275
+   },
+   {
+    "statement": "The store is open on Sundays.",
+    "quality": {
+     "supports": {
+      "auc": 1,
+      "top": true
+     },
+     "refutes": {
+      "auc": 1,
+      "top": true
+     },
+     "relates": {
+      "auc": 1,
+      "top": true
+     }
+    },
+    "paragraphs": [
+     {
+      "text": "Open daily, including Sundays, from 10 to 18.",
+      "supports": 1,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.8652218630638413,
+       "refutes": 0.004846119035389186,
+       "relates": 0.9825366177095841
+      }
+     },
+     {
+      "text": "The store is not open on Sundays.",
+      "supports": 0,
+      "refutes": 1,
+      "relates": 1,
+      "scores": {
+       "supports": 0.0007040653616433455,
+       "refutes": 0.9846694156742605,
+       "relates": 0.9905530155286948
+      }
+     },
+     {
+      "text": "The store is open on Saturdays from 9 to 14.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 1,
+      "scores": {
+       "supports": 0.006504003146861772,
+       "refutes": 0.8462102786727059,
+       "relates": 0.9092788573563931
+      }
+     },
+     {
+      "text": "Penguins cannot fly.",
+      "supports": 0,
+      "refutes": 0,
+      "relates": 0,
+      "scores": {
+       "supports": 0.003491740401596632,
+       "refutes": 0.22088970912429723,
+       "relates": 0.2637490151705505
+      }
+     }
+    ],
+    "ms": 268
+   }
+  ]
+ },
+ "nuance": {
+  "statements": [
+   "The sky is blue.",
+   "The sky is usually blue on Earth when it is not cloudy."
+  ],
+  "paragraphs": [
+   {
+    "text": "Photo of a green sky over the city.",
+    "absolute": {
+     "key": "0",
+     "text": "Photo of a green sky over the city.",
+     "supports": 0.008063574221861127,
+     "refutes": 0.8313232850128682,
+     "relates": 0.9020446629701355
+    },
+    "qualified": {
+     "key": "0",
+     "text": "Photo of a green sky over the city.",
+     "supports": 0.02191376923368486,
+     "refutes": 0.5057844148002826,
+     "relates": 0.7056436287693277
+    },
+    "refutesLess": true
+   },
+   {
+    "text": "On a cloudy day the sky over Berlin was grey.",
+    "absolute": {
+     "key": "1",
+     "text": "On a cloudy day the sky over Berlin was grey.",
+     "supports": 0.0031394684576890896,
+     "refutes": 0.8854972120885481,
+     "relates": 0.9307888044142347
+    },
+    "qualified": {
+     "key": "1",
+     "text": "On a cloudy day the sky over Berlin was grey.",
+     "supports": 0.13366087301358207,
+     "refutes": 0.107671681070279,
+     "relates": 0.8163093337187213
+    },
+    "refutesLess": true
+   },
+   {
+    "text": "On Mars the daytime sky is a pale butterscotch colour.",
+    "absolute": {
+     "key": "2",
+     "text": "On Mars the daytime sky is a pale butterscotch colour.",
+     "supports": 0.11952609432725703,
+     "refutes": 0.5004625268657608,
+     "relates": 0.8362658110387691
+    },
+    "qualified": {
+     "key": "2",
+     "text": "On Mars the daytime sky is a pale butterscotch colour.",
+     "supports": 0.034669783574218696,
+     "refutes": 0.33601483733724313,
+     "relates": 0.6587376836940708
+    },
+    "refutesLess": true
+   }
+  ],
+  "held": 3,
+  "of": 3
+ }
+}

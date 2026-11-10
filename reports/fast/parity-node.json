@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "runtime": "node v24.22.1",
+  "precision": "fp32",
+  "model": "vllm-sr/vela3-fast",
+  "results": [
+    {
+      "case": "billing",
+      "tokenIdsExact": true,
+      "maxProbabilityError": 2.5788045471264454e-7,
+      "ms": 144.71231499999976,
+      "answer": {
+        "type": "choice",
+        "choice": "billing",
+        "probabilities": {
+          "billing": 0.6719806170168557,
+          "technical": 0.28682420962004496,
+          "sales": 0.04119517336309932
+        }
+      }
+    },
+    {
+      "case": "noul",
+      "tokenIdsExact": true,
+      "maxProbabilityError": 4.6916628965165685e-7,
+      "ms": 114.87129499999992,
+      "answer": {
+        "type": "noul",
+        "noul": 0.5634169894841515
+      }
+    },
+    {
+      "case": "json",
+      "tokenIdsExact": true,
+      "maxProbabilityError": 1.8734983309176556e-7,
+      "ms": 226.044578,
+      "answer": {
+        "type": "choice",
+        "choice": "other",
+        "probabilities": {
+          "unicode": 0.19906006434049875,
+          "ascii": 0.10837256963389293,
+          "other": 0.6925673660256083
+        }
+      }
+    },
+    {
+      "case": "long",
+      "tokenIdsExact": true,
+      "maxProbabilityError": 1.1617090237003858e-7,
+      "ms": 2056.1688839999997,
+      "answer": {
+        "type": "choice",
+        "choice": "garden",
+        "probabilities": {
+          "garden": 0.9147758176947228,
+          "server": 0.08522418230527723
+        }
+      }
+    },
+    {
+      "case": "empty",
+      "tokenIdsExact": true,
+      "maxProbabilityError": 0,
+      "ms": 64.2764100000004,
+      "answer": {
+        "type": "choice",
+        "choice": "only",
+        "probabilities": {
+          "only": 1
+        }
+      }
+    }
+  ]
+}

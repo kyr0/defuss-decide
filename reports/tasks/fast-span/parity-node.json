@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "model": "vllm-sr/vela3-fast",
+  "task": "span",
+  "checks": [
+    {
+      "name": "description",
+      "maxLogitError": 0.0000016689300537109375,
+      "decodedOutputMatched": true,
+      "milliseconds": 138
+    },
+    {
+      "name": "unicode",
+      "maxLogitError": 0.0000040531158447265625,
+      "decodedOutputMatched": true,
+      "milliseconds": 255
+    }
+  ],
+  "runtime": "Node v24.22.1"
+}

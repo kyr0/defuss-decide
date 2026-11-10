@@ -1,0 +1,402 @@
+{
+ "note": "The website's sample images (docs/assets/samples/synthetic) with one question per task. scripts/verify-samples.ts runs them on the real bundles and records the answers in reports/samples/; `expect` is what a person reads off the image: a box task's point must fall inside `inside` (fractions of the image), a span task must flag every `flag` text and nothing else, a decide run must answer `decision`.",
+ "samples": [
+  {
+   "id": "squirrel",
+   "file": "vision_box_span_1_squirrel.webp",
+   "title": "Soccer squirrel",
+   "alt": "A squirrel in a blue jersey kicks a soccer ball while a dog in a cap cheers; the scoreboard reads 2 to 1.",
+   "runs": [
+    {
+     "task": "vision-box",
+     "state": "",
+     "question": {
+      "type": "box",
+      "instructions": "the soccer ball"
+     },
+     "expect": {
+      "inside": {
+       "left": 0.55,
+       "right": 0.8,
+       "top": 0.55,
+       "bottom": 1
+      }
+     }
+    },
+    {
+     "task": "vision-span",
+     "state": {
+      "user": "Describe the picture.",
+      "answer": "A squirrel in a blue jersey kicks a soccer ball. The scoreboard shows 2 to 1. A cat is the goalkeeper."
+     },
+     "question": {
+      "type": "span",
+      "criteria": [
+       "unsupported"
+      ]
+     },
+     "expect": {
+      "flag": [
+       "A cat is the goalkeeper."
+      ]
+     }
+    },
+    {
+     "task": "decide",
+     "state": {
+      "listing": {
+       "title": "Fantasy Cup poster",
+       "sport": "soccer"
+      }
+     },
+     "question": {
+      "type": "decide",
+      "instructions": "Does the image show a soccer ball?",
+      "region": "the soccer ball"
+     },
+     "expect": {
+      "decision": "yes"
+     }
+    }
+   ]
+  },
+  {
+   "id": "dragon",
+   "file": "vision_box_span_2_dragon.webp",
+   "title": "Dragon rider",
+   "alt": "A woman in a red cape rides an orange dragon above the clouds; an airship and a floating castle are in the sky.",
+   "runs": [
+    {
+     "task": "vision-box",
+     "state": "",
+     "question": {
+      "type": "box",
+      "instructions": "the dragon's head"
+     },
+     "expect": {
+      "inside": {
+       "left": 0.42,
+       "right": 0.82,
+       "top": 0.3,
+       "bottom": 0.72
+      }
+     }
+    },
+    {
+     "task": "decide",
+     "state": {
+      "listing": {
+       "title": "Dragon rider print"
+      }
+     },
+     "question": {
+      "type": "decide",
+      "instructions": "Does the image show a submarine?",
+      "region": "the submarine"
+     },
+     "expect": {
+      "decision": "no"
+     }
+    }
+   ]
+  },
+  {
+   "id": "space",
+   "file": "vision_box_span_3_space.webp",
+   "title": "Space rabbit",
+   "alt": "A rabbit in goggles pulls a small spaceship with a cat pilot across the surface of the moon.",
+   "runs": [
+    {
+     "task": "vision-box",
+     "state": "",
+     "question": {
+      "type": "box",
+      "instructions": "the rabbit"
+     },
+     "expect": {
+      "inside": {
+       "left": 0.45,
+       "right": 1,
+       "top": 0.25,
+       "bottom": 1
+      }
+     }
+    },
+    {
+     "task": "vision-span",
+     "state": {
+      "user": "Describe the picture.",
+      "answer": "A rabbit pulls a spaceship across the moon. A dog flies the spaceship."
+     },
+     "question": {
+      "type": "span",
+      "criteria": [
+       "unsupported"
+      ]
+     },
+     "expect": {
+      "flag": [
+       "A dog flies the spaceship."
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "submarine",
+   "file": "vision_box_span_4_submarine_ocr.webp",
+   "title": "Submarine comic",
+   "alt": "A comic panel: a giant fish swallows a yellow submarine; signs read DANGER GIANT FISH AREA and ATLANTIS 5 km.",
+   "runs": [
+    {
+     "task": "vision-box",
+     "state": "",
+     "question": {
+      "type": "box",
+      "instructions": "the yellow submarine"
+     },
+     "expect": {
+      "inside": {
+       "left": 0.45,
+       "right": 0.88,
+       "top": 0.15,
+       "bottom": 0.7
+      }
+     }
+    },
+    {
+     "task": "vision-ocr",
+     "state": {
+      "ocr": "The Lost Submarine Adventure!\nDANGER\nGIANT FISH AREA\nATLANTIS 9 km"
+     },
+     "question": {
+      "type": "span",
+      "task": "ocr_check",
+      "criteria": [
+       "ocr_error"
+      ]
+     },
+     "expect": {
+      "flag": [
+       "ATLANTIS 9 km"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "library",
+   "file": "vision_pinpoint_1.webp",
+   "title": "Magic library",
+   "alt": "A magic library: a cat sleeps on an open book, a small dragon reads a scroll, two goblins carry a magnifying glass, an owl sits on the chandelier.",
+   "runs": [
+    {
+     "task": "vision-box",
+     "state": "",
+     "question": {
+      "type": "box",
+      "instructions": "the sleeping cat"
+     },
+     "expect": {
+      "inside": {
+       "left": 0.04,
+       "right": 0.47,
+       "top": 0.65,
+       "bottom": 0.95
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "kitchen",
+   "file": "vision_pinpoint_2.webp",
+   "title": "Wizard kitchen",
+   "alt": "A wizard flips pancakes in a kitchen; a treasure chest with a tongue holds socks, a unicorn teapot steams on the stove.",
+   "runs": [
+    {
+     "task": "vision-box",
+     "state": "",
+     "question": {
+      "type": "box",
+      "instructions": "the treasure chest"
+     },
+     "expect": {
+      "inside": {
+       "left": 0.62,
+       "right": 0.98,
+       "top": 0.4,
+       "bottom": 0.82
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "market",
+   "file": "vision_pinpoint_3.webp",
+   "title": "Goose knight",
+   "alt": "A knight rides a goose through a market; a skeleton plays the lute and a winged donut flies over the stalls.",
+   "runs": [
+    {
+     "task": "vision-box",
+     "state": "",
+     "question": {
+      "type": "box",
+      "instructions": "the knight riding a goose"
+     },
+     "expect": {
+      "inside": {
+       "left": 0.25,
+       "right": 0.7,
+       "top": 0.2,
+       "bottom": 0.95
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "reef",
+   "file": "vision_pinpoint_4.webp",
+   "title": "Mermaid workshop",
+   "alt": "Under the sea a mermaid repairs a yellow submarine; an octopus holds tools and a crab carries a map.",
+   "runs": [
+    {
+     "task": "vision-box",
+     "state": "",
+     "question": {
+      "type": "box",
+      "instructions": "the octopus"
+     },
+     "expect": {
+      "inside": {
+       "left": 0.66,
+       "right": 0.96,
+       "top": 0.14,
+       "bottom": 0.55
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "letter",
+   "file": "ocr_document_digital.webp",
+   "title": "Appointment letter",
+   "alt": "A printed German letter from Nordlicht Service GmbH to Maria Keller confirming an appointment on 18.11.2026 at 14:30.",
+   "runs": [
+    {
+     "task": "vision-ocr",
+     "state": {
+      "ocr": "Empfänger:\nMaria Keller\nAhornweg 72\n80469 München"
+     },
+     "question": {
+      "type": "span",
+      "task": "ocr_check",
+      "criteria": [
+       "ocr_error"
+      ]
+     },
+     "expect": {
+      "flag": [
+       "Ahornweg 72"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "broadcast",
+   "file": "ocr_film_labels.webp",
+   "title": "News caption",
+   "alt": "A live TV interview; the caption reads LENA HOFFMANN, Projektleiterin, Zukunftsforum Berlin, Technikmesse 2026 eröffnet neue KI-Initiativen.",
+   "runs": [
+    {
+     "task": "vision-ocr",
+     "state": {
+      "ocr": "LIVE\nLENA HOFFMANN\nProjektleiterin | Zukunftsforum Berlin\nTechnikmesse 2025 eröffnet neue KI-Initiativen"
+     },
+     "question": {
+      "type": "span",
+      "task": "ocr_check",
+      "criteria": [
+       "ocr_error"
+      ]
+     },
+     "expect": {
+      "flag": [
+       "2025"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "notes",
+   "file": "ocr_letter_handwriting.webp",
+   "title": "Handwritten notes",
+   "alt": "A handwritten German to-do list dated Montag, 16.11.2026, with a phone number +49 170 555 1284 and the door code ZX-418-K.",
+   "runs": [
+    {
+     "task": "vision-ocr",
+     "state": {
+      "ocr": "Einkauf & Notizen\nMontag, 16.11.2026\n1. Brot und Äpfel kaufen\n2. Termin bei Dr. Weber um 09:30\n3. Paket für Lena abholen\n4. Rückruf an +49 170 555 1248\n5. Türcode: ZX-418-K"
+     },
+     "question": {
+      "type": "span",
+      "task": "ocr_check",
+      "criteria": [
+       "ocr_error"
+      ]
+     },
+     "expect": {
+      "flag": [
+       "+49 170 555 1248"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "bottle",
+   "file": "ocr_product_engraved.webp",
+   "title": "Engraved bottle",
+   "alt": "A steel bottle engraved ALPENQUELL, ISOLIERFLASCHE, 750 ML, LIMITED EDITION.",
+   "runs": [
+    {
+     "task": "vision-ocr",
+     "state": {
+      "ocr": "BERGQUELL\nISOLIERFLASCHE\n750 ML\nLIMITED EDITION"
+     },
+     "question": {
+      "type": "span",
+      "task": "ocr_check",
+      "criteria": [
+       "ocr_error"
+      ]
+     },
+     "expect": {
+      "flag": [
+       "BERGQUELL"
+      ]
+     }
+    },
+    {
+     "task": "decide",
+     "state": {
+      "ocr": "ALPENQUELL\nISOLIERFLASCHE\n750 ML\nLIMITED EDITION"
+     },
+     "question": {
+      "type": "decide",
+      "instructions": "Does the extracted text match the photo?",
+      "region": "the engraved brand name"
+     },
+     "expect": {
+      "decision": "yes"
+     }
+    }
+   ]
+  }
+ ]
+}

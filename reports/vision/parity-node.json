@@ -1,0 +1,61 @@
+{
+  "passed": true,
+  "runtime": "node v24.22.1",
+  "precision": "fp32",
+  "model": "vllm-sr/vela3-fast-vision",
+  "results": [
+    {
+      "case": "red",
+      "tokenIdsExact": true,
+      "maxProbabilityError": 8.069792468701209e-7,
+      "ms": 7993.586286,
+      "answer": {
+        "type": "choice",
+        "choice": "red",
+        "probabilities": {
+          "red": 0.9481816991776947,
+          "blue": 0.025278966353484145,
+          "green": 0.026539334468821056
+        }
+      }
+    },
+    {
+      "case": "blue",
+      "tokenIdsExact": true,
+      "maxProbabilityError": 0.000006181880983169297,
+      "ms": 7540.247378000002,
+      "answer": {
+        "type": "noul",
+        "noul": 0.6534523593856663
+      }
+    },
+    {
+      "case": "two",
+      "tokenIdsExact": true,
+      "maxProbabilityError": 0.0000028483580501864614,
+      "ms": 16317.09991,
+      "answer": {
+        "type": "choice",
+        "choice": "red and blue",
+        "probabilities": {
+          "red and blue": 0.9195525217360005,
+          "green and yellow": 0.08044747826399959
+        }
+      }
+    },
+    {
+      "case": "text",
+      "tokenIdsExact": true,
+      "maxProbabilityError": 6.413916875391834e-7,
+      "ms": 30.219852000001993,
+      "answer": {
+        "type": "choice",
+        "choice": "blue",
+        "probabilities": {
+          "red": 0.42626351641773896,
+          "blue": 0.573736483582261
+        }
+      }
+    }
+  ]
+}

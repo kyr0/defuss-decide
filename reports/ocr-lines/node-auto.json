@@ -1,0 +1,1097 @@
+{
+ "runtime": "node v26.11.1",
+ "platform": "darwin/arm64",
+ "backend": "webgpu",
+ "summary": {
+  "lines": 83,
+  "whole": {
+   "falseAlarms": 8,
+   "catches": 42
+  },
+  "byLine": {
+   "falseAlarms": 7,
+   "catches": 55
+  }
+ },
+ "rows": [
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "Nordlicht Service GmbH",
+   "changed": "Nrodlicht Service GmbH",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "Lindenstraße 12",
+   "changed": "Lindenstraße 15",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "80331 München",
+   "changed": "80334 München",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    true,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "Tel.: +49 89 555 1200",
+   "changed": "Tel.: +49 89 555 1203",
+   "whole": [
+    true,
+    true
+   ],
+   "lines": [
+    true,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "E-Mail: kontakt@nordlicht-service.de",
+   "changed": "E-Mail: knotakt@nordlicht-service.de",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "Empfänger:",
+   "changed": "Epmfänger:",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "Maria Keller",
+   "changed": "Maria Kleler",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "Ahornweg 27",
+   "changed": "Ahornweg 20",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "80469 München",
+   "changed": "80462 München",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "Geburtsdatum: 03.04.1989",
+   "changed": "Geburtsdatum: 03.04.1982",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "Kundennummer: NK-48291",
+   "changed": "Kundennummer: NK-48294",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "E-Mail: maria.keller@example.de",
+   "changed": "E-Mail: mraia.keller@example.de",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "Telefon: +49 151 555 8321",
+   "changed": "Telefon: +49 151 555 8324",
+   "whole": [
+    true,
+    true
+   ],
+   "lines": [
+    true,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "München, 16.11.2026",
+   "changed": "München, 16.11.2029",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "Betreff: Bestätigung Ihres Beratungstermins",
+   "changed": "Betreff: Bestätigung Ihres Breatungstermins",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "Sehr geehrte Frau Keller,",
+   "changed": "Sehr geehrte Frau Keller,",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "hiermit bestätigen wir Ihren Beratungstermin am 18.11.2026 um 14:30 Uhr in",
+   "changed": "hiermit bestätigen wir Ihren Beratungstermin am 18.11.2026 um 14:33 Uhr in",
+   "whole": [
+    true,
+    true
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "unserem Büro in der Lindenstraße 12, 80331 München.",
+   "changed": "unserem Büro in der Lindenstraße 12, 80334 München.",
+   "whole": [
+    true,
+    true
+   ],
+   "lines": [
+    true,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "Bitte bringen Sie Ihren Ausweis sowie die Unterlagen mit der Referenz A-77-19 mit.",
+   "changed": "Bitte bringen Sie Ihren Ausweis sowie die Unterlagen mit der Referenz A-77-12 mit.",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "Bei Rückfragen erreichen Sie uns unter +49 89 555 1200 oder per E-Mail an",
+   "changed": "Bei Rückfragen erreichen Sie uns unter +49 89 555 1203 oder per E-Mail an",
+   "whole": [
+    true,
+    true
+   ],
+   "lines": [
+    true,
+    false
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "kontakt@nordlicht-service.de.",
+   "changed": "knotakt@nordlicht-service.de.",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "Mit freundlichen Grüßen",
+   "changed": "Mit ferundlichen Grüßen",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "Maximilian Roth",
+   "changed": "Mxaimilian Roth",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "line": "Kundenservice",
+   "changed": "Knudenservice",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_letter_handwriting.webp",
+   "line": "Einkauf & Notizen",
+   "changed": "Enikauf & Notizen",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_letter_handwriting.webp",
+   "line": "Montag, 16.11.2026",
+   "changed": "Montag, 16.11.2029",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_letter_handwriting.webp",
+   "line": "1. Brot und Äpfel kaufen",
+   "changed": "4. Brot und Äpfel kaufen",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_letter_handwriting.webp",
+   "line": "2. Termin bei Dr. Weber um 09:30",
+   "changed": "2. Termin bei Dr. Weber um 09:33",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_letter_handwriting.webp",
+   "line": "3. Paket für Lena abholen",
+   "changed": "6. Paket für Lena abholen",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_letter_handwriting.webp",
+   "line": "4. Rückruf an +49 170 555 1284",
+   "changed": "4. Rückruf an +49 170 555 1287",
+   "whole": [
+    true,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_letter_handwriting.webp",
+   "line": "5. Türcode: ZX-418-K",
+   "changed": "5. Türcode: ZX-411-K",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_letter_handwriting.webp",
+   "line": "Nicht vergessen:",
+   "changed": "Nicht vregessen:",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_letter_handwriting.webp",
+   "line": "Unterlagen für den Workshop mitnehmen.",
+   "changed": "Utnerlagen für den Workshop mitnehmen.",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_letter_handwriting.webp",
+   "line": "- Aron",
+   "changed": "- Aorn",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_product_engraved.webp",
+   "line": "ALPENQUELL",
+   "changed": "APLENQUELL",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_product_engraved.webp",
+   "line": "ISOLIERFLASCHE",
+   "changed": "IOSLIERFLASCHE",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_product_engraved.webp",
+   "line": "750 ML",
+   "changed": "753 ML",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_product_engraved.webp",
+   "line": "LIMITED EDITION",
+   "changed": "LMIITED EDITION",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_film_labels.webp",
+   "line": "LIVE",
+   "changed": "LVIE",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_film_labels.webp",
+   "line": "LENA HOFFMANN",
+   "changed": "LENA HFOFMANN",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_film_labels.webp",
+   "line": "Projektleiterin | Zukunftsforum Berlin",
+   "changed": "Porjektleiterin | Zukunftsforum Berlin",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_film_labels.webp",
+   "line": "Technikmesse 2026 eröffnet neue KI-Initiativen",
+   "changed": "Technikmesse 2029 eröffnet neue KI-Initiativen",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/vision_box_span_4_submarine_ocr.webp",
+   "line": "The Lost Submarine Adventure!",
+   "changed": "The Lost Submarine Avdenture!",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/vision_box_span_4_submarine_ocr.webp",
+   "line": "DANGER",
+   "changed": "DNAGER",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/vision_box_span_4_submarine_ocr.webp",
+   "line": "GIANT FISH AREA",
+   "changed": "GAINT FISH AREA",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/vision_box_span_4_submarine_ocr.webp",
+   "line": "ATLANTIS 5 km",
+   "changed": "ATLANTIS 8 km",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/vision_box_span_4_submarine_ocr.webp",
+   "line": "TITAN-IC-2312",
+   "changed": "TITAN-IC-2315",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/vision_box_span_4_submarine_ocr.webp",
+   "line": "FULL THROTTLE! NOW!!!",
+   "changed": "FULL TRHOTTLE! NOW!!!",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_receipt.png",
+   "line": "BÄCKEREI SONNENKORN",
+   "changed": "BÄCKEREI SNONENKORN",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_receipt.png",
+   "line": "Hauptstraße 41, 50667 Köln",
+   "changed": "Hauptstraße 41, 50660 Köln",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_receipt.png",
+   "line": "Bon 2026-4471 08.11.2026 07:52",
+   "changed": "Bon 2026-4471 08.11.2026 07:55",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_receipt.png",
+   "line": "2 x Roggenbrot 7,80",
+   "changed": "2 x Roggenbrot 7,83",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_receipt.png",
+   "line": "1 x Croissant 1,90",
+   "changed": "1 x Croissant 1,93",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_receipt.png",
+   "line": "3 x Brezel 3,60",
+   "changed": "3 x Brezel 3,63",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_receipt.png",
+   "line": "1 x Kaffee groß 3,20",
+   "changed": "1 x Kaffee groß 3,23",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_receipt.png",
+   "line": "Zwischensumme 16,50",
+   "changed": "Zwischensumme 16,53",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_receipt.png",
+   "line": "MwSt 7 % 1,08",
+   "changed": "MwSt 7 % 1,01",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_receipt.png",
+   "line": "SUMME EUR 16,50",
+   "changed": "SUMME EUR 16,53",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_receipt.png",
+   "line": "Bar gegeben 20,00",
+   "changed": "Bar gegeben 20,03",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_receipt.png",
+   "line": "Rückgeld 3,50",
+   "changed": "Rückgeld 3,53",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_receipt.png",
+   "line": "Vielen Dank für Ihren Einkauf!",
+   "changed": "Vielen Dank für Ihren Enikauf!",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_receipt.png",
+   "line": "Steuer-Nr. 214/5730/1188",
+   "changed": "Steuer-Nr. 214/5730/1181",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_form.png",
+   "line": "Antrag auf Erstattung von Reisekosten",
+   "changed": "Antrag auf Erstattung von Riesekosten",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_form.png",
+   "line": "Name: Jonas Becker",
+   "changed": "Name: Jonas Bceker",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_form.png",
+   "line": "Personalnummer: 77-3195",
+   "changed": "Personalnummer: 77-3198",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    true,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_form.png",
+   "line": "Abteilung: Einkauf",
+   "changed": "Atbeilung: Einkauf",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_form.png",
+   "line": "Reiseziel: Hamburg",
+   "changed": "Rieseziel: Hamburg",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_form.png",
+   "line": "Reisezeitraum: 02.10.2026 bis 04.10.2026",
+   "changed": "Reisezeitraum: 02.10.2026 bis 04.10.2029",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_form.png",
+   "line": "Bahnfahrt 2. Klasse: 118,40 EUR",
+   "changed": "Bahnfahrt 2. Klasse: 118,43 EUR",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_form.png",
+   "line": "Hotel, zwei Nächte: 246,00 EUR",
+   "changed": "Hotel, zwei Nächte: 246,03 EUR",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_form.png",
+   "line": "Verpflegungspauschale: 70,00 EUR",
+   "changed": "Verpflegungspauschale: 70,03 EUR",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_form.png",
+   "line": "Summe: 434,40 EUR",
+   "changed": "Summe: 434,43 EUR",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_form.png",
+   "line": "IBAN: DE44 5001 0517 5407 3249 31",
+   "changed": "IBAN: DE44 5001 0517 5407 3249 34",
+   "whole": [
+    true,
+    true
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_form.png",
+   "line": "Datum: 06.10.2026",
+   "changed": "Datum: 06.10.2029",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_form.png",
+   "line": "Unterschrift des Antragstellers",
+   "changed": "Unterschrift des Atnragstellers",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_label.png",
+   "line": "PAKET 2,4 kg",
+   "changed": "PAKET 2,7 kg",
+   "whole": [
+    true,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_label.png",
+   "line": "Absender: Lindgren Design GmbH",
+   "changed": "Asbender: Lindgren Design GmbH",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_label.png",
+   "line": "Empfänger: Clara Weiß",
+   "changed": "Epmfänger: Clara Weiß",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    false
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_label.png",
+   "line": "Seestraße 118",
+   "changed": "Seestraße 111",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    true,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_label.png",
+   "line": "20249 Hamburg",
+   "changed": "20242 Hamburg",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_label.png",
+   "line": "Sendungsnummer: 00340 43487 21590",
+   "changed": "Sendungsnummer: 00340 43487 21593",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_label.png",
+   "line": "Zustellung bis 12.11.2026",
+   "changed": "Zustellung bis 12.11.2029",
+   "whole": [
+    false,
+    true
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_label.png",
+   "line": "Nicht knicken",
+   "changed": "Nicht kincken",
+   "whole": [
+    false,
+    false
+   ],
+   "lines": [
+    false,
+    true
+   ]
+  }
+ ]
+}

@@ -1,0 +1,107 @@
+{
+  "runtime": "node v26.11.1",
+  "platform": "darwin/arm64",
+  "precision": "q4",
+  "backend": "webgpu",
+  "threads": "default",
+  "rows": [
+    {
+      "bundle": "evidence/q4",
+      "fixture": "evidence",
+      "backend": "webgpu",
+      "loadMs": 1415,
+      "medianMs": 53
+    },
+    {
+      "bundle": "evidence/q4",
+      "fixture": "support",
+      "backend": "webgpu",
+      "loadMs": 1415,
+      "medianMs": 50
+    },
+    {
+      "bundle": "evidence/q4",
+      "fixture": "evidence, about 1,800 tokens",
+      "backend": "webgpu",
+      "loadMs": 1415,
+      "medianMs": 429
+    },
+    {
+      "bundle": "relation/q4",
+      "fixture": "employment",
+      "backend": "webgpu",
+      "loadMs": 1315,
+      "medianMs": 50
+    },
+    {
+      "bundle": "relation/q4",
+      "fixture": "multi",
+      "backend": "webgpu",
+      "loadMs": 1315,
+      "medianMs": 49
+    },
+    {
+      "bundle": "relation/q4",
+      "fixture": "employment, about 1,800 tokens",
+      "backend": "webgpu",
+      "loadMs": 1315,
+      "medianMs": 412
+    },
+    {
+      "bundle": "span/q4",
+      "fixture": "description",
+      "backend": "webgpu",
+      "loadMs": 1392,
+      "medianMs": 54
+    },
+    {
+      "bundle": "span/q4",
+      "fixture": "unicode",
+      "backend": "webgpu",
+      "loadMs": 1392,
+      "medianMs": 51
+    },
+    {
+      "bundle": "span/q4",
+      "fixture": "description, about 1,800 tokens",
+      "backend": "webgpu",
+      "loadMs": 1392,
+      "medianMs": 432
+    },
+    {
+      "bundle": "span_set/q4",
+      "fixture": "pii",
+      "backend": "webgpu",
+      "loadMs": 1315,
+      "medianMs": 54
+    },
+    {
+      "bundle": "span_set/q4",
+      "fixture": "halu",
+      "backend": "webgpu",
+      "loadMs": 1315,
+      "medianMs": 48
+    },
+    {
+      "bundle": "span_set/q4",
+      "fixture": "pii, about 1,800 tokens",
+      "backend": "webgpu",
+      "loadMs": 1315,
+      "medianMs": 429
+    },
+    {
+      "bundle": "vision-ocr/q4",
+      "fixture": "ocr",
+      "backend": "webgpu",
+      "loadMs": 1591,
+      "medianMs": 398
+    },
+    {
+      "bundle": "vision-span/q4",
+      "fixture": "span",
+      "backend": "webgpu",
+      "loadMs": 1687,
+      "medianMs": 360
+    }
+  ]
+}

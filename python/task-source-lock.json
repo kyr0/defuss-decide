@@ -1,0 +1,38 @@
+{
+  "fast": {
+    "config.json": "a85b358ac11b71d780deb09e8a082efddc67938a2eb4fc16d68d8ae888c69d14",
+    "model.safetensors": "2294745881d9a01b7d049133b57e5fed2aec6ae1d34ef1ab9fa16f047fc35c8e",
+    "tokenizer.json": "38734bb17ef19f84c67b5eb5692bea19801ffd02cb5c5ffc11429e76b0242e08",
+    "tokenizer_config.json": "649781df90d51837dd6ba951a89fae07c985a9eacfd781d84002d480c3cb0b6e",
+    "configuration_ultrabert.py": "823d10bda19f5164da4f79f8f9c01e5ebd7a75569abce78c0a26b7674fc78cd9",
+    "modeling_ultrabert.py": "6d86b56fbcc634dd2f7e2aa29047062289def1ba7e602b991be1af888dc82072",
+    "vela3_encoder.py": "3ca59bead96cf8aeaa2fb07b4c3b8c4f50c67822ad6dbfba9d575d5fc9f853d3",
+    "ub_d3_common.py": "ae36592c0fe964af9bba46b55a6eccff484efeb15c8c2fe209149fe285f971a3",
+    "vela3_schema.py": "d247f3a3c5638ee820a27712663ec78973c873541e44e12e4492ab7648b3a953",
+    "vela3_config.json": "ee5088605aa5151210fbc12e3f6ee0c9a382dddf90d3a43ac606c0df305d9ff2",
+    "span_adapter.safetensors": "15eb0f11e4261bc6f54e4a6a6cc15951575a510dd1d0bd598e6a6d7a15800fd8",
+    "span_sets_adapter.safetensors": "73c904acf7a765a38fd793b0d5d9d02633f9c5938620c9e063063aa1458cf006",
+    "ner_adapter.safetensors": "387f409c7f954e696c2d95f6b85829e84e6ea8ad52128f2cf1340f7ee7045f8a",
+    "relation_adapter.safetensors": "a448606d98c5f0c5e0e3249ac00465c69f58fa6995555b344e6c1d89b99c4d46",
+    "evidence_adapter.safetensors": "8aeda02d53ca0f29b1888c567b0e7199dd15ceea0b77faa26448f293840ac774"
+  },
+  "vision": {
+    "config.json": "96c0a13f682092cb4b7289ec10d54179dd0085bbc988cba269a7b3d1ace1c079",
+    "tokenizer.json": "bda9af747539d9444eca3fc9df922811ae318d93ced0b83ecf2001c77a925e8a",
+    "tokenizer_config.json": "5c983bf0fa140fd6005da8b8239df4de0c85243e08be553896be2527cad8186f",
+    "processor_config.json": "0657d91d3b77ff66812ae4527aa0fad027dfd532df237e73c5b794cc2fcbac5c",
+    "configuration_ultravbert.py": "97b79ba8cf3d1e96b829441fa06fcc56ed83d3c0d43a89b04661c463cf9bf1cf",
+    "modeling_ultravbert.py": "fdc8e5c3ace4336e0eee7f54366029e3bb7ab347b51cf01372eaa38e3ebae866",
+    "image_processing_ultravbert.py": "6c41054315f105fabda36d9fcc9d84f1fce84bf0cb4489917360a5dc2544dac9",
+    "uvb_core.py": "973a990aee3ec5968ca1f8d321edf6add2bd92e18cd4939eeb0b9c888fed5a58",
+    "model.safetensors": "9387cfd5bc53082b6ff634453c6b0cb3123a67e4c197209e308ecfaf7a578900",
+    "backbone_v2.safetensors": "46e65f6e6b906a64e4ad57e2e76957522bd01e2eeb5d8467078b895410d1e0aa",
+    "span_adapter.safetensors": "9cbfd04d5960818001c1b6ff7a3f02a5595dd73f3c5d32a256fbe1855f4055bd",
+    "ocr_adapter.safetensors": "882f2d71d6aee9d90f75b68d35c6eb74388fa96c1013d959b0ab18fe8b0f9719",
+    "box_adapter.safetensors": "62d05d58ddbb7f9248dff4e84dc4864c09c78a56e19088cae112ccbd9035fb6b",
+    "vela3v_encoder.py": "2398a40745281624c14598f486846999068de4ac1486fec36c3d8e868908c2ed",
+    "vela3v_config.json": "f8d159468b49ee268c29d29c99ec488226ef7524fd967caa34d8d71f333f71f2",
+    "span_decode_v2.py": "d2c5f2f446cf12d2f8a24dbf634452477088523b0973e1e07df244c851421efb",
+    "probe_lib.py": "00e74b15f1d4872771bb6a95415212a9ba7159d809a2daffc9a6d30a637c049f"
+  }
+}

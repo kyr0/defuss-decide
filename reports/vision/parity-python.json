@@ -1,0 +1,135 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "case": "red/vision-tile",
+      "max_abs_error": 2.115964889526367e-06
+    },
+    {
+      "case": "red/vision-tile",
+      "max_abs_error": 2.1457672119140625e-06
+    },
+    {
+      "case": "red/vision-tile",
+      "max_abs_error": 2.1457672119140625e-06
+    },
+    {
+      "case": "red/vision-tile",
+      "max_abs_error": 2.1457672119140625e-06
+    },
+    {
+      "case": "red/vision-tile",
+      "max_abs_error": 1.7285346984863281e-06
+    },
+    {
+      "case": "red/wrapper",
+      "max_abs_error": 0.0
+    },
+    {
+      "case": "red/onnx",
+      "max_abs_error": 1.3709068298339844e-06
+    },
+    {
+      "case": "red/probabilities",
+      "max_abs_error": 6.792579698711165e-08
+    },
+    {
+      "case": "blue/vision-tile",
+      "max_abs_error": 2.908986061811447e-06
+    },
+    {
+      "case": "blue/vision-tile",
+      "max_abs_error": 5.349516868591309e-06
+    },
+    {
+      "case": "blue/vision-tile",
+      "max_abs_error": 5.349516868591309e-06
+    },
+    {
+      "case": "blue/vision-tile",
+      "max_abs_error": 5.349516868591309e-06
+    },
+    {
+      "case": "blue/vision-tile",
+      "max_abs_error": 2.726912498474121e-06
+    },
+    {
+      "case": "blue/wrapper",
+      "max_abs_error": 0.0
+    },
+    {
+      "case": "blue/onnx",
+      "max_abs_error": 4.082918167114258e-06
+    },
+    {
+      "case": "blue/probabilities",
+      "max_abs_error": 1.032559486913165e-06
+    },
+    {
+      "case": "two/vision-tile",
+      "max_abs_error": 2.115964889526367e-06
+    },
+    {
+      "case": "two/vision-tile",
+      "max_abs_error": 2.1457672119140625e-06
+    },
+    {
+      "case": "two/vision-tile",
+      "max_abs_error": 2.1457672119140625e-06
+    },
+    {
+      "case": "two/vision-tile",
+      "max_abs_error": 2.1457672119140625e-06
+    },
+    {
+      "case": "two/vision-tile",
+      "max_abs_error": 1.7285346984863281e-06
+    },
+    {
+      "case": "two/vision-tile",
+      "max_abs_error": 2.908986061811447e-06
+    },
+    {
+      "case": "two/vision-tile",
+      "max_abs_error": 5.349516868591309e-06
+    },
+    {
+      "case": "two/vision-tile",
+      "max_abs_error": 5.349516868591309e-06
+    },
+    {
+      "case": "two/vision-tile",
+      "max_abs_error": 5.349516868591309e-06
+    },
+    {
+      "case": "two/vision-tile",
+      "max_abs_error": 2.726912498474121e-06
+    },
+    {
+      "case": "two/wrapper",
+      "max_abs_error": 0.0
+    },
+    {
+      "case": "two/onnx",
+      "max_abs_error": 4.172325134277344e-06
+    },
+    {
+      "case": "two/probabilities",
+      "max_abs_error": 3.0864116340456604e-07
+    },
+    {
+      "case": "text/wrapper",
+      "max_abs_error": 0.0
+    },
+    {
+      "case": "text/onnx",
+      "max_abs_error": 1.9073486328125e-06
+    },
+    {
+      "case": "text/probabilities",
+      "max_abs_error": 6.413916875391834e-07
+    }
+  ],
+  "torch": "2.15.0+cpu",
+  "tests": "real checkpoint; eager FP32 vs portable wrapper vs ONNX Runtime CPU"
+}

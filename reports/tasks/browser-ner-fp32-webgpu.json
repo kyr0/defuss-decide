@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "model": "vllm-sr/vela3-fast",
+  "task": "ner",
+  "checks": [
+    {
+      "name": "entities",
+      "maxLogitError": 0.0000019073486328125,
+      "decodedOutputMatched": true,
+      "milliseconds": 253
+    },
+    {
+      "name": "unicode",
+      "maxLogitError": 0.000005245208740234375,
+      "decodedOutputMatched": true,
+      "milliseconds": 98
+    }
+  ],
+  "backend": "webgpu",
+  "browser": "156.0.8078.4"
+}

@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "model": "fast",
+  "task": "relation",
+  "torch": "2.15.0+cpu",
+  "checks": [
+    {
+      "case": "employment/wrapper",
+      "max_abs_error": 0.0
+    },
+    {
+      "case": "multi/wrapper",
+      "max_abs_error": 0.0
+    },
+    {
+      "case": "employment/onnx",
+      "max_abs_error": 2.86102294921875e-06
+    },
+    {
+      "case": "multi/onnx",
+      "max_abs_error": 2.86102294921875e-06
+    }
+  ],
+  "scope": "original checkpoint vs portable wrapper and ONNX CPU; JS verification separately checks decoding"
+}

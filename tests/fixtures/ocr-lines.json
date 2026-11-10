@@ -1,0 +1,128 @@
+{
+ "note": "Images with their text, line by line, for scripts/verify-ocr-lines.ts: each line is checked as written (a flag is a false alarm) and with one character changed (a flag is a catch). The website samples are 1,024 px WebP; the three rendered documents are print-sized PNGs.",
+ "images": [
+  {
+   "file": "docs/assets/samples/synthetic/ocr_document_digital.webp",
+   "lines": [
+    "Nordlicht Service GmbH",
+    "Lindenstraße 12",
+    "80331 München",
+    "Tel.: +49 89 555 1200",
+    "E-Mail: kontakt@nordlicht-service.de",
+    "Empfänger:",
+    "Maria Keller",
+    "Ahornweg 27",
+    "80469 München",
+    "Geburtsdatum: 03.04.1989",
+    "Kundennummer: NK-48291",
+    "E-Mail: maria.keller@example.de",
+    "Telefon: +49 151 555 8321",
+    "München, 16.11.2026",
+    "Betreff: Bestätigung Ihres Beratungstermins",
+    "Sehr geehrte Frau Keller,",
+    "hiermit bestätigen wir Ihren Beratungstermin am 18.11.2026 um 14:30 Uhr in",
+    "unserem Büro in der Lindenstraße 12, 80331 München.",
+    "Bitte bringen Sie Ihren Ausweis sowie die Unterlagen mit der Referenz A-77-19 mit.",
+    "Bei Rückfragen erreichen Sie uns unter +49 89 555 1200 oder per E-Mail an",
+    "kontakt@nordlicht-service.de.",
+    "Mit freundlichen Grüßen",
+    "Maximilian Roth",
+    "Kundenservice"
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_letter_handwriting.webp",
+   "lines": [
+    "Einkauf & Notizen",
+    "Montag, 16.11.2026",
+    "1. Brot und Äpfel kaufen",
+    "2. Termin bei Dr. Weber um 09:30",
+    "3. Paket für Lena abholen",
+    "4. Rückruf an +49 170 555 1284",
+    "5. Türcode: ZX-418-K",
+    "Nicht vergessen:",
+    "Unterlagen für den Workshop mitnehmen.",
+    "- Aron"
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_product_engraved.webp",
+   "lines": [
+    "ALPENQUELL",
+    "ISOLIERFLASCHE",
+    "750 ML",
+    "LIMITED EDITION"
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/ocr_film_labels.webp",
+   "lines": [
+    "LIVE",
+    "LENA HOFFMANN",
+    "Projektleiterin | Zukunftsforum Berlin",
+    "Technikmesse 2026 eröffnet neue KI-Initiativen"
+   ]
+  },
+  {
+   "file": "docs/assets/samples/synthetic/vision_box_span_4_submarine_ocr.webp",
+   "lines": [
+    "The Lost Submarine Adventure!",
+    "DANGER",
+    "GIANT FISH AREA",
+    "ATLANTIS 5 km",
+    "TITAN-IC-2312",
+    "FULL THROTTLE! NOW!!!"
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_receipt.png",
+   "lines": [
+    "BÄCKEREI SONNENKORN",
+    "Hauptstraße 41, 50667 Köln",
+    "Bon 2026-4471 08.11.2026 07:52",
+    "2 x Roggenbrot 7,80",
+    "1 x Croissant 1,90",
+    "3 x Brezel 3,60",
+    "1 x Kaffee groß 3,20",
+    "Zwischensumme 16,50",
+    "MwSt 7 % 1,08",
+    "SUMME EUR 16,50",
+    "Bar gegeben 20,00",
+    "Rückgeld 3,50",
+    "Vielen Dank für Ihren Einkauf!",
+    "Steuer-Nr. 214/5730/1188"
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_form.png",
+   "lines": [
+    "Antrag auf Erstattung von Reisekosten",
+    "Name: Jonas Becker",
+    "Personalnummer: 77-3195",
+    "Abteilung: Einkauf",
+    "Reiseziel: Hamburg",
+    "Reisezeitraum: 02.10.2026 bis 04.10.2026",
+    "Bahnfahrt 2. Klasse: 118,40 EUR",
+    "Hotel, zwei Nächte: 246,00 EUR",
+    "Verpflegungspauschale: 70,00 EUR",
+    "Summe: 434,40 EUR",
+    "IBAN: DE44 5001 0517 5407 3249 31",
+    "Datum: 06.10.2026",
+    "Unterschrift des Antragstellers"
+   ]
+  },
+  {
+   "file": "tests/fixtures/ocr-lines/held_label.png",
+   "lines": [
+    "PAKET 2,4 kg",
+    "Absender: Lindgren Design GmbH",
+    "Empfänger: Clara Weiß",
+    "Seestraße 118",
+    "20249 Hamburg",
+    "Sendungsnummer: 00340 43487 21590",
+    "Zustellung bis 12.11.2026",
+    "Nicht knicken"
+   ]
+  }
+ ]
+}
