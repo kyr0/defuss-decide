@@ -47,7 +47,7 @@ Features:
 - 🚀 GPU first: WebGPU in Node.js, Bun and browsers where the machine offers it, CPU or WASM otherwise; every response names the backend it ran on
 - 🔀 One provider, one resident adapter: questions route to the right bundle by the upstream rules and run grouped by adapter; only one backbone is loaded at a time
 - 🌐 One codebase for Node.js, Bun and browsers; the tests run in all four runtimes (Node.js, Bun, Chromium, WebKit)
-- 📦 Validated quantizations: weight-only `q8` for all eight adapters, `q4` for six, with identical decoded results; the four text `q4` bundles share one 210 MiB backbone, `vision-span` and `vision-ocr` share 121 MiB; the vision decision head also comes in `q4` (149 MiB)
+- 📦 Validated quantizations: weight-only `q8` and `q4` for all eight adapters: six `q4` bundles decode the reference inputs like FP32, `ner` and `vision-box` passed an accuracy check on public test sets; the five text `q4` bundles share one 210 MiB backbone, `vision-span` and `vision-ocr` share 121 MiB; the vision decision head also comes in `q4` (149 MiB)
 - 🔒 Local inference: state and images stay in your process or browser tab; only bundle files are downloaded
 
 ## What each task answers
@@ -79,7 +79,7 @@ bun add ../defuss-decision
 
 ## Getting the models
 
-The model is published on Hugging Face as [kyr0/winzling-decide-1.0](https://huggingface.co/kyr0/winzling-decide-1.0): every task's bundles in each validated precision, plus the text decision bundle in q4, each file with a Brotli copy (`.br`) for browsers. The loaders default to it, each task in its smallest published precision: q4, else q8 (`ner`, `vision-box`). The text decision bundle in q4 failed the check against FP32 (3 of 177 test decisions change) but adds 10.7 MB to the text backbone the q4 tasks share, instead of 1,329 MB in FP32, so it is the default too; `winzlingBundles(base, "fp32")` loads full precision. In Node.js and Bun, download it into `models/`, where `loadVelaProvider()` looks without arguments:
+The model is published on Hugging Face as [kyr0/winzling-decide-1.0](https://huggingface.co/kyr0/winzling-decide-1.0): every task's bundles in each validated precision, each file with a Brotli copy (`.br`) for browsers. The loaders default to it, each task in q4, its smallest precision. Three q4 bundles change single answers against FP32 and were validated by their accuracy on labelled sets instead of by unchanged answers: `ner`, `vision-box` and the text decision bundle ([documentation/models.md](documentation/models.md)). `winzlingBundles(base, "q8")` or `winzlingBundles(base, "fp32")` loads a larger precision. In Node.js and Bun, download it into `models/`, where `loadVelaProvider()` looks without arguments:
 
 ```bash
 hf download kyr0/winzling-decide-1.0 --exclude "*.br" --local-dir models
@@ -112,7 +112,7 @@ Each export checks the source hashes, compares PyTorch with ONNX Runtime on its 
 import { loadVelaProvider } from "defuss-decide/node";
 
 // The default: every task of kyr0/winzling-decide-1.0 from models/, each in its smallest published precision
-// (q4, else q8). Pass a map of bundle folders to load others.
+// (q4). Pass a map of bundle folders to load others.
 const vela = await loadVelaProvider();
 try {
   const text = await vela.systemOne({

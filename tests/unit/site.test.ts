@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { axisRange, benchSpeed, browserKey, browserSpeed, downloadRows, downloads, niceCeil, qualityData } from "../../scripts/site-data.ts";
+import { accuracyData, axisRange, benchSpeed, browserKey, browserSpeed, downloadRows, downloads, niceCeil, qualityData } from "../../scripts/site-data.ts";
 import { bundleDir, loadFiles } from "../../scripts/model-sizes.ts";
 import { elementAt, syncEnglishTemplates, tr } from "../../scripts/site-i18n.ts";
 import { architectureHTML, codeHTML, heroAnswerHTML, heroStats, stepsHTML, uspSizeHTML } from "../../scripts/site-sections.ts";
@@ -96,6 +96,28 @@ describe("site chart data", () => {
     expect(q).toEqual({ ids: ["span", "decision/vision"], q8: [0.001, null], q4: [0.01, 0.005], used: ["q4", "q4"], change: [0.01, 0.005], limit: 0.02 });
   });
 
+  test("a task published by accuracy has no score-change row, and its figures come from the gate reports", () => {
+    const quant = { accepted: { q8: { bundles: { span: { maxScoreDrift: 0.001 }, ner: { maxScoreDrift: 0.003 } } }, q4: { bundles: { span: { maxScoreDrift: 0.01 } } } } };
+    expect(qualityData(quant, {}, ["ner"]).ids).toEqual(["span"]);
+    const tasks = {
+      bundles: {
+        "ner/q4": { passed: true, fp32: { sentences: 3000, f1: 0.5571 }, quantized: { sentences: 3000, f1: 0.5603 } },
+        "vision-box/q4": { passed: true, fp32: { expressions: 1500, pointInRegion: 0.708 }, quantized: { expressions: 1500, pointInRegion: 0.7027 } },
+      },
+    };
+    const decision = { passed: true, sets: { boolq: { inputs: 1300, flips: 26, correct: { fp32: 1103, quantized: 1103 } } } };
+    expect(accuracyData(tasks, decision)).toEqual({
+      tasks: ["ner", "vision-box"],
+      ner: { sentences: 3000, fp32: 0.5571, q4: 0.5603 },
+      box: { expressions: 1500, fp32: 0.708, q4: 0.7027 },
+      decision: { questions: 1300, fp32: 1103, q4: 1103, differing: 26 },
+    });
+    // A bundle that failed its gate, or was never measured, must not reach the page.
+    expect(() => accuracyData({ bundles: { ...tasks.bundles, "ner/q4": { ...tasks.bundles["ner/q4"], passed: false } } }, decision)).toThrow(/ner\/q4/);
+    expect(() => accuracyData({ bundles: { "ner/q4": tasks.bundles["ner/q4"] } }, decision)).toThrow(/vision-box\/q4/);
+    expect(() => accuracyData(tasks, { ...decision, passed: false })).toThrow(/quantization-decision/);
+  });
+
   test("bench speed splits short text, 1,800-token text, images and load times", () => {
     const speed = benchSpeed({
       precision: "q8",
@@ -125,15 +147,15 @@ describe("site chart data", () => {
 
 describe("site sections", () => {
   test("the download claims count the shared backbone once and refuse a record without a q4 text bundle", () => {
-    const sizes = { shared: { text: 100 }, bundles: { evidence: { fp32: 1000, q4: 50 }, relation: { fp32: 1000, q4: 50 }, span: { fp32: 1000, q4: 50 }, span_set: { fp32: 1000, q4: 50 } } };
-    expect(heroStats(sizes, 90)[0].value).toEqual(["13.3x", "13,3x"]);
+    const sizes = { shared: { text: 100 }, bundles: { evidence: { fp32: 1000, q4: 50 }, ner: { fp32: 1000, q4: 50 }, relation: { fp32: 1000, q4: 50 }, span: { fp32: 1000, q4: 50 }, span_set: { fp32: 1000, q4: 50 } } };
+    expect(heroStats(sizes, 90)[0].value).toEqual(["14.3x", "14,3x"]);
     expect(heroStats(sizes, 90)[1].value[0]).toBe("90 ms");
     // The validated count leaves out a published precision whose manifest says validated: false.
-    expect(heroStats(sizes, 90)[3].value[0]).toBe("8");
-    expect(heroStats({ ...sizes, bundles: { ...sizes.bundles, "decision/fast": { fp32: 1400, q4: 15, unvalidated: ["q4"] } } }, 90)[3].value[0]).toBe("9");
-    // 300 MiB = 315 MB, 4,000 MiB = 4.2 GB
-    expect(uspSizeHTML(sizes)).toContain("take 315 MB instead of 4.2 GB");
-    expect(uspSizeHTML(sizes)).toContain("brauchen 315 MB statt 4,2 GB");
+    expect(heroStats(sizes, 90)[3].value[0]).toBe("10");
+    expect(heroStats({ ...sizes, bundles: { ...sizes.bundles, "decision/fast": { fp32: 1400, q4: 15, unvalidated: ["q4"] } } }, 90)[3].value[0]).toBe("11");
+    // 350 MiB = 367 MB, 5,000 MiB = 5.2 GB
+    expect(uspSizeHTML(sizes)).toContain("take 367 MB instead of 5.2 GB");
+    expect(uspSizeHTML(sizes)).toContain("brauchen 367 MB statt 5,2 GB");
     expect(() => uspSizeHTML({ ...sizes, bundles: { ...sizes.bundles, span: { fp32: 1000 } } })).toThrow(/span/);
   });
 

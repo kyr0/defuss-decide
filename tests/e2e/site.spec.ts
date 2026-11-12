@@ -24,7 +24,13 @@ test("navigation, theme and every section", async ({ page }, info) => {
   await expect(page).toHaveTitle(/defuss-decide/);
   for (const id of ["examples", "how", "measured", "enterprise", "use"]) {
     const link = page.locator(`.mk-header-nav a[href="#${id}"]`);
-    await link.click();
+    // The pointer clicks where the link is, instead of locator.click(): that scrolls its target into view first, and
+    // WebKit moves the page 64 px for a link in the sticky header. VERIFIED: (2026-11-12) such a jump right after a
+    // smooth scroll makes WebKit cut the next one short, so the section never arrives (3 of 8 runs); pointer clicks at
+    // the link's position and DOM clicks: 0 of 16.
+    await expect(link).toBeVisible();
+    const box = (await link.boundingBox())!;
+    await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
     await expect(page.locator(`#${id}`)).toBeInViewport();
     await expect(page).toHaveURL(new RegExp(`#${id}$`));
     await expect(link).toHaveAttribute("aria-current", "location");
@@ -171,8 +177,9 @@ test("each chart answers one question in horizontal bars and redraws for its swi
   await expect(described("measured-speed")).not.toHaveAttribute("aria-label", /Chromium/);
   await speed.locator('[data-factor="input"] .toggle[value="image"]').click();
   await expect(described("measured-speed")).toHaveAttribute("aria-label", /Chromium, WASM/);
-  // Quality: one bar per bundle in the precision a default load uses, so both precisions appear as series.
-  await expect(described("measured-quality")).toHaveAttribute("aria-label", /q8.*q4/);
+  // Quality: one bar per bundle in the precision a default load uses, q4 for every bundle with a score-change record.
+  await expect(described("measured-quality")).toHaveAttribute("aria-label", /q4/);
+  await expect(described("measured-quality")).not.toHaveAttribute("aria-label", /q8/);
   await page.locator('.dd-lang [data-locale="de"]').click();
   await expect(described("measured-size")).toHaveAttribute("aria-label", /Text-Backbone.*Evidenz/);
   assertClean();
@@ -537,13 +544,13 @@ test("removing an own image keeps an edit marked as not run", async ({ page }) =
   assertClean();
 });
 
-test("runs load each task's smallest published bundle: q4, else q8", async ({ page }) => {
+test("runs load each task's smallest published bundle, q4", async ({ page }) => {
   const { assertClean } = guard(page);
   await page.goto(EXAMPLES_URL);
-  // ner has no q4 bundle (reports/quantization-tasks.json), so the default loads q8; span loads q4.
+  // Every task has a q4 bundle (src/winzling.ts), ner among them since its accuracy gate (scripts/verify-accuracy.ts).
   await page.locator("#tab-ner").click();
   await runTab(page, "ner");
-  await expect(page.locator("#status-ner")).toContainText("ner q8");
+  await expect(page.locator("#status-ner")).toContainText("ner q4");
   await page.locator("#tab-span").click();
   await runTab(page, "span");
   await expect(page.locator("#status-span")).toContainText("span q4");
@@ -598,7 +605,7 @@ test("a run fetches Brotli files with a bar per file and one for the run, and ke
     }).observe(box, { attributes: true, subtree: true, childList: true, characterData: true });
   });
   await runTab(page, "ner");
-  const bundle = "/models/vela3-fast-onnx/ner/q8/";
+  const bundle = "/models/vela3-fast-onnx/ner/q4/";
   expect(fetched).toEqual(expect.arrayContaining(["manifest.json.br", "task.onnx.br", "task.onnx.data.br"].map((f) => bundle + f)));
   expect(fetched.filter((p) => p.startsWith("/models/") && !p.endsWith(".br"))).toEqual([]);
   const seen: string[] = await page.evaluate(() => (window as unknown as { seen: string[] }).seen);

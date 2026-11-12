@@ -21,7 +21,10 @@ def quantize_graph(source, destination, bits, group_size=0):
     """Rewrite one graph with quantized MatMul weights; returns (count, raw bytes, packed bytes).
 
     Symmetric per output channel, or per block of `group_size` rows along the reduction axis, with zero points 0, so
-    the standard DequantizeLinear operator reproduces `q * scale` and no custom operator is needed."""
+    the standard DequantizeLinear operator reproduces `q * scale` and no custom operator is needed.
+
+    An existing data file of the destination is removed first, and the written one must hold only what the graph
+    reads: a rerun into the same folder then gives the same bundle, instead of one that carries the old weights too."""
     source, destination = Path(source), Path(destination)
     m = onnx.load(str(source))  # resolves external data next to the file
     if bits == 4:
@@ -72,9 +75,19 @@ def quantize_graph(source, destination, bits, group_size=0):
     del m.graph.node[:]
     m.graph.node.extend(nodes + old)
     data_name = destination.name + '.data'
+    # onnx.save appends to an existing external data file and points the graph at the appended copy.
+    # VERIFIED: a second save doubled a 4 MB data file with offset 4,000,000 (onnx 1.23.2, 2026-11-12); the published
+    # ner q8 and vision-box q8 bundles carried 596 MB and 101 MB of such unread bytes from a second run into their folder.
+    (destination.parent / data_name).unlink(missing_ok=True)
     onnx.save(m, str(destination), save_as_external_data=True, all_tensors_to_one_file=True,
               location=data_name, size_threshold=1024, convert_attribute=False)
     onnx.checker.check_model(str(destination))
+    data = destination.parent / data_name
+    if data.exists():
+        saved = onnx.load(str(destination), load_external_data=False)
+        used = sum(int(e.value) for t in saved.graph.initializer for e in t.external_data if e.key == 'length')
+        if data.stat().st_size > used * 1.01:
+            raise RuntimeError(f'{data} holds {data.stat().st_size} bytes, the graph reads {used}')
     return count, raw_bytes, packed_bytes
 
 

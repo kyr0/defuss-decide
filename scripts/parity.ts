@@ -24,7 +24,10 @@ const flags = process.argv.slice(2),
   gpu = !flags.includes("--no-webgpu"),
   only = flags.find((a) => !a.startsWith("--")); // optional filter, e.g. "ner" or "vision-box/q8"
 const nodeGPU = gpu && listSupportedBackends().some((b) => b.name === "webgpu");
-const bundles = readdirSync(BASE).flatMap((task) => readdirSync(join(BASE, task)).map((p) => `${task}/${p}`))
+// Folders only. VERIFIED: Finder left a .DS_Store file beside the task folders, and listing it as a folder threw
+// ENOTDIR before any bundle ran (2026-11-12).
+const folders = (dir: string) => readdirSync(dir, { withFileTypes: true }).filter((e) => e.isDirectory()).map((e) => e.name);
+const bundles = folders(BASE).flatMap((task) => folders(join(BASE, task)).map((p) => `${task}/${p}`))
   .filter((b) => existsSync(join(BASE, b, "manifest.json")) && (!only || b.includes(only)));
 const failed: string[] = [];
 for (const b of bundles) {

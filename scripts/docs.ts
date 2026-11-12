@@ -38,7 +38,7 @@ import { createCodeHighlighter, highlightCode } from "./highlight.ts";
 import type { Sample } from "./verify-samples.ts";
 import { syncEnglishTemplates, tr } from "./site-i18n.ts";
 import { WINZLING_URL } from "../src/winzling.ts";
-import { benchSpeed, browserSpeed, downloadRows, downloads, qualityData, PRECISIONS, type BenchRecord, type BrowserRecord, type Precision } from "./site-data.ts";
+import { accuracyData, benchSpeed, browserSpeed, downloadRows, downloads, qualityData, PRECISIONS, type BenchRecord, type BrowserRecord, type Precision } from "./site-data.ts";
 import { architectureHTML, chartsHTML, codeHTML, diagramHTML, heroAnswerHTML, heroStats, installHTML, statsHTML, stepsHTML, uspSizeHTML, type ChartData } from "./site-sections.ts";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
@@ -536,9 +536,11 @@ export async function chartData(): Promise<ChartData> {
   const fidelity = Number(Math.max(...rows.flatMap((r) => r.slice(1, 5).map(Number))).toPrecision(1));
   // decision/vision q4: the largest probability change of its Chromium parity record (scripts/browser-test.ts).
   const visionQ4 = Math.max(...((await json("reports/browser-vision-q4.json")).results as { maxProbabilityError: number }[]).map((r) => r.maxProbabilityError));
+  const accuracy = accuracyData(await json("reports/quantization-accuracy.json"), await json("reports/quantization-decision.json"));
   return {
     sizes: downloadRows(downloads(await json("reports/model-sizes.json"))),
-    quality: qualityData(await json("reports/quantization-tasks.json"), { "decision/vision": { q4: visionQ4 } }),
+    quality: qualityData(await json("reports/quantization-tasks.json"), { "decision/vision": { q4: visionQ4 } }, accuracy.tasks),
+    accuracy,
     speed: { node, browser: browserSpeed(records) },
     fidelity,
   };

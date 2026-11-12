@@ -80,7 +80,9 @@ function speedOption(data, figure) {
   });
 }
 
-/** The largest score change of the bundle each task loads here (q4, else q8), as a loss in red, against the 2 % limit.
+/** The largest score change of the bundle each task loads here, as a loss in red, against the 2 % limit (the bundles
+ * published by accuracy have no row: scripts/site-data.ts). VERIFIED: tests/e2e/site.spec.ts expects a q4 series and no
+ * q8 series in the chart's description.
  * One series per precision, stacked, so a row carries one bar in its precision's color (as in the size chart). */
 function qualityOption(data) {
   const q = data.quality;

@@ -1,0 +1,81 @@
+{
+ "tool": "scripts/verify-accuracy.ts",
+ "bundles": {
+  "ner/q4": {
+   "date": "2026-11-12",
+   "precision": "w4a32",
+   "runtime": "Node v26.11.1, webgpu",
+   "set": {
+    "name": "Few-NERD, supervised test split",
+    "dataset": "DFKI-SLT/few-nerd",
+    "revision": "205f3e9c9f3577ea2561d43f2f62dc249ab92d5b",
+    "license": "CC BY-SA 4.0",
+    "selection": "the first 3000 sentences of 5 to 60 tokens after a shuffle with seed 7; the coarse types except \"other\"",
+    "cases": 3000,
+    "sha256": "3d08d48d47400f6babc1607a39cf06e72eed9f3b54c8cc0f98377cd7d4deeb6f"
+   },
+   "rule": {
+    "metric": "f1",
+    "maxDrop": 0.01
+   },
+   "fp32": {
+    "sentences": 3000,
+    "labelled": 6671,
+    "spans": 9928,
+    "correct": 4624,
+    "precision": 0.4658,
+    "recall": 0.6931,
+    "f1": 0.5571
+   },
+   "quantized": {
+    "sentences": 3000,
+    "labelled": 6671,
+    "spans": 9694,
+    "correct": 4585,
+    "precision": 0.473,
+    "recall": 0.6873,
+    "f1": 0.5603
+   },
+   "agreement": {
+    "sameSentences": 2280,
+    "spansOnlyFp32": 715,
+    "spansOnlyQuantized": 481
+   },
+   "passed": true
+  },
+  "vision-box/q4": {
+   "date": "2026-11-12",
+   "precision": "w4a32",
+   "runtime": "Node v26.11.1, webgpu",
+   "set": {
+    "name": "RefCOCO, validation split",
+    "dataset": "jxu124/refcoco",
+    "revision": "9fba8200c5326e996f789191f095bd464ef1d09e",
+    "images": "COCO train2014",
+    "imagesSha256": "e51838ccdb5bfde75bbab8a73f666bce791b74d9828828f4c3371f22cf86a43b",
+    "selection": "the first 1500 references after a shuffle with seed 7, each with its first expression",
+    "cases": 1500,
+    "sha256": "6c27f753706acfee32d7c14683b0bf58cd57dc9bb48c0b6d7d2a6f193bfc685d"
+   },
+   "rule": {
+    "metric": "pointInRegion",
+    "maxDrop": 0.02
+   },
+   "fp32": {
+    "expressions": 1500,
+    "hits": 1062,
+    "pointInRegion": 0.708
+   },
+   "quantized": {
+    "expressions": 1500,
+    "hits": 1054,
+    "pointInRegion": 0.7027
+   },
+   "agreement": {
+    "samePoint": 918,
+    "pointInFp32Region": 1442
+   },
+   "passed": true
+  }
+ }
+}

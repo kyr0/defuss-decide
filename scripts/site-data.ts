@@ -1,12 +1,14 @@
 // The numbers the website's charts show, derived from the tracked records so the page states nothing the records lack:
 //   sizes    reports/model-sizes.json (the original safetensors files, and the `.br` files the page downloads, MiB)
 //   quality  reports/quantization-tasks.json (largest decoded-score change of q8 and q4 against FP32) and the
-//            decision/vision q4 parity (largest probability change)
+//            decision/vision q4 parity (largest probability change); for the q4 bundles published by accuracy,
+//            reports/quantization-accuracy.json (ner, vision-box) and reports/quantization-decision.json
 //   speed    reports/bench/bench-<precision>-<backend>.json (Node.js, scripts/bench.ts) and the browser records
 //            reports/tasks/{browser|webkit}-<task>-<precision>[-webgpu].json (scripts/browser-tasks.ts)
 // docs.ts embeds the result in docs/index.html as JSON, so the charts also draw from a page opened from disk.
 // VERIFIED: tests/unit/site.test.ts checks the 5 % widening (in log space on a log axis), niceCeil, the download rows
-// with each shared backbone on its own row, the bench and browser medians.
+// with each shared backbone on its own row, the bench and browser medians, and that a task published by accuracy has
+// no score-change row while its figures come from a passed gate report.
 
 export type Precision = "fp32" | "q8" | "q4";
 export const PRECISIONS: Precision[] = ["fp32", "q8", "q4"];
@@ -86,14 +88,56 @@ export function downloadRows(rec: SizeRecord): DownloadRow[] {
   return rows;
 }
 
-/** Largest change of a decoded score (span score, box confidence, decision probability) against FP32. */
-export function qualityData(quant: { accepted: Record<string, { bundles: Record<string, { maxScoreDrift: number }> }> }, extra: Record<string, Partial<Record<Precision, number>>> = {}) {
-  const ids = [...new Set([...Object.keys(quant.accepted.q8?.bundles ?? {}), ...Object.keys(quant.accepted.q4?.bundles ?? {}), ...Object.keys(extra)])];
+/**
+ * Largest change of a decoded score (span score, box confidence, decision probability) against FP32.
+ * @param byAccuracy Tasks whose default bundle is published by its accuracy on a labelled set (`accuracyData`): their
+ *   answers may differ from FP32's, so a score change against FP32 says nothing about them and they get no row.
+ */
+export function qualityData(quant: { accepted: Record<string, { bundles: Record<string, { maxScoreDrift: number }> }> }, extra: Record<string, Partial<Record<Precision, number>>> = {}, byAccuracy: string[] = []) {
+  const ids = [...new Set([...Object.keys(quant.accepted.q8?.bundles ?? {}), ...Object.keys(quant.accepted.q4?.bundles ?? {}), ...Object.keys(extra)])].filter((id) => !byAccuracy.includes(id));
   const pick = (p: "q8" | "q4") => ids.map((id) => quant.accepted[p]?.bundles[id]?.maxScoreDrift ?? extra[id]?.[p] ?? null);
   const q8 = pick("q8"), q4 = pick("q4");
   // The precision a default load uses: q4 where a bundle has it, else q8 (src/winzling.ts), and its change.
   const used = ids.map((_, i): "q8" | "q4" => (q4[i] !== null ? "q4" : "q8"));
   return { ids, q8, q4, used, change: ids.map((_, i) => (used[i] === "q4" ? q4[i] : q8[i])), limit: 0.02 };
+}
+
+/** The q4 bundles published by accuracy: what each gate measured for FP32 and for q4 on its labelled set. */
+export interface AccuracyData {
+  /** The tasks of reports/quantization-accuracy.json with a passed q4 bundle. */
+  tasks: string[];
+  /** Entity F1 on the Few-NERD sentences. */
+  ner: { sentences: number; fp32: number; q4: number };
+  /** Share of RefCOCO expressions whose point lies in the labelled region. */
+  box: { expressions: number; fp32: number; q4: number };
+  /** Correct answers to the BoolQ questions, and the answers on which q4 differs from FP32. */
+  decision: { questions: number; fp32: number; q4: number; differing: number };
+}
+
+type Figures = Record<string, number>;
+/**
+ * The accuracy figures from the two gate reports.
+ * @throws {Error} When a q4 bundle of the task report has not passed, or ner or vision-box is missing.
+ */
+export function accuracyData(
+  tasks: { bundles: Record<string, { passed: boolean; fp32: Figures; quantized: Figures }> },
+  decision: { passed: boolean; sets: { boolq: { inputs: number; flips: number; correct: { fp32: number; quantized: number } } } },
+): AccuracyData {
+  const of = (id: string) => {
+    const b = tasks.bundles[`${id}/q4`];
+    if (!b?.passed) throw new Error(`reports/quantization-accuracy.json has no passed ${id}/q4; run: node scripts/verify-accuracy.ts models/vela3-fast-onnx/${id}/q4`);
+    return b;
+  };
+  if (!decision.passed) throw new Error("reports/quantization-decision.json did not pass");
+  const ner = of("ner"),
+    box = of("vision-box"),
+    boolq = decision.sets.boolq;
+  return {
+    tasks: Object.keys(tasks.bundles).filter((k) => k.endsWith("/q4")).map((k) => k.slice(0, -3)),
+    ner: { sentences: ner.fp32.sentences, fp32: ner.fp32.f1, q4: ner.quantized.f1 },
+    box: { expressions: box.fp32.expressions, fp32: box.fp32.pointInRegion, q4: box.quantized.pointInRegion },
+    decision: { questions: boolq.inputs, fp32: boolq.correct.fp32, q4: boolq.correct.quantized, differing: boolq.flips },
+  };
 }
 
 const median = (xs: number[]) => {

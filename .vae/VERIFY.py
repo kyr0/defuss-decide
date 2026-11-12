@@ -65,6 +65,11 @@ RULES = [{
     "command": "python3 .vae/checks/memguard.py",
     "claim": "every Python model job starts the memory guard, so no run can push the machine into swap unnoticed",
 }, {
+    "id": "python.external-data",
+    "kind": "command",
+    "command": "python3 .vae/checks/external-data.py",
+    "claim": "every ONNX save with external data removes the old data file first, so no bundle carries bytes that no graph reads",
+}, {
     "id": "docs.generated-in-sync",
     "kind": "command",
     "command": "node scripts/docs.ts --check",

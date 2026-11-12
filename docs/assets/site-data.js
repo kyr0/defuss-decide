@@ -2,12 +2,14 @@
 // The numbers the website's charts show, derived from the tracked records so the page states nothing the records lack:
 //   sizes    reports/model-sizes.json (the original safetensors files, and the `.br` files the page downloads, MiB)
 //   quality  reports/quantization-tasks.json (largest decoded-score change of q8 and q4 against FP32) and the
-//            decision/vision q4 parity (largest probability change)
+//            decision/vision q4 parity (largest probability change); for the q4 bundles published by accuracy,
+//            reports/quantization-accuracy.json (ner, vision-box) and reports/quantization-decision.json
 //   speed    reports/bench/bench-<precision>-<backend>.json (Node.js, scripts/bench.ts) and the browser records
 //            reports/tasks/{browser|webkit}-<task>-<precision>[-webgpu].json (scripts/browser-tasks.ts)
 // docs.ts embeds the result in docs/index.html as JSON, so the charts also draw from a page opened from disk.
 // VERIFIED: tests/unit/site.test.ts checks the 5 % widening (in log space on a log axis), niceCeil, the download rows
-// with each shared backbone on its own row, the bench and browser medians.
+// with each shared backbone on its own row, the bench and browser medians, and that a task published by accuracy has
+// no score-change row while its figures come from a passed gate report.
 export const PRECISIONS = ["fp32", "q8", "q4"];
 /**
  * The record with the download sizes in place of the on-disk ones: what a browser fetches with `brotli` (src/web.ts).
@@ -58,14 +60,39 @@ export function downloadRows(rec) {
     }
     return rows;
 }
-/** Largest change of a decoded score (span score, box confidence, decision probability) against FP32. */
-export function qualityData(quant, extra = {}) {
-    const ids = [...new Set([...Object.keys(quant.accepted.q8?.bundles ?? {}), ...Object.keys(quant.accepted.q4?.bundles ?? {}), ...Object.keys(extra)])];
+/**
+ * Largest change of a decoded score (span score, box confidence, decision probability) against FP32.
+ * @param byAccuracy Tasks whose default bundle is published by its accuracy on a labelled set (`accuracyData`): their
+ *   answers may differ from FP32's, so a score change against FP32 says nothing about them and they get no row.
+ */
+export function qualityData(quant, extra = {}, byAccuracy = []) {
+    const ids = [...new Set([...Object.keys(quant.accepted.q8?.bundles ?? {}), ...Object.keys(quant.accepted.q4?.bundles ?? {}), ...Object.keys(extra)])].filter((id) => !byAccuracy.includes(id));
     const pick = (p) => ids.map((id) => quant.accepted[p]?.bundles[id]?.maxScoreDrift ?? extra[id]?.[p] ?? null);
     const q8 = pick("q8"), q4 = pick("q4");
     // The precision a default load uses: q4 where a bundle has it, else q8 (src/winzling.ts), and its change.
     const used = ids.map((_, i) => (q4[i] !== null ? "q4" : "q8"));
     return { ids, q8, q4, used, change: ids.map((_, i) => (used[i] === "q4" ? q4[i] : q8[i])), limit: 0.02 };
+}
+/**
+ * The accuracy figures from the two gate reports.
+ * @throws {Error} When a q4 bundle of the task report has not passed, or ner or vision-box is missing.
+ */
+export function accuracyData(tasks, decision) {
+    const of = (id) => {
+        const b = tasks.bundles[`${id}/q4`];
+        if (!b?.passed)
+            throw new Error(`reports/quantization-accuracy.json has no passed ${id}/q4; run: node scripts/verify-accuracy.ts models/vela3-fast-onnx/${id}/q4`);
+        return b;
+    };
+    if (!decision.passed)
+        throw new Error("reports/quantization-decision.json did not pass");
+    const ner = of("ner"), box = of("vision-box"), boolq = decision.sets.boolq;
+    return {
+        tasks: Object.keys(tasks.bundles).filter((k) => k.endsWith("/q4")).map((k) => k.slice(0, -3)),
+        ner: { sentences: ner.fp32.sentences, fp32: ner.fp32.f1, q4: ner.quantized.f1 },
+        box: { expressions: box.fp32.expressions, fp32: box.fp32.pointInRegion, q4: box.quantized.pointInRegion },
+        decision: { questions: boolq.inputs, fp32: boolq.correct.fp32, q4: boolq.correct.quantized, differing: boolq.flips },
+    };
 }
 const median = (xs) => {
     const s = [...xs].sort((a, b) => a - b);

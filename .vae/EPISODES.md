@@ -42,20 +42,10 @@ Wrap: EVERY lead becomes a test | .vae/VERIFY.py rule | one MEMORY line with BC,
 2026-11-08T23:42:19Z s=ba2c51e2 FINDING python/repair_decision.py:main test inputs learn=none: observed in the run log; no Python CI harness
 2026-11-08T23:42:19Z s=ba2c51e2 FINDING python/quantize_gptq.py:rewrite learn=none: export scripts need multi-GB checkpoints; no CI harness
 2026-11-09T09:05:31Z s=ba2c51e2 FINDING python/memguard.py:guard exit log learn=none: observability addition; no Python CI harness
-2026-11-09T16:12:39Z s=ba2c51e2 FINDING docs/assets/site.css:.dd-option-chosen, .dd-mark-label, .dd-option:not([data-chosen]) learn=test: same contrast test
-2026-11-09T16:12:39Z s=ba2c51e2 FINDING docs/assets/site.css:color-mix learn=verifier: .vae/VERIFY.py site.color-mix-oklab
 2026-11-09T16:12:39Z s=ba2c51e2 FINDING docs/assets/page.js:mac learn=none: probe showed platform 'macOS'; e2e runs on the CI platform, so a platform-specific test would pin the environment
-2026-11-09T16:12:39Z s=ba2c51e2 FINDING scripts/site-sections.ts:lines learn=test: tests/unit/site.test.ts joined-lines case
-2026-11-09T16:12:39Z s=ba2c51e2 FINDING docs/assets/site.css:html[data-static] .dd-chart .chart learn=test: tests/e2e/site.spec.ts heading anchor deep link
-2026-11-09T16:12:39Z s=ba2c51e2 FINDING docs/assets/site.js:259 learn=test: tests/e2e/site.spec.ts every image opens larger
-2026-11-09T16:12:39Z s=ba2c51e2 FINDING scripts/examples.ts:decode/pageBlocks learn=test: tests/unit/docs.test.ts and examples.test.ts compare page blocks with the README blocks
-2026-11-09T16:12:39Z s=ba2c51e2 FINDING docs/index.html:usp-2 learn=test: tests/unit/site.test.ts download claims
 2026-11-09T16:12:39Z s=ba2c51e2 FINDING scripts/site-sections.ts:heroStats learn=none: content choice, numbers from records
 2026-11-09T16:12:39Z s=ba2c51e2 FINDING reports/bench/bench-q4-*.json learn=none: measurement, not a code defect
 2026-11-09T16:12:39Z s=ba2c51e2 FINDING docs/assets/render.js:spanTableHTML/relateHTML/decideHTML learn=none: e2e language test covers restoration; German presence of these labels is not asserted
-2026-11-09T20:16:44Z s=ba2c51e2 FAIL prose,tests.e2e.1
-2026-11-09T20:25:57Z s=ba2c51e2 FAIL tests.unit
-2026-11-09T20:40:56Z s=ba2c51e2 DONE fp=40f49185e76d cov=97.2% paths=.github/workflows/verify.yml,AGENTS.md,ARCH.md,Makefile(+210)
 2026-11-09T20:40:56Z s=ba2c51e2 FINDING docs/assets/site.css:.dd-hero-title learn=test: tests/e2e/site.spec.ts measures rendered text against the side column in German at 1,024, 1,100 and 1,280 px
 2026-11-09T20:40:56Z s=ba2c51e2 FINDING tests/e2e/site.spec.ts:hero copy test learn=none: test-harness detail, fixed in the test itself
 2026-11-09T20:40:56Z s=ba2c51e2 FINDING src/web.ts:unbrotli learn=none: a failing .wasm fetch cannot be produced in the browser tests without a mock
@@ -107,3 +97,13 @@ Wrap: EVERY lead becomes a test | .vae/VERIFY.py rule | one MEMORY line with BC,
 2026-11-10T22:44:32Z s=ba2c51e2 FINDING .gitignore:26 lib/ learn=verifier: scripts/check-repo.ts rule 10 site.tracked, run by make lint and the gate's repo.rules.
 2026-11-10T23:01:58Z s=ba2c51e2 DONE fp=8c8251274ed7 cov=97.1% paths=tests/e2e/site.spec.ts
 2026-11-10T23:01:58Z s=ba2c51e2 FINDING tests/e2e/site.spec.ts:68 learn=none: A limit of WebKit's Linux port that the local macOS run does not reach; CI is the check.
+2026-11-12T08:31:35Z s=ba2c51e2 FAIL tests.e2e.1
+2026-11-12T08:55:34Z s=ba2c51e2 DONE fp=95b0c9232cb2 cov=97.1% paths=python/quantize_tasks.py,tests/e2e/site.spec.ts
+2026-11-12T08:55:34Z s=ba2c51e2 FINDING python/quantize_tasks.py:quantize_graph learn=verifier: Rule python.external-data (.vae/checks/external-data.py): every function that saves with save_as_external_data removes the data file first; it fails on the HEAD
+2026-11-12T08:55:34Z s=ba2c51e2 FINDING tests/e2e/site.spec.ts:26 learn=memory: No rule kind can tell a locator.click() on a sticky element from a harmless one, and the test itself is the regression check; the cause is recorded as a .vae/ME
+2026-11-12T10:22:51Z s=ba2c51e2 DONE fp=a14f95a0d4e3 cov=97.1% paths=ARCH.md,README.md,docs/assets/charts.js,docs/assets/lib/winzling.js(+33)
+2026-11-12T10:22:51Z s=ba2c51e2 FINDING scripts/verify-accuracy.ts:answers learn=test: tests/unit/verify-scripts.test.ts 'the gates' loader': a fixture bundle with pendingVerification is refused by loadVela and loaded by loadPending, and its manif
+2026-11-12T10:22:51Z s=ba2c51e2 FINDING scripts/parity.ts:folders learn=none: The script runs top-level code over the real bundles under models/, which the gate and CI do not have; the fix removes the cause by construction (directories on
+2026-11-12T10:22:51Z s=ba2c51e2 FINDING scripts/brotli-models.ts:estimate learn=memory: A memory need on one machine is no rule a check can express; .vae/MEMORY.md has the line [scripts/brotli-models.ts], and the script logs peakGb against estimate
+2026-11-12T10:22:51Z s=ba2c51e2 FINDING README.md:82, documentation/api.md:13, scripts/site-sections.ts:chartsHTML learn=test: tests/unit/site.test.ts 'a task published by accuracy has no score-change row...': accuracyData throws for a missing or failed gate report, so the page cannot s
+2026-11-12T10:44:34Z s=ba2c51e2 DONE fp=2b46a9cdee77 cov=97.1% paths=ARCH.md,README.md,docs/assets/charts.js,docs/assets/lib/winzling.js(+33)

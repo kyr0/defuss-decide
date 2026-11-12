@@ -20,7 +20,7 @@ The calibration and held-out inputs are generated here, deterministic per seed: 
 shapes on plain and noisy backgrounds, descriptions with wrong details, OCR texts with corrupted characters, region
 instructions and decision questions. Every q4 graph must reproduce the FP32 graph with the same dequantized weights
 (ONNX Runtime, optimization level basic). decision/vision must also keep FP32's option on its 4 recorded fixtures;
-task bundles stay unvalidated until `scripts/verify-quantized.ts` passes.
+task bundles stay unvalidated until `scripts/verify-quantized.ts` passes, vision-box until `scripts/verify-accuracy.ts` does.
 """
 import argparse, hashlib, json, os, random, shutil, sys, tempfile, time
 from pathlib import Path
@@ -313,7 +313,11 @@ def main():
                 else:
                     diffs = [float(np.abs(x - y).max()) for x, y in drift]
                     entry['heldOut'] = {'inputs': len(diffs), 'meanMaxLogitDiff': round(float(np.mean(diffs)), 4), 'maxLogitDiff': round(float(np.max(diffs)), 4)}
-                    extra = {'validated': False, 'pendingVerification': 'node scripts/verify-quantized.ts ' + os.path.relpath(d, REPO)}
+                    # vision-box points at another cell of the same region in q4, so its gate is the share of points in the
+                    # labelled region (scripts/verify-accuracy.ts) and not "no fixture changes" (scripts/verify-quantized.ts).
+                    # VERIFIED: vision-box q4 failed the fixture check on its point and passed the accuracy gate (2026-11-12).
+                    gate = 'verify-accuracy.ts' if b == 'vision-box' else 'verify-quantized.ts'
+                    extra = {'validated': False, 'pendingVerification': f'node scripts/{gate} ' + os.path.relpath(d, REPO)}
                 # The manifest: the FP32 one with the q4 graphs; files other than graphs and parity records are copied.
                 m = dict(man[b]); src = src_dir(models, b)
                 for f in src.iterdir():

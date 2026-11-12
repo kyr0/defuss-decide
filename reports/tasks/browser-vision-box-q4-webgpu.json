@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "model": "vllm-sr/vela3-fast-vision",
+  "task": "box",
+  "precision": "w4a32",
+  "maxLogitError": 0.014326214790344238,
+  "maxScoreDrift": 1.1920928955078125e-7,
+  "checks": [
+    {
+      "name": "box",
+      "maxLogitError": 0.014326214790344238,
+      "decodedOutputMatched": true,
+      "milliseconds": 453
+    }
+  ],
+  "backend": "webgpu",
+  "browser": "156.0.8078.4"
+}

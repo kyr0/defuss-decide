@@ -62,9 +62,9 @@ export function statsHTML(stats: Stat[]): string {
       </dl>`;
 }
 
-/** The four text tasks' download in q4 (the shared backbone counted once) and in FP32, in MiB. */
+/** The five text tasks' download in q4 (the shared backbone counted once) and in FP32, in MiB. */
 function textDownload(sizes: { bundles: Record<string, { fp32?: number; q4?: number }>; shared: Record<string, number> }) {
-  const text = ["evidence", "relation", "span", "span_set"];
+  const text = ["evidence", "ner", "relation", "span", "span_set"];
   for (const b of text) if (sizes.bundles[b]?.fp32 === undefined || sizes.bundles[b]?.q4 === undefined) throw new Error(`reports/model-sizes.json lacks the FP32 or q4 size of ${b}`);
   const fp32 = text.reduce((s, b) => s + sizes.bundles[b].fp32!, 0);
   const q4 = sizes.shared.text + text.reduce((s, b) => s + sizes.bundles[b].q4!, 0);
@@ -78,13 +78,13 @@ export function uspSizeHTML(sizes: { bundles: Record<string, { fp32?: number; q4
   const gb = (fp32 * 1048576) / 1e9;
   return tr(
     "usp-2",
-    `The q4 bundles share one backbone file: all four text tasks take ${mb} MB instead of ${gb.toFixed(1)} GB as full-precision bundles.`,
-    `Die q4-Bundles teilen sich eine Backbone-Datei: Alle vier Textaufgaben brauchen ${mb} MB statt ${de(gb)} GB als Bundles in voller Genauigkeit.`,
+    `The q4 bundles share one backbone file: all five text tasks take ${mb} MB instead of ${gb.toFixed(1)} GB as full-precision bundles.`,
+    `Die q4-Bundles teilen sich eine Backbone-Datei: Alle fünf Textaufgaben brauchen ${mb} MB statt ${de(gb)} GB als Bundles in voller Genauigkeit.`,
     "p",
   );
 }
 
-/** The hero numbers from the records: the q4 download of the four text tasks against their FP32 bundles, the slower
+/** The hero numbers from the records: the q4 download of the five text tasks against their FP32 bundles, the slower
  * of the two browsers' median time for a short text question on WebGPU (q8), the runtimes with the same answers, and
  * the validated bundles. */
 export function heroStats(sizes: { bundles: Record<string, { fp32?: number; q8?: number; q4?: number; unvalidated?: string[] }>; shared: Record<string, number> }, browserText: number): Stat[] {
@@ -93,7 +93,7 @@ export function heroStats(sizes: { bundles: Record<string, { fp32?: number; q8?:
   const validated = Object.values(sizes.bundles).reduce((n, b) => n + PRECISIONS.filter((p) => b[p] !== undefined && !b.unvalidated?.includes(p)).length, 0);
   const ms = `${Math.round(browserText)} ms`;
   return [
-    { id: "size", icon: "i-download", value: [`${ratio.toFixed(1)}x`, `${de(ratio)}x`], label: ["smaller download for the four text tasks in q4", "kleinerer Download der vier Textaufgaben in q4"] },
+    { id: "size", icon: "i-download", value: [`${ratio.toFixed(1)}x`, `${de(ratio)}x`], label: ["smaller download for the five text tasks in q4", "kleinerer Download der fünf Textaufgaben in q4"] },
     { id: "speed", icon: "i-zap", value: [ms, ms], label: ["or less per short text question in Chromium and WebKit on WebGPU", "oder weniger pro kurzer Textfrage in Chromium und WebKit auf WebGPU"] },
     { id: "runtimes", icon: "i-layers", value: ["4", "4"], label: ["runtimes, same answers: Node.js, Bun, Chromium, WebKit", "Laufzeiten, gleiche Antworten: Node.js, Bun, Chromium, WebKit"] },
     { id: "bundles", icon: "i-badge-check", value: [String(validated), String(validated)], label: ["bundles validated against the original models", "Bundles, gegen die Originalmodelle validiert"] },
@@ -191,6 +191,7 @@ export function diagramHTML(): string {
 export interface ChartData {
   sizes: import("./site-data.ts").DownloadRow[];
   quality: ReturnType<typeof import("./site-data.ts").qualityData>;
+  accuracy: import("./site-data.ts").AccuracyData;
   speed: { node: Record<string, Record<Precision, Record<Input, number | null>>>; browser: Record<string, Record<Precision, Record<"text" | "image", number | null>>> };
   fidelity: number;
 }
@@ -297,15 +298,24 @@ export function chartsHTML(data: ChartData): string {
   const loss = (x: number | null) => (x === null ? "-" : x === 0 ? "0%" : `-${points(x)}%`);
   const qualityRows: Cell[][] = q.ids.map((id, i) => [BUNDLE_LABELS[id] ?? id, q.used[i], both(loss(q.change[i]))]);
   const fid = Number((data.fidelity * 100).toPrecision(1));
+  // The bundles published by accuracy (scripts/verify-accuracy.ts, python/verify_decision.py) have no bar; the text
+  // states their figures. VERIFIED: `accuracyData` throws when a gate report is missing or did not pass, so the page
+  // cannot state a figure the reports lack (tests/unit/site.test.ts).
+  const a = data.accuracy;
+  const count = (n: number) => both(n.toLocaleString("en-US"));
+  const share = (x: number) => (x * 100).toFixed(1);
   const quality = chartFrame(
     "measured-quality",
     "i-badge-check",
     ["Smaller bundles, nearly the same scores", "Kleinere Bundles, fast gleiche Werte"],
-    [`How far any score moved against full precision (FP32) on the reference inputs, for the precision each task loads here: -1% is a probability going from 0.90 to 0.89 or to 0.91. Every bundle here stays under the publishing limit of 2%, and no answer changes. The text decision bundle in q4, which the page loads by default, did not pass: 3 of 177 test decisions change against FP32. FP32 itself is within ${fid} points of the original model.`, `Wie weit sich ein Wert gegenüber voller Genauigkeit (FP32) auf den Referenzeingaben höchstens bewegt, für die Genauigkeit, die jede Aufgabe hier lädt: -1 % ist eine Wahrscheinlichkeit, die von 0,90 auf 0,89 oder auf 0,91 geht. Jedes Bundle hier bleibt unter der Grenze von 2 % für die Veröffentlichung, und keine Antwort ändert sich. Das Textentscheidungs-Bundle in q4, das die Seite standardmäßig lädt, hat die Prüfung nicht bestanden: 3 von 177 Testentscheidungen ändern sich gegenüber FP32. FP32 selbst liegt höchstens ${String(fid).replace(".", ",")} Punkte vom Originalmodell entfernt.`],
+    [
+      `How far any score moved against full precision (FP32) on the reference inputs, for the precision each task loads here: -1% is a probability going from 0.90 to 0.89 or to 0.91. Every bundle in the chart stays under the publishing limit of 2%, and no answer changes. Three q4 bundles are published by their accuracy on public test sets instead, because single answers close to a threshold change in q4: ${BUNDLE_LABELS.ner[0]} reaches an F1 of ${a.ner.q4.toFixed(3)} against ${a.ner.fp32.toFixed(3)} for FP32 on ${count(a.ner.sentences)[0]} sentences, ${BUNDLE_LABELS["vision-box"][0]} points into the labelled region for ${share(a.box.q4)}% of ${count(a.box.expressions)[0]} expressions against ${share(a.box.fp32)}%, and ${BUNDLE_LABELS["decision/fast"][0]} answers ${count(a.decision.q4)[0]} of ${count(a.decision.questions)[0]} questions correctly against ${count(a.decision.fp32)[0]} for FP32. FP32 itself is within ${fid} points of the original model.`,
+      `Wie weit sich ein Wert gegenüber voller Genauigkeit (FP32) auf den Referenzeingaben höchstens bewegt, für die Genauigkeit, die jede Aufgabe hier lädt: -1 % ist eine Wahrscheinlichkeit, die von 0,90 auf 0,89 oder auf 0,91 geht. Jedes Bundle im Diagramm bleibt unter der Grenze von 2 % für die Veröffentlichung, und keine Antwort ändert sich. Drei q4-Bundles sind stattdessen nach ihrer Trefferquote auf öffentlichen Testdaten veröffentlicht, weil sich in q4 einzelne Antworten nahe an einer Schwelle ändern: ${BUNDLE_LABELS.ner[1]} erreicht ein F1 von ${de(a.ner.q4, 3)} gegenüber ${de(a.ner.fp32, 3)} für FP32 auf ${count(a.ner.sentences)[1]} Sätzen, ${BUNDLE_LABELS["vision-box"][1]} zeigt bei ${de(a.box.q4 * 100)} % von ${count(a.box.expressions)[1]} Ausdrücken in die markierte Region, gegenüber ${de(a.box.fp32 * 100)} %, und ${BUNDLE_LABELS["decision/fast"][1]} beantwortet ${count(a.decision.q4)[1]} von ${count(a.decision.questions)[1]} Fragen richtig, gegenüber ${count(a.decision.fp32)[1]} für FP32. FP32 selbst liegt höchstens ${String(fid).replace(".", ",")} Punkte vom Originalmodell entfernt.`,
+    ],
     "",
-    ["Horizontal bar chart: largest score change against FP32 of the q8 or q4 bundle each task loads here, all below the limit of 2 %", "Horizontales Balkendiagramm: größte Wertänderung gegenüber FP32 des q8- oder q4-Bundles, das jede Aufgabe hier lädt, alle unter der Grenze von 2 %"],
+    ["Horizontal bar chart: largest score change against FP32 of the bundle each task loads here, all below the limit of 2 %", "Horizontales Balkendiagramm: größte Wertänderung gegenüber FP32 des Bundles, das jede Aufgabe hier lädt, alle unter der Grenze von 2 %"],
     table("measured-quality", ["Largest score change against FP32, for the precision this page loads", "Größte Wertänderung gegenüber FP32, für die Genauigkeit, die diese Seite lädt"], [["Bundle", "Bundle"], ["Precision", "Genauigkeit"], ["Change", "Änderung"]], qualityRows),
-    ["Source: scripts/verify-quantized.ts and scripts/verify-js.ts on the recorded reference inputs, reports/quantization-tasks.json", "Quelle: scripts/verify-quantized.ts und scripts/verify-js.ts auf den aufgezeichneten Referenzeingaben, reports/quantization-tasks.json"],
+    ["Source: scripts/verify-quantized.ts and scripts/verify-js.ts on the recorded reference inputs, reports/quantization-tasks.json; accuracy: reports/quantization-accuracy.json, reports/quantization-decision.json", "Quelle: scripts/verify-quantized.ts und scripts/verify-js.ts auf den aufgezeichneten Referenzeingaben, reports/quantization-tasks.json; Trefferquote: reports/quantization-accuracy.json, reports/quantization-decision.json"],
     q.ids.length * 46 + 64,
   );
   const payload = { ...data, labels: Object.fromEntries(Object.keys(BUNDLE_LABELS).map((id) => [id, BUNDLE_LABELS[id]])) };

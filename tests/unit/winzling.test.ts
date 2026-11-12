@@ -14,8 +14,9 @@ describe("the Winzling release", () => {
 
   test("a task loads its smallest published precision, or the next larger one than a preference it lacks", () => {
     expect(winzlingPrecision("span")).toBe("q4");
-    expect(winzlingPrecision("ner")).toBe("q8");
-    expect(winzlingPrecision("vision-box")).toBe("q8");
+    expect(winzlingPrecision("ner")).toBe("q4");
+    expect(winzlingPrecision("ner", "q8")).toBe("q8");
+    expect(winzlingPrecision("vision-box")).toBe("q4");
     expect(winzlingPrecision("decision/fast")).toBe("q4");
     expect(winzlingPrecision("decision/fast", "q8")).toBe("fp32");
     expect(winzlingPrecision("decision/vision")).toBe("q4");
@@ -25,7 +26,8 @@ describe("the Winzling release", () => {
   });
 
   test("bundle folders follow the repository layout, under a URL or a local directory", () => {
-    expect(winzlingBundle("ner")).toBe(`${WINZLING_URL}vela3-fast-onnx/ner/q8/`);
+    expect(winzlingBundle("ner")).toBe(`${WINZLING_URL}vela3-fast-onnx/ner/q4/`);
+    expect(winzlingBundle("ner", "models", "q8")).toBe("models/vela3-fast-onnx/ner/q8/");
     expect(winzlingBundle("decision/fast", "models")).toBe("models/decision/fast/q4/");
     expect(winzlingBundle("decision/fast", "models", "fp32")).toBe("models/decision/fast/");
     expect(winzlingBundle("decision/vision", "models/")).toBe("models/decision/vision/q4/");
@@ -34,11 +36,11 @@ describe("the Winzling release", () => {
         evidence: "models/vela3-fast-onnx/evidence/q4/",
         span: "models/vela3-fast-onnx/span/q4/",
         span_set: "models/vela3-fast-onnx/span_set/q4/",
-        ner: "models/vela3-fast-onnx/ner/q8/",
+        ner: "models/vela3-fast-onnx/ner/q4/",
         relation: "models/vela3-fast-onnx/relation/q4/",
         decision: "models/decision/fast/q4/",
       },
-      vision: { span: "models/vela3-fast-onnx/vision-span/q4/", ocr: "models/vela3-fast-onnx/vision-ocr/q4/", box: "models/vela3-fast-onnx/vision-box/q8/", decision: "models/decision/vision/q4/" },
+      vision: { span: "models/vela3-fast-onnx/vision-span/q4/", ocr: "models/vela3-fast-onnx/vision-ocr/q4/", box: "models/vela3-fast-onnx/vision-box/q4/", decision: "models/decision/vision/q4/" },
     });
     expect(WINZLING_URL).toMatch(/^https:\/\/huggingface\.co\/kyr0\/winzling-decide-1\.0\/resolve\/[0-9a-f]{40}\/$/);
   });

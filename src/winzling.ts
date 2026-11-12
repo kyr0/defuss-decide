@@ -2,15 +2,16 @@
  * The published model release, kyr0/winzling-decide-1.0 on Hugging Face: where its bundles lie and which precisions of
  * each task the release publishes. The loaders default to it, each task in its smallest published precision.
  *
- * WHY the smallest by default: the smaller bundle downloads less: the four text tasks in q4 take 12.7 times fewer bytes
+ * WHY the smallest by default: the smaller bundle downloads less: the five text tasks in q4 take 13.5 times fewer bytes
  * than in FP32, and the text decision bundle in q4 needs 10.7 MB of its own beside the text backbone those tasks share,
- * against 1,329 MB in FP32. Every task bundle that is published passed the check against FP32 (largest score change at
- * most 0.02, no answer changed on the reference inputs; `reports/quantization-tasks.json`). A task without a validated
- * q4 bundle (ner, vision-box) uses q8.
- * The text decision bundle is the exception, the default on the maintainer's request: its q4 manifest says
- * `validated: false`. VERIFIED (plans/2026-11-08_19-43_decision-q4.md, `reports/quantization-gptq.json`): it answers
- * 52 of the 56 labelled cases correctly, as FP32 does, but 3 of 177 held-out decisions and the `noul` fixture (p(yes)
- * 0.563 in FP32, 0.439 in q4) change their answer. `prefer: "fp32"` loads the full-precision bundle.
+ * against 1,329 MB in FP32. Every published bundle passed a check against FP32. For most it is the task gate (largest
+ * score change at most 0.02, no answer changed on the reference inputs; `reports/quantization-tasks.json`). Three q4
+ * bundles change single answers that FP32 itself gives by a narrow margin, and passed a gate on their accuracy instead:
+ * VERIFIED: ner q4 has an entity F1 of 0.560 against 0.557 for FP32 on 3,000 Few-NERD sentences, vision-box q4 points
+ * into the labelled region for 70.3 % of 1,500 RefCOCO expressions against 70.8 % (`scripts/verify-accuracy.ts`,
+ * `reports/quantization-accuracy.json`), and the text decision bundle answers 1,103 of 1,300 BoolQ questions correctly,
+ * as FP32 does, differing from it on 26 (`python/verify_decision.py`, `reports/quantization-decision.json`).
+ * `prefer: "q8"` or `"fp32"` loads a larger bundle when an answer must not differ from the original model's.
  * VERIFIED: tests/unit/winzling.test.ts compares `PRECISIONS` with reports/model-sizes.json.
  * @module
  */
@@ -23,7 +24,7 @@ export type BundlePrecision = "fp32" | "q8" | "q4";
 /** The Hugging Face repository of the release. */
 export const WINZLING_REPOSITORY = "kyr0/winzling-decide-1.0";
 /** The pinned commit: its files never change, so a cache of them never goes stale. */
-export const WINZLING_REVISION = "8fb5a439ced663a11eb689ad21ec6bf7edb0c312";
+export const WINZLING_REVISION = "20f73ec7cb993ac638e5d16406653e895f9e082a";
 /** The release's folder URL at the pinned commit; the browser loaders' default. */
 export const WINZLING_URL = `https://huggingface.co/${WINZLING_REPOSITORY}/resolve/${WINZLING_REVISION}/`;
 /** The Cache API cache the browser loaders keep the release's files in by default. */
@@ -35,11 +36,11 @@ export type WinzlingTask = "evidence" | "ner" | "relation" | "span" | "span_set"
 /** The published precisions every task loads, smallest last: the validated ones. */
 export const PRECISIONS: Readonly<Record<WinzlingTask, readonly BundlePrecision[]>> = {
   evidence: ["fp32", "q8", "q4"],
-  ner: ["fp32", "q8"],
+  ner: ["fp32", "q8", "q4"],
   relation: ["fp32", "q8", "q4"],
   span: ["fp32", "q8", "q4"],
   span_set: ["fp32", "q8", "q4"],
-  "vision-box": ["fp32", "q8"],
+  "vision-box": ["fp32", "q8", "q4"],
   "vision-ocr": ["fp32", "q8", "q4"],
   "vision-span": ["fp32", "q8", "q4"],
   "decision/fast": ["fp32", "q4"],

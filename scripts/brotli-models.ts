@@ -8,7 +8,9 @@
 // part of an FP32 weight file took 2.5 GB of resident memory and 28 s at quality 11, and shrank by 8.5 % (2026-11-09).
 // Before each file the script waits until the machine has --min-free-gb (default 8) plus the file's estimated need
 // available (python/memguard.py measures it); while a file compresses it samples every 5 s and stops below the floor.
-// HYPOTHESIS: a file needs at most 3 GB plus three times its size; falsifier: a `peakGb` above `estimateGb` in the log.
+// HYPOTHESIS: a file needs at most 0.375 GB per worker (3 GB with the 8 default ones) plus three times its size;
+// falsifier: a `peakGb` above `estimateGb` in the log. VERIFIED: a 98 MB weight file peaked at 2.6 GB with 8 workers
+// and at 0.88 GB with 2 (2026-11-12), so `--threads 2` compresses on a machine that has 9 GB available, not 11.
 import { spawn, spawnSync } from "node:child_process";
 import { readdirSync, statSync } from "node:fs";
 import { join, resolve } from "node:path";
@@ -110,7 +112,7 @@ log("INFO", `brotli files=${all.length} upToDate=${all.length - todo.length} tod
 let before = 0, after = 0;
 try {
   for (const [i, { f, size }] of todo.entries()) {
-    const estimate = 3 + (3 * size) / GB;
+    const estimate = 0.375 * threads + (3 * size) / GB;
     for (let waited = 0; availableGb() < minFreeGb + estimate; waited += 30) {
       if (waited === 0) log("WARN", `memory waiting file=${f} estimate_gb=${estimate.toFixed(1)} min_free_gb=${minFreeGb}`);
       if (waited >= 3600) throw Object.assign(new Error(`memory stayed below ${minFreeGb + estimate} GB for an hour`), { exitCode: 3 });
